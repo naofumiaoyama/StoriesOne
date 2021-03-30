@@ -24,6 +24,7 @@ namespace Stories.Api.Controllers
         {
             List<Address> list = new List<Address>();
             list.Add(new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
+            list.Add(new Address { City = "Tokorozawa", Country = "Japan", Others = "所沢", Street = "プロペ通り" });
             return list;
 
         }
