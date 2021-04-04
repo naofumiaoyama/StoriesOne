@@ -12,10 +12,7 @@ namespace Stories.Api.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "test", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+       
 
         private readonly ILogger<UserController> _logger;
 
@@ -29,6 +26,9 @@ namespace Stories.Api.Controllers
         {
             List<User> users = new List<User>();
             User user = new User();
+            user.PersonInfo = new PersonInfo();
+            user.Address = new Address();
+            
             user.LoginID = "testID";
             user.DisplayName = "Naofumi Aoyama";
             users.Add(user);

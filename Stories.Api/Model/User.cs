@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Stories.Api.Model
 {
-    public class User
+    public class User : Person
     {
         public string LoginID { get; set; }
         public string Password { get; set; }
