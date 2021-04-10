@@ -27,7 +27,7 @@ namespace Stories.Api.Controllers
             List<User> users = new List<User>();
             User user = new User();
             user.PersonInfo = new PersonInfo();
-            user.Address = (new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
+            user.PersonInfo.Address = (new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
             user.LoginID = "testID";
             user.DisplayName = "Naofumi Aoyama";
             users.Add(user);
