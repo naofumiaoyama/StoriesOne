@@ -9,7 +9,7 @@ namespace Stories.Data
         {
         }
 
-        
+    
         public DbSet<User> Users { get; set; }
         public DbSet<PersonalInfo> PersonalInfos { get; set; }
         public DbSet<Person> Persons { get; set; }

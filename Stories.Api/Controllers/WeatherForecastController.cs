@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Stories.Api.Model;
+using Stories.Domain.Model;
 
 namespace Stories.Api.Controllers
 {

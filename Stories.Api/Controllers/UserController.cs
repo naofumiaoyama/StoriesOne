@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Stories.Api.Model;
+using Stories.Domain.Model;
 
 namespace Stories.Api.Controllers
 {
@@ -22,17 +22,17 @@ namespace Stories.Api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<User> Get()
+        public async Task<ActionResult<IEnumerable<User>>> Get()
         {
             List<User> users = new List<User>();
             User user = new User();
             user.PersonInfo = new PersonInfo();
-            user.Address = new Address();
-            
+            user.Address = (new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
             user.LoginID = "testID";
             user.DisplayName = "Naofumi Aoyama";
             users.Add(user);
-            return users.ToArray();
+            var result = await Task.Run(() => users);
+            return result;
         }
 
         //[HttpGet]
