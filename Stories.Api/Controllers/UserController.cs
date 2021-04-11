@@ -12,7 +12,7 @@ namespace Stories.Api.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-       
+
 
         private readonly ILogger<UserController> _logger;
 
@@ -32,6 +32,69 @@ namespace Stories.Api.Controllers
             user.DisplayName = "Naofumi Aoyama";
             users.Add(user);
             var result = await Task.Run(() => users);
+            return result;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUserByGuid(Guid guid)
+        {
+            List<User> users = new List<User>();
+            User user = new User();
+            user.ID = Guid.Parse("430c4bbd-6614-4b17-8bfe-7090ad2ba482");
+            user.PersonInfo = new PersonInfo();
+            user.PersonInfo.Address = (new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
+            user.LoginID = "testID";
+            user.DisplayName = "Naofumi Aoyama";
+            users.Add(user);
+
+            //User user = new User();
+            user.PersonInfo = new PersonInfo();
+            user.PersonInfo.Address = (new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
+            user.LoginID = "testID";
+            user.DisplayName = "Naofumi Aoyama";
+            users.Add(user);
+
+
+            //User user = new User();
+            user.PersonInfo = new PersonInfo();
+            user.PersonInfo.Address = (new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
+            user.LoginID = "testID";
+            user.DisplayName = "Naofumi Aoyama";
+            users.Add(user);
+
+            var result = users.Find(p => p.ID == guid);
+            return result;
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUser(string loginId)
+        {
+            List<User> users = new List<User>();
+            User user = new User();
+            user.ID = Guid.Parse("430c4bbd-6614-4b17-8bfe-7090ad2ba482");
+            user.PersonInfo = new PersonInfo();
+            user.PersonInfo.Address = (new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
+            user.LoginID = "testID";
+            user.DisplayName = "Naofumi Aoyama";
+            users.Add(user);
+
+            //User user = new User();
+            user.PersonInfo = new PersonInfo();
+            user.PersonInfo.Address = (new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
+            user.LoginID = "testID2";
+            user.DisplayName = "Naofumi Aoyama";
+            users.Add(user);
+
+
+            //User user = new User();
+            user.PersonInfo = new PersonInfo();
+            user.PersonInfo.Address = (new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
+            user.LoginID = "testID3";
+            user.DisplayName = "Naofumi Aoyama";
+            users.Add(user);
+
+            var result = users.Find(p => p.LoginID == loginId);
             return result;
         }
 
@@ -131,4 +194,5 @@ namespace Stories.Api.Controllers
         //    };
 
     }
+
 }
