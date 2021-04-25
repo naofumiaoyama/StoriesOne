@@ -60,19 +60,6 @@ namespace Stories.Api.Controllers
             return result;
         }
 
-
-            //    //User user = new User();
-            //    //user.PersonInfo = new PersonInfo();
-            //    //user.PersonInfo.Address = (new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
-            //    //user.LoginID = "testID";
-            //    //user.DisplayName = "Naofumi Aoyama";
-            //    //users.Add(user);
-            //    var userResults = await Task.Run(() => users);
-            //    var result = userResults.Find(p => p.ID == guid);
-            //    return result;
-            //}
-
-
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(string id)
         {
@@ -92,86 +79,28 @@ namespace Stories.Api.Controllers
             user1.LoginID = "testID2";
             user1.DisplayName = "Naofumi Aoyama2";
             users.Add(user1);
-
-
-            //User user = new User();
-            //user.PersonInfo = new PersonInfo();
-            //user.PersonInfo.Address = (new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
-            //user.LoginID = "testID3";
-            //user.DisplayName = "Naofumi Aoyama";
-            //users.Add(user);
             var userResults = await Task.Run(() => users);
             var result = userResults.Find(p => p.LoginID == id);
             return result;
         }
+       
+        [HttpPost]
+        public async Task<ActionResult<User>> Get()
+        {
+            var todoItem = new TodoItem
+            {
+                IsComplete = todoItemDTO.IsComplete,
+                Name = todoItemDTO.Name
+            };
 
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<User>>>GetTodoItem()
-        //{
-        //    return await _context.TodoItems
-        //    .Select(x => ItemToDTO(x))
-        //    .ToListAsync();
-        //}
+            _context.TodoItems.Add(todoItem);
+            await _context.SaveChangesAsync();
 
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<User>>GetUser(long id)
-        //{
-        //    var todoItem = await _context.TodoItems.FindAsync(id);
-
-        //    if (UserAccount == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return ItemToDTO(todoItem);
-        //}
-
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> UpdateTodoItem(long id, TodoItemDTO todoItemDTO)
-        //{
-        //    if (id != todoItemDTO.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    var todoItem = await _context.TodoItems.FindAsync(id);
-        //    if (todoItem == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    todoItem.Name = todoItemDTO.Name;
-        //    todoItem.IsComplete = todoItemDTO.IsComplete;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException) when (!TodoItemExists(id))
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return NoContent();
-        //}
-
-        //[HttpPost]
-        //public async Task<ActionResult<TodoItemDTO>> CreateTodoItem(TodoItemDTO todoItemDTO)
-        //{
-        //    var todoItem = new TodoItem
-        //    {
-        //        IsComplete = todoItemDTO.IsComplete,
-        //        Name = todoItemDTO.Name
-        //    };
-
-        //    _context.TodoItems.Add(todoItem);
-        //    await _context.SaveChangesAsync();
-
-        //    return CreatedAtAction(
-        //        nameof(GetTodoItem),
-        //        new { id = todoItem.Id },
-        //        ItemToDTO(todoItem));
-        //}
+            return CreatedAtAction(
+                nameof(GetTodoItem),
+                new { id = todoItem.Id },
+                ItemToDTO(todoItem));
+        }
 
         //[HttpDelete("{id}")]
         //public async Task<IActionResult> DeleteTodoItem(long id)
