@@ -83,51 +83,80 @@ namespace Stories.Api.Controllers
             var result = userResults.Find(p => p.LoginID == id);
             return result;
         }
-       
-        [HttpPost]
-        public async Task<ActionResult<User>> Get()
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateUser(string id, User user)
         {
-            var todoItem = new TodoItem
+            if (id != user.Id)
             {
-                IsComplete = todoItemDTO.IsComplete,
-                Name = todoItemDTO.Name
+                return BadRequest();
+            }
+
+            var todoItem = await _context.User.FindAsync(id);
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
+
+            todoItem.Name = User.Name;
+            todoItem.IsComplete = User.IsComplete;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException) when (!UserExists(id))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<User>> CreateUser(User user)
+        {
+            var user = new User
+            {
+                IsComplete = user.IsComplete,
+                Name = user.Name
             };
 
-            _context.TodoItems.Add(todoItem);
+            _context.TodoItems.Add(user);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(
-                nameof(GetTodoItem),
-                new { id = todoItem.Id },
-                ItemToDTO(todoItem));
+                nameof(GetUser),
+                new { id = user.Id },
+                ItemToDTO(user));
         }
 
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteTodoItem(long id)
-        //{
-        //    var todoItem = await _context.TodoItems.FindAsync(id);
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTodoItem(long id)
+        {
+            var todoItem = await _context.TodoItems.FindAsync(id);
 
-        //    if (todoItem == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
 
-        //    _context.TodoItems.Remove(todoItem);
-        //    await _context.SaveChangesAsync();
+            _context.TodoItems.Remove(todoItem);
+            await _context.SaveChangesAsync();
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
-        //private bool TodoItemExists(long id) =>
-        //     _context.TodoItems.Any(e => e.Id == id);
+        private bool UserExists(string id) =>
+             _context.TodoItems.Any(e => e.Id == id);
 
-        //private static TodoItemDTO ItemToDTO(TodoItem todoItem) =>
-        //    new TodoItemDTO
-        //    {
-        //        Id = todoItem.Id,
-        //        Name = todoItem.Name,
-        //        IsComplete = todoItem.IsComplete
-        //    };
+        private static User ItemToDTO(User todoItem) =>
+            new User
+            {
+                Id = user.Id,
+                Name = user.Name,
+                IsComplete = user.IsComplete
+            };
 
     }
 
