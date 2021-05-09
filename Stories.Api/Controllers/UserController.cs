@@ -84,80 +84,77 @@ namespace Stories.Api.Controllers
             return result;
         }
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> UpdateUser(Guid guid, User user)
-        //{
-        //    if (guid != user.ID)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut("{id}")]
+        public IActionResult UpdateUser(Guid guid, User newUser)
+        {
+            if (guid != newUser.ID)
+            {
+                return BadRequest();
+            }
 
-        //    var todoItem = await _context.User.FindAsync(id);
-        //    if (todoItem == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var resultUser = new User();
+            //var resultUser = await _context.User.FindAsync(guid);
+            //if (resultUser == null)
+            //{
+            //    return NotFound();
+            //}
 
-        //    todoItem.Name = User.Name;
-        //    todoItem.IsComplete = User.IsComplete;
+            resultUser.FirstName = newUser.FirstName;
+            resultUser.FamiliyName = newUser.FamiliyName;
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException) when (!UserExists(id))
-        //    {
-        //        return NotFound();
-        //    }
+            //try
+            //{
+            //    await _context.SaveChangesAsync();
+            //}
+            //catch (DbUpdateConcurrencyException) when (!UserExists(id))
+            //{
+            //    return NotFound();
+            //}
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
-        //[HttpPost]
-        //public async Task<ActionResult<User>> CreateUser(User user)
-        //{
-        //    var user = new User
-        //    {
-        //        IsComplete = user.IsComplete,
-        //        Name = user.Name
-        //    };
+        [HttpPost]
+        public ActionResult<User> CreateUser(User newUser)
+        {
+            var resultUser = new User
+            {
+                DisplayName = newUser.DisplayName,
+                FamiliyName = newUser.FamiliyName
+            };
 
-        //    _context.TodoItems.Add(user);
-        //    await _context.SaveChangesAsync();
+            //_context.User.Add(newUser);
+            //await _context.SaveChangesAsync();
 
-        //    return CreatedAtAction(
-        //        nameof(GetUser),
-        //        new { id = user.Id },
-        //        ItemToDTO(user));
-        //}
+            return newUser;
+        }
 
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteTodoItem(long id)
-        //{
-        //    var todoItem = await _context.TodoItems.FindAsync(id);
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUser(Guid guid)
+        {
+            //var todoItem = await _context.TodoItems.FindAsync(guid);
 
-        //    if (todoItem == null)
-        //    {
-        //        return NotFound();
-        //    }
+            //if (todoItem == null)
+            //{
+            //    return NotFound();
+            //}
 
-        //    _context.TodoItems.Remove(todoItem);
-        //    await _context.SaveChangesAsync();
+            //_context.TodoItems.Remove(User);
+            //await _context.SaveChangesAsync();
+            var resultUser = new User();
 
-        //    return NoContent();
-        //}
+
+            return NoContent();
+        }
 
         //private bool UserExists(string id) =>
-        //     _context.TodoItems.Any(e => e.Id == id);
+             //_context.TodoItems.Any(e => e.Id == id);
 
-        //private static User ItemToDTO(User todoItem) =>
-        //    new User
-        //    {
-        //        Id = user.Id,
-        //        Name = user.Name,
-        //        IsComplete = user.IsComplete
-        //    };
-
+        private static User ItemToDTO(User newUser) =>
+            new User
+            {
+                DisplayName = newUser.DisplayName,
+                FamiliyName = newUser.FamiliyName
+            };
     }
-
 }
