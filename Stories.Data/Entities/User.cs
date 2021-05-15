@@ -3,11 +3,13 @@
 
 namespace Stories.Data.Entities
 {
-    public class User
+    public class User : Person
     {
         [Key]
-        public string Login_Id { get; set; }
+        public string LoginId { get; set; }
         public string Password { get; set; }
         public string DisplayName { get; set; }
+        public string UserIconURL { get; set; }
+        public string SelfIntroduction { get; set; }
     }
 }
