@@ -7,7 +7,7 @@ namespace Stories.Data.Entities
     {
         [Key]
         public int Id { get; set; }
-        public User CommentUser  { get; set; }
+        public Person CommentUser  { get; set; }
         public DateTime PostTime { get; set; }
     }
 }

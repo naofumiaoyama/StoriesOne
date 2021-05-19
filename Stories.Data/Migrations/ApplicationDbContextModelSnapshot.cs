@@ -3,24 +3,27 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Stories.Data;
 
 namespace Stories.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(AppDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.0-preview.3.20181.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Stories.Data.Entities.Address", b =>
                 {
-                    b.Property<string>("Person_Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("PersonId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
@@ -34,9 +37,30 @@ namespace Stories.Data.Migrations
                     b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Person_Id");
+                    b.HasKey("PersonId");
 
                     b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Biography", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaritalStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Occupation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Biographies");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Comment", b =>
@@ -46,15 +70,15 @@ namespace Stories.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CommentUserLogin_Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid?>("CommentUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("PostTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CommentUserLogin_Id");
+                    b.HasIndex("CommentUserId");
 
                     b.ToTable("Comments");
                 });
@@ -65,21 +89,37 @@ namespace Stories.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("DisplayName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FamilyName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GivenName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LoginId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SelfIntroduction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserIconURL")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Persons");
+                    b.ToTable("People");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.PersonalInfo", b =>
                 {
-                    b.Property<string>("MobileNumber")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("PersonId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Birthdate")
                         .HasColumnType("datetime2");
@@ -87,14 +127,15 @@ namespace Stories.Data.Migrations
                     b.Property<string>("EmailAddress")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("MobileNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Sex")
                         .HasColumnType("int");
 
-                    b.HasKey("MobileNumber");
+                    b.HasKey("PersonId");
 
                     b.ToTable("PersonalInfos");
-
-                    b.HasCheckConstraint("CK_PersonalInfos_Sex_Enum_Constraint", "[Sex] IN(1, 2)");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Photo", b =>
@@ -127,8 +168,11 @@ namespace Stories.Data.Migrations
                     b.Property<int?>("ImageId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ReactionMarksId")
-                        .HasColumnType("int");
+                    b.Property<string>("ReactionMarksUrl")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid?>("TimelinePersonId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -139,60 +183,72 @@ namespace Stories.Data.Migrations
 
                     b.HasIndex("ImageId");
 
-                    b.HasIndex("ReactionMarksId");
+                    b.HasIndex("ReactionMarksUrl");
+
+                    b.HasIndex("TimelinePersonId");
 
                     b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.ReactionMark", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<string>("Url")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("Url");
 
                     b.ToTable("ReactionMarks");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.SearchContents", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Story", b =>
                 {
-                    b.Property<string>("SearchWord")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("SearchWord");
+                    b.Property<Guid?>("AuthorId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.ToTable("SearchContents");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Summary")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("Stories");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.User", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Timeline", b =>
                 {
-                    b.Property<string>("Login_Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("PersonId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("DisplayName")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("PersonId");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Login_Id");
-
-                    b.ToTable("Users");
+                    b.ToTable("Timelines");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Comment", b =>
                 {
-                    b.HasOne("Stories.Data.Entities.User", "CommentUser")
+                    b.HasOne("Stories.Data.Entities.Person", "CommentUser")
                         .WithMany()
-                        .HasForeignKey("CommentUserLogin_Id");
+                        .HasForeignKey("CommentUserId");
+
+                    b.Navigation("CommentUser");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Post", b =>
@@ -207,7 +263,31 @@ namespace Stories.Data.Migrations
 
                     b.HasOne("Stories.Data.Entities.ReactionMark", "ReactionMarks")
                         .WithMany()
-                        .HasForeignKey("ReactionMarksId");
+                        .HasForeignKey("ReactionMarksUrl");
+
+                    b.HasOne("Stories.Data.Entities.Timeline", null)
+                        .WithMany("Posts")
+                        .HasForeignKey("TimelinePersonId");
+
+                    b.Navigation("Comments");
+
+                    b.Navigation("Image");
+
+                    b.Navigation("ReactionMarks");
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Story", b =>
+                {
+                    b.HasOne("Stories.Data.Entities.Person", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
+                    b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Timeline", b =>
+                {
+                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }

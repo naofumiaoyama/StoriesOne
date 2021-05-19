@@ -21,8 +21,5 @@ namespace Stories.Data.Entities
         DIVORCED,
         WIDOWED,
         COMPLICATED
-    }
-
-   
-        
+    }        
 }

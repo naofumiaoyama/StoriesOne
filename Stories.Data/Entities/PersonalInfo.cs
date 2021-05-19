@@ -7,6 +7,7 @@ namespace Stories.Data.Entities
     public class PersonalInfo
     {
         [Key]
+        public Guid PersonId { get; set; }
         public string MobileNumber { get; set; }
         public Sex Sex { get; set; }
         public DateTime Birthdate { get; set; }

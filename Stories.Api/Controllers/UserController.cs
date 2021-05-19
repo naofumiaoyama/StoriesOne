@@ -99,8 +99,8 @@ namespace Stories.Api.Controllers
             //    return NotFound();
             //}
 
-            resultUser.FirstName = newUser.FirstName;
-            resultUser.FamiliyName = newUser.FamiliyName;
+            //resultUser.FirstName = newUser.FirstName;
+            //resultUser.FamiliyName = newUser.FamiliyName;
 
             //try
             //{
@@ -119,11 +119,11 @@ namespace Stories.Api.Controllers
         {
             var resultUser = new User
             {
-                DisplayName = newUser.DisplayName,
-                FamiliyName = newUser.FamiliyName
+            DisplayName = newUser.DisplayName,
+            FamilyName = newUser.FamilyName
             };
 
-            //_context.User.Add(newUser);
+           // _context.User.Add(newUser);
             //await _context.SaveChangesAsync();
 
             return newUser;
@@ -154,7 +154,7 @@ namespace Stories.Api.Controllers
             new User
             {
                 DisplayName = newUser.DisplayName,
-                FamiliyName = newUser.FamiliyName
+                FamilyName = newUser.FamilyName
             };
     }
 }

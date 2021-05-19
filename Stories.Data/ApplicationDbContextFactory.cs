@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace Stories.Data
 {
-    public class ApplicationContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
+    public class ApplicationContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
-        public ApplicationDbContext CreateDbContext(string[] args)
+        public AppDbContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseSqlServer("Data Source=localhost;Database=Stories;User Id=sa;Password=reallyStrongPwd123;");
-
-            return new ApplicationDbContext(optionsBuilder.Options);
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            //optionsBuilder.UseSqlServer("Data Source=localhost;Database=Stories;User Id=sa;Password=reallyStrongPwd123;");
+            optionsBuilder.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Database=Stories;Trusted_Connection=True;");
+            return new AppDbContext(optionsBuilder.Options);
         }
     }
 }
