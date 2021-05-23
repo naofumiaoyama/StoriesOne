@@ -30,7 +30,7 @@ namespace Stories.Data.Repositories
 
         public async Task<Timeline> Get(Guid personId)
         {
-            return _context.Timelines.Find(personId);
+            return await _context.Timelines.FindAsync(personId);
         }
 
         public async Task Update(Timeline timeline)

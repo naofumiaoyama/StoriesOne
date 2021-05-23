@@ -29,7 +29,7 @@ namespace Stories.Data.Repositories
 
         public async Task<ReactionMark> Get(string Url)
         {
-            return _context.ReactionMarks.Find(Url);
+            return await _context.ReactionMarks.FindAsync(Url);
         }
 
         public async Task Update(ReactionMark reactionMark)

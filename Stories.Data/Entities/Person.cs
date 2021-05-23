@@ -14,7 +14,8 @@ namespace Stories.Data.Entities
         public string DisplayName { get; set; }
         public string UserIconURL { get; set; }
         public string SelfIntroduction { get; set; }
-
+        public Address Address { get; set; }
+        public Timeline Timeline { get; set; }
 
     }
 }

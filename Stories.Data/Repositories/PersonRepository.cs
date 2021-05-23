@@ -11,7 +11,6 @@ namespace Stories.Data.Repositories
     {
         protected DatabaseContext _context;
 
-
         public PersonRepository(DatabaseContext context)
         {
             _context = context;
@@ -19,17 +18,17 @@ namespace Stories.Data.Repositories
 
         public async Task Add(Person person)
         {
-            _context.People.Add(person);
+            await _context.People.AddAsync(person);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(Person person)
+        public void Remove(Person person)
         {
             _context.People.Remove(person);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
         
-        public async Task<Person> Get(Guid guid)
+        public async Task<Person> Find(Guid guid)
         {
             return await _context.People.FindAsync(guid);
         }

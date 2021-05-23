@@ -9,5 +9,6 @@ namespace Stories.Domain.Model
         public string UserIconURL { get; set; }
         public string SelfIntroction { get; set; }
         public string GroupName { get; set; }
+        public Timeline timeline { get; set; }
     }
 }

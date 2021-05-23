@@ -29,7 +29,7 @@ namespace Stories.Data.Repositories
 
         public async Task<Biography> Get(int id)
         {
-            return _context.Biographies.Find(id);
+            return await _context.Biographies.FindAsync(id);
         }
 
         public async Task Update(Biography biography)

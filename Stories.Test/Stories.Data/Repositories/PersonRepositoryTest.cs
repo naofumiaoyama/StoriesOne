@@ -32,10 +32,10 @@ namespace Stories.Test.Stories.Data.Repositories
                 person.DisplayName = "N.A";
                 person.UserIconURL = "https://www.test.co.jp/test.jpg";
                 person.SelfIntroduction = "私の自己紹介";
-                await personRepository .Add(person);
+                await personRepository.Add(person);
 
                 // Getting
-                var getPerson = personRepository.Get(person.Id).Result;
+                var getPerson = personRepository.Find(person.Id).Result;
 
                 Assert.AreEqual(getPerson.Id, person.Id);
                 Assert.AreEqual(getPerson.GivenName, person.GivenName);
@@ -46,14 +46,18 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(getPerson.UserIconURL, person.UserIconURL);
                 Assert.AreEqual(getPerson.SelfIntroduction, person.SelfIntroduction);
 
-                // Updating
-                person.GivenName = "Jenalyn";
-                person.FamilyName = "Albios";
-                await personRepository .Update(person);
-                var updatePerson = personRepository.Get(person.Id).Result;
-                Assert.AreEqual(updatePerson.FamilyName, person.FamilyName);
-                Assert.AreEqual(updatePerson.GivenName, person.GivenName);
+                //// Updating
+                //person.GivenName = "Jenalyn";
+                //person.FamilyName = "Albios";
+                //await personRepository .Update(person);
+                //var updatePerson = await personRepository.Find(person.Id);
+                //Assert.AreEqual(updatePerson.FamilyName, person.FamilyName);
+                //Assert.AreEqual(updatePerson.GivenName, person.GivenName);
 
+                //// Removing
+                //personRepository.Remove(person);
+                //var resultPerson = personRepository.Find(person.Id).Result;
+                //Assert.AreEqual(resultPerson, null);
 
             }
 

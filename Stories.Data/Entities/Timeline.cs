@@ -10,7 +10,7 @@ namespace Stories.Data.Entities
    public class Timeline
     {
         [Key]
-        public Guid PersonId { get; set; }
+        public int Id { get; set; }
         public List<Post> Posts { get; set; }
     }
 }

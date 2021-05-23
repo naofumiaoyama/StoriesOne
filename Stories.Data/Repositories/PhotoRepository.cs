@@ -30,7 +30,7 @@ namespace Stories.Data.Repositories
 
         public async Task<Photo> Get(int id)
         {
-            return _context.Photos.Find(id);
+            return await _context.Photos.FindAsync(id);
         }
 
         public async Task Update(Photo photo)

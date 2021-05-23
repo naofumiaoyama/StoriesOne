@@ -29,7 +29,7 @@ namespace Stories.Data.Repositories
 
         public async Task<Comment> Get(int id)
         {
-            return _context.Comments.Find( id);
+            return await _context.Comments.FindAsync(id);
         }
 
         public async Task Update(Comment comment)

@@ -30,6 +30,8 @@ namespace Stories.Api
         {
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("sqlServerConnection"))
+                // Mac
+                // options.UseSqlServer(Configuration.GetConnectionString("sqlServerMacConnection"))
                 );
 
             services.AddControllers();

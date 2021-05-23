@@ -30,7 +30,7 @@ namespace Stories.Data.Repositories
 
         public async Task<PersonalInfo> Get(Guid personId)
         {
-            return _context.PersonalInfos.Find(personId);
+            return await _context.PersonalInfos.FindAsync(personId);
         }   
          
         public async Task Update(PersonalInfo personalInfo)

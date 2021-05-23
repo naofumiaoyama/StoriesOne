@@ -31,7 +31,7 @@ namespace Stories.Data.Repositories
 
         public async Task<Address> Get(Guid PersonId)
         {
-            return _context.Addresses.Find(PersonId);
+            return await _context.Addresses.FindAsync(PersonId);
            
         }
 

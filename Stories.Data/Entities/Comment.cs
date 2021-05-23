@@ -6,7 +6,8 @@ namespace Stories.Data.Entities
     public class Comment
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
+        public string CommentText { get; set; }
         public Person CommentUser  { get; set; }
         public DateTime PostTime { get; set; }
     }
