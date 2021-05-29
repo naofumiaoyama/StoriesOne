@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Stories.Data.Repositories
 {
-    public class StoryRepository : IStroryRepoisitory
+    public class StoryRepository : IStoryRepoisitory
     {
         protected DatabaseContext _context;
 

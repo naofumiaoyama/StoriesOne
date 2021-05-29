@@ -18,24 +18,27 @@ namespace Stories.Data.Repositories
 
         public async Task Add(Comment comment)
         {
-            await _context.AddAsync(comment);
+            await _context.Comments.AddAsync(comment);
+            await _context.SaveChangesAsync();
         }
 
         public async Task Delete(Comment comment)
         {
-            _context.Remove(comment);
+            _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Comment> Get(int id)
+        public async Task<Comment> Get(Guid id)
         {
             return await _context.Comments.FindAsync(id);
         }
 
         public async Task Update(Comment comment)
         {
-            _context.Update(comment);
+            _context.Comments.Update(comment);
             await _context.SaveChangesAsync();
         }
+
+      
     }
 }

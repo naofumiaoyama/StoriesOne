@@ -17,7 +17,7 @@ namespace Stories.Test.Stories.Data.Repositories
     public class PersonRepositoryTest
     {
         [TestMethod]
-        public async Task CRUDAsync()
+        public async Task CRUDTest()
         {
             using (var context = new DatabaseContext())
             {
@@ -35,7 +35,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 await personRepository.Add(person);
 
                 // Getting
-                var getPerson = personRepository.Find(person.Id).Result;
+                var getPerson = await personRepository.Get(person.Id);
 
                 Assert.AreEqual(getPerson.Id, person.Id);
                 Assert.AreEqual(getPerson.GivenName, person.GivenName);
@@ -46,23 +46,21 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(getPerson.UserIconURL, person.UserIconURL);
                 Assert.AreEqual(getPerson.SelfIntroduction, person.SelfIntroduction);
 
-                //// Updating
-                //person.GivenName = "Jenalyn";
-                //person.FamilyName = "Albios";
-                //await personRepository .Update(person);
-                //var updatePerson = await personRepository.Find(person.Id);
-                //Assert.AreEqual(updatePerson.FamilyName, person.FamilyName);
-                //Assert.AreEqual(updatePerson.GivenName, person.GivenName);
+                // Updating
+                person.GivenName = "Jenalyn";
+                person.FamilyName = "Albios";
+                await personRepository.Update(person);
+                var updatePerson = await personRepository.Get(person.Id);
+                Assert.AreEqual(updatePerson.FamilyName, person.FamilyName);
+                Assert.AreEqual(updatePerson.GivenName, person.GivenName);
 
                 //// Removing
-                //personRepository.Remove(person);
-                //var resultPerson = personRepository.Find(person.Id).Result;
+                //await personRepository.Remove(person);
+                //var resultPerson = personRepository.Get(person.Id).Result;
                 //Assert.AreEqual(resultPerson, null);
 
             }
-
-
         }
-    
     }
 }
+

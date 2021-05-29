@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Stories.Data.Repositories
 {
-    public interface IStroryRepoisitory
+    public interface IStoryRepoisitory
     {
         Task<Story> Get(Guid guid);
         Task Add(Story story);

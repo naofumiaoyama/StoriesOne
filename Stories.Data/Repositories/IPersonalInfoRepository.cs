@@ -9,7 +9,7 @@ namespace Stories.Data.Repositories
 {
   public  interface IPersonalInfoRepository
     {
-        Task<PersonalInfo> Get(Guid personId);
+        Task<PersonalInfo> Get(int Id);
         Task Add(PersonalInfo personalInfo);
         Task Update(PersonalInfo personalInfo);
         Task Delete(PersonalInfo personalInfo);

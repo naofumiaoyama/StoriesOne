@@ -18,12 +18,13 @@ namespace Stories.Data.Repositories
 
         public async Task Add(Biography biography)
         {
-            await _context.AddAsync(biography);
+            await _context.Biographies.AddAsync(biography);
+            await _context.SaveChangesAsync();
         }
 
         public async Task Delete(Biography biography)
         {
-            _context.Remove(biography);
+            _context.Biographies.Remove(biography);
             await _context.SaveChangesAsync();
         }
 
@@ -34,7 +35,7 @@ namespace Stories.Data.Repositories
 
         public async Task Update(Biography biography)
         {
-            _context.Update(biography);
+            _context.Biographies.Update(biography);
             await _context.SaveChangesAsync();
         }
     }

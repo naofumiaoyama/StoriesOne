@@ -9,7 +9,7 @@ namespace Stories.Data.Repositories
 {
   public  interface ICommentRepository
     {
-        Task<Comment> Get(int id);
+        Task<Comment> Get(Guid id);
         Task Add(Comment comment);
         Task Update(Comment comment);
         Task Delete(Comment comment);

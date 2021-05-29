@@ -1,4 +1,5 @@
-﻿using Stories.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Stories.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Stories.Data.Repositories
     public class PersonRepository : IPersonRepository
     {
         protected DatabaseContext _context;
+       
 
         public PersonRepository(DatabaseContext context)
         {
@@ -22,13 +24,13 @@ namespace Stories.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public void Remove(Person person)
+        public async Task Remove(Person person)
         {
             _context.People.Remove(person);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
         
-        public async Task<Person> Find(Guid guid)
+        public async Task<Person> Get(Guid guid)
         {
             return await _context.People.FindAsync(guid);
         }

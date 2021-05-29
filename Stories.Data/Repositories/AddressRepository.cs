@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Stories.Data.Entities;
+﻿using Stories.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,23 +20,25 @@ namespace Stories.Data.Repositories
         public async Task Add(Address address)
         {
             await _context.AddAsync(address);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(Address address)
+        public async Task<Address> Get(int id)
+        {
+            return await _context.Addresses.FindAsync(id);
+        }
+
+        public async Task Remove(Address address)
         {
              _context.Remove(address);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Address> Get(Guid PersonId)
-        {
-            return await _context.Addresses.FindAsync(PersonId);
-           
-        }
-
-        public void Update(Address address)
+        public async Task Update(Address address)
         {
             _context.Update(address);
+            await _context.SaveChangesAsync();
+
         }
     }
 }

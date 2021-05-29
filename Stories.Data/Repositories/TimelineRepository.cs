@@ -11,7 +11,7 @@ namespace Stories.Data.Repositories
     {
         protected DatabaseContext _context;
 
-        TimelineRepository(DatabaseContext context)
+        public TimelineRepository(DatabaseContext context)
         {
             _context = context;
         }

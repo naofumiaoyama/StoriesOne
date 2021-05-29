@@ -10,9 +10,9 @@ namespace Stories.Data.Repositories
 {
     public interface IPersonRepository
     {
-        Task<Person> Find(Guid guid);
+        Task<Person> Get(Guid guid);
         Task Add(Person person);
         Task Update(Person person);
-        void Remove(Person person);
+        Task Remove(Person person);
     }
 }

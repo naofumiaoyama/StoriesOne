@@ -3,21 +3,18 @@ using Stories.Data.Entities;
 
 namespace Stories.Data
 {
-    public class DatabaseContext : DbContext
+    public class DatabaseContext: DbContext
     {
         public DatabaseContext()
-        {
-        }
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //Win SQLServer Developer Edition
-            //optionsBuilder.UseSqlServer("server=localhost\\MSSQLSERVER01; database = Stories; integrated security = true");
+            optionsBuilder.UseSqlServer("server=localhost\\MSSQLSERVER01; database = Stories; integrated security = true");
             // Mac Docker
-            optionsBuilder.UseSqlServer("Server=tcp:127.0.0.1,1433;database=Stories; User ID=sa;Password=reallyStrongPwd123;");
+            /// optionsBuilder.UseSqlServer("Server=tcp:127.0.0.1,1433;database=Stories; User ID=sa;Password=reallyStrongPwd123;");
 
         }
 

@@ -16,10 +16,10 @@ namespace Stories.Data.Repositories
             _context = context;
         }
 
-
         public async Task Add(PersonalInfo personalInfo)
         {
             await _context.AddAsync(personalInfo);
+            await _context.SaveChangesAsync();
         }
 
         public async Task Delete(PersonalInfo personalInfo)
@@ -28,15 +28,15 @@ namespace Stories.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<PersonalInfo> Get(Guid personId)
+        public async Task<PersonalInfo> Get(int Id)
         {
-            return await _context.PersonalInfos.FindAsync(personId);
+            return await _context.PersonalInfos.FindAsync(Id);
         }   
          
         public async Task Update(PersonalInfo personalInfo)
         {
-            _context.Update(personalInfo);
+            _context.PersonalInfos.Update(personalInfo);
             await _context.SaveChangesAsync();
-        }
+        }     
     }
 }
