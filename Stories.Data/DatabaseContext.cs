@@ -23,8 +23,7 @@ namespace Stories.Data
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<PersonalInfo> PersonalInfos { get; set; }      
-        public DbSet<Photo> Photos { get; set; }
-        
+        public DbSet<Picture> Pictures { get; set; }
         public DbSet<ReactionMark> ReactionMarks { get; set;}
         public DbSet<Story> Stories { get; set; }
         public DbSet<Timeline> Timelines { get; set; }
@@ -32,9 +31,7 @@ namespace Stories.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Post>()
-                .HasOne(p => p.Timeline)
-                .WithMany(b => b.Posts);
+           
         }
     }
 }

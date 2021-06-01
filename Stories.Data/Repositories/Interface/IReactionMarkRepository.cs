@@ -9,7 +9,7 @@ namespace Stories.Data.Repositories
 {
     public interface IReactionMarkRepository
     {
-        Task<ReactionMark> Get(string Url);
+        Task<ReactionMark> Get(Guid id);
         Task Add(ReactionMark reactionMark);
         Task Update(ReactionMark reactionMark);
         Task Delete(ReactionMark reactionMark);

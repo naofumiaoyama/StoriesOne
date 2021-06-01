@@ -9,7 +9,7 @@ namespace Stories.Data.Repositories
 {
    public interface IAddressRepository
     {
-        Task<Address> Get(int Id);
+        Task<Address> Get(Guid Id);
         Task Add(Address address);
         Task Update(Address address);
         Task Remove(Address address);

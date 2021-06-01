@@ -16,6 +16,11 @@ namespace Stories.Data.Repositories
             _context = context;
         }
 
+        public async Task<Comment> Get(Guid id)
+        {
+            return await _context.Comments.FindAsync(id);
+        }
+
         public async Task Add(Comment comment)
         {
             await _context.Comments.AddAsync(comment);
@@ -26,11 +31,6 @@ namespace Stories.Data.Repositories
         {
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
-        }
-
-        public async Task<Comment> Get(Guid id)
-        {
-            return await _context.Comments.FindAsync(id);
         }
 
         public async Task Update(Comment comment)

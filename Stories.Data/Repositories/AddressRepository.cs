@@ -23,7 +23,7 @@ namespace Stories.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Address> Get(int id)
+        public async Task<Address> Get(Guid id)
         {
             return await _context.Addresses.FindAsync(id);
         }

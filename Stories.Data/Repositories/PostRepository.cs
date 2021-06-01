@@ -20,6 +20,7 @@ namespace Stories.Data.Repositories
         public async Task Add(Post post)
         {
             await _context.AddAsync(post);
+            await _context.SaveChangesAsync();
         }
 
         public async Task Delete(Post post)
@@ -31,6 +32,7 @@ namespace Stories.Data.Repositories
         public async Task<Post> Get(Guid id)
         {
             return await _context.Posts.FindAsync(id);
+
         }
 
         public async Task Update(Post post)

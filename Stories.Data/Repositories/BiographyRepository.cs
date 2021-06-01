@@ -16,6 +16,11 @@ namespace Stories.Data.Repositories
             _context = context;
         }
 
+        public async Task<Biography> Get(Guid id)
+        {
+            return await _context.Biographies.FindAsync(id);
+        }
+
         public async Task Add(Biography biography)
         {
             await _context.Biographies.AddAsync(biography);
@@ -28,15 +33,11 @@ namespace Stories.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Biography> Get(int id)
-        {
-            return await _context.Biographies.FindAsync(id);
-        }
-
         public async Task Update(Biography biography)
         {
             _context.Biographies.Update(biography);
             await _context.SaveChangesAsync();
         }
+
     }
 }

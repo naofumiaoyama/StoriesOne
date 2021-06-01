@@ -9,7 +9,7 @@ namespace Stories.Data.Repositories
 {
    public interface IBiographyRepository
    {
-        Task<Biography> Get(int id);
+        Task<Biography> Get(Guid id);
         Task Add(Biography biography);
         Task Update(Biography biography);
         Task Delete(Biography biography);

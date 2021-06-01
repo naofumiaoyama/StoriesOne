@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Stories.Data.Repositories
 {
-   public  interface IPhotoRepository
+   public  interface IPictureRepository
     {
-        Task<Photo> Get(int id);
-        Task Add(Photo photo);
-        Task Update(Photo photo);
-        Task Delete(Photo photo);
+        Task<Picture> Get(Guid id);
+        Task Add(Picture photo);
+        Task Update(Picture photo);
+        Task Delete(Picture photo);
     }
 }

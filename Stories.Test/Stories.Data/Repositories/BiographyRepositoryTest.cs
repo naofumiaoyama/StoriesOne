@@ -21,27 +21,28 @@ namespace Stories.Test.Stories.Data.Repositories
                 //adding
                 BiographyRepository biographyRepository = new BiographyRepository(context);
                 Biography biography = new Biography();
-                biography.Id = biography.Id;
-                biography.Address = "GuizoMandaueCity";
+                biography.Id = Guid.NewGuid();
+                biography.Person = new Person();
+                biography.LivingPlace = "Guizo";
                 biography.Occupation = "Actress";
-                biography.MaritalStatus = "Married";
+                biography.MaritalStatus = MaritalStatus.Single;
                 await biographyRepository.Add(biography);
 
                 //Getting
-                var getBiography = await biographyRepository.Get(biography.Id);
-
+                var getBiography = biographyRepository.Get(biography.Id).Result;
                 Assert.AreEqual(getBiography.Id, biography.Id);
-                Assert.AreEqual(getBiography.Address, biography.Address);
+                Assert.AreEqual(getBiography.LivingPlace, biography.LivingPlace);
                 Assert.AreEqual(getBiography.Occupation, biography.Occupation);
                 Assert.AreEqual(getBiography.MaritalStatus, biography.MaritalStatus);
 
-                //Upadating
-                biography.Address = "MandaueCity";
+                //Updating
+                biography.LivingPlace = "MandaueCity";
                 biography.Occupation = "engineer";
                 await biographyRepository.Update(biography);
                 var updatebiography = await biographyRepository.Get(biography.Id);
-                Assert.AreEqual(updatebiography.Address, biography.Address);
+                Assert.AreEqual(updatebiography.LivingPlace, biography.LivingPlace);
                 Assert.AreEqual(updatebiography.Occupation, biography.Occupation);
+                Assert.AreEqual(updatebiography.MaritalStatus, biography.MaritalStatus);
 
                 ////Removing
                 //await biographyRepository.Delete(biography);

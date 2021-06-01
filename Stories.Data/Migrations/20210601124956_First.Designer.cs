@@ -10,8 +10,8 @@ using Stories.Data;
 namespace Stories.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210522153659_initial")]
-    partial class initial
+    [Migration("20210601124956_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,10 +23,9 @@ namespace Stories.Data.Migrations
 
             modelBuilder.Entity("Stories.Data.Entities.Address", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
@@ -37,31 +36,40 @@ namespace Stories.Data.Migrations
                     b.Property<string>("Others")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Biography", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
+                    b.Property<string>("LivingPlace")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MaritalStatus")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("MaritalStatus")
+                        .HasColumnType("int");
 
                     b.Property<string>("Occupation")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Biographies");
                 });
@@ -78,12 +86,22 @@ namespace Stories.Data.Migrations
                     b.Property<Guid?>("CommentUserId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("PostId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("PostTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CommentUserId");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("PostId");
 
                     b.ToTable("Comments");
                 });
@@ -93,9 +111,6 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("int");
 
                     b.Property<string>("DisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -115,17 +130,12 @@ namespace Stories.Data.Migrations
                     b.Property<string>("SelfIntroduction")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TimelineId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserIconURL")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("UserIconURLId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("TimelineId");
+                    b.HasIndex("UserIconURLId");
 
                     b.ToTable("People");
                 });
@@ -146,35 +156,34 @@ namespace Stories.Data.Migrations
                     b.Property<string>("MobileNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Sex")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("personId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("personId");
+                    b.HasIndex("PersonId");
 
                     b.ToTable("PersonalInfos");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.Photo", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Picture", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("PictureType")
+                        .HasColumnType("int");
 
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Photos");
+                    b.ToTable("Pictures");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Post", b =>
@@ -183,33 +192,13 @@ namespace Stories.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CommentId")
+                    b.Property<Guid?>("TimelineId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ReactionMarksUrl")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid?>("StoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("TimelineId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("ImageId");
-
-                    b.HasIndex("ReactionMarksUrl");
-
-                    b.HasIndex("StoryId");
 
                     b.HasIndex("TimelineId");
 
@@ -218,13 +207,22 @@ namespace Stories.Data.Migrations
 
             modelBuilder.Entity("Stories.Data.Entities.ReactionMark", b =>
                 {
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Url");
+                    b.Property<Guid?>("PostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
 
                     b.ToTable("ReactionMarks");
                 });
@@ -259,14 +257,36 @@ namespace Stories.Data.Migrations
 
             modelBuilder.Entity("Stories.Data.Entities.Timeline", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("PersonId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PersonId");
+
                     b.ToTable("Timelines");
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Address", b =>
+                {
+                    b.HasOne("Stories.Data.Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId");
+
+                    b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Biography", b =>
+                {
+                    b.HasOne("Stories.Data.Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId");
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Comment", b =>
@@ -275,62 +295,55 @@ namespace Stories.Data.Migrations
                         .WithMany()
                         .HasForeignKey("CommentUserId");
 
+                    b.HasOne("Stories.Data.Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId");
+
+                    b.HasOne("Stories.Data.Entities.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId");
+
                     b.Navigation("CommentUser");
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Person", b =>
                 {
-                    b.HasOne("Stories.Data.Entities.Address", "Address")
+                    b.HasOne("Stories.Data.Entities.Picture", "UserIconURL")
                         .WithMany()
-                        .HasForeignKey("AddressId");
+                        .HasForeignKey("UserIconURLId");
 
-                    b.HasOne("Stories.Data.Entities.Timeline", "Timeline")
-                        .WithMany()
-                        .HasForeignKey("TimelineId");
-
-                    b.Navigation("Address");
-
-                    b.Navigation("Timeline");
+                    b.Navigation("UserIconURL");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.PersonalInfo", b =>
                 {
-                    b.HasOne("Stories.Data.Entities.Person", "person")
+                    b.HasOne("Stories.Data.Entities.Person", "Person")
                         .WithMany()
-                        .HasForeignKey("personId");
+                        .HasForeignKey("PersonId");
 
-                    b.Navigation("person");
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Post", b =>
                 {
-                    b.HasOne("Stories.Data.Entities.Comment", "Comment")
+                    b.HasOne("Stories.Data.Entities.Timeline", "Timeline")
                         .WithMany()
-                        .HasForeignKey("CommentId");
-
-                    b.HasOne("Stories.Data.Entities.Photo", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId");
-
-                    b.HasOne("Stories.Data.Entities.ReactionMark", "ReactionMarks")
-                        .WithMany()
-                        .HasForeignKey("ReactionMarksUrl");
-
-                    b.HasOne("Stories.Data.Entities.Story", "Story")
-                        .WithMany()
-                        .HasForeignKey("StoryId");
-
-                    b.HasOne("Stories.Data.Entities.Timeline", null)
-                        .WithMany("Posts")
                         .HasForeignKey("TimelineId");
 
-                    b.Navigation("Comment");
+                    b.Navigation("Timeline");
+                });
 
-                    b.Navigation("Image");
+            modelBuilder.Entity("Stories.Data.Entities.ReactionMark", b =>
+                {
+                    b.HasOne("Stories.Data.Entities.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId");
 
-                    b.Navigation("ReactionMarks");
-
-                    b.Navigation("Story");
+                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Story", b =>
@@ -344,7 +357,11 @@ namespace Stories.Data.Migrations
 
             modelBuilder.Entity("Stories.Data.Entities.Timeline", b =>
                 {
-                    b.Navigation("Posts");
+                    b.HasOne("Stories.Data.Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId");
+
+                    b.Navigation("Person");
                 });
 #pragma warning restore 612, 618
         }

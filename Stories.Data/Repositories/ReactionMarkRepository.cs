@@ -16,25 +16,26 @@ namespace Stories.Data.Repositories
             _context = context;
         }
 
+        public async Task<ReactionMark> Get(Guid id)
+        {
+            return await _context.ReactionMarks.FindAsync(id);
+        }
+
         public async Task Add(ReactionMark reactionMark)
         {
-            await _context.AddAsync(reactionMark);
+            await _context.ReactionMarks.AddAsync(reactionMark);
+            await _context.SaveChangesAsync();
         }
 
         public async Task Delete(ReactionMark reactionMark)
         {
-            _context.Remove(reactionMark);
+            _context.ReactionMarks.Remove(reactionMark);
             await _context.SaveChangesAsync();
-        }
-
-        public async Task<ReactionMark> Get(string Url)
-        {
-            return await _context.ReactionMarks.FindAsync(Url);
         }
 
         public async Task Update(ReactionMark reactionMark)
         {
-            _context.Update(reactionMark);
+            _context.ReactionMarks.Update(reactionMark);
             await _context.SaveChangesAsync();
         }
     }

@@ -8,7 +8,7 @@ namespace Stories.Data.Entities
     {
         [Key]
         public int Id { get; set; }
-        public Person person { get; set; }
+        public Person Person { get; set; }
         public string MobileNumber { get; set; }
         public Sex Sex { get; set; }
         public DateTime Birthdate { get; set; }

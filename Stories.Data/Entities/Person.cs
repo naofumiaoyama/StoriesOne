@@ -12,10 +12,8 @@ namespace Stories.Data.Entities
         public string LoginId { get; set; }
         public string Password { get; set; }
         public string DisplayName { get; set; }
-        public string UserIconURL { get; set; }
+        public Picture UserIconURL { get; set; }
         public string SelfIntroduction { get; set; }
-        public Address Address { get; set; }
-        public Timeline Timeline { get; set; }
 
     }
 }

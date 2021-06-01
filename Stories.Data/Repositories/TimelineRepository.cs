@@ -19,23 +19,24 @@ namespace Stories.Data.Repositories
 
         public async Task Add(Timeline timeline)
         {
-            await _context.AddAsync(timeline);
+            await _context.Timelines.AddAsync(timeline);
+            await _context.SaveChangesAsync();
         }
 
         public async Task Delete(Timeline timeline)
         {
-            _context.Remove(timeline);
+            _context.Timelines.Remove(timeline);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Timeline> Get(Guid personId)
+        public async Task<Timeline> Get(Guid timelineId)
         {
-            return await _context.Timelines.FindAsync(personId);
+            return await _context.Timelines.FindAsync(timelineId);
         }
-
+      
         public async Task Update(Timeline timeline)
         {
-            _context.Update(timeline);
+            _context.Timelines.Update(timeline);
             await _context.SaveChangesAsync();
         }
     }

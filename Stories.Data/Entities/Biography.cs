@@ -8,18 +8,19 @@ namespace Stories.Data.Entities
 {
     public class Biography
     {
-        public int Id { get; set; }
-        public string Address { get; set; }
+        public Guid Id { get; set; }
+        public Person Person { get; set; }
+        public string LivingPlace { get; set; }
         public string Occupation { get; set; }
-        public string MaritalStatus { get; set; }
+        public MaritalStatus MaritalStatus { get; set; }
     }
 
     public enum MaritalStatus
     {
-        SINGLE,
-        MARRIED,
-        DIVORCED,
-        WIDOWED,
-        COMPLICATED
-    }        
+        Single = 1,
+        Married = 2,
+        Divorced = 3,
+        Windowed = 4,
+        Complicated = 5
+    }
 }

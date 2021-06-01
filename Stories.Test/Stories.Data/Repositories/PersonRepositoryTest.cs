@@ -30,7 +30,10 @@ namespace Stories.Test.Stories.Data.Repositories
                 person.LoginId = "naofumi.aoyoama@gmail.com";
                 person.Password = "pass";
                 person.DisplayName = "N.A";
-                person.UserIconURL = "https://www.test.co.jp/test.jpg";
+                person.UserIconURL = new Picture() 
+                { Url = "https://www.test.co.jp/test.jpg", 
+                  PictureType = PictureType.UserProfile
+                };
                 person.SelfIntroduction = "私の自己紹介";
                 await personRepository.Add(person);
 
