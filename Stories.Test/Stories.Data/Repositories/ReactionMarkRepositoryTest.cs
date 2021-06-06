@@ -40,9 +40,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updateReactionMark.Name, reactionMark.Name);
 
                 ////Removing
-                //await reactionMarkRepository.Delete(reactionMark);
-                //var resultReactionMark = reactionMarkRepository.Get(reactionMark.Id).Result;
-                //Assert.AreEqual(resultReactionMark, null);
+               await reactionMarkRepository.Delete(reactionMark);
+               var resultReactionMark = reactionMarkRepository.Get(reactionMark.Id).Result;
+               Assert.AreEqual(resultReactionMark, null);
 
             }
         }

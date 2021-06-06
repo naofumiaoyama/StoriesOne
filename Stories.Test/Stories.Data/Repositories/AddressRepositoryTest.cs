@@ -47,9 +47,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updateAddress.City, address.City);
 
                 ////Removing
-                //await addressRepository.Remove(address);
-                //var resultaddress = addressRepository.Get(address.Id).Result;
-                //Assert.AreEqual(resultaddress, null);
+                await addressRepository.Remove(address);
+                var resultaddress = addressRepository.Get(address.Id).Result;
+                Assert.AreEqual(resultaddress, null);
 
             }
         }

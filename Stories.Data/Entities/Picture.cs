@@ -8,6 +8,7 @@ namespace Stories.Data.Entities
     public class Picture
     {
         public Guid Id { get; set; }
+        public Person Person { get; set; }
         public PictureType PictureType { get; set; }
         public string Url { get; set; }
     }

@@ -35,7 +35,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 await timelineRepository.Update(timeline);
                 var updateTimeline = await timelineRepository.Get(timeline.Id);
 
-                //Removing
+                 //Removing
                 await timelineRepository.Delete(timeline);
                 var resulttimeline = timelineRepository.Get(timeline.Id).Result;
                 Assert.AreEqual(resulttimeline, null);

@@ -40,9 +40,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updatePicture.PictureType, picture.PictureType);
 
                 ////Removing
-                //await pictureRespository.Delete(picture);
-                //var resultPhoto = pictureRespository.Get(picture.Id).Result;
-                //Assert.AreEqual(resultPhoto, null);
+                await pictureRespository.Delete(picture);
+                var resultPhoto = pictureRespository.Get(picture.Id).Result;
+                Assert.AreEqual(resultPhoto, null);
 
             }
         }

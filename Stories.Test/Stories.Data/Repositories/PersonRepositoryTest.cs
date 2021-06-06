@@ -30,10 +30,6 @@ namespace Stories.Test.Stories.Data.Repositories
                 person.LoginId = "naofumi.aoyoama@gmail.com";
                 person.Password = "pass";
                 person.DisplayName = "N.A";
-                person.UserIconURL = new Picture() 
-                { Url = "https://www.test.co.jp/test.jpg", 
-                  PictureType = PictureType.UserProfile
-                };
                 person.SelfIntroduction = "私の自己紹介";
                 await personRepository.Add(person);
 
@@ -46,7 +42,6 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(getPerson.LoginId, person.LoginId);
                 Assert.AreEqual(getPerson.Password, person.Password);
                 Assert.AreEqual(getPerson.DisplayName, person.DisplayName);
-                Assert.AreEqual(getPerson.UserIconURL, person.UserIconURL);
                 Assert.AreEqual(getPerson.SelfIntroduction, person.SelfIntroduction);
 
                 // Updating
@@ -57,10 +52,10 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updatePerson.FamilyName, person.FamilyName);
                 Assert.AreEqual(updatePerson.GivenName, person.GivenName);
 
-                //// Removing
-                //await personRepository.Remove(person);
-                //var resultPerson = personRepository.Get(person.Id).Result;
-                //Assert.AreEqual(resultPerson, null);
+                /// Removing
+                await personRepository.Remove(person);
+                var resultPerson = personRepository.Get(person.Id).Result;
+                Assert.AreEqual(resultPerson, null);
 
             }
         }

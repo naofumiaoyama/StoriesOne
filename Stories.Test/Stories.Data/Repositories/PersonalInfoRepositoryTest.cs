@@ -54,9 +54,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updatePersonalInfo.EmailAddress, personalInfo.EmailAddress);
 
                 ////Removing
-                //await personalInfoRepository.Delete(personalInfo);
-                //var resultPersonalInfo = personalInfoRepository.Get(personalInfo.Id).Result;
-                //Assert.AreEqual(resultPersonalInfo, null);
+                await personalInfoRepository.Delete(personalInfo);
+                var resultPersonalInfo = personalInfoRepository.Get(personalInfo.Id).Result;
+                Assert.AreEqual(resultPersonalInfo, null);
             }
         }
 

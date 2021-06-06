@@ -42,10 +42,10 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updateComment.CommentText, comment.CommentText);
                 Assert.AreEqual(updateComment.CommentUser, comment.CommentUser);
 
-                ////Removing
-                //await commentRepository.Delete(comment);
-                //var resultComment = commentRepository.Get(comment.Id).Result;
-                //Assert.AreEqual(resultComment, null);
+                //Removing
+               await commentRepository.Delete(comment);
+               var resultComment = commentRepository.Get(comment.Id).Result;
+               Assert.AreEqual(resultComment, null);
 
             }
         }

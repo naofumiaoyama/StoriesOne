@@ -44,10 +44,10 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updateStory.Title, story.Title);
                 Assert.AreEqual(updateStory.Author, story.Author);
 
-                ////Removing
-                //await storyRepository.Delete(story);
-                //var resultstory = storyRepository.Get(story.Id).Result;
-                //Assert.AreEqual(resultstory, null);
+                //Removing
+               await storyRepository.Delete(story);
+               var resultstory = storyRepository.Get(story.Id).Result;
+               Assert.AreEqual(resultstory, null);
 
             }
         }

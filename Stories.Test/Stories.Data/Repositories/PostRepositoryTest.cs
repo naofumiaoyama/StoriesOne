@@ -39,9 +39,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updatePost.Title, post.Title);
 
                 ////Removing
-                //await postRepository.Delete(post);
-                //var resultPost = postRepository.Get(post.Id).Result;
-                //Assert.AreEqual(resultPost, null);
+               await postRepository.Delete(post);
+               var resultPost = postRepository.Get(post.Id).Result;
+               Assert.AreEqual(resultPost, null);
             }
         }
     }

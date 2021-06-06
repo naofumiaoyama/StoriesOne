@@ -44,10 +44,10 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updatebiography.Occupation, biography.Occupation);
                 Assert.AreEqual(updatebiography.MaritalStatus, biography.MaritalStatus);
 
-                ////Removing
-                //await biographyRepository.Delete(biography);
-                //var resultbiography = biographyRepository.Get(biography.Id).Result;
-                //Assert.AreEqual(resultbiography, null);
+                //Removing
+                await biographyRepository.Delete(biography);
+                var resultbiography = biographyRepository.Get(biography.Id).Result;
+                Assert.AreEqual(resultbiography, null);
             }
         }
              

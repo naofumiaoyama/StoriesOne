@@ -11,8 +11,7 @@ namespace Stories.Data.Repositories
     public class PersonRepository : IPersonRepository
     {
         protected DatabaseContext _context;
-       
-
+        
         public PersonRepository(DatabaseContext context)
         {
             _context = context;
