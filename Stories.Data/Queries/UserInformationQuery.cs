@@ -30,6 +30,12 @@ guid +
                     {
                         user.ID = reader.GetGuid(0);
                         user.DisplayName = reader.GetString(1);
+                        user.UserIconPicture = new Picture()
+                        {
+                            Id = reader.GetGuid(2),
+                            PictureType = PictureType.UserProfile,
+                            Url = reader.GetString(4),
+                        };
                     }
                 }
             }
