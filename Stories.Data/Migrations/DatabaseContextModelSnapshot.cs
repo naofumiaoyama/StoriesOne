@@ -25,11 +25,20 @@ namespace Stories.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("City")
+                    b.Property<string>("CityName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Country")
+                    b.Property<string>("CountryCode")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CountryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreateUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Others")
                         .HasColumnType("nvarchar(max)");
@@ -37,39 +46,35 @@ namespace Stories.Data.Migrations
                     b.Property<Guid?>("PersonId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("PrefectureCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PrefectureName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StateCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StateName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TownName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UpdateUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PersonId");
 
                     b.ToTable("Addresses");
-                });
-
-            modelBuilder.Entity("Stories.Data.Entities.Biography", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("LivingPlace")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MaritalStatus")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Occupation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("PersonId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonId");
-
-                    b.ToTable("Biographies");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Comment", b =>
@@ -84,9 +89,6 @@ namespace Stories.Data.Migrations
                     b.Property<Guid?>("CommentUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("PersonId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("PostId")
                         .HasColumnType("uniqueidentifier");
 
@@ -96,8 +98,6 @@ namespace Stories.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CommentUserId");
-
-                    b.HasIndex("PersonId");
 
                     b.HasIndex("PostId");
 
@@ -110,23 +110,50 @@ namespace Stories.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreateUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("DisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FamilyName")
+                    b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GivenName")
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LivingPlace")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LoginId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("MaritalStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Occupation")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PersonType")
+                        .HasColumnType("int");
+
                     b.Property<string>("SelfIntroduction")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UpdateUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -135,29 +162,38 @@ namespace Stories.Data.Migrations
 
             modelBuilder.Entity("Stories.Data.Entities.PersonalInfo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("PersonId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Birthdate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EmailAddress")
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreateUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("EmailAddress1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailAddress2")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MobileNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("PersonId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Sex")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
 
-                    b.HasIndex("PersonId");
+                    b.Property<Guid>("UpdateUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PersonId");
 
                     b.ToTable("PersonalInfos");
                 });
@@ -190,11 +226,26 @@ namespace Stories.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreateUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("PostDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid?>("TimelineId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UpdateUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -208,6 +259,9 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Clicked")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -237,6 +291,9 @@ namespace Stories.Data.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("CreateUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Summary")
                         .HasColumnType("nvarchar(max)");
 
@@ -245,6 +302,9 @@ namespace Stories.Data.Migrations
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UpdateUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -259,7 +319,19 @@ namespace Stories.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreateUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -278,24 +350,11 @@ namespace Stories.Data.Migrations
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.Biography", b =>
-                {
-                    b.HasOne("Stories.Data.Entities.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId");
-
-                    b.Navigation("Person");
-                });
-
             modelBuilder.Entity("Stories.Data.Entities.Comment", b =>
                 {
                     b.HasOne("Stories.Data.Entities.Person", "CommentUser")
                         .WithMany()
                         .HasForeignKey("CommentUserId");
-
-                    b.HasOne("Stories.Data.Entities.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId");
 
                     b.HasOne("Stories.Data.Entities.Post", "Post")
                         .WithMany()
@@ -303,18 +362,7 @@ namespace Stories.Data.Migrations
 
                     b.Navigation("CommentUser");
 
-                    b.Navigation("Person");
-
                     b.Navigation("Post");
-                });
-
-            modelBuilder.Entity("Stories.Data.Entities.PersonalInfo", b =>
-                {
-                    b.HasOne("Stories.Data.Entities.Person", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId");
-
-                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Picture", b =>

@@ -12,7 +12,9 @@ namespace Stories.Data.Entities
         public string Title { get; set; }
         public Person Author { get; set; }
         public string Summary { get; set; }
+        public Guid CreateUserId { get; set; }
         public DateTime CreateDate { get; set; }
+        public Guid UpdateUserId { get; set; }
         public DateTime UpdateDate { get; set; }
     }
 }

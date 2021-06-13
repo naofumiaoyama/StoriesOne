@@ -3,8 +3,9 @@ namespace Stories.Domain.Model
 {
     public class Comment
     {
-            //public UserAccount
-            public DateTime PostingTime { get; set; }
-            public static bool ExcellentStatus { get; set; }
+        public Guid Id { get; set; }
+        public string CommentText { get; set; }
+        public Person CommentUser { get; set; }
+        public DateTime PostTime { get; set; }
     }
 }

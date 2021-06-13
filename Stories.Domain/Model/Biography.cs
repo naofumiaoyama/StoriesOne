@@ -8,7 +8,6 @@ namespace Stories.Domain.Model
 {
     public class Biography
     {
-        public Guid Id { get; set; }
         public string LivingPlace { get; set; }
         public string Occupation { get; set; }
         public MaritalStatus MaritalStatus { get; set; }

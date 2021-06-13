@@ -18,11 +18,11 @@ namespace Stories.Data.Queries
             using (var connection = new SqlConnection("server = localhost\\MSSQLSERVER01; database = Stories; integrated security = true"))
             {
                 var command = new SqlCommand("" +
-"select p.Id, DisplayName, pic.Id, pic.PictureType, pic.Url from People p " +
-"INNER JOIN Pictures pic on p.Id = pic.PersonId " +
-"where CAST(p.Id as uniqueidentifier) = CAST('" + 
-guid + 
-"' as uniqueidentifier)  ", connection);
+                "Select p.Id, DisplayName, pic.Id, pic.PictureType, pic.Url from People p " +
+                "INNER JOIN Pictures pic on p.Id = pic.PersonId " +
+                "Where CAST(p.Id as uniqueidentifier) = CAST('" + 
+                guid + 
+                "' as uniqueidentifier)  ", connection);
                 await connection.OpenAsync();
                 using (SqlDataReader reader = await command.ExecuteReaderAsync())
                 {

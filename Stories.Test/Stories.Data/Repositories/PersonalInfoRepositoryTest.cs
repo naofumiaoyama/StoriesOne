@@ -22,40 +22,39 @@ namespace Stories.Test.Stories.Data.Repositories
                 PersonalInfoRepository personalInfoRepository = new PersonalInfoRepository(context);
                 PersonalInfo personalInfo = new PersonalInfo();
 
-                personalInfo.Person = new Person();
+                personalInfo.PersonId = Guid.Parse("");
                 personalInfo.MobileNumber = "09260018922";
                 personalInfo.Sex = Sex.Female;
                 personalInfo.Birthdate = new DateTime(1995, 2, 27);
-                personalInfo.EmailAddress = "albiosjenalyn27@gmail.com";
+                personalInfo.EmailAddress1 = "albiosjenalyn27@gmail.com";
                 await personalInfoRepository.Add(personalInfo);
 
                 //Getting
-                var getPersonalInfo = personalInfoRepository.Get(personalInfo.Id).Result;
+                var getPersonalInfo = personalInfoRepository.Get(personalInfo.PersonId).Result;
 
-                Assert.AreEqual(getPersonalInfo.Id, personalInfo.Id);
-                Assert.AreEqual(getPersonalInfo.Person, personalInfo.Person);
+                Assert.AreEqual(getPersonalInfo.PersonId, personalInfo.PersonId);
+  
                 Assert.AreEqual(getPersonalInfo.MobileNumber, personalInfo.MobileNumber);
                 Assert.AreEqual(getPersonalInfo.Sex, personalInfo.Sex);
                 Assert.AreEqual(getPersonalInfo.Birthdate, personalInfo.Birthdate);
-                Assert.AreEqual(getPersonalInfo.EmailAddress, personalInfo.EmailAddress);
+                Assert.AreEqual(getPersonalInfo.EmailAddress1, personalInfo.EmailAddress1);
 
                 //Updating
-                personalInfo.Person = new Person();
                 personalInfo.MobileNumber = "09091068083";
                 personalInfo.Sex = Sex.Male;
                 personalInfo.Birthdate = new DateTime(1971, 7, 28);
-                personalInfo.EmailAddress = "naofumi.aoyama@gmail.com";
+                personalInfo.EmailAddress1 = "naofumi.aoyama@gmail.com";
                 await personalInfoRepository.Update(personalInfo);
-                var updatePersonalInfo = await personalInfoRepository.Get(personalInfo.Id);
-                Assert.AreEqual(updatePersonalInfo.Person, personalInfo.Person);
+                var updatePersonalInfo = await personalInfoRepository.Get(personalInfo.PersonId);
+                Assert.AreEqual(updatePersonalInfo.PersonId, personalInfo.PersonId);
                 Assert.AreEqual(updatePersonalInfo.MobileNumber, personalInfo.MobileNumber);
                 Assert.AreEqual(updatePersonalInfo.Sex, personalInfo.Sex);
                 Assert.AreEqual(updatePersonalInfo.Birthdate, personalInfo.Birthdate);
-                Assert.AreEqual(updatePersonalInfo.EmailAddress, personalInfo.EmailAddress);
+                Assert.AreEqual(updatePersonalInfo.EmailAddress1, personalInfo.EmailAddress1);
 
                 ////Removing
                 await personalInfoRepository.Delete(personalInfo);
-                var resultPersonalInfo = personalInfoRepository.Get(personalInfo.Id).Result;
+                var resultPersonalInfo = personalInfoRepository.Get(personalInfo.PersonId).Result;
                 Assert.AreEqual(resultPersonalInfo, null);
             }
         }

@@ -28,10 +28,10 @@ namespace Stories.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<PersonalInfo> Get(int Id)
+        public async Task<PersonalInfo> Get(Guid PersonId)
         {
-            return await _context.PersonalInfos.FindAsync(Id);
-        }   
+            return await _context.PersonalInfos.FindAsync(PersonId);
+        }
          
         public async Task Update(PersonalInfo personalInfo)
         {

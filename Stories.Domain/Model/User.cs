@@ -8,7 +8,6 @@ namespace Stories.Domain.Model
         public string DisplayName { get; set; }
         public Picture UserIconPicture { get; set; }
         public string SelfIntroction { get; set; }
-        public string GroupName { get; set; }
         public Timeline Timeline { get; set; }
         public Biography Biography { get; set; }
     }

@@ -15,6 +15,6 @@ namespace Stories.Data.Entities
         public Post Post { get; set; }
         public string Url { get; set; }
         public string Name { get; set; }
-
+        public bool Clicked { get; set; }
     }
 }

@@ -4,8 +4,8 @@ namespace Stories.Domain.Model
     public class Message
     {
         public string Title { get; set; }
-        //public User UserAccount { }
-        public string Detail { get; set; }
-        //public string Icon {User}
+        public User User { get; set; }
+        public string Content { get; set; }
+        
     }
 }

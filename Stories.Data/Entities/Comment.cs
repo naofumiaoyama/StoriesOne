@@ -7,7 +7,6 @@ namespace Stories.Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        public Person Person { get; set; }
         public Post Post { get; set; }
         public string CommentText { get; set; }
         public Person CommentUser  { get; set; }

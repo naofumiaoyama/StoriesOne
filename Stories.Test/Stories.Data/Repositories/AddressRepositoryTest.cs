@@ -23,8 +23,8 @@ namespace Stories.Test.Stories.Data.Repositories
                 Address address = new Address();
                 address.Id = Guid.NewGuid();
                 address.Person = new Person();
-                address.Country = "Japan";
-                address.City = "TorokorozawaCity";
+                address.CountryName = "Japan";
+                address.CityName = "TorokorozawaCityName";
                 address.Street = "Kotesashi";
                 address.Others = "etc";
                 await addressRepository.Add(address);
@@ -33,18 +33,18 @@ namespace Stories.Test.Stories.Data.Repositories
                 var getAddress = await addressRepository.Get(address.Id);
 
                 Assert.AreEqual(getAddress.Id, address.Id);
-                Assert.AreEqual(getAddress.Country, address.Country);
-                Assert.AreEqual(getAddress.City, address.City);
+                Assert.AreEqual(getAddress.CountryName, address.CountryName);
+                Assert.AreEqual(getAddress.CityName, address.CityName);
                 Assert.AreEqual(getAddress.Street, address.Street);
                 Assert.AreEqual(getAddress.Others, address.Others);
 
                 //Updating
-                address.Country = "Japan";
-                address.City = "TokorozawaCity";
+                address.CountryName = "Japan";
+                address.CityName = "TokorozawaCityName";
                 await addressRepository.Update(address);
                 var updateAddress = await addressRepository.Get(address.Id);
-                Assert.AreEqual(updateAddress.Country, address.Country);
-                Assert.AreEqual(updateAddress.City, address.City);
+                Assert.AreEqual(updateAddress.CountryName, address.CountryName);
+                Assert.AreEqual(updateAddress.CityName, address.CityName);
 
                 ////Removing
                 await addressRepository.Remove(address);

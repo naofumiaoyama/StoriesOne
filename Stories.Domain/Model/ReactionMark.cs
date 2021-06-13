@@ -3,8 +3,14 @@ namespace Stories.Domain.Model
 {
     public class ReactionMark
     {
-        public string ID { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
-        //public string Image { }
+        public ReactionMarkType ReactionMarkType { get; set; }
+        public bool Clicked { get; set; }
+    }
+
+    public enum ReactionMarkType
+    {
+        GoodButton = 1,
     }
 }

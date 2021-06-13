@@ -27,7 +27,7 @@ namespace Stories.Api.Controllers
             List<User> users = new List<User>();
             User user = new User();
             user.PersonInfo = new PersonInfo();
-            user.PersonInfo.Address = (new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
+            user.PersonInfo.Address = (new Address { CityName = "Ikebukuro", CountryName = "Japan", Others = "池袋", Street = "" });
             user.LoginID = "testID";
             user.DisplayName = "Naofumi Aoyama";
             users.Add(user);
@@ -42,7 +42,7 @@ namespace Stories.Api.Controllers
             User user = new User();
             user.ID = Guid.Parse("430c4bbd-6614-4b17-8bfe-7090ad2ba482");
             user.PersonInfo = new PersonInfo();
-            user.PersonInfo.Address = (new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
+            user.PersonInfo.Address = (new Address { CityName = "Ikebukuro", CountryName = "Japan", Others = "池袋", Street = "" });
             user.LoginID = "testID";
             user.DisplayName = "Naofumi Aoyama";
             users.Add(user);
@@ -50,7 +50,7 @@ namespace Stories.Api.Controllers
             User user1 = new User();
             user1.ID = Guid.Parse("f4caeef7-2158-409b-9534-adf900ae3c89");
             user1.PersonInfo = new PersonInfo();
-            user1.PersonInfo.Address = (new Address { City = "Warabi", Country = "Japan", Others = "蕨", Street = "" });
+            user1.PersonInfo.Address = (new Address { CityName = "Warabi", CountryName = "Japan", Others = "蕨", Street = "" });
             user1.LoginID = "testID";
             user1.DisplayName = "Toya Arai";
             users.Add(user1);
@@ -67,7 +67,7 @@ namespace Stories.Api.Controllers
             User user = new User();
             user.ID = Guid.Parse("430c4bbd-6614-4b17-8bfe-7090ad2ba482");
             user.PersonInfo = new PersonInfo();
-            user.PersonInfo.Address = (new Address { City = "Ikebukuro", Country = "Japan", Others = "池袋", Street = "" });
+            user.PersonInfo.Address = (new Address { CityName = "Ikebukuro", CountryName = "Japan", Others = "池袋", Street = "" });
             user.LoginID = "testID";
             user.DisplayName = "Naofumi Aoyama";
             users.Add(user);
@@ -75,7 +75,7 @@ namespace Stories.Api.Controllers
             User user1 = new User();
             user1.ID = Guid.Parse("f4caeef7-2158-409b-9534-adf900ae3c89");
             user1.PersonInfo = new PersonInfo();
-            user1.PersonInfo.Address = (new Address { City = "Warabi", Country = "Japan", Others = "蕨", Street = "" });
+            user1.PersonInfo.Address = (new Address { CityName = "Warabi", CountryName = "Japan", Others = "蕨", Street = "" });
             user1.LoginID = "testID2";
             user1.DisplayName = "Naofumi Aoyama2";
             users.Add(user1);

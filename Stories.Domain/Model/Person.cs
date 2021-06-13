@@ -12,5 +12,6 @@ namespace Stories.Domain.Model
         public string GivenName { get; set; }
         public string FamilyName { get; set; }
         public PersonInfo PersonInfo { get; set; }
+        
     }
 }

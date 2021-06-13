@@ -24,9 +24,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 // Adding
                 PersonRepository personRepository = new PersonRepository(context);
                 Person person = new Person();
-                person.Id = Guid.NewGuid();
-                person.GivenName = "Naofumi";
-                person.FamilyName = "Aoyama";
+                person.Id = Guid.Parse("");
+                person.FirstName = "Naofumi";
+                person.LastName = "Aoyama";
                 person.LoginId = "naofumi.aoyoama@gmail.com";
                 person.Password = "pass";
                 person.DisplayName = "N.A";
@@ -37,20 +37,20 @@ namespace Stories.Test.Stories.Data.Repositories
                 var getPerson = await personRepository.Get(person.Id);
 
                 Assert.AreEqual(getPerson.Id, person.Id);
-                Assert.AreEqual(getPerson.GivenName, person.GivenName);
-                Assert.AreEqual(getPerson.FamilyName, person.FamilyName);
+                Assert.AreEqual(getPerson.FirstName, person.FirstName);
+                Assert.AreEqual(getPerson.LastName, person.LastName);
                 Assert.AreEqual(getPerson.LoginId, person.LoginId);
                 Assert.AreEqual(getPerson.Password, person.Password);
                 Assert.AreEqual(getPerson.DisplayName, person.DisplayName);
                 Assert.AreEqual(getPerson.SelfIntroduction, person.SelfIntroduction);
 
                 // Updating
-                person.GivenName = "Jenalyn";
-                person.FamilyName = "Albios";
+                person.FirstName = "Jenalyn";
+                person.LastName = "Albios";
                 await personRepository.Update(person);
                 var updatePerson = await personRepository.Get(person.Id);
-                Assert.AreEqual(updatePerson.FamilyName, person.FamilyName);
-                Assert.AreEqual(updatePerson.GivenName, person.GivenName);
+                Assert.AreEqual(updatePerson.FirstName, person.FirstName);
+                Assert.AreEqual(updatePerson.LastName, person.LastName);
 
                 /// Removing
                 await personRepository.Remove(person);
