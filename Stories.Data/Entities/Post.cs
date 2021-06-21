@@ -1,20 +1,20 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class Post
+    public class Post : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
-        public Timeline Timeline { get; set; }
+        [ForeignKey("Timeline")]
+        public Guid TimelineId { get; set; }
+        [ForeignKey("Picture")]
+        public Guid PictureId { get; set; }
         public string Title { get; set; }
-        public DateTime PostDate { get; set; }
-        public Guid CreateUserId { get; set; }
-        public DateTime CreateDate { get; set; }
-        public Guid UpdateUserId { get; set; }
-        public DateTime UpdateDate { get; set; }
+        public DateTime PostDateTime { get; set; }
+   
     }
 
 

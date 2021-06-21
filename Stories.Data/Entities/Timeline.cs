@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Stories.Data.Entities
 {
-   public class Timeline
+   public class Timeline : BaseEntity
     {
         [Key]
-        public Guid Id { get; set; }
-        public Person Person { get; set; }
-        public Guid CreateUserId { get; set; }
-        public DateTime CreateDate { get; set; }
-        public Guid UpdateUserId { get; set; }
-        public DateTime UpdateDate { get; set; }
-
+        [ForeignKey("Person")]
+        public Guid PersonId { get; set; }
+        public string TimelineName { get; set; }
+        public ICollection<Post> Posts { get; set; }
     }
 }

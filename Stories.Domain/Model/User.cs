@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Stories.Domain.Model
 {
     public class User : Person
@@ -10,5 +12,8 @@ namespace Stories.Domain.Model
         public string SelfIntroction { get; set; }
         public Timeline Timeline { get; set; }
         public Biography Biography { get; set; }
+        public List<Story> Stories { get; set; }
+
+        public List<User> Friends { get; set; }
     }
 }

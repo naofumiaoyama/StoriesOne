@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Stories.Data.Entities
 {
-    public class Person
+    public class Person : BaseEntity
     {
         [Key]
         public Guid Id {get; set;}
@@ -18,10 +20,16 @@ namespace Stories.Data.Entities
         public string LivingPlace { get; set; }
         public string Occupation { get; set; }
         public MaritalStatus MaritalStatus { get; set; }
-        public Guid CreateUserId { get; set; }
-        public DateTime CreateDate { get; set; }
-        public Guid UpdateUserId { get; set; }
-        public DateTime UpdateDate { get; set; }
+
+        public ICollection<Address> Addresses { get; set; }
+
+        public ICollection<Story> Stories { get; set; }
+
+        public ICollection<Post> Posts { get; set; }
+
+        public PersonalInfo PersonalInfo { get; set; }
+
+        public Timeline Timeline { get; set; }
     }
     public enum PersonType
     {

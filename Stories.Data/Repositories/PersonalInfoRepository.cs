@@ -22,7 +22,7 @@ namespace Stories.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(PersonalInfo personalInfo)
+        public async Task Remove(PersonalInfo personalInfo)
         {
             _context.Remove(personalInfo);
             await _context.SaveChangesAsync();

@@ -12,14 +12,15 @@ namespace Stories.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //Win SQLServer Developer Edition
-            //optionsBuilder.UseSqlServer("server=localhost\\MSSQLSERVER01; database = Stories; integrated security = true");
+            optionsBuilder.UseSqlServer("server=localhost\\MSSQLSERVER01; database = Stories; integrated security = true");
             // Mac Docker
-            optionsBuilder.UseSqlServer("Server=tcp:127.0.0.1,1433;database=Stories; User ID=sa;Password=reallyStrongPwd123;");
+            //optionsBuilder.UseSqlServer("Server=tcp:127.0.0.1,1433;database=Stories; User ID=sa;Password=reallyStrongPwd123;");
 
         }
 
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<FriendRelationship> FriendRelationships { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<PersonalInfo> PersonalInfos { get; set; }      
         public DbSet<Picture> Pictures { get; set; }
@@ -35,3 +36,5 @@ namespace Stories.Data
         }
     }
 }
+
+

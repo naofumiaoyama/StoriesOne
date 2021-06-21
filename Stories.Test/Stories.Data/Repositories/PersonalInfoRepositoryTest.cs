@@ -21,8 +21,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 //adding
                 PersonalInfoRepository personalInfoRepository = new PersonalInfoRepository(context);
                 PersonalInfo personalInfo = new PersonalInfo();
-
-                personalInfo.PersonId = Guid.Parse("");
+                personalInfo.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 personalInfo.MobileNumber = "09260018922";
                 personalInfo.Sex = Sex.Female;
                 personalInfo.Birthdate = new DateTime(1995, 2, 27);
@@ -52,8 +51,8 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updatePersonalInfo.Birthdate, personalInfo.Birthdate);
                 Assert.AreEqual(updatePersonalInfo.EmailAddress1, personalInfo.EmailAddress1);
 
-                ////Removing
-                await personalInfoRepository.Delete(personalInfo);
+                //Removing
+                await personalInfoRepository.Remove(personalInfo);
                 var resultPersonalInfo = personalInfoRepository.Get(personalInfo.PersonId).Result;
                 Assert.AreEqual(resultPersonalInfo, null);
             }

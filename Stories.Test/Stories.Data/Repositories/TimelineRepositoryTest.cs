@@ -21,26 +21,26 @@ namespace Stories.Test.Stories.Data.Repositories
                 //adding
                 TimelineRepository timelineRepository = new TimelineRepository(context);
                 Timeline timeline = new Timeline();           
-                timeline.Id = Guid.NewGuid();
-                timeline.Person = new Person();
+                timeline.PersonId = Guid.Parse("3A4685B0-7167-48F9-BE06-F9ACBB7E1756");
+                timeline.TimelineName = "Naofumi Aoyama";
                 await timelineRepository.Add(timeline);
 
                 //getting
-                var getTimeline = await  timelineRepository.Get(timeline.Id);
-                Assert.AreEqual(getTimeline.Id, timeline.Id);
-                Assert.AreEqual(getTimeline.Person, getTimeline.Person);
+                var getTimeline = await  timelineRepository.Get(timeline.PersonId);                
+                Assert.AreEqual(getTimeline.PersonId, getTimeline.PersonId);
+                Assert.AreEqual(getTimeline.TimelineName, getTimeline.TimelineName);
 
-                //Updating
-                timeline.Person = new Person();
+                //Updating           
+                timeline.TimelineName = "Jenalyn Albios";
                 await timelineRepository.Update(timeline);
-                var updateTimeline = await timelineRepository.Get(timeline.Id);
+                var updateTimeline = await timelineRepository.Get(timeline.PersonId);
 
                  //Removing
                 await timelineRepository.Delete(timeline);
-                var resulttimeline = timelineRepository.Get(timeline.Id).Result;
+                var resulttimeline = timelineRepository.Get(timeline.PersonId).Result;
                 Assert.AreEqual(resulttimeline, null);
             }
         }
     }
 
-}
+} 

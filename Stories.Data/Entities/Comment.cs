@@ -1,15 +1,18 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class Comment
+    public class Comment : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
-        public Post Post { get; set; }
+        [ForeignKey("Post")]
+        public Guid PostId { get; set; }
+        [ForeignKey("Person")]
+        public Guid CommentPersonId { get; set; }
         public string CommentText { get; set; }
-        public Person CommentUser  { get; set; }
         public DateTime PostTime { get; set; }
     }
 }

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class Address
+    public class Address : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
-        public Person Person { get; set; }
+        [ForeignKey("Person")]
+        public Guid PersonId { get; set; }
         public string CountryCode { get; set; }
         public string CountryName { get; set; }
         public string PrefectureCode { get; set; }
@@ -19,9 +20,6 @@ namespace Stories.Data.Entities
         public string TownName { get; set; }
         public string Street { get; set; }
         public string Others { get; set; }
-        public Guid CreateUserId { get; set; }
-        public DateTime CreateDate { get; set; }
-        public Guid UpdateUserId { get; set; }
-        public DateTime UpdateDate { get; set; }
+        
     }
 }

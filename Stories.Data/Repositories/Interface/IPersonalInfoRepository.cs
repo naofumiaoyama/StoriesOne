@@ -12,6 +12,6 @@ namespace Stories.Data.Repositories
         Task<PersonalInfo> Get(Guid PersonId);
         Task Add(PersonalInfo personalInfo);
         Task Update(PersonalInfo personalInfo);
-        Task Delete(PersonalInfo personalInfo);
+        Task Remove(PersonalInfo personalInfo);
     }
 }

@@ -18,7 +18,7 @@ namespace Stories.Data.Queries
             using (var connection = new SqlConnection("server = localhost\\MSSQLSERVER01; database = Stories; integrated security = true"))
             {
                 var command = new SqlCommand("" +
-                "Select p.Id, DisplayName, pic.Id, pic.PictureType, pic.Url from People p " +
+                "Select p.Id, DisplayName,MiddleName,  pic.Id, pic.PictureType, pic.Url from People p " +
                 "INNER JOIN Pictures pic on p.Id = pic.PersonId " +
                 "Where CAST(p.Id as uniqueidentifier) = CAST('" + 
                 guid + 
@@ -30,7 +30,7 @@ namespace Stories.Data.Queries
                     {
                         user.ID = reader.GetGuid(0);
                         user.DisplayName = reader.GetString(1);
-                        user.UserIconPicture = new Picture()
+                        user.UserIconPicture = new Picture()                       
                         {
                             Id = reader.GetGuid(2),
                             PictureType = PictureType.UserProfile,

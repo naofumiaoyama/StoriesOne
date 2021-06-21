@@ -20,7 +20,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 Story story = new Story();
                 story.Id = Guid.NewGuid();
                 story.Title = "Titanic";
-                story.Author = await new PersonRepository(context).Get(Guid.Parse("0E407699-EDE4-4C2B-8699-2DA8F2BD75E2"));
+                story.AuthorPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 story.Summary = "Start by a young couple meeting, falling in love and having a hard time being together";
                 story.CreateDate = new DateTime(2021- 3 - 27);
                 story.UpdateDate = DateTime.Today;
@@ -31,18 +31,18 @@ namespace Stories.Test.Stories.Data.Repositories
 
                 Assert.AreEqual(getStory.Id, story.Id);
                 Assert.AreEqual(getStory.Title, story.Title);
-                Assert.AreEqual(getStory.Author, story.Author);
+                Assert.AreEqual(getStory.AuthorPersonId, story.AuthorPersonId);
                 Assert.AreEqual(getStory.Summary, story.Summary);
                 Assert.AreEqual(getStory.CreateDate, story.CreateDate);
                 Assert.AreEqual(getStory.UpdateDate, story.UpdateDate);
 
                 //Updating
                 story.Title = "Lovebirds";
-                story.Author = new Person();
+              
                 await storyRepository.Update(story);
                 var updateStory = await storyRepository.Get(story.Id);
                 Assert.AreEqual(updateStory.Title, story.Title);
-                Assert.AreEqual(updateStory.Author, story.Author);
+                Assert.AreEqual(updateStory.AuthorPersonId, story.AuthorPersonId);
 
                 //Removing
                await storyRepository.Delete(story);

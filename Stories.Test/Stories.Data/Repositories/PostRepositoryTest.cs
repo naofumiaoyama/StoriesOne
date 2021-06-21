@@ -21,8 +21,8 @@ namespace Stories.Test.Stories.Data.Repositories
                 //adding
                 PostRepository postRepository = new PostRepository(context);
                 Post post = new Post();
-                post.Id = Guid.NewGuid(); 
-                post.Timeline = new Timeline();
+                post.Id = Guid.NewGuid();
+                post.TimelineId = Guid.NewGuid();
                 await postRepository.Add(post);
 
                 //Getting
@@ -30,7 +30,6 @@ namespace Stories.Test.Stories.Data.Repositories
 
                 Assert.AreEqual(getPost.Id, post.Id);
                 Assert.AreEqual(getPost.Title, post.Title);
-                Assert.AreEqual(getPost.Timeline, post.Timeline);
 
                 //Updating
                 post.Title = "Stories";

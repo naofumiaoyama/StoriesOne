@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace Stories.Data.Entities
 {
-    public class Story
+    public class Story : BaseEntity
     {
-        public Guid Id  { get; set; }
+        [Key]
+        public Guid Id { get; set; }
+        [ForeignKey("Person")]
+        public Guid AuthorPersonId { get; set; }
+        public string AuthorName { get; set; }
         public string Title { get; set; }
-        public Person Author { get; set; }
         public string Summary { get; set; }
-        public Guid CreateUserId { get; set; }
-        public DateTime CreateDate { get; set; }
-        public Guid UpdateUserId { get; set; }
-        public DateTime UpdateDate { get; set; }
+     
     }
 }

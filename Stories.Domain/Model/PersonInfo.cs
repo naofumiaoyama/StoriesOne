@@ -9,11 +9,16 @@ namespace Stories.Domain.Model
         public DateTime Birthdate { get; set; }
         public string EmailAddress1 { get; set; }
         public string EmailAddress2 { get; set; }
+
+        public PersonInfo()
+        {
+
+        }
     }
 
     public enum Sex
     {
-        male,
-        female,
+        Male,
+        Female,
     }
 }

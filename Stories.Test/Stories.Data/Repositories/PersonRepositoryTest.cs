@@ -24,39 +24,50 @@ namespace Stories.Test.Stories.Data.Repositories
                 // Adding
                 PersonRepository personRepository = new PersonRepository(context);
                 Person person = new Person();
-                person.Id = Guid.Parse("");
-                person.FirstName = "Naofumi";
-                person.LastName = "Aoyama";
+                person.Id = Guid.Parse("B87DD83A-7F89-4AD0-BB4E-E94518F8A677");
+                person.PersonType = PersonType.User;
+                person.FirstName = "OtherFirst";
+                person.MiddleName = "Makio";
+                person.LastName = "OtherLast";
                 person.LoginId = "naofumi.aoyoama@gmail.com";
                 person.Password = "pass";
                 person.DisplayName = "N.A";
                 person.SelfIntroduction = "私の自己紹介";
+                person.LivingPlace = "TokorozawaCity";
+                person.Occupation = "Engineer";
+                person.MaritalStatus = MaritalStatus.Married;
                 await personRepository.Add(person);
+
 
                 // Getting
                 var getPerson = await personRepository.Get(person.Id);
 
                 Assert.AreEqual(getPerson.Id, person.Id);
+                Assert.AreEqual(getPerson.PersonType, person.PersonType);
                 Assert.AreEqual(getPerson.FirstName, person.FirstName);
                 Assert.AreEqual(getPerson.LastName, person.LastName);
                 Assert.AreEqual(getPerson.LoginId, person.LoginId);
                 Assert.AreEqual(getPerson.Password, person.Password);
                 Assert.AreEqual(getPerson.DisplayName, person.DisplayName);
                 Assert.AreEqual(getPerson.SelfIntroduction, person.SelfIntroduction);
+                Assert.AreEqual(getPerson.LivingPlace, person.LivingPlace);
+                Assert.AreEqual(getPerson.Occupation, person.Occupation);
+                Assert.AreEqual(getPerson.MaritalStatus, person.MaritalStatus);
 
                 // Updating
-                person.FirstName = "Jenalyn";
-                person.LastName = "Albios";
+                person.FirstName = "Shigeyoshi";
+                person.LastName = "Aoyama";
                 await personRepository.Update(person);
                 var updatePerson = await personRepository.Get(person.Id);
                 Assert.AreEqual(updatePerson.FirstName, person.FirstName);
                 Assert.AreEqual(updatePerson.LastName, person.LastName);
 
-                /// Removing
+                // Removing
                 await personRepository.Remove(person);
                 var resultPerson = personRepository.Get(person.Id).Result;
                 Assert.AreEqual(resultPerson, null);
 
+             
             }
         }
     }

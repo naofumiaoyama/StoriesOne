@@ -23,7 +23,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 Comment comment = new Comment();
                 comment.Id = Guid.NewGuid();
                 comment.CommentText = "Abc";
-                comment.CommentUser = new Person();
+                comment.CommentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 comment.PostTime = DateTime.Now;
                 await commentRepository.Add(comment);
 
@@ -31,21 +31,20 @@ namespace Stories.Test.Stories.Data.Repositories
                 var getcomment = await commentRepository.Get(comment.Id);
                 Assert.AreEqual(getcomment.Id, comment.Id);
                 Assert.AreEqual(getcomment.CommentText, comment.CommentText);
-                Assert.AreEqual(getcomment.CommentUser, comment.CommentUser);
+                Assert.AreEqual(getcomment.CommentPersonId,comment.CommentPersonId);
                 Assert.AreEqual(getcomment.PostTime, comment.PostTime);
 
                 //Updating
                 comment.CommentText = "CDE";
-                comment.CommentUser = await new PersonRepository(context).Get(Guid.Parse("0E407699-EDE4-4C2B-8699-2DA8F2BD75E2"));
-                await commentRepository.Update(comment);
+                comment.CommentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 var updateComment = await commentRepository.Get(comment.Id);
-                Assert.AreEqual(updateComment.CommentText, comment.CommentText);
-                Assert.AreEqual(updateComment.CommentUser, comment.CommentUser);
+                Assert.AreEqual(updateComment.CommentText, comment.CommentText);       
+                Assert.AreEqual(updateComment.CommentPersonId, comment.CommentPersonId);
 
                 //Removing
-               await commentRepository.Delete(comment);
-               var resultComment = commentRepository.Get(comment.Id).Result;
-               Assert.AreEqual(resultComment, null);
+                await commentRepository.Delete(comment);
+                var resultComment = commentRepository.Get(comment.Id).Result;
+                Assert.AreEqual(resultComment, null);
 
             }
         }
