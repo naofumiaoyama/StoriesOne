@@ -17,10 +17,14 @@ namespace Stories.Data.InitialData
                 PersonalInfoRepository personalInfoRepository = new PersonalInfoRepository(context);
                 PersonalInfo personalInfo = new PersonalInfo();
                 personalInfo.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                personalInfo.LoginId = "naofumi.aoyoama@gmail.com";
+                personalInfo.Password = "pass";
                 personalInfo.MobileNumber = "09091068083";
                 personalInfo.Sex = Sex.Male;
                 personalInfo.Birthdate = new DateTime(1971, 7, 28);
-                personalInfo.EmailAddress1 = "naofumi.aoyoama@gmail.com"; 
+                personalInfo.MaritalStatus = MaritalStatus.Married;
+                personalInfo.EmailAddress1 = "naofumi.aoyoama@gmail.com";
+                personalInfo.EmailAddress2 = "janeaoyama@gmail.com";
                 await personalInfoRepository.Add(personalInfo);
 
                 PersonalInfo personalInfo2 = new PersonalInfo();
@@ -29,6 +33,7 @@ namespace Stories.Data.InitialData
                 personalInfo2.Sex = Sex.Female;
                 personalInfo2.Birthdate = new DateTime(1995, 3, 27);
                 personalInfo2.EmailAddress1 = "albiosjenalyn27@gmail.com";
+                personalInfo2.EmailAddress2 = "naoaoyama@gmail.com";
                 await personalInfoRepository.Add(personalInfo2);
             }
         }

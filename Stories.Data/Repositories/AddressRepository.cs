@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Stories.Data.Repositories
 {
-    public class AddressRepository : IAddressRepository
+    public class AddressRepository : IAddressRepository 
     {
         protected DatabaseContext _context;
-     
 
         public AddressRepository(DatabaseContext context)
         {

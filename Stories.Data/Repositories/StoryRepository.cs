@@ -16,7 +16,6 @@ namespace Stories.Data.Repositories
             _context = context;
         }
 
-
         public async Task Add(Story story)
         {
             await _context.Stories.AddAsync(story);

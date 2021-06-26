@@ -29,13 +29,10 @@ namespace Stories.Test.Stories.Data.Repositories
                 person.FirstName = "OtherFirst";
                 person.MiddleName = "Makio";
                 person.LastName = "OtherLast";
-                person.LoginId = "naofumi.aoyoama@gmail.com";
-                person.Password = "pass";
                 person.DisplayName = "N.A";
                 person.SelfIntroduction = "私の自己紹介";
                 person.LivingPlace = "TokorozawaCity";
                 person.Occupation = "Engineer";
-                person.MaritalStatus = MaritalStatus.Married;
                 await personRepository.Add(person);
 
 
@@ -46,13 +43,12 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(getPerson.PersonType, person.PersonType);
                 Assert.AreEqual(getPerson.FirstName, person.FirstName);
                 Assert.AreEqual(getPerson.LastName, person.LastName);
-                Assert.AreEqual(getPerson.LoginId, person.LoginId);
-                Assert.AreEqual(getPerson.Password, person.Password);
+               
                 Assert.AreEqual(getPerson.DisplayName, person.DisplayName);
                 Assert.AreEqual(getPerson.SelfIntroduction, person.SelfIntroduction);
                 Assert.AreEqual(getPerson.LivingPlace, person.LivingPlace);
                 Assert.AreEqual(getPerson.Occupation, person.Occupation);
-                Assert.AreEqual(getPerson.MaritalStatus, person.MaritalStatus);
+                
 
                 // Updating
                 person.FirstName = "Shigeyoshi";

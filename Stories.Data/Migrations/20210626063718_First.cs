@@ -46,32 +46,6 @@ namespace Stories.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "People",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PersonType = table.Column<int>(type: "int", nullable: false),
-                    LoginId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SelfIntroduction = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LivingPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Occupation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MaritalStatus = table.Column<int>(type: "int", nullable: false),
-                    CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_People", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Pictures",
                 columns: table => new
                 {
@@ -108,21 +82,19 @@ namespace Stories.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Addresses",
+                name: "People",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CountryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PrefectureCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PrefectureName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StateCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StateName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CityName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TownName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Others = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PersonType = table.Column<int>(type: "int", nullable: false),
+                    DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SelfIntroduction = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LivingPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Occupation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProfilePictureId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -130,13 +102,13 @@ namespace Stories.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                    table.PrimaryKey("PK_People", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Addresses_People_PersonId",
-                        column: x => x.PersonId,
-                        principalTable: "People",
+                        name: "FK_People_Pictures_ProfilePictureId",
+                        column: x => x.ProfilePictureId,
+                        principalTable: "Pictures",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -144,9 +116,12 @@ namespace Stories.Data.Migrations
                 columns: table => new
                 {
                     PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LoginId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Sex = table.Column<int>(type: "int", nullable: false),
                     Birthdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MaritalStatus = table.Column<int>(type: "int", nullable: false),
                     EmailAddress1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmailAddress2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -214,6 +189,39 @@ namespace Stories.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CountryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PrefectureCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PrefectureName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CityName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TownName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Others = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PersonalInfoPersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Addresses_PersonalInfos_PersonalInfoPersonId",
+                        column: x => x.PersonalInfoPersonId,
+                        principalTable: "PersonalInfos",
+                        principalColumn: "PersonId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Posts",
                 columns: table => new
                 {
@@ -246,9 +254,14 @@ namespace Stories.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Addresses_PersonId",
+                name: "IX_Addresses_PersonalInfoPersonId",
                 table: "Addresses",
-                column: "PersonId");
+                column: "PersonalInfoPersonId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_People_ProfilePictureId",
+                table: "People",
+                column: "ProfilePictureId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_PersonId",
@@ -278,12 +291,6 @@ namespace Stories.Data.Migrations
                 name: "FriendRelationships");
 
             migrationBuilder.DropTable(
-                name: "PersonalInfos");
-
-            migrationBuilder.DropTable(
-                name: "Pictures");
-
-            migrationBuilder.DropTable(
                 name: "Posts");
 
             migrationBuilder.DropTable(
@@ -293,10 +300,16 @@ namespace Stories.Data.Migrations
                 name: "Stories");
 
             migrationBuilder.DropTable(
+                name: "PersonalInfos");
+
+            migrationBuilder.DropTable(
                 name: "Timelines");
 
             migrationBuilder.DropTable(
                 name: "People");
+
+            migrationBuilder.DropTable(
+                name: "Pictures");
         }
     }
 }

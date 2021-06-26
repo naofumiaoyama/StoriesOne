@@ -9,15 +9,15 @@ using Stories.Data.Queries;
 namespace Stories.Test.Stories.Data.Queries
 {
     [TestClass]
-    public class UserInformationQueryTest
+    public class UserQueryTest
     {
 
         [TestMethod]
         public async Task GetTest()
         {
-            var query = new UserInformationQuery();
-            var user = await query.Get(Guid.Parse("1DD10D85-AB15-41B6-936B-0BC8E439DD66"));
-            Assert.AreEqual(user.ID, Guid.Parse("1DD10D85-AB15-41B6-936B-0BC8E439DD66"));
+            var query = new UserQuery();
+            var user = await query.Get(Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F"));
+            Assert.AreEqual(user.Id, Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F"));
             Assert.AreEqual(user.DisplayName, "N.A");
         }
     }

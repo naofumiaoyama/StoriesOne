@@ -8,16 +8,17 @@ namespace Stories.Domain.Model
 {
     public class Person
     {
-        public Guid ID { get; set; }
-        public string GivenName { get; set; }
-        public string FamilyName { get; set; }
-        public PersonInfo PersonInfo { get; set; }
+        public Guid Id{ get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public PersonalInfo PersonalInfo { get; set; }
 
         public string FullName
         {
             get
             {
-                return GivenName;
+                return FirstName + " " + LastName;
             }
         }
             

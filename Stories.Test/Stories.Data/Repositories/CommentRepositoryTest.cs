@@ -36,7 +36,7 @@ namespace Stories.Test.Stories.Data.Repositories
 
                 //Updating
                 comment.CommentText = "CDE";
-                comment.CommentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                comment.CommentPersonId = Guid.Parse("54AE5D62-D355-46D3-81C7-A35806A4E9BB");
                 var updateComment = await commentRepository.Get(comment.Id);
                 Assert.AreEqual(updateComment.CommentText, comment.CommentText);       
                 Assert.AreEqual(updateComment.CommentPersonId, comment.CommentPersonId);

@@ -10,8 +10,8 @@ using Stories.Data;
 namespace Stories.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210621145449_First")]
-    partial class First
+    [Migration("20210626074528_Second")]
+    partial class Second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,6 +48,9 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("PersonId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("PersonalInfoPersonId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("PrefectureCode")
                         .HasColumnType("nvarchar(max)");
 
@@ -74,7 +77,7 @@ namespace Stories.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonId");
+                    b.HasIndex("PersonalInfoPersonId");
 
                     b.ToTable("Addresses");
                 });
@@ -173,23 +176,17 @@ namespace Stories.Data.Migrations
                     b.Property<string>("LivingPlace")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LoginId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MaritalStatus")
-                        .HasColumnType("int");
-
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Occupation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("PersonType")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("ProfilePictureId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SelfIntroduction")
                         .HasColumnType("nvarchar(max)");
@@ -225,7 +222,16 @@ namespace Stories.Data.Migrations
                     b.Property<string>("EmailAddress2")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LoginId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MaritalStatus")
+                        .HasColumnType("int");
+
                     b.Property<string>("MobileNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Sex")
@@ -415,11 +421,9 @@ namespace Stories.Data.Migrations
 
             modelBuilder.Entity("Stories.Data.Entities.Address", b =>
                 {
-                    b.HasOne("Stories.Data.Entities.Person", null)
+                    b.HasOne("Stories.Data.Entities.PersonalInfo", null)
                         .WithMany("Addresses")
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PersonalInfoPersonId");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.PersonalInfo", b =>
@@ -462,8 +466,6 @@ namespace Stories.Data.Migrations
 
             modelBuilder.Entity("Stories.Data.Entities.Person", b =>
                 {
-                    b.Navigation("Addresses");
-
                     b.Navigation("PersonalInfo");
 
                     b.Navigation("Posts");
@@ -471,6 +473,11 @@ namespace Stories.Data.Migrations
                     b.Navigation("Stories");
 
                     b.Navigation("Timeline");
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.PersonalInfo", b =>
+                {
+                    b.Navigation("Addresses");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Timeline", b =>

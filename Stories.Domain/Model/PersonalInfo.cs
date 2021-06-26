@@ -1,34 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-
-namespace Stories.Data.Entities
+namespace Stories.Domain.Model
 {
-    public class PersonalInfo : BaseEntity
+    public class PersonalInfo
     {
-        [Key]
-        [ForeignKey("Person")]
-        public Guid PersonId { get; set; }
-        public string LoginId { get; set; }
+        public string LoginID { get; set; }
         public string Password { get; set; }
         public string MobileNumber { get; set; }
         public Sex Sex { get; set; }
         public DateTime Birthdate { get; set; }
         public MaritalStatus MaritalStatus { get; set; }
-        public string EmailAddress1 {get; set;}
+        public string EmailAddress1 { get; set; }
         public string EmailAddress2 { get; set; }
-
-        public ICollection<Address> Addresses { get; set; }
-
-
+       
+       // public IList<Address> Addresses { get; set; }
     }
 
     public enum Sex
     {
-        Male = 1,
-        Female = 2
+        Male,
+        Female,
     }
     public enum MaritalStatus
     {
@@ -39,4 +31,3 @@ namespace Stories.Data.Entities
         Complicated = 5
     }
 }
-

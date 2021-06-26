@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stories.Data;
 
 namespace Stories.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210626063718_First")]
+    partial class First
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,7 +185,7 @@ namespace Stories.Data.Migrations
                     b.Property<int>("PersonType")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("ProfilePictureId")
+                    b.Property<Guid?>("ProfilePictureId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SelfIntroduction")
@@ -196,6 +198,8 @@ namespace Stories.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfilePictureId");
 
                     b.ToTable("People");
                 });
@@ -422,6 +426,15 @@ namespace Stories.Data.Migrations
                     b.HasOne("Stories.Data.Entities.PersonalInfo", null)
                         .WithMany("Addresses")
                         .HasForeignKey("PersonalInfoPersonId");
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Person", b =>
+                {
+                    b.HasOne("Stories.Data.Entities.Picture", "ProfilePicture")
+                        .WithMany()
+                        .HasForeignKey("ProfilePictureId");
+
+                    b.Navigation("ProfilePicture");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.PersonalInfo", b =>

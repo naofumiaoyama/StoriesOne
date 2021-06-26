@@ -27,9 +27,9 @@ namespace Stories.Data.Queries
                 {
                     while (await reader.ReadAsync())
                     {
-                        person.ID = reader.GetGuid(1);
-                        person.FamilyName = reader.GetString(2);
-                        person.GivenName = reader.GetString(3);
+                        person.Id = reader.GetGuid(1);
+                        person.FirstName = reader.GetString(2);
+                        person.LastName = reader.GetString(3);
                     }
                 }
                 return person;

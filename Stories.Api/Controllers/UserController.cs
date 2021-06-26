@@ -26,9 +26,8 @@ namespace Stories.Api.Controllers
         {
             List<User> users = new List<User>();
             User user = new User();
-            user.PersonInfo = new PersonInfo();
-            user.PersonInfo.Address = (new Address { CityName = "Ikebukuro", CountryName = "Japan", Others = "池袋", Street = "" });
-            user.LoginID = "testID";
+            //user.PersonInfo = new PersonInfo();
+            //user.PersonInfo.Address = (new Address { CityName = "Ikebukuro", CountryName = "Japan", Others = "池袋", Street = "" });
             user.DisplayName = "Naofumi Aoyama";
             users.Add(user);
             var result = await Task.Run(() => users);
@@ -40,23 +39,23 @@ namespace Stories.Api.Controllers
         {
             List<User> users = new List<User>();
             User user = new User();
-            user.ID = Guid.Parse("430c4bbd-6614-4b17-8bfe-7090ad2ba482");
-            user.PersonInfo = new PersonInfo();
-            user.PersonInfo.Address = (new Address { CityName = "Ikebukuro", CountryName = "Japan", Others = "池袋", Street = "" });
-            user.LoginID = "testID";
+            user.Id = Guid.Parse("430c4bbd-6614-4b17-8bfe-7090ad2ba482");
+            //user.PersonInfo = new PersonInfo();
+            //user.PersonInfo.Address = (new Address { CityName = "Ikebukuro", CountryName = "Japan", Others = "池袋", Street = "" });
+            
             user.DisplayName = "Naofumi Aoyama";
             users.Add(user);
 
             User user1 = new User();
-            user1.ID = Guid.Parse("f4caeef7-2158-409b-9534-adf900ae3c89");
-            user1.PersonInfo = new PersonInfo();
-            user1.PersonInfo.Address = (new Address { CityName = "Warabi", CountryName = "Japan", Others = "蕨", Street = "" });
-            user1.LoginID = "testID";
+            user1.Id = Guid.Parse("f4caeef7-2158-409b-9534-adf900ae3c89");
+            //user1.PersonInfo = new PersonInfo();
+            //user1.PersonInfo.Address = (new Address { CityName = "Warabi", CountryName = "Japan", Others = "蕨", Street = "" });
+            
             user1.DisplayName = "Toya Arai";
             users.Add(user1);
 
             var userResults = await Task.Run(() => users);
-            var result = userResults.Find(p => p.ID == guid);
+            var result = userResults.Find(p => p.Id == guid);
             return result;
         }
 
@@ -65,29 +64,29 @@ namespace Stories.Api.Controllers
         {
             List<User> users = new List<User>();
             User user = new User();
-            user.ID = Guid.Parse("430c4bbd-6614-4b17-8bfe-7090ad2ba482");
-            user.PersonInfo = new PersonInfo();
-            user.PersonInfo.Address = (new Address { CityName = "Ikebukuro", CountryName = "Japan", Others = "池袋", Street = "" });
-            user.LoginID = "testID";
+            user.Id = Guid.Parse("430c4bbd-6614-4b17-8bfe-7090ad2ba482");
+            //user.PersonInfo = new PersonInfo();
+            //user.PersonInfo.Address = (new Address { CityName = "Ikebukuro", CountryName = "Japan", Others = "池袋", Street = "" });
+            
             user.DisplayName = "Naofumi Aoyama";
             users.Add(user);
 
             User user1 = new User();
-            user1.ID = Guid.Parse("f4caeef7-2158-409b-9534-adf900ae3c89");
-            user1.PersonInfo = new PersonInfo();
-            user1.PersonInfo.Address = (new Address { CityName = "Warabi", CountryName = "Japan", Others = "蕨", Street = "" });
-            user1.LoginID = "testID2";
+            user1.Id = Guid.Parse("f4caeef7-2158-409b-9534-adf900ae3c89");
+            //user1.PersonInfo = new PersonInfo();
+            //user1.PersonInfo.Address = (new Address { CityName = "Warabi", CountryName = "Japan", Others = "蕨", Street = "" });
+          
             user1.DisplayName = "Naofumi Aoyama2";
             users.Add(user1);
             var userResults = await Task.Run(() => users);
-            var result = userResults.Find(p => p.LoginID == id);
+            var result = userResults.Find(p => p.PersonalInfo.LoginID == id);
             return result;
         }
 
         [HttpPut("{id}")]
         public IActionResult UpdateUser(Guid guid, User newUser)
         {
-            if (guid != newUser.ID)
+            if (guid != newUser.Id)
             {
                 return BadRequest();
             }
@@ -119,8 +118,8 @@ namespace Stories.Api.Controllers
         {
             var resultUser = new User
             {
-            DisplayName = newUser.DisplayName,
-            FamilyName = newUser.FamilyName
+                DisplayName = newUser.DisplayName,
+                LastName = newUser.LastName
             };
 
            // _context.User.Add(newUser);
@@ -154,7 +153,7 @@ namespace Stories.Api.Controllers
             new User
             {
                 DisplayName = newUser.DisplayName,
-                FamilyName = newUser.FamilyName
+                LastName = newUser.LastName
             };
     }
 }

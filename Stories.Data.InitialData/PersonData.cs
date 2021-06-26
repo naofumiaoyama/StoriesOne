@@ -19,13 +19,12 @@ namespace Stories.Data.InitialData
                 person.FirstName = "Naofumi";
                 person.MiddleName = "Makio";
                 person.LastName = "Aoyama";
-                person.LoginId = "naofumi.aoyoama@gmail.com";
-                person.Password = "pass";
                 person.DisplayName = "N.A";
                 person.SelfIntroduction = "私の自己紹介";
                 person.LivingPlace = "TokorozawaCity";
                 person.Occupation = "Engineer";
-                person.MaritalStatus = MaritalStatus.Married;
+                person.ProfilePictureId = Guid.Parse("CF2FD49A-A7CB-4523-8BED-C09B896026EF");
+             
                 await personRepository.Add(person);
 
                 Person person2 = new Person();
@@ -34,13 +33,13 @@ namespace Stories.Data.InitialData
                 person2.FirstName = "Jenalyn";
                 person2.MiddleName = "Makio";
                 person2.LastName = "Aoyama";
-                person2.LoginId = "jen@gmail.com";
-                person2.Password = "pass";
                 person2.DisplayName = "J.A";
                 person2.SelfIntroduction = "私の自己紹介";
                 person2.LivingPlace = "MandaueCity";
                 person2.Occupation = "Engineer";
-                person2.MaritalStatus = MaritalStatus.Married;
+               
+                person2.ProfilePictureId = Guid.Parse("5006E057-4682-4EA6-BA61-C1FF7A63492C");
+
                 await personRepository.Add(person2);
             }
         }

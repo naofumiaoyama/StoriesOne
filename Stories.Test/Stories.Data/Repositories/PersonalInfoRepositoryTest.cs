@@ -26,6 +26,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 personalInfo.Sex = Sex.Female;
                 personalInfo.Birthdate = new DateTime(1995, 2, 27);
                 personalInfo.EmailAddress1 = "albiosjenalyn27@gmail.com";
+                personalInfo.EmailAddress2 = "janeaoyama@gamail.com";
                 await personalInfoRepository.Add(personalInfo);
 
                 //Getting
@@ -43,6 +44,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 personalInfo.Sex = Sex.Male;
                 personalInfo.Birthdate = new DateTime(1971, 7, 28);
                 personalInfo.EmailAddress1 = "naofumi.aoyama@gmail.com";
+                personalInfo.EmailAddress2 = "naoaoyama@gmail.com";
                 await personalInfoRepository.Update(personalInfo);
                 var updatePersonalInfo = await personalInfoRepository.Get(personalInfo.PersonId);
                 Assert.AreEqual(updatePersonalInfo.PersonId, personalInfo.PersonId);
@@ -50,6 +52,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updatePersonalInfo.Sex, personalInfo.Sex);
                 Assert.AreEqual(updatePersonalInfo.Birthdate, personalInfo.Birthdate);
                 Assert.AreEqual(updatePersonalInfo.EmailAddress1, personalInfo.EmailAddress1);
+                Assert.AreEqual(updatePersonalInfo.EmailAddress2, personalInfo.EmailAddress2);
 
                 //Removing
                 await personalInfoRepository.Remove(personalInfo);
