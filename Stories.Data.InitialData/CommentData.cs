@@ -20,13 +20,22 @@ namespace Stories.Data.InitialData
                 comment1.CommentText = "Abc";
                 comment1.CommentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 comment1.PostTime = DateTime.Now;
+                comment1.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                comment1.CreateDate = DateTime.Now;
+                comment1.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                comment1.UpdateDate = DateTime.Now;
                 await commentRepository.Add(comment1);
 
                 Comment comment2 = new Comment();
                 comment2.Id = Guid.Parse("9C886F4A-5BCE-4FEF-82AB-BF3BB922FACD");
                 comment2.CommentText = "Abc";
                 comment2.CommentPersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
+                comment2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                comment2.CreateDate = DateTime.Now;
+                comment2.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                comment2.UpdateDate = DateTime.Now;
                 comment2.PostTime = DateTime.Now;
+
                 await commentRepository.Add(comment2);      
             }
         }

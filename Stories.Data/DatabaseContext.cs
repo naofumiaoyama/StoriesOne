@@ -9,13 +9,13 @@ namespace Stories.Data
         {
         }
 
+        //Win SQLServer Developer Edition
+        public static string DbConnectionString = "server=localhost\\MSSQLSERVER01; database = Stories; integrated security = true";
+        // Mac Docker
+        // public static string DbConnectionString = "Server=tcp:127.0.0.1,1433;database=Stories; User ID = sa; Password=reallyStrongPwd123;";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //Win SQLServer Developer Edition
-            optionsBuilder.UseSqlServer("server=localhost\\MSSQLSERVER01; database = Stories; integrated security = true");
-            // Mac Docker
-            //optionsBuilder.UseSqlServer("Server=tcp:127.0.0.1,1433;database=Stories; User ID=sa;Password=reallyStrongPwd123;");
-
+            optionsBuilder.UseSqlServer(DbConnectionString);
         }
 
         public DbSet<Address> Addresses { get; set; }
@@ -29,7 +29,6 @@ namespace Stories.Data
         public DbSet<Story> Stories { get; set; }
         public DbSet<Timeline> Timelines { get; set; }
         
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
            

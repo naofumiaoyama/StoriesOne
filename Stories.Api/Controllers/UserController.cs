@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Stories.Domain.Model;
+using Stories.Data.Queries;
 
 namespace Stories.Api.Controllers
 {
@@ -21,66 +22,16 @@ namespace Stories.Api.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> Get()
-        {
-            List<User> users = new List<User>();
-            User user = new User();
-            //user.PersonInfo = new PersonInfo();
-            //user.PersonInfo.Address = (new Address { CityName = "Ikebukuro", CountryName = "Japan", Others = "池袋", Street = "" });
-            user.DisplayName = "Naofumi Aoyama";
-            users.Add(user);
-            var result = await Task.Run(() => users);
-            return result;
-        }
-
-        [HttpGet("{guid}")]
-        public async Task<ActionResult<User>> GetUserByGuid(Guid guid)
-        {
-            List<User> users = new List<User>();
-            User user = new User();
-            user.Id = Guid.Parse("430c4bbd-6614-4b17-8bfe-7090ad2ba482");
-            //user.PersonInfo = new PersonInfo();
-            //user.PersonInfo.Address = (new Address { CityName = "Ikebukuro", CountryName = "Japan", Others = "池袋", Street = "" });
-            
-            user.DisplayName = "Naofumi Aoyama";
-            users.Add(user);
-
-            User user1 = new User();
-            user1.Id = Guid.Parse("f4caeef7-2158-409b-9534-adf900ae3c89");
-            //user1.PersonInfo = new PersonInfo();
-            //user1.PersonInfo.Address = (new Address { CityName = "Warabi", CountryName = "Japan", Others = "蕨", Street = "" });
-            
-            user1.DisplayName = "Toya Arai";
-            users.Add(user1);
-
-            var userResults = await Task.Run(() => users);
-            var result = userResults.Find(p => p.Id == guid);
-            return result;
-        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(string id)
         {
-            List<User> users = new List<User>();
-            User user = new User();
-            user.Id = Guid.Parse("430c4bbd-6614-4b17-8bfe-7090ad2ba482");
-            //user.PersonInfo = new PersonInfo();
-            //user.PersonInfo.Address = (new Address { CityName = "Ikebukuro", CountryName = "Japan", Others = "池袋", Street = "" });
-            
-            user.DisplayName = "Naofumi Aoyama";
-            users.Add(user);
-
-            User user1 = new User();
-            user1.Id = Guid.Parse("f4caeef7-2158-409b-9534-adf900ae3c89");
-            //user1.PersonInfo = new PersonInfo();
-            //user1.PersonInfo.Address = (new Address { CityName = "Warabi", CountryName = "Japan", Others = "蕨", Street = "" });
-          
-            user1.DisplayName = "Naofumi Aoyama2";
-            users.Add(user1);
-            var userResults = await Task.Run(() => users);
-            var result = userResults.Find(p => p.PersonalInfo.LoginID == id);
-            return result;
+            var userQuery = new UserQuery();
+            var friendQuery = new FriendQuery();
+            var user = await userQuery.Get(Guid.Parse(id));
+            var friends = await friendQuery.Get(Guid.Parse(id));
+            user.Friends = (List<User>)friends;
+            return user;
         }
 
         [HttpPut("{id}")]

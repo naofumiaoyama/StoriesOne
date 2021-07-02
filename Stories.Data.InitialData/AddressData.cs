@@ -28,6 +28,10 @@ namespace Stories.Data.InitialData
                 address.TownName = "Tokorozawa";
                 address.Street = "Kotesashi";
                 address.Others = "etc";
+                address.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                address.CreateDate = DateTime.Now;
+                address.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                address.UpdateDate = DateTime.Now;
                 await addressRepository.Add(address);
 
 
@@ -44,6 +48,10 @@ namespace Stories.Data.InitialData
                 address2.TownName = "regatta";
                 address2.Street = "24Cornwellwest";
                 address2.Others = "more";
+                address2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                address2.CreateDate = DateTime.Now;
+                address2.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                address2.UpdateDate = DateTime.Now;
                 await addressRepository.Add(address2);
             }
         }

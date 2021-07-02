@@ -53,10 +53,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updateStory.UpdateUserId, story.UpdateUserId);
 
                 //Removing
-               await storyRepository.Delete(story);
-               var resultstory = storyRepository.Get(story.Id).Result;
-               Assert.AreEqual(resultstory, null);
-
+              // await storyRepository.Delete(story);
+              // var resultstory = storyRepository.Get(story.Id).Result;
+              // Assert.AreEqual(resultstory, null);
             }
         }
     }

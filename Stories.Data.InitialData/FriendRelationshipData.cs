@@ -16,18 +16,27 @@ namespace Stories.Data.InitialData
             {
                 FriendRelationshipRepository friendRelationshipRepository = new FriendRelationshipRepository(context);
                 FriendRelationship friendRelationship = new FriendRelationship();
-                friendRelationship.PersonId = Guid.Parse("B87DD83A-7F89-4AD0-BB4E-E94518F8A677");
-                friendRelationship.FullName = "Angelina Jolie";
-                friendRelationship.FriendPersonId = Guid.Parse("4487058C-0C80-4655-8FC6-DFDA0B1B1563");
-                friendRelationship.FriendFullName = "Taylor Swift";
+                friendRelationship.Id = Guid.Parse("C8524962-2CE4-4136-B23B-F50A3739D569");
+                friendRelationship.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                friendRelationship.FullName = "Naofumi Aoyama";
+                friendRelationship.FriendPersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
+                friendRelationship.FriendFullName = "Jenalyn Aoyama";
                 friendRelationship.FriendshipDateTime = DateTime.Now;
+                friendRelationship.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                friendRelationship.CreateDate = DateTime.Now;
+                friendRelationship.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                friendRelationship.UpdateDate = DateTime.Now;
                 await friendRelationshipRepository.Add(friendRelationship);
 
                 FriendRelationship friendRelationship2 = new FriendRelationship();
-                friendRelationship2.PersonId = Guid.Parse("8241FD67-2A46-45A9-B64D-42D788B71A65");
-                friendRelationship2.FullName = "Gal Gadot";
-                friendRelationship2.FriendPersonId = Guid.Parse("34AFAE61-FBBA-40FB-B2FF-4704CBC6A6B0");
-                friendRelationship2.FriendFullName = "Selena Gomez";
+                friendRelationship2.Id = Guid.Parse("9CD98835-4CED-4983-AA83-6E55578E9FA9");
+                friendRelationship2.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                friendRelationship2.FullName = "Naofumi Aoyama";
+                friendRelationship2.FriendPersonId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
+                friendRelationship2.FriendFullName = "Chisumi Aoyama";
+                friendRelationship2.CreateDate = DateTime.Now;
+                friendRelationship2.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                friendRelationship2.UpdateDate = DateTime.Now;
                 await friendRelationshipRepository.Add(friendRelationship2);
             }
         }
@@ -37,7 +46,7 @@ namespace Stories.Data.InitialData
             using (var context = new DatabaseContext())
             {
                 FriendRelationshipRepository friendRelationshipRepository = new FriendRelationshipRepository(context);
-                var friendRelationship1 = friendRelationshipRepository.Get(Guid.Parse("B87DD83A-7F89-4AD0-BB4E-E94518F8A677")).Result;
+                var friendRelationship1 = friendRelationshipRepository.Get(Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F")).Result;
                 if (friendRelationship1 != null) { await friendRelationshipRepository.Remove(friendRelationship1); }
 
                 var friendRelationship2 = friendRelationshipRepository.Get(Guid.Parse("8241FD67-2A46-45A9-B64D-42D788B71A65")).Result;

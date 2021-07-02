@@ -18,8 +18,12 @@ namespace Stories.Data.InitialData
                 Picture picture1 = new Picture();
                 picture1.Id = Guid.Parse("CF2FD49A-A7CB-4523-8BED-C09B896026EF");
                 picture1.PictureType = PictureType.UserProfile;
+                picture1.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                picture1.CreateDate = DateTime.Now;
+                picture1.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                picture1.UpdateDate = DateTime.Now;
                 picture1.Url = "https://scontent-nrt1-1.xx.fbcdn.net/v/t1.6435-9/56391650_10218606827978007_2759002573368197120_n.jpg?_nc_cat=109&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=j8b3XwPviYEAX8F_JD5&_nc_ht=scontent-nrt1-1.xx&oh=7ed7218190af8db52997a55df3d8ec57&oe=60DBCDB2";
-
+                
                 await pictureRepository.Add(picture1);
 
                 Picture picture2 = new Picture();

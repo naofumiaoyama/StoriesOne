@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Stories.Domain.Model;
 
 namespace Stories.Data.Queries.Interface
 {
-    interface IAddressInformationQuery
+    public interface IAddressQuery
     {
+        Task<IList<Address>> Get(Guid guid);
     }
 }

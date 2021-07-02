@@ -61,9 +61,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 // Removing
                 await personRepository.Remove(person);
                 var resultPerson = personRepository.Get(person.Id).Result;
-                Assert.AreEqual(resultPerson, null);
-
-             
+                Assert.AreEqual(resultPerson, null);            
             }
         }
     }

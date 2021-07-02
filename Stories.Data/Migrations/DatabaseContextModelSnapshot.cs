@@ -117,7 +117,7 @@ namespace Stories.Data.Migrations
 
             modelBuilder.Entity("Stories.Data.Entities.FriendRelationship", b =>
                 {
-                    b.Property<Guid>("PersonId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -139,13 +139,18 @@ namespace Stories.Data.Migrations
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("PersonId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
 
                     b.ToTable("FriendRelationships");
                 });
@@ -424,6 +429,15 @@ namespace Stories.Data.Migrations
                         .HasForeignKey("PersonalInfoPersonId");
                 });
 
+            modelBuilder.Entity("Stories.Data.Entities.FriendRelationship", b =>
+                {
+                    b.HasOne("Stories.Data.Entities.Person", null)
+                        .WithMany("FriendRelationships")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Stories.Data.Entities.PersonalInfo", b =>
                 {
                     b.HasOne("Stories.Data.Entities.Person", null)
@@ -464,6 +478,8 @@ namespace Stories.Data.Migrations
 
             modelBuilder.Entity("Stories.Data.Entities.Person", b =>
                 {
+                    b.Navigation("FriendRelationships");
+
                     b.Navigation("PersonalInfo");
 
                     b.Navigation("Posts");

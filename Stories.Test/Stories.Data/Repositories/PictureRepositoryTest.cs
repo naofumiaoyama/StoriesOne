@@ -43,7 +43,6 @@ namespace Stories.Test.Stories.Data.Repositories
                 await pictureRespository.Delete(picture);
                 var resultPhoto = pictureRespository.Get(picture.Id).Result;
                 Assert.AreEqual(resultPhoto, null);
-
             }
         }
     }

@@ -43,7 +43,6 @@ namespace Stories.Test.Stories.Data.Repositories
                await reactionMarkRepository.Delete(reactionMark);
                var resultReactionMark = reactionMarkRepository.Get(reactionMark.Id).Result;
                Assert.AreEqual(resultReactionMark, null);
-
             }
         }
     }

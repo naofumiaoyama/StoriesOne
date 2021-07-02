@@ -25,6 +25,8 @@ namespace Stories.Data.Entities
         [ForeignKey("Picture")]
         public Guid ProfilePictureId { get; set; }
 
+        public ICollection<FriendRelationship> FriendRelationships { get; set; }
+
         public ICollection<Story> Stories { get; set; }
 
         public ICollection<Post> Posts { get; set; }
