@@ -13,11 +13,11 @@ namespace Stories.Data.Queries
     public class AddressQuery : IAddressQuery
     {
         /// <summary>
-        /// Getting Address
+        /// Getting Posts
         /// </summary>
         /// <param name="guid">People.Id</param>
         /// <returns></returns>
-        public async Task<IList<Address>> Get(Guid guid)
+        public async Task<ICollection<Address>> Get(Guid guid)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -31,9 +31,9 @@ namespace Stories.Data.Queries
                 var addresses = await connection.QueryAsync<Address>(query);
                 
                 await connection.CloseAsync();
-                
-                return (IList<Address>)addresses;
 
+                var dic = addresses.ToDictionary(a => a.Id);
+                return (ICollection<Address>)dic;
             }
         }
     }

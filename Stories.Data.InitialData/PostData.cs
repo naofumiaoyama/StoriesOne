@@ -25,16 +25,6 @@ namespace Stories.Data.InitialData
                 post1.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 post1.UpdateDate = DateTime.Now;
                 await postRepository.Add(post1);
-
-                Post post2 = new Post();
-                post2.Id = Guid.Parse("F1A3CE20-8428-450C-B9BD-76D763AD5020");
-                post2.TimelineId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
-                post2.Title = "Stories";
-                post2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                post2.CreateDate = DateTime.Now;
-                post2.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                post2.UpdateDate = DateTime.Now;
-                await postRepository.Add(post2);
             }
         }
 
@@ -45,8 +35,6 @@ namespace Stories.Data.InitialData
                 PostRepository postRepository = new PostRepository(context);
                 var post1 = postRepository.Get(Guid.Parse("231A90BC-72E8-4A01-8967-73EE78E0D497")).Result;
                 if (post1 != null) { await postRepository.Delete(post1); }
-                var post2 = postRepository.Get(Guid.Parse("F1A3CE20-8428-450C-B9BD-76D763AD5020")).Result;
-                if (post2 != null) { await postRepository.Delete(post2); }
             }
         }
     }

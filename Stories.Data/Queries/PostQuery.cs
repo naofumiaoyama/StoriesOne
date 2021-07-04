@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Stories.Domain.Model;
 using Stories.Data.Queries.Interface;
 using System.Data.SqlClient;
 using Dapper;
-using System.Linq;
 
 namespace Stories.Data.Queries
 {
-    public class FriendQuery : IFriendQuery
+    public class PostQuery : IPostQuery
     {
         /// <summary>
-        /// Getting Friends
+        /// Getting Posts
         /// </summary>
-        /// <param name="guid">People.Id</param>
+        /// <param name="guid">Timeline.Id</param>
         /// <returns></returns>
-        public async Task<IDictionary<Guid, User>> Get(Guid guid)
+        public async Task<IDictionary<Guid, Post>> Get(Guid guid)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -24,16 +25,14 @@ namespace Stories.Data.Queries
                 connection.ConnectionString = DatabaseContext.DbConnectionString;
                 await connection.OpenAsync();
 
-                var query = @"Select pl.* from People pl " +
-                             "Where pl.Id In( " +
-                             "Select fl.FriendPersonId From FriendRelationships fl " +
-                             "Where CAST(fl.PersonId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier))";
+                var query = @"Select ps.* from Posts ps " +
+                             "Where CAST(ps.TimelineId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
                 
-                var friends = await connection.QueryAsync<User>(query);
+                var posts = await connection.QueryAsync<Post>(query);
                 
                 await connection.CloseAsync();
-
-                return friends.ToDictionary(f => f.Id); ;
+                var dic = posts.ToDictionary(f => f.Id);
+                return dic;
 
             }
         }

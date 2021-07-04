@@ -16,7 +16,6 @@ namespace Stories.Data.InitialData
             {
                 FriendRelationshipRepository friendRelationshipRepository = new FriendRelationshipRepository(context);
                 FriendRelationship friendRelationship = new FriendRelationship();
-                friendRelationship.Id = Guid.Parse("C8524962-2CE4-4136-B23B-F50A3739D569");
                 friendRelationship.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 friendRelationship.FullName = "Naofumi Aoyama";
                 friendRelationship.FriendPersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
@@ -29,9 +28,8 @@ namespace Stories.Data.InitialData
                 await friendRelationshipRepository.Add(friendRelationship);
 
                 FriendRelationship friendRelationship2 = new FriendRelationship();
-                friendRelationship2.Id = Guid.Parse("9CD98835-4CED-4983-AA83-6E55578E9FA9");
                 friendRelationship2.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                friendRelationship2.FullName = "Naofumi Aoyama";
+                friendRelationship2.FullName = "Shigeyoshi Aoyama";
                 friendRelationship2.FriendPersonId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
                 friendRelationship2.FriendFullName = "Chisumi Aoyama";
                 friendRelationship2.CreateDate = DateTime.Now;

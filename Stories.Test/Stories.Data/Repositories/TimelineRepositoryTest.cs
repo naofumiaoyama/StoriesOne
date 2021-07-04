@@ -18,12 +18,17 @@ namespace Stories.Test.Stories.Data.Repositories
         {
             using(var context = new DatabaseContext())
             {
-                //adding
                 TimelineRepository timelineRepository = new TimelineRepository(context);
-                Timeline timeline = new Timeline();           
-                timeline.PersonId = Guid.Parse("3A4685B0-7167-48F9-BE06-F9ACBB7E1756");
-                timeline.TimelineName = "Naofumi Aoyama";
+                //adding
+                Timeline timeline = new Timeline();
+                timeline.PersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
+                timeline.TimelineName = "Jenalyn Albios";
+                timeline.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                timeline.CreateDate = DateTime.Now;
+                timeline.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                timeline.UpdateDate = DateTime.Now;
                 await timelineRepository.Add(timeline);
+    
 
                 //getting
                 var getTimeline = await  timelineRepository.Get(timeline.PersonId);                
@@ -34,8 +39,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 timeline.TimelineName = "Jenalyn Albios";
                 await timelineRepository.Update(timeline);
                 var updateTimeline = await timelineRepository.Get(timeline.PersonId);
+                Assert.AreEqual(updateTimeline.TimelineName, timeline.TimelineName);
 
-                 //Removing
+                //Removing
                 await timelineRepository.Delete(timeline);
                 var resulttimeline = timelineRepository.Get(timeline.PersonId).Result;
                 Assert.AreEqual(resulttimeline, null);

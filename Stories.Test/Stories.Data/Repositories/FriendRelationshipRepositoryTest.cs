@@ -13,6 +13,7 @@ namespace Stories.Test.Stories.Data.Repositories
     [TestClass]
     public class FriendRelationshipRepositoryTest
     {
+
         [TestMethod]
         public async Task CRUDTest()
         {
@@ -21,35 +22,41 @@ namespace Stories.Test.Stories.Data.Repositories
                 //adding
                 FriendRelationshipRepository friendRelationshipRepository = new FriendRelationshipRepository(context);
                 FriendRelationship friendRelationship = new FriendRelationship();
-                friendRelationship.PersonId = Guid.Parse("B87DD83A-7F89-4AD0-BB4E-E94518F8A677");
-                friendRelationship.FullName = "Angelina Jolie";
-                friendRelationship.FriendPersonId = Guid.Parse("4487058C-0C80-4655-8FC6-DFDA0B1B1563");
-                friendRelationship.FriendFullName = "Taylor Swift";
+                friendRelationship.Id = Guid.Parse("2E4B133E-BEB5-44C6-9912-7A48CDECCC98");
+                friendRelationship.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                friendRelationship.FullName = "Naofumi Aoyama";
+                friendRelationship.FriendPersonId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
+                friendRelationship.FriendFullName = "Jenalyn Aoyama";
                 friendRelationship.FriendshipDateTime = DateTime.Now;
                 await friendRelationshipRepository.Add(friendRelationship);
 
                 //getting
-                var getfriendrelationship = await friendRelationshipRepository.Get(friendRelationship.PersonId);
+                var getfriendRelationship = await friendRelationshipRepository.Get(friendRelationship.Id);
+             
 
-                Assert.AreEqual(getfriendrelationship.PersonId, friendRelationship.PersonId);
-                Assert.AreEqual(getfriendrelationship.FullName, friendRelationship.FullName);
-                Assert.AreEqual(getfriendrelationship.FriendPersonId, friendRelationship.FriendPersonId);
-                Assert.AreEqual(getfriendrelationship.FriendFullName, friendRelationship.FriendFullName);
-                Assert.AreEqual(getfriendrelationship.FriendshipDateTime, friendRelationship.FriendshipDateTime);
+                Assert.AreEqual(getfriendRelationship.Id, friendRelationship.Id);
+                Assert.AreEqual(getfriendRelationship.PersonId, friendRelationship.PersonId);
+                Assert.AreEqual(getfriendRelationship.FullName, friendRelationship.FullName);
+                Assert.AreEqual(getfriendRelationship.FriendPersonId, friendRelationship.FriendPersonId);
+                Assert.AreEqual(getfriendRelationship.FriendFullName, friendRelationship.FriendFullName);
+                Assert.AreEqual(getfriendRelationship.FriendshipDateTime, friendRelationship.FriendshipDateTime);
 
                 //updating
-                friendRelationship.PersonId = Guid.Parse("18923966-65CB-4EFE-8B07-00473476C13D");
-                friendRelationship.FullName = "Gal Gadot";
+                friendRelationship.FullName = "Naofumi Aoyama 2";
                 friendRelationship.FriendPersonId = Guid.Parse("157B7DC6-0D77-4305-A70F-3B73BA581351");
-                friendRelationship.FriendFullName = "Selena Gomez";
+                friendRelationship.FriendFullName = "Jenalyn Aoyama 2";
+                friendRelationship.FriendshipDateTime = DateTime.Today;
                 await friendRelationshipRepository.Update(friendRelationship);
-                var updateFriendRelationship = await friendRelationshipRepository.Get(friendRelationship.PersonId);
-                Assert.AreEqual(updateFriendRelationship.PersonId, friendRelationship.PersonId);
+                var updateFriendRelationship = await friendRelationshipRepository.Get(friendRelationship.Id);
+                Assert.AreEqual(updateFriendRelationship.FullName, friendRelationship.FullName);
+                Assert.AreEqual(updateFriendRelationship.FriendFullName, friendRelationship.FriendFullName);
+               
+                //removing
+                await friendRelationshipRepository.Remove(friendRelationship);
+                var resultPersonalInfo = friendRelationshipRepository.Get(friendRelationship.PersonId).Result;
+                Assert.AreEqual(resultPersonalInfo, null);
 
-                // ////removing
-                //await friendRelationshipRepository.Remove(friendRelationship);
-                //var resultFriendRelationship = friendRelationshipRepository.Get(friendRelationship.PersonId).Result;
-               // Assert.AreEqual(resultFriendRelationship, null);
+
             }
         }
     }

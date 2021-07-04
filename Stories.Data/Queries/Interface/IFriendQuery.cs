@@ -9,6 +9,6 @@ namespace Stories.Data.Queries.Interface
 {
     public interface IFriendQuery
     {
-        Task<IList<User>> Get(Guid guid);
+        Task<IDictionary<Guid, User>> Get(Guid guid);
     }
 }

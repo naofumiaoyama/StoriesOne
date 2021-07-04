@@ -26,13 +26,15 @@ namespace Stories.Data.InitialData
                 await timelineRepository.Add(timeline);
 
                 Timeline timeline2 = new Timeline();
-                timeline2.PersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
-                timeline2.TimelineName = "Jenalyn Albios";
+                timeline2.PersonId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
+                timeline2.TimelineName = "Chisumi Aoyama";
                 timeline2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 timeline2.CreateDate = DateTime.Now;
                 timeline2.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 timeline2.UpdateDate = DateTime.Now;
                 await timelineRepository.Add(timeline2);
+
+
             }
         }
 

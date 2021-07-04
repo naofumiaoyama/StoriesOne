@@ -7,8 +7,8 @@ using Stories.Domain.Model;
 
 namespace Stories.Data.Queries.Interface
 {
-    public interface IAddressQuery
+    public interface IPostQuery
     {
-        Task<ICollection<Address>> Get(Guid guid);
+        Task<IDictionary<Guid, Post>> Get(Guid guid);
     }
 }

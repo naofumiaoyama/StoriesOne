@@ -20,8 +20,7 @@ namespace Stories.Test.Stories.Data.Queries
             Assert.AreEqual(user.Id, Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F"));
             Assert.AreEqual(user.FullName, "Naofumi Aoyama");
             Assert.AreEqual(user.DisplayName, "N.A");
-            Assert.AreEqual(user.PersonalInfo.MobileNumber, "09091068083");
-
+            Assert.AreEqual(user.Timeline.TimelineName, "Naofumi Aoyama");
         }
     }
 }      

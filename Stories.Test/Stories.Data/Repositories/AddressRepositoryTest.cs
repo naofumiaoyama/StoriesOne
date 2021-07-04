@@ -24,7 +24,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 //adding
                 AddressRepository addressRepository = new AddressRepository(context);
                 Address address = new Address();
-                address.Id = Guid.Parse("4487058C-0C80-4655-8FC6-DFDA0B1B1563");
+                address.Id = Guid.Parse("52E91D81-D193-4BDC-911A-63C7F7CC099F");
                 address.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 address.CountryCode = "81";
                 address.CountryName = "Japan";
@@ -75,8 +75,6 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updateAddress.CityName, address.CityName);
                 Assert.AreEqual(updateAddress.TownName, address.TownName);
                 Assert.AreEqual(updateAddress.Street, address.Street);
-
-
 
                 //removing
                 await addressRepository.Remove(address);

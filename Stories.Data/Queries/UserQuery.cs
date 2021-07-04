@@ -25,16 +25,16 @@ namespace Stories.Data.Queries
                 connection.ConnectionString = DatabaseContext.DbConnectionString;
                 await connection.OpenAsync();
             
-                var query = @"Select pe.*, pc.*, pi.* from People pe " +
+                var query = @"Select pe.*, pc.*, tl.* from People pe " +
                             "Inner Join Pictures pc on pe.ProfilePictureId = pc.Id " +
-                            "Inner Join PersonalInfos pi on pe.Id = pi.PersonId " +
+                            "Inner Join Timelines tl on pe.Id = tl.PersonId " + 
                             "Where CAST(pe.Id as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
                 
-                var user = await connection.QueryAsync<User, Picture, PersonalInfo, User>
-                (query, (pe, pc, pi) =>
+                var user = await connection.QueryAsync<User, Picture, Timeline, User>
+                (query, (pe, pc, tl) =>
                   {
                       pe.ProfilePicture = pc;
-                      pe.PersonalInfo = pi;
+                      pe.Timeline = tl;
                       return pe;
                   },
                   splitOn: "Id, PersonId"

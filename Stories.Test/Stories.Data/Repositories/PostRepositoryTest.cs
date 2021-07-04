@@ -21,8 +21,8 @@ namespace Stories.Test.Stories.Data.Repositories
                 //adding
                 PostRepository postRepository = new PostRepository(context);
                 Post post = new Post();
-                post.Id = Guid.Parse("32F39E40-9C2F-4702-B2B2-BBB7990FC3D8");
-                post.TimelineId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
+                post.Id = Guid.Parse("908FD83F-93C8-41BD-B3CA-438D06996F85");
+                post.TimelineId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
                 post.Title = "Hello";
                 await postRepository.Add(post);
 

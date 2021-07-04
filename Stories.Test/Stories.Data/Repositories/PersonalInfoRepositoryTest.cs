@@ -18,15 +18,21 @@ namespace Stories.Test.Stories.Data.Repositories
         {
             using (var context = new DatabaseContext())
             {
-                //adding
                 PersonalInfoRepository personalInfoRepository = new PersonalInfoRepository(context);
+                //adding
                 PersonalInfo personalInfo = new PersonalInfo();
-                personalInfo.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                personalInfo.MobileNumber = "09260018922";
+                personalInfo.PersonId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
+                personalInfo.LoginId = "chisumiAoyama@gmail.com";
+                personalInfo.Password = "abcde";
+                personalInfo.MobileNumber = "09011223344";
                 personalInfo.Sex = Sex.Female;
-                personalInfo.Birthdate = new DateTime(1995, 2, 27);
-                personalInfo.EmailAddress1 = "albiosjenalyn27@gmail.com";
-                personalInfo.EmailAddress2 = "janeaoyama@gamail.com";
+                personalInfo.Birthdate = new DateTime(1995, 3, 27);
+                personalInfo.EmailAddress1 = "Aoyama@gmail.com";
+                personalInfo.EmailAddress2 = "Aoyama2@gmail.com";
+                personalInfo.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                personalInfo.CreateDate = DateTime.Now;
+                personalInfo.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                personalInfo.UpdateDate = DateTime.Now;
                 await personalInfoRepository.Add(personalInfo);
 
                 //Getting
@@ -43,8 +49,8 @@ namespace Stories.Test.Stories.Data.Repositories
                 personalInfo.MobileNumber = "09091068083";
                 personalInfo.Sex = Sex.Male;
                 personalInfo.Birthdate = new DateTime(1971, 7, 28);
-                personalInfo.EmailAddress1 = "naofumi.aoyama@gmail.com";
-                personalInfo.EmailAddress2 = "naoaoyama@gmail.com";
+                personalInfo.EmailAddress1 = "chisumi.aoyama@gmail.com";
+                personalInfo.EmailAddress2 = "chisumi2@gmail.com";
                 await personalInfoRepository.Update(personalInfo);
                 var updatePersonalInfo = await personalInfoRepository.Get(personalInfo.PersonId);
                 Assert.AreEqual(updatePersonalInfo.PersonId, personalInfo.PersonId);
