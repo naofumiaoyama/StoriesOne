@@ -17,7 +17,7 @@ namespace Stories.Data.Queries
         /// </summary>
         /// <param name="guid">People.Id</param>
         /// <returns></returns>
-        public async Task<ICollection<Address>> Get(Guid guid)
+        public async Task<IDictionary<Guid, Address>> Get(Guid guid)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -33,7 +33,7 @@ namespace Stories.Data.Queries
                 await connection.CloseAsync();
 
                 var dic = addresses.ToDictionary(a => a.Id);
-                return (ICollection<Address>)dic;
+                return dic;
             }
         }
     }

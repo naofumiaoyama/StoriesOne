@@ -11,9 +11,9 @@ namespace Stories.Domain.Model
         public Timeline Timeline { get; set; }
         public Biography Biography { get; set; }
 
-        public List<Story> Stories { get; set; }
+        public IDictionary<Guid, Story> Stories { get; set; }
 
-        public List<User> Friends { get; set; }
+        public IDictionary<Guid, User> Friends { get; set; }
 
         public Picture ProfilePicture { get; set; }
     }

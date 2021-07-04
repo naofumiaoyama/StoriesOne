@@ -30,7 +30,7 @@ namespace Stories.Api.Controllers
             var friendQuery = new FriendQuery();
             var user = await userQuery.Get(Guid.Parse(id));
             var friends = await friendQuery.Get(Guid.Parse(id));
-            user.Friends = (List<User>)friends;
+            user.Friends = friends;
             return user;
         }
 
