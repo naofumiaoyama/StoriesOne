@@ -8,6 +8,6 @@ namespace Stories.Domain.Model
         public Guid Id { get; set; }
         public string Title { get; set; }
         public Story Story { get; set; }
-        public List<Comment> Comments { get; set; } 
+        public IDictionary<Guid, Comment> Comments { get; set; } 
     }
 }

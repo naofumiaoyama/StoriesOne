@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Stories.Domain.Model
+namespace Stories.Data.Entities
 {
-    public class Body
+    public class Body : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }

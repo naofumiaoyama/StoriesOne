@@ -15,6 +15,7 @@ namespace Stories.Data.InitialData
             CommentData commentData = new CommentData();
             FriendRelationshipData friendRelationshipData = new FriendRelationshipData();
             PostData postData = new PostData();
+            StoryData storyData = new StoryData();
 
             await personData.DeleteData();
             await personalInfoData.DeleteData();
@@ -24,6 +25,7 @@ namespace Stories.Data.InitialData
             await commentData.DeleteData();
             await friendRelationshipData.DeleteData();
             await postData.DeleteData();
+            await storyData.DeleteData();
 
             await personData.MakeData();
             await personalInfoData.MakeData();
@@ -33,6 +35,7 @@ namespace Stories.Data.InitialData
             await commentData.MakeData();
             await friendRelationshipData.MakeData();
             await postData.MakeData();
+            await storyData.MakeData();
         }
     }
 }

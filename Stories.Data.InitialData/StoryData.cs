@@ -16,7 +16,7 @@ namespace Stories.Data.InitialData
             {
                 StoryRepository storyRepository = new StoryRepository(context);
                 Story story = new Story();
-                story.Id = Guid.NewGuid();
+                story.Id = Guid.Parse("D701ACBD-97D9-437B-A949-A4CF04A33521");
                 story.Title = "Titanic";
                 story.AuthorPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 story.Summary = "Start by a young couple meeting, falling in love and having a hard time being together";
@@ -29,7 +29,7 @@ namespace Stories.Data.InitialData
                 await storyRepository.Add(story);
 
                 Story story2 = new Story();
-                story2.Id = Guid.NewGuid();
+                story2.Id = Guid.Parse("4EADAFCD-7585-492C-A39D-878715441048");
                 story2.Title = "Lovebirds";
                 story2.AuthorPersonId = Guid.Parse("EEFB1E9D-4E17-43A3-A690-F374D27D36DE");
                 story2.Summary = "The two people who believe that love knows no age";
@@ -50,10 +50,10 @@ namespace Stories.Data.InitialData
             {
 
                 StoryRepository storyRepository = new StoryRepository(context);
-                var story1 = storyRepository.Get(Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F")).Result;
+                var story1 = storyRepository.Get(Guid.Parse("D701ACBD-97D9-437B-A949-A4CF04A33521")).Result;
                 if (story1 != null) { await storyRepository.Delete(story1); }
 
-                var story2 = storyRepository.Get(Guid.Parse("EEFB1E9D-4E17-43A3-A690-F374D27D36DE")).Result;
+                var story2 = storyRepository.Get(Guid.Parse("4EADAFCD-7585-492C-A39D-878715441048")).Result;
                 if (story2!= null) { await storyRepository.Delete(story2); }
             }
         }

@@ -34,7 +34,6 @@ namespace Stories.Data.Queries
                 await connection.CloseAsync();
 
                 return friends.ToDictionary(f => f.Id); ;
-
             }
         }
     }

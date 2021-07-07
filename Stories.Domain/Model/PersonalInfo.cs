@@ -14,7 +14,7 @@ namespace Stories.Domain.Model
         public string EmailAddress1 { get; set; }
         public string EmailAddress2 { get; set; }
        
-        public IList<Address> Addresses { get; set; }
+        public IDictionary<Guid, Address> Addresses { get; set; }
     }
 
     public enum Sex

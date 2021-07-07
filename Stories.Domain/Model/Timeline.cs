@@ -7,6 +7,6 @@ namespace Stories.Domain.Model
     {
         public Guid PersonId { get; set; }
         public string TimelineName { get; set; }
-        public List<Post> Posts { get; set; }
+        public IDictionary<Guid, Post> Posts { get; set; }
     }
 }
