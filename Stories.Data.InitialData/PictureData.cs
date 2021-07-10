@@ -14,7 +14,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                PictureRepository pictureRepository = new PictureRepository(context);
+                GenericRepository<Picture>pictureRepository = new GenericRepository<Picture>(context);
                 Picture picture1 = new Picture();
                 picture1.Id = Guid.Parse("CF2FD49A-A7CB-4523-8BED-C09B896026EF");
                 picture1.PictureType = PictureType.UserProfile;
@@ -39,12 +39,12 @@ namespace Stories.Data.InitialData
 
             using (var context = new DatabaseContext())
             {
-                PictureRepository pictureRepository = new PictureRepository(context);
+                GenericRepository<Picture>pictureRepository = new GenericRepository<Picture>(context);
                 var picture1 = pictureRepository.Get(Guid.Parse("CF2FD49A-A7CB-4523-8BED-C09B896026EF")).Result;
-                if (picture1 != null) { await pictureRepository.Delete(picture1); }
+                if (picture1 != null) { await pictureRepository.Remove(picture1); }
 
                 var picture2 = pictureRepository.Get(Guid.Parse("5006E057-4682-4EA6-BA61-C1FF7A63492C")).Result;
-                if (picture2 != null) { await pictureRepository.Delete(picture2); }
+                if (picture2 != null) { await pictureRepository.Remove(picture2); }
             }
         }
     }

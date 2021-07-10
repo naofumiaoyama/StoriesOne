@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Stories.Data.Repositories
 {
-    public interface IPersonRepository
+    public interface IGenericRepository<T> where T : class
     {
-        Task<Person> Get(Guid guid);
-        Task Add(Person person);
-        Task Update(Person person);
-        Task Remove(Person person);
+        Task<T> Get(Guid guid);
+        Task Add(T entity);
+        Task Update(T entity);
+        Task Remove(T entity);
     }
 }

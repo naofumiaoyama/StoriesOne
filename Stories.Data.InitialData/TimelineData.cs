@@ -15,7 +15,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                TimelineRepository timelineRepository = new TimelineRepository(context);
+                GenericRepository<Timeline>timelineRepository = new GenericRepository<Timeline>(context);
                 Timeline timeline = new Timeline();
                 timeline.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 timeline.TimelineName = "Naofumi Aoyama";
@@ -42,12 +42,12 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                TimelineRepository timelineRepository = new TimelineRepository(context);
+                GenericRepository<Timeline>timelineRepository = new GenericRepository<Timeline>(context);
                 var timeline1 = timelineRepository.Get(Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F")).Result;
-                if (timeline1 != null) { await timelineRepository.Delete(timeline1); }
+                if (timeline1 != null) { await timelineRepository.Remove(timeline1); }
 
                 var timeline2 = timelineRepository.Get(Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F")).Result;
-                if (timeline2 != null) { await timelineRepository.Delete(timeline2); }
+                if (timeline2 != null) { await timelineRepository.Remove(timeline2); }
             }
         }
 

@@ -14,7 +14,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                FriendRelationshipRepository friendRelationshipRepository = new FriendRelationshipRepository(context);
+                GenericRepository<FriendRelationship>friendRelationshipRepository = new GenericRepository<FriendRelationship>(context);
                 FriendRelationship friendRelationship = new FriendRelationship();
                 friendRelationship.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 friendRelationship.FullName = "Naofumi Aoyama";
@@ -43,7 +43,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                FriendRelationshipRepository friendRelationshipRepository = new FriendRelationshipRepository(context);
+                GenericRepository<FriendRelationship>friendRelationshipRepository = new GenericRepository<FriendRelationship>(context);
                 var friendRelationship1 = friendRelationshipRepository.Get(Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F")).Result;
                 if (friendRelationship1 != null) { await friendRelationshipRepository.Remove(friendRelationship1); }
 

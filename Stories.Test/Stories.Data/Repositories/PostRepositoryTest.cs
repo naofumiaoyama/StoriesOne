@@ -19,7 +19,7 @@ namespace Stories.Test.Stories.Data.Repositories
             using(var context = new DatabaseContext())
             {
                 //adding
-                PostRepository postRepository = new PostRepository(context);
+                GenericRepository<Post>postRepository = new GenericRepository<Post>(context);
                 Post post = new Post();
                 post.Id = Guid.Parse("908FD83F-93C8-41BD-B3CA-438D06996F85");
                 post.TimelineId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
@@ -39,7 +39,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updatePost.Title, "Stories");
 
                 //Removing
-               await postRepository.Delete(post);
+               await postRepository.Remove(post);
                var resultPost = postRepository.Get(post.Id).Result;
                Assert.AreEqual(resultPost, null);
             }

@@ -22,7 +22,7 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                AddressRepository addressRepository = new AddressRepository(context);
+                GenericRepository<Address>addressRepository = new GenericRepository<Address>(context);
                 Address address = new Address();
                 address.Id = Guid.Parse("52E91D81-D193-4BDC-911A-63C7F7CC099F");
                 address.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");

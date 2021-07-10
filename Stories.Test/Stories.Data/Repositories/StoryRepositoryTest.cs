@@ -16,7 +16,7 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                StoryRepository storyRepository = new StoryRepository(context);
+                GenericRepository<Story>storyRepository = new GenericRepository<Story>(context);
                 Story story = new Story();
                 story.Id = new Guid();
                 story.Title = "Titanic";
@@ -53,7 +53,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updateStory.UpdateUserId, story.UpdateUserId);
 
                 //Removing
-              // await storyRepository.Delete(story);
+              // await storyRepository.Remove(story);
               // var resultstory = storyRepository.Get(story.Id).Result;
               // Assert.AreEqual(resultstory, null);
             }

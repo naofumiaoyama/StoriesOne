@@ -18,7 +18,7 @@ namespace Stories.Test.Stories.Data.Repositories
         {
             using(var context = new DatabaseContext())
             {
-                TimelineRepository timelineRepository = new TimelineRepository(context);
+                GenericRepository<Timeline>timelineRepository = new GenericRepository<Timeline>(context);
                 //adding
                 Timeline timeline = new Timeline();
                 timeline.PersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
@@ -42,7 +42,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updateTimeline.TimelineName, timeline.TimelineName);
 
                 //Removing
-                await timelineRepository.Delete(timeline);
+                await timelineRepository.Remove(timeline);
                 var resulttimeline = timelineRepository.Get(timeline.PersonId).Result;
                 Assert.AreEqual(resulttimeline, null);
             }

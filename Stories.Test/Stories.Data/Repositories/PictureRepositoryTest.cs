@@ -19,7 +19,7 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                PictureRepository pictureRespository = new PictureRepository(context);
+                GenericRepository<Picture>pictureRespository = new GenericRepository<Picture>(context);
                 Picture picture = new Picture();
                 picture.Id = Guid.NewGuid();
                 picture.Url = "http://www.photo.com";
@@ -40,7 +40,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updatePicture.PictureType, picture.PictureType);
 
                 ////Removing
-                await pictureRespository.Delete(picture);
+                await pictureRespository.Remove(picture);
                 var resultPhoto = pictureRespository.Get(picture.Id).Result;
                 Assert.AreEqual(resultPhoto, null);
             }

@@ -22,7 +22,7 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 // Adding
-                PersonRepository personRepository = new PersonRepository(context);
+                GenericRepository<Person> personRepository = new GenericRepository<Person>(context);
                 Person person = new Person();
                 person.Id = Guid.Parse("B87DD83A-7F89-4AD0-BB4E-E94518F8A677");
                 person.PersonType = PersonType.User;

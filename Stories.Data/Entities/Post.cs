@@ -13,10 +13,7 @@ namespace Stories.Data.Entities
         [ForeignKey("Picture")]
         public Guid PictureId { get; set; }
         public string Title { get; set; }
-        public DateTime PostDateTime { get; set; }
-   
+        public DateTime PostDateTime { get; set; }   
     }
-
-
 }    
 

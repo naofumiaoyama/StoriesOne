@@ -14,7 +14,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                CommentRepository commentRepository = new CommentRepository(context);
+                GenericRepository<Comment>commentRepository = new GenericRepository<Comment>(context);
                 Comment comment1 = new Comment();
                 comment1.Id = Guid.Parse("68AFFD37-1590-4EC9-9596-76A99F3AD892");
                 comment1.CommentText = "Abc";
@@ -44,12 +44,12 @@ namespace Stories.Data.InitialData
 
             using (var context = new DatabaseContext())
             {
-                CommentRepository commentRepository = new CommentRepository(context);
+                GenericRepository<Comment>commentRepository = new GenericRepository<Comment>(context);
                 var comment1 = commentRepository.Get(Guid.Parse("68AFFD37-1590-4EC9-9596-76A99F3AD892")).Result;
-                if (comment1 != null) { await commentRepository.Delete(comment1); }
+                if (comment1 != null) { await commentRepository.Remove(comment1); }
 
                 var comment2 = commentRepository.Get(Guid.Parse("9C886F4A-5BCE-4FEF-82AB-BF3BB922FACD")).Result;
-                if (comment2 != null) { await commentRepository.Delete(comment2); }
+                if (comment2 != null) { await commentRepository.Remove(comment2); }
             }
         }
     }

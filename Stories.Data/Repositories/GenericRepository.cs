@@ -8,35 +8,36 @@ using System.Threading.Tasks;
 
 namespace Stories.Data.Repositories
 {
-    public class PersonRepository : IPersonRepository
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected DatabaseContext _context;
-        
-        public PersonRepository(DatabaseContext context)
+        protected DbSet<T> _dbSet;
+        public GenericRepository(DatabaseContext context)
         {
             _context = context;
+            _dbSet = context.Set<T>();
         }
 
-        public async Task Add(Person person)
+        public async Task Add(T entity)
         {
-            await _context.People.AddAsync(person);
+            await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Remove(Person person)
+        public async Task Remove(T entity)
         {
-            _context.People.Remove(person);
+            _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
         }
         
-        public async Task<Person> Get(Guid guid)
+        public async Task<T> Get(Guid guid)
         {
-            return await _context.People.FindAsync(guid);
+            return await _dbSet.FindAsync(guid);
         }
 
-        public async Task Update(Person person)
+        public async Task Update(T entity)
         {
-            _context.People.Update(person);
+            _dbSet.Update(entity);
             await _context.SaveChangesAsync();
         }
     }

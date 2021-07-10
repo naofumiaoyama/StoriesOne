@@ -14,7 +14,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                StoryRepository storyRepository = new StoryRepository(context);
+                GenericRepository<Story>storyRepository = new GenericRepository<Story>(context);
                 Story story = new Story();
                 story.Id = Guid.Parse("D701ACBD-97D9-437B-A949-A4CF04A33521");
                 story.Title = "Titanic";
@@ -49,12 +49,12 @@ namespace Stories.Data.InitialData
             using (var context = new DatabaseContext())
             {
 
-                StoryRepository storyRepository = new StoryRepository(context);
+                GenericRepository<Story>storyRepository = new GenericRepository<Story>(context);
                 var story1 = storyRepository.Get(Guid.Parse("D701ACBD-97D9-437B-A949-A4CF04A33521")).Result;
-                if (story1 != null) { await storyRepository.Delete(story1); }
+                if (story1 != null) { await storyRepository.Remove(story1); }
 
                 var story2 = storyRepository.Get(Guid.Parse("4EADAFCD-7585-492C-A39D-878715441048")).Result;
-                if (story2!= null) { await storyRepository.Delete(story2); }
+                if (story2!= null) { await storyRepository.Remove(story2); }
             }
         }
     }

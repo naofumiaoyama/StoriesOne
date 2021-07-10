@@ -19,7 +19,7 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                CommentRepository commentRepository = new CommentRepository(context);
+                GenericRepository<Comment>commentRepository = new GenericRepository<Comment>(context);
                 Comment comment = new Comment();
                 comment.Id = Guid.NewGuid();
                 comment.CommentText = "Abc";
@@ -42,7 +42,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updateComment.CommentPersonId, comment.CommentPersonId);
 
                 //Removing
-                await commentRepository.Delete(comment);
+                await commentRepository.Remove(comment);
                 var resultComment = commentRepository.Get(comment.Id).Result;
                 Assert.AreEqual(resultComment, null);
 

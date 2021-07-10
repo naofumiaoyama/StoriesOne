@@ -28,7 +28,8 @@ namespace Stories.Data
         public DbSet<ReactionMark> ReactionMarks { get; set;}
         public DbSet<Story> Stories { get; set; }
         public DbSet<Timeline> Timelines { get; set; }
-        
+        public DbSet<Body> Bodies { get; internal set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
            

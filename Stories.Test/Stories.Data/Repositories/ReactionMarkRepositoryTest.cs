@@ -19,7 +19,7 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //Adding
-                ReactionMarkRepository reactionMarkRepository = new ReactionMarkRepository(context);
+                GenericRepository<ReactionMark>reactionMarkRepository = new GenericRepository<ReactionMark>(context);
                 ReactionMark reactionMark = new ReactionMark();
                 reactionMark.Id = Guid.NewGuid();
                 reactionMark.Url = "http://www.shortstories.com";
@@ -40,7 +40,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updateReactionMark.Name, reactionMark.Name);
 
                 ////Removing
-               await reactionMarkRepository.Delete(reactionMark);
+               await reactionMarkRepository.Remove(reactionMark);
                var resultReactionMark = reactionMarkRepository.Get(reactionMark.Id).Result;
                Assert.AreEqual(resultReactionMark, null);
             }

@@ -7,37 +7,37 @@ using System.Threading.Tasks;
 
 namespace Stories.Data.Repositories
 {
-    public class AddressRepository : IAddressRepository 
+    public class BodyRepository : IBodyRepository
     {
         protected DatabaseContext _context;
 
-        public AddressRepository(DatabaseContext context)
+        public BodyRepository(DatabaseContext context)
         {
             _context = context;
         }
 
-        public async Task Add(Address address)
+
+        public async Task Add(Body body)
         {
-            await _context.AddAsync(address);
+            await _context.AddAsync(body);
+            await _context.SaveChangesAsync();
+        }
+   
+        public async Task<Body> Get(Guid Id)
+        {
+            return await _context.Bodies.FindAsync(Id);
+        }
+      
+        public async Task Remove(Body body)
+        {
+            _context.Remove(body);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Address> Get(Guid id)
+        public async Task Update(Body body)
         {
-            return await _context.Addresses.FindAsync(id);
-        }
-
-        public async Task Remove(Address address)
-        {
-             _context.Remove(address);
+            _context.Remove(body);
             await _context.SaveChangesAsync();
-        }
-
-        public async Task Update(Address address)
-        {
-            _context.Update(address);
-            await _context.SaveChangesAsync();
-
         }
     }
 }

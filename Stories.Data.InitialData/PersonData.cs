@@ -13,7 +13,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                PersonRepository personRepository = new PersonRepository(context);
+                GenericRepository<Person> personRepository = new GenericRepository<Person>(context);
                 Person person = new Person();
                 person.Id = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 person.PersonType = PersonType.User;
@@ -72,7 +72,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                PersonRepository personRepository = new PersonRepository(context);
+                GenericRepository<Person> personRepository = new GenericRepository<Person>(context);
                 var person1 = personRepository.Get(Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F")).Result;
                 if( person1 != null) { await personRepository.Remove(person1);  }
 

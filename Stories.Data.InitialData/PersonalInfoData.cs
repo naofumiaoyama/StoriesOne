@@ -14,7 +14,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                PersonalInfoRepository personalInfoRepository = new PersonalInfoRepository(context);
+                GenericRepository<PersonalInfo> personalInfoRepository = new GenericRepository<PersonalInfo>(context);
                 PersonalInfo personalInfo = new PersonalInfo();
                 personalInfo.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 personalInfo.LoginId = "naofumi.aoyoama@gmail.com";
@@ -55,7 +55,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                PersonalInfoRepository personalInfoRepository = new PersonalInfoRepository(context);
+                GenericRepository<PersonalInfo>personalInfoRepository = new GenericRepository<PersonalInfo>(context);
                 var personinfo1 = personalInfoRepository.Get(Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F")).Result;
                 if (personinfo1 != null) { await personalInfoRepository.Remove(personinfo1); }
 
