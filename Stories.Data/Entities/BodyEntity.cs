@@ -8,7 +8,7 @@ namespace Stories.Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        [ForeignKey("Story")]
+        [ForeignKey("StoryEntity")]
         public Guid StoryId { get; set; }
         public int ChapterNumber { get; set; }
         public string BodyContent { get; set; }

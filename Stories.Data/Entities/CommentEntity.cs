@@ -8,9 +8,9 @@ namespace Stories.Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        [ForeignKey("Post")]
+        [ForeignKey("PostEntity")]
         public Guid PostId { get; set; }
-        [ForeignKey("Person")]
+        [ForeignKey("PersonEntity")]
         public Guid CommentPersonId { get; set; }
         public string CommentText { get; set; }
         public DateTime PostTime { get; set; }

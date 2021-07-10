@@ -11,7 +11,7 @@ namespace Stories.Data.Entities
         public Guid Id { get; set; }
         public Guid PersonId { get; set; }
         public string FullName { get; set; }
-        [ForeignKey("Person")]
+        [ForeignKey("PersonEntity")]
         public Guid FriendPersonId { get; set; }
         public string FriendFullName { get; set; }
         public DateTime FriendshipDateTime { get; set; }

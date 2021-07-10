@@ -22,7 +22,7 @@ namespace Stories.Data.Entities
         public PersonalInfoEntity PersonalInfo { get; set; }
 
         public TimelineEntity Timeline { get; set; }
-        [ForeignKey("Picture")]
+        [ForeignKey("PictureEntity")]
         public Guid ProfilePictureId { get; set; }
 
         public ICollection<FriendRelationshipEntity> FriendRelationships { get; set; }

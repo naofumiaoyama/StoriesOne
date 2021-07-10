@@ -12,7 +12,7 @@ namespace Stories.Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        [ForeignKey("Person")]
+        [ForeignKey("PersonEntity")]
         public Guid AuthorPersonId { get; set; }
         public string AuthorName { get; set; }
         public string Title { get; set; }

@@ -11,7 +11,7 @@ namespace Stories.Data.Entities
    public class TimelineEntity : BaseEntity
     {
         [Key]
-        [ForeignKey("Person")]
+        [ForeignKey("PersonEntity")]
         public Guid PersonId { get; set; }
         public string TimelineName { get; set; }
         public ICollection<PostEntity> Posts { get; set; }

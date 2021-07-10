@@ -9,7 +9,7 @@ namespace Stories.Data.Entities
     public class PersonalInfoEntity : BaseEntity
     {
         [Key]
-        [ForeignKey("Person")]
+        [ForeignKey("PersonEntity")]
         public Guid PersonId { get; set; }
         public string LoginId { get; set; }
         public string Password { get; set; }

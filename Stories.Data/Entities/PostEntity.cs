@@ -8,9 +8,9 @@ namespace Stories.Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        [ForeignKey("Timeline")]
+        [ForeignKey("TimelineEntity")]
         public Guid TimelineId { get; set; }
-        [ForeignKey("Picture")]
+        [ForeignKey("PictureEntity")]
         public Guid PictureId { get; set; }
         public string Title { get; set; }
         public DateTime PostDateTime { get; set; }   
