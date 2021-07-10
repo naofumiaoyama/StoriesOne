@@ -15,8 +15,8 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<Timeline>timelineRepository = new GenericRepository<Timeline>(context);
-                Timeline timeline = new Timeline();
+                GenericRepository<TimelineEntity>timelineRepository = new GenericRepository<TimelineEntity>(context);
+                TimelineEntity timeline = new TimelineEntity();
                 timeline.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 timeline.TimelineName = "Naofumi Aoyama";
                 timeline.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
@@ -25,7 +25,7 @@ namespace Stories.Data.InitialData
                 timeline.UpdateDate = DateTime.Now;
                 await timelineRepository.Add(timeline);
 
-                Timeline timeline2 = new Timeline();
+                TimelineEntity timeline2 = new TimelineEntity();
                 timeline2.PersonId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
                 timeline2.TimelineName = "Chisumi Aoyama";
                 timeline2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
@@ -42,7 +42,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<Timeline>timelineRepository = new GenericRepository<Timeline>(context);
+                GenericRepository<TimelineEntity> timelineRepository = new GenericRepository<TimelineEntity>(context);
                 var timeline1 = timelineRepository.Get(Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F")).Result;
                 if (timeline1 != null) { await timelineRepository.Remove(timeline1); }
 

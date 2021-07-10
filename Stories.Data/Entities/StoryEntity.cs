@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class Story : BaseEntity
+    public class StoryEntity : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
@@ -18,7 +18,7 @@ namespace Stories.Data.Entities
         public string Title { get; set; }
         public string Summary { get; set; }
 
-        public ICollection<Body> Bodies { get; set; }
+        public ICollection<BodyEntity> Bodies { get; set; }
 
     }
 }

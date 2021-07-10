@@ -19,29 +19,29 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //Adding
-                GenericRepository<ReactionMark>reactionMarkRepository = new GenericRepository<ReactionMark>(context);
-                ReactionMark reactionMark = new ReactionMark();
-                reactionMark.Id = Guid.NewGuid();
-                reactionMark.Url = "http://www.shortstories.com";
-                reactionMark.Name = "helloworld";
-                await reactionMarkRepository.Add(reactionMark);
+                GenericRepository<ReactionMarkEntity>reactionMarkRepository = new GenericRepository<ReactionMarkEntity>(context);
+                ReactionMarkEntity reactionMarkEntity = new ReactionMarkEntity();
+                reactionMarkEntity.Id = Guid.NewGuid();
+                reactionMarkEntity.Url = "http://www.shortstories.com";
+                reactionMarkEntity.Name = "helloworld";
+                await reactionMarkRepository.Add(reactionMarkEntity);
 
                 //Getting
-                var getReactionMark = await reactionMarkRepository.Get(reactionMark.Id);
+                var getReactionMark = await reactionMarkRepository.Get(reactionMarkEntity.Id);
 
-                Assert.AreEqual(getReactionMark.Url, reactionMark.Url);
-                Assert.AreEqual(getReactionMark.Name, reactionMark.Name);
+                Assert.AreEqual(getReactionMark.Url, reactionMarkEntity.Url);
+                Assert.AreEqual(getReactionMark.Name, reactionMarkEntity.Name);
 
                 //Updating
-                reactionMark.Url = "http://www.short.net";
-                reactionMark.Name = "Hello";
-                await reactionMarkRepository.Update(reactionMark);
-                var updateReactionMark = await reactionMarkRepository.Get(reactionMark.Id);
-                Assert.AreEqual(updateReactionMark.Name, reactionMark.Name);
+                reactionMarkEntity.Url = "http://www.short.net";
+                reactionMarkEntity.Name = "Hello";
+                await reactionMarkRepository.Update(reactionMarkEntity);
+                var updateReactionMark = await reactionMarkRepository.Get(reactionMarkEntity.Id);
+                Assert.AreEqual(updateReactionMark.Name, reactionMarkEntity.Name);
 
                 ////Removing
-               await reactionMarkRepository.Remove(reactionMark);
-               var resultReactionMark = reactionMarkRepository.Get(reactionMark.Id).Result;
+               await reactionMarkRepository.Remove(reactionMarkEntity);
+               var resultReactionMark = reactionMarkRepository.Get(reactionMarkEntity.Id).Result;
                Assert.AreEqual(resultReactionMark, null);
             }
         }

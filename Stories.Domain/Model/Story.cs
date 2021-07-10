@@ -5,6 +5,7 @@ namespace Stories.Domain.Model
 {
     public class Story
     {
+        public Guid Id { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
         public IDictionary<Guid, Body> Bodies { get; set; }

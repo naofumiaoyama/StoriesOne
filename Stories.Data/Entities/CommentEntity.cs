@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class Comment : BaseEntity
+    public class CommentEntity : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }

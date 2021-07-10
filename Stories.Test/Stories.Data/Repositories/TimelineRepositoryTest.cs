@@ -18,32 +18,32 @@ namespace Stories.Test.Stories.Data.Repositories
         {
             using(var context = new DatabaseContext())
             {
-                GenericRepository<Timeline>timelineRepository = new GenericRepository<Timeline>(context);
+                GenericRepository<TimelineEntity>timelineRepository = new GenericRepository<TimelineEntity>(context);
                 //adding
-                Timeline timeline = new Timeline();
-                timeline.PersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
-                timeline.TimelineName = "Jenalyn Albios";
-                timeline.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                timeline.CreateDate = DateTime.Now;
-                timeline.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                timeline.UpdateDate = DateTime.Now;
-                await timelineRepository.Add(timeline);
+                TimelineEntity timelineEntity = new TimelineEntity();
+                timelineEntity.PersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
+                timelineEntity.TimelineName = "Jenalyn Albios";
+                timelineEntity.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                timelineEntity.CreateDate = DateTime.Now;
+                timelineEntity.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                timelineEntity.UpdateDate = DateTime.Now;
+                await timelineRepository.Add(timelineEntity);
     
 
                 //getting
-                var getTimeline = await  timelineRepository.Get(timeline.PersonId);                
-                Assert.AreEqual(getTimeline.PersonId, getTimeline.PersonId);
-                Assert.AreEqual(getTimeline.TimelineName, getTimeline.TimelineName);
+                var getTimelineEntity = await  timelineRepository.Get(timelineEntity.PersonId);                
+                Assert.AreEqual(getTimelineEntity.PersonId, getTimelineEntity.PersonId);
+                Assert.AreEqual(getTimelineEntity.TimelineName, getTimelineEntity.TimelineName);
 
                 //Updating           
-                timeline.TimelineName = "Jenalyn Albios";
-                await timelineRepository.Update(timeline);
-                var updateTimeline = await timelineRepository.Get(timeline.PersonId);
-                Assert.AreEqual(updateTimeline.TimelineName, timeline.TimelineName);
+                timelineEntity.TimelineName = "Jenalyn Albios";
+                await timelineRepository.Update(timelineEntity);
+                var updateTimeline = await timelineRepository.Get(timelineEntity.PersonId);
+                Assert.AreEqual(updateTimeline.TimelineName, timelineEntity.TimelineName);
 
                 //Removing
-                await timelineRepository.Remove(timeline);
-                var resulttimeline = timelineRepository.Get(timeline.PersonId).Result;
+                await timelineRepository.Remove(timelineEntity);
+                var resulttimeline = timelineRepository.Get(timelineEntity.PersonId).Result;
                 Assert.AreEqual(resulttimeline, null);
             }
         }

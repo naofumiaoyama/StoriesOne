@@ -22,45 +22,45 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 // Adding
-                GenericRepository<Person> personRepository = new GenericRepository<Person>(context);
-                Person person = new Person();
-                person.Id = Guid.Parse("B87DD83A-7F89-4AD0-BB4E-E94518F8A677");
-                person.PersonType = PersonType.User;
-                person.FirstName = "OtherFirst";
-                person.MiddleName = "Makio";
-                person.LastName = "OtherLast";
-                person.DisplayName = "N.A";
-                person.SelfIntroduction = "私の自己紹介";
-                person.LivingPlace = "TokorozawaCity";
-                person.Occupation = "Engineer";
-                await personRepository.Add(person);
+                GenericRepository<PersonEntity> personRepository = new GenericRepository<PersonEntity>(context);
+                PersonEntity personEntity = new PersonEntity();
+                personEntity.Id = Guid.Parse("B87DD83A-7F89-4AD0-BB4E-E94518F8A677");
+                personEntity.PersonType = PersonType.User;
+                personEntity.FirstName = "OtherFirst";
+                personEntity.MiddleName = "Makio";
+                personEntity.LastName = "OtherLast";
+                personEntity.DisplayName = "N.A";
+                personEntity.SelfIntroduction = "私の自己紹介";
+                personEntity.LivingPlace = "TokorozawaCity";
+                personEntity.Occupation = "Engineer";
+                await personRepository.Add(personEntity);
 
 
                 // Getting
-                var getPerson = await personRepository.Get(person.Id);
+                var getPerson = await personRepository.Get(personEntity.Id);
 
-                Assert.AreEqual(getPerson.Id, person.Id);
-                Assert.AreEqual(getPerson.PersonType, person.PersonType);
-                Assert.AreEqual(getPerson.FirstName, person.FirstName);
-                Assert.AreEqual(getPerson.LastName, person.LastName);
+                Assert.AreEqual(getPerson.Id, personEntity.Id);
+                Assert.AreEqual(getPerson.PersonType, personEntity.PersonType);
+                Assert.AreEqual(getPerson.FirstName, personEntity.FirstName);
+                Assert.AreEqual(getPerson.LastName, personEntity.LastName);
                
-                Assert.AreEqual(getPerson.DisplayName, person.DisplayName);
-                Assert.AreEqual(getPerson.SelfIntroduction, person.SelfIntroduction);
-                Assert.AreEqual(getPerson.LivingPlace, person.LivingPlace);
-                Assert.AreEqual(getPerson.Occupation, person.Occupation);
-                
+                Assert.AreEqual(getPerson.DisplayName, personEntity.DisplayName);
+                Assert.AreEqual(getPerson.SelfIntroduction, personEntity.SelfIntroduction);
+                Assert.AreEqual(getPerson.LivingPlace, personEntity.LivingPlace);
+                Assert.AreEqual(getPerson.Occupation, personEntity.Occupation);
+
 
                 // Updating
-                person.FirstName = "Shigeyoshi";
-                person.LastName = "Aoyama";
-                await personRepository.Update(person);
-                var updatePerson = await personRepository.Get(person.Id);
-                Assert.AreEqual(updatePerson.FirstName, person.FirstName);
-                Assert.AreEqual(updatePerson.LastName, person.LastName);
+                personEntity.FirstName = "Shigeyoshi";
+                personEntity.LastName = "Aoyama";
+                await personRepository.Update(personEntity);
+                var updatePerson = await personRepository.Get(personEntity.Id);
+                Assert.AreEqual(updatePerson.FirstName, personEntity.FirstName);
+                Assert.AreEqual(updatePerson.LastName, personEntity.LastName);
 
                 // Removing
-                await personRepository.Remove(person);
-                var resultPerson = personRepository.Get(person.Id).Result;
+                await personRepository.Remove(personEntity);
+                var resultPerson = personRepository.Get(personEntity.Id).Result;
                 Assert.AreEqual(resultPerson, null);            
             }
         }

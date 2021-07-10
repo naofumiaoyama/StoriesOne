@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Stories.Data.Entities
 {
-    public class ReactionMark : BaseEntity
+    public class ReactionMarkEntity : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }

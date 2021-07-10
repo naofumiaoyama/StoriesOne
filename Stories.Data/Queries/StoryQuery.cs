@@ -1,13 +1,12 @@
 ﻿using Dapper;
-using Stories.Data.Entities;
-using Stories.Data.Queries.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Stories.Data.Queries.Interface;
+using Stories.Domain.Model;
 namespace Stories.Data.Queries
 {
     public class StoryQuery : IStoryQuery

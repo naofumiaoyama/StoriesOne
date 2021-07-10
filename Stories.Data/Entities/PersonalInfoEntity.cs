@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class PersonalInfo : BaseEntity
+    public class PersonalInfoEntity : BaseEntity
     {
         [Key]
         [ForeignKey("Person")]
@@ -20,7 +20,7 @@ namespace Stories.Data.Entities
         public string EmailAddress1 {get; set;}
         public string EmailAddress2 { get; set; }
 
-        public ICollection<Address> Addresses { get; set; }
+        public ICollection<AddressEntity> Addresses { get; set; }
 
 
     }

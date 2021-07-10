@@ -1,4 +1,4 @@
-﻿using Stories.Data.Entities;
+﻿using Stories.Domain.Model;
 using Stories.Data.Queries.Interface;
 using System;
 using System.Collections.Generic;

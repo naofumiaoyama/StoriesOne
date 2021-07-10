@@ -19,31 +19,31 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                GenericRepository<Comment>commentRepository = new GenericRepository<Comment>(context);
-                Comment comment = new Comment();
-                comment.Id = Guid.NewGuid();
-                comment.CommentText = "Abc";
-                comment.CommentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                comment.PostTime = DateTime.Now;
-                await commentRepository.Add(comment);
+                GenericRepository<CommentEntity>commentRepository = new GenericRepository<CommentEntity>(context);
+                CommentEntity commentEntity = new CommentEntity();
+                commentEntity.Id = Guid.NewGuid();
+                commentEntity.CommentText = "Abc";
+                commentEntity.CommentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                commentEntity.PostTime = DateTime.Now;
+                await commentRepository.Add(commentEntity);
 
                 //Getting
-                var getcomment = await commentRepository.Get(comment.Id);
-                Assert.AreEqual(getcomment.Id, comment.Id);
-                Assert.AreEqual(getcomment.CommentText, comment.CommentText);
-                Assert.AreEqual(getcomment.CommentPersonId,comment.CommentPersonId);
-                Assert.AreEqual(getcomment.PostTime, comment.PostTime);
+                var getcomment = await commentRepository.Get(commentEntity.Id);
+                Assert.AreEqual(getcomment.Id, commentEntity.Id);
+                Assert.AreEqual(getcomment.CommentText, commentEntity.CommentText);
+                Assert.AreEqual(getcomment.CommentPersonId,commentEntity.CommentPersonId);
+                Assert.AreEqual(getcomment.PostTime, commentEntity.PostTime);
 
                 //Updating
-                comment.CommentText = "CDE";
-                comment.CommentPersonId = Guid.Parse("54AE5D62-D355-46D3-81C7-A35806A4E9BB");
-                var updateComment = await commentRepository.Get(comment.Id);
-                Assert.AreEqual(updateComment.CommentText, comment.CommentText);       
-                Assert.AreEqual(updateComment.CommentPersonId, comment.CommentPersonId);
+                commentEntity.CommentText = "CDE";
+                commentEntity.CommentPersonId = Guid.Parse("54AE5D62-D355-46D3-81C7-A35806A4E9BB");
+                var updateComment = await commentRepository.Get(commentEntity.Id);
+                Assert.AreEqual(updateComment.CommentText, commentEntity.CommentText);       
+                Assert.AreEqual(updateComment.CommentPersonId, commentEntity.CommentPersonId);
 
                 //Removing
-                await commentRepository.Remove(comment);
-                var resultComment = commentRepository.Get(comment.Id).Result;
+                await commentRepository.Remove(commentEntity);
+                var resultComment = commentRepository.Get(commentEntity.Id).Result;
                 Assert.AreEqual(resultComment, null);
 
             }

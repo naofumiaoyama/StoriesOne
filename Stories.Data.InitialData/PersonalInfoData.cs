@@ -14,8 +14,8 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<PersonalInfo> personalInfoRepository = new GenericRepository<PersonalInfo>(context);
-                PersonalInfo personalInfo = new PersonalInfo();
+                GenericRepository<PersonalInfoEntity> personalInfoRepository = new GenericRepository<PersonalInfoEntity>(context);
+                PersonalInfoEntity personalInfo = new PersonalInfoEntity();
                 personalInfo.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 personalInfo.LoginId = "naofumi.aoyoama@gmail.com";
                 personalInfo.Password = "password";
@@ -31,7 +31,7 @@ namespace Stories.Data.InitialData
                 personalInfo.UpdateDate = DateTime.Now;
                 await personalInfoRepository.Add(personalInfo);
 
-                PersonalInfo personalInfo2 = new PersonalInfo();
+                PersonalInfoEntity personalInfo2 = new PersonalInfoEntity();
                 personalInfo2.PersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
                 personalInfo2.LoginId = "albiosjenalyn27@gmail.com";
                 personalInfo2.Password = "abcd";
@@ -46,8 +46,6 @@ namespace Stories.Data.InitialData
                 personalInfo2.UpdateDate = DateTime.Now;
                 await personalInfoRepository.Add(personalInfo2);
 
-                PersonalInfo personalInfo3 = new PersonalInfo();
-
             }
         }
 
@@ -55,7 +53,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<PersonalInfo>personalInfoRepository = new GenericRepository<PersonalInfo>(context);
+                GenericRepository<PersonalInfoEntity> personalInfoRepository = new GenericRepository<PersonalInfoEntity>(context);
                 var personinfo1 = personalInfoRepository.Get(Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F")).Result;
                 if (personinfo1 != null) { await personalInfoRepository.Remove(personinfo1); }
 

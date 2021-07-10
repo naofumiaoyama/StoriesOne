@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Stories.Domain.Model;
-using Stories.Domain.Logic;
 using Stories.Data.Queries;
-using Stories.Data.Repositories;
+using Stories.Application;
+
 namespace Stories.Api.Controllers
 {
     [ApiController]
@@ -16,33 +16,24 @@ namespace Stories.Api.Controllers
     {
 
         private readonly ILogger<UserController> _logger;
-        private UserQuery _userQuery;
-        private FriendQuery _friendQuery;
-        private UserLogic _userLogic;
-       
-
         public UserController(ILogger<UserController> logger)
         {
             _logger = logger;
-            _userQuery = new UserQuery();
-            _friendQuery = new FriendQuery();
-            _userLogic = new UserLogic();
-
         }
-
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(string id)
+        public async Task<User> GetUserWithFriendsAsync(string id)
         {
-            var user = await _userQuery.Get(Guid.Parse(id));
-            var friends = await _friendQuery.Get(Guid.Parse(id));
-            return _userLogic.SetFriends(user, friends);
+            UserApplication userApplication = new UserApplication();
+            var user = await userApplication.GetUserWithFriends(id);
+            return user;
         }
 
+        /*
         [HttpPost]
         public async Task CreateUser(string firstName, string lastName, string emailAddress)
         {
-            var newUser = new User
+            var user = new User
             {
                 FirstName = firstName,
                 LastName = lastName,
@@ -54,7 +45,7 @@ namespace Stories.Api.Controllers
 
             
         }
-
+        */
 
         [HttpPut("{id}")]
         public IActionResult UpdateUser(Guid guid, User newUser)
@@ -107,12 +98,13 @@ namespace Stories.Api.Controllers
 
         //private bool UserExists(string id) =>
              //_context.TodoItems.Any(e => e.Id == id);
-
+        /*
         private static User ItemToDTO(User newUser) =>
             new User
             {
                 DisplayName = newUser.DisplayName,
                 LastName = newUser.LastName
             };
+        */
     }
 }

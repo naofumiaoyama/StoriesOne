@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class FriendRelationship : BaseEntity
+    public class FriendRelationshipEntity : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
