@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore.Design;
 namespace Stories.Test.Stories.Data.Repositories
 {
     [TestClass]
-  public  class addressEntityRepositoryTest
+  public  class AddressEntityRepositoryTest
   {
         [TestMethod]
        public async Task CRUDTest()

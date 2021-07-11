@@ -13,6 +13,8 @@ namespace Stories.Domain.Model
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public PersonalInfo PersonalInfo { get; set; }
+        public PersonType PersonType { get; set; }
+
 
         public string FullName
         {
@@ -21,6 +23,13 @@ namespace Stories.Domain.Model
                 return FirstName + " " + LastName;
             }
         }
-            
+        
+    }
+
+    public enum PersonType
+    {
+        User = 1,
+        SystemOperater = 2,
+        Administrator = 3
     }
 }

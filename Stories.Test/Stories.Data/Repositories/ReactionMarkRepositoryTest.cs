@@ -21,14 +21,14 @@ namespace Stories.Test.Stories.Data.Repositories
                 //Adding
                 GenericRepository<ReactionMarkEntity>reactionMarkRepository = new GenericRepository<ReactionMarkEntity>(context);
                 ReactionMarkEntity reactionMarkEntity = new ReactionMarkEntity();
-                reactionMarkEntity.Id = Guid.NewGuid();
+                reactionMarkEntity.Id = Guid.Parse("347157AA-A162-48A5-94C4-87A023A77A3A");
                 reactionMarkEntity.Url = "http://www.shortstories.com";
                 reactionMarkEntity.Name = "helloworld";
                 await reactionMarkRepository.Add(reactionMarkEntity);
 
                 //Getting
                 var getReactionMark = await reactionMarkRepository.Get(reactionMarkEntity.Id);
-
+                Assert.AreEqual(getReactionMark.Id, reactionMarkEntity.Id);
                 Assert.AreEqual(getReactionMark.Url, reactionMarkEntity.Url);
                 Assert.AreEqual(getReactionMark.Name, reactionMarkEntity.Name);
 
@@ -39,10 +39,10 @@ namespace Stories.Test.Stories.Data.Repositories
                 var updateReactionMark = await reactionMarkRepository.Get(reactionMarkEntity.Id);
                 Assert.AreEqual(updateReactionMark.Name, reactionMarkEntity.Name);
 
-                ////Removing
-               await reactionMarkRepository.Remove(reactionMarkEntity);
-               var resultReactionMark = reactionMarkRepository.Get(reactionMarkEntity.Id).Result;
-               Assert.AreEqual(resultReactionMark, null);
+                //Removing
+                await reactionMarkRepository.Remove(reactionMarkEntity);
+                var resultReactionMark = reactionMarkRepository.Get(reactionMarkEntity.Id).Result;
+                Assert.AreEqual(resultReactionMark, null);
             }
         }
     }

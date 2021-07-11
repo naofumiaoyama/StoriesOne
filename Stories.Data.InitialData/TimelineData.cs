@@ -46,7 +46,7 @@ namespace Stories.Data.InitialData
                 var timeline1 = timelineRepository.Get(Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F")).Result;
                 if (timeline1 != null) { await timelineRepository.Remove(timeline1); }
 
-                var timeline2 = timelineRepository.Get(Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F")).Result;
+                var timeline2 = timelineRepository.Get(Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C")).Result;
                 if (timeline2 != null) { await timelineRepository.Remove(timeline2); }
             }
         }

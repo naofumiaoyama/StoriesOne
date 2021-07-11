@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
+using AutoMapper;
 using Stories.Domain.Model;
 using Stories.Data.Entities;
-using System.Threading.Tasks;
+
 namespace Stories.Data.Repositories
 {
     public class UserUnitOfWork
@@ -12,12 +14,14 @@ namespace Stories.Data.Repositories
 
         public async Task CreateUser(User user)
         {
-            GenericRepository<PersonEntity> personRepository = new GenericRepository<PersonEntity>(new DatabaseContext());
-            PersonEntity personEntity = new PersonEntity();
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<User, PersonEntity>());
 
-            personEntity.FirstName = user.FirstName;
-            personEntity.MiddleName = user.MiddleName;
-            personEntity.LastName = user.LastName;
+            GenericRepository<PersonEntity> personRepository = new GenericRepository<PersonEntity>(new DatabaseContext());
+          
+
+            var mapper = new Mapper(config);
+            var personEntity = mapper.Map<PersonEntity>(user);
+
             await personRepository.Add(personEntity);
 
         }

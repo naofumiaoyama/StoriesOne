@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 using Stories.Data;
 using Stories.Data.Entities;
 using Stories.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
+
 
 
 namespace Stories.Test.Stories.Data.Repositories

@@ -16,6 +16,7 @@ namespace Stories.Data.InitialData
             FriendRelationshipData friendRelationshipData = new FriendRelationshipData();
             PostData postData = new PostData();
             StoryData storyData = new StoryData();
+            ReactionMarkData reactionMarkData = new ReactionMarkData();
 
             await personData.DeleteData();
             await personalInfoData.DeleteData();
@@ -26,6 +27,7 @@ namespace Stories.Data.InitialData
             await friendRelationshipData.DeleteData();
             await postData.DeleteData();
             await storyData.DeleteData();
+            await reactionMarkData.DeleteData();
 
             await personData.MakeData();
             await personalInfoData.MakeData();
@@ -36,6 +38,7 @@ namespace Stories.Data.InitialData
             await friendRelationshipData.MakeData();
             await postData.MakeData();
             await storyData.MakeData();
+            await reactionMarkData.MakeData();
         }
     }
 }

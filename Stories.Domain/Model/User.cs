@@ -7,11 +7,11 @@ namespace Stories.Domain.Model
     {
         private IDictionary<Guid, Story> _stories;
         private IDictionary<Guid, User> _friends;
-        public string DisplayName { get; private set; }
-        public string SelfIntroction { get; private set; }
+        public string DisplayName { get; set; }
+        public string SelfIntroction { get; set; }
         public Timeline Timeline { get; set; }
-        public Biography Biography { get; set; }
-
+        public string LivingPlace { get; set; }
+        public string Occupation { get; set; }
         public IDictionary<Guid, Story> Stories
         {
             get { return this._stories; }
