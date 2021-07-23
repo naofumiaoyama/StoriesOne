@@ -8,17 +8,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class StoryEntity : BaseEntity
+    public class Story : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
-        [ForeignKey("PersonEntity")]
+        [ForeignKey("Person")]
         public Guid AuthorPersonId { get; set; }
         public string AuthorName { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
 
-        public ICollection<BodyEntity> Bodies { get; set; }
+        public ICollection<Body> Bodies { get; set; }
 
     }
 }

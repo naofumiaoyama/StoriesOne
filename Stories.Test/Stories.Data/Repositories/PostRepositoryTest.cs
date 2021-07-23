@@ -19,28 +19,28 @@ namespace Stories.Test.Stories.Data.Repositories
             using(var context = new DatabaseContext())
             {
                 //adding
-                GenericRepository<PostEntity>postRepository = new GenericRepository<PostEntity>(context);
-                PostEntity postEntity = new PostEntity();
-                postEntity.Id = Guid.Parse("908FD83F-93C8-41BD-B3CA-438D06996F85");
-                postEntity.TimelineId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
-                postEntity.Title = "Hello";
-                await postRepository.Add(postEntity);
+                GenericRepository<Post>postRepository = new GenericRepository<Post>(context);
+                Post post = new Post();
+                post.Id = Guid.Parse("908FD83F-93C8-41BD-B3CA-438D06996F85");
+                post.TimelineId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
+                post.Title = "Hello";
+                await postRepository.Add(post);
 
                 //Getting
-                var getPost = await postRepository.Get(postEntity.Id);
+                var getPost = await postRepository.Get(post.Id);
 
-                Assert.AreEqual(getPost.Id, postEntity.Id);
-                Assert.AreEqual(getPost.Title, postEntity.Title);
+                Assert.AreEqual(getPost.Id, post.Id);
+                Assert.AreEqual(getPost.Title, post.Title);
 
                 //Updating
-                postEntity.Title = "Stories";
-                await postRepository.Update(postEntity);
-                var updatePost = await postRepository.Get(postEntity.Id);
+                post.Title = "Stories";
+                await postRepository.Update(post);
+                var updatePost = await postRepository.Get(post.Id);
                 Assert.AreEqual(updatePost.Title, "Stories");
 
                 //Removing
-               await postRepository.Remove(postEntity);
-               var resultPost = postRepository.Get(postEntity.Id).Result;
+               await postRepository.Remove(post);
+               var resultPost = postRepository.Get(post.Id).Result;
                Assert.AreEqual(resultPost, null);
             }
         }

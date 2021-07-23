@@ -27,17 +27,19 @@ namespace Stories.Test.Stories.Data.Repositories
             user.DisplayName = "F.L";
             user.LivingPlace = "TokyoCity";
             user.Occupation = "Engineer";
+            
             await userUnitOfWork.CreateUser(user);
+
             using (var context = new DatabaseContext())
             {
-                GenericRepository<PersonEntity> personRepository = new GenericRepository<PersonEntity>(context);
-                var personEntity = await personRepository.Get(user.Id);
+                GenericRepository<global::Stories.Data.Entities.Person> personRepository = new GenericRepository<global::Stories.Data.Entities.Person>(context);
+                var person = await personRepository.Get(user.Id);
 
-                Assert.AreEqual(user.Id, personEntity.Id);
-                Assert.AreEqual(user.PersonType.ToString(), personEntity.PersonType.ToString());
-                Assert.AreEqual(user.FirstName, personEntity.FirstName);
+                Assert.AreEqual(user.Id, person.Id);
+                Assert.AreEqual(user.PersonType.ToString(), person.PersonType.ToString());
+                Assert.AreEqual(user.FirstName, person.FirstName);
 
-                await personRepository.Remove(personEntity);
+                await personRepository.Remove(person);
             }
         }
     }

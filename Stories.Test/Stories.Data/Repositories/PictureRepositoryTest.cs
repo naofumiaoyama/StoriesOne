@@ -19,29 +19,29 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                GenericRepository<PictureEntity>pictureRespository = new GenericRepository<PictureEntity>(context);
-                PictureEntity pictureEntity = new PictureEntity();
-                pictureEntity.Id = Guid.NewGuid();
-                pictureEntity.Url = "http://www.photo.com";
-                pictureEntity.PictureType = PictureType.UserProfile;
-                await pictureRespository.Add(pictureEntity);
+                GenericRepository<Picture>pictureRespository = new GenericRepository<Picture>(context);
+                Picture picture = new Picture();
+                picture.Id = Guid.NewGuid();
+                picture.Url = "http://www.photo.com";
+                picture.PictureType = PictureType.UserProfile;
+                await pictureRespository.Add(picture);
 
                 //Getting
-                var getPhoto = await pictureRespository.Get(pictureEntity.Id);
+                var getPhoto = await pictureRespository.Get(picture.Id);
 
-                Assert.AreEqual(getPhoto.Url, pictureEntity.Url);
-                Assert.AreEqual(getPhoto.PictureType, pictureEntity.PictureType);
+                Assert.AreEqual(getPhoto.Url, picture.Url);
+                Assert.AreEqual(getPhoto.PictureType, picture.PictureType);
 
                 //Updating
-                pictureEntity.Url = "http://www.stories.com";
-                await pictureRespository.Update(pictureEntity);
-                var updatePicture = await pictureRespository.Get(pictureEntity.Id);
-                Assert.AreEqual(updatePicture.Url, pictureEntity.Url);
-                Assert.AreEqual(updatePicture.PictureType, pictureEntity.PictureType);
+                picture.Url = "http://www.stories.com";
+                await pictureRespository.Update(picture);
+                var updatePicture = await pictureRespository.Get(picture.Id);
+                Assert.AreEqual(updatePicture.Url, picture.Url);
+                Assert.AreEqual(updatePicture.PictureType, picture.PictureType);
 
                 ////Removing
-                await pictureRespository.Remove(pictureEntity);
-                var resultPhoto = pictureRespository.Get(pictureEntity.Id).Result;
+                await pictureRespository.Remove(picture);
+                var resultPhoto = pictureRespository.Get(picture.Id).Result;
                 Assert.AreEqual(resultPhoto, null);
             }
         }

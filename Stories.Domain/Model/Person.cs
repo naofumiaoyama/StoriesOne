@@ -15,7 +15,6 @@ namespace Stories.Domain.Model
         public PersonalInfo PersonalInfo { get; set; }
         public PersonType PersonType { get; set; }
 
-
         public string FullName
         {
             get

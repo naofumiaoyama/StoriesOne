@@ -26,7 +26,8 @@ namespace Stories.Api.Controllers
         {
             UserApplication userApplication = new UserApplication();
             var user = await userApplication.GetUserWithFriends(id);
-            return user;
+            
+            return null;
         }
 
         /*

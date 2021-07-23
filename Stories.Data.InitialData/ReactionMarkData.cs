@@ -15,27 +15,27 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<ReactionMarkEntity> reactionMarkRepository = new GenericRepository<ReactionMarkEntity>(context);
-                ReactionMarkEntity reactionMarkEntity = new ReactionMarkEntity();
-                reactionMarkEntity.Id = Guid.Parse("42697A78-A3B6-4C49-AA5A-9A0F7F9B6405");
-                reactionMarkEntity.Url = "http://www.shortstories.com";
-                reactionMarkEntity.Name = "helloworld";
-                reactionMarkEntity.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                reactionMarkEntity.CreateDate = DateTime.Now;
-                reactionMarkEntity.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                reactionMarkEntity.UpdateDate = DateTime.Now;
-                await reactionMarkRepository.Add(reactionMarkEntity);
+                GenericRepository<Entities.ReactionMark> reactionMarkRepository = new GenericRepository<Entities.ReactionMark>(context);
+                Entities.ReactionMark reactionMark = new Entities.ReactionMark();
+                reactionMark.Id = Guid.Parse("42697A78-A3B6-4C49-AA5A-9A0F7F9B6405");
+                reactionMark.Url = "http://www.shortstories.com";
+                reactionMark.Name = "helloworld";
+                reactionMark.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                reactionMark.CreateDate = DateTime.Now;
+                reactionMark.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                reactionMark.UpdateDate = DateTime.Now;
+                await reactionMarkRepository.Add(reactionMark);
 
-                
-                ReactionMarkEntity reactionMarkEntity2 = new ReactionMarkEntity();
-                reactionMarkEntity2.Id = Guid.Parse("529099F0-B652-4CBF-AE9B-27E842B37B0D");
-                reactionMarkEntity2.Url = "http://www.short.net";
-                reactionMarkEntity2.Name = "Hello";
-                reactionMarkEntity2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                reactionMarkEntity2.CreateDate = DateTime.Now;
-                reactionMarkEntity2.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                reactionMarkEntity2.UpdateDate = DateTime.Now;
-                await reactionMarkRepository.Add(reactionMarkEntity2);
+
+                Entities.ReactionMark reactionMark2 = new Entities.ReactionMark();
+                reactionMark2.Id = Guid.Parse("529099F0-B652-4CBF-AE9B-27E842B37B0D");
+                reactionMark2.Url = "http://www.short.net";
+                reactionMark2.Name = "Hello";
+                reactionMark2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                reactionMark2.CreateDate = DateTime.Now;
+                reactionMark2.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                reactionMark2.UpdateDate = DateTime.Now;
+                await reactionMarkRepository.Add(reactionMark2);
             }
         }
 
@@ -43,7 +43,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<ReactionMarkEntity> reactionMarkRepository = new GenericRepository<ReactionMarkEntity>(context);
+                GenericRepository<Entities.ReactionMark> reactionMarkRepository = new GenericRepository<Entities.ReactionMark>(context);
                 var reactionMark1 = reactionMarkRepository.Get(Guid.Parse("42697A78-A3B6-4C49-AA5A-9A0F7F9B6405")).Result;
                 if (reactionMark1 != null) { await reactionMarkRepository.Remove(reactionMark1); }
 

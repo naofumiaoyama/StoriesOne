@@ -20,40 +20,40 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                GenericRepository<FriendRelationshipEntity> friendRelationshipRepository = new GenericRepository<FriendRelationshipEntity>(context);
-                FriendRelationshipEntity friendRelationshipEntity = new FriendRelationshipEntity();
-                friendRelationshipEntity.Id = Guid.Parse("2E4B133E-BEB5-44C6-9912-7A48CDECCC98");
-                friendRelationshipEntity.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                friendRelationshipEntity.FullName = "Naofumi Aoyama";
-                friendRelationshipEntity.FriendPersonId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
-                friendRelationshipEntity.FriendFullName = "Jenalyn Aoyama";
-                friendRelationshipEntity.FriendshipDateTime = DateTime.Now;
-                await friendRelationshipRepository.Add(friendRelationshipEntity);
+                GenericRepository<FriendRelationship> friendRelationshipRepository = new GenericRepository<FriendRelationship>(context);
+                FriendRelationship friendRelationship = new FriendRelationship();
+                friendRelationship.Id = Guid.Parse("2E4B133E-BEB5-44C6-9912-7A48CDECCC98");
+                friendRelationship.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                friendRelationship.FullName = "Naofumi Aoyama";
+                friendRelationship.FriendPersonId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
+                friendRelationship.FriendFullName = "Jenalyn Aoyama";
+                friendRelationship.FriendshipDateTime = DateTime.Now;
+                await friendRelationshipRepository.Add(friendRelationship);
 
                 //getting
-                var getFriendRelationshipEntity = await friendRelationshipRepository.Get(friendRelationshipEntity.Id);
+                var getFriendRelationship = await friendRelationshipRepository.Get(friendRelationship.Id);
              
 
-                Assert.AreEqual(getFriendRelationshipEntity.Id, friendRelationshipEntity.Id);
-                Assert.AreEqual(getFriendRelationshipEntity.PersonId, friendRelationshipEntity.PersonId);
-                Assert.AreEqual(getFriendRelationshipEntity.FullName, friendRelationshipEntity.FullName);
-                Assert.AreEqual(getFriendRelationshipEntity.FriendPersonId, friendRelationshipEntity.FriendPersonId);
-                Assert.AreEqual(getFriendRelationshipEntity.FriendFullName, friendRelationshipEntity.FriendFullName);
-                Assert.AreEqual(getFriendRelationshipEntity.FriendshipDateTime, friendRelationshipEntity.FriendshipDateTime);
+                Assert.AreEqual(getFriendRelationship.Id, friendRelationship.Id);
+                Assert.AreEqual(getFriendRelationship.PersonId, friendRelationship.PersonId);
+                Assert.AreEqual(getFriendRelationship.FullName, friendRelationship.FullName);
+                Assert.AreEqual(getFriendRelationship.FriendPersonId, friendRelationship.FriendPersonId);
+                Assert.AreEqual(getFriendRelationship.FriendFullName, friendRelationship.FriendFullName);
+                Assert.AreEqual(getFriendRelationship.FriendshipDateTime, friendRelationship.FriendshipDateTime);
 
                 //updating
-                friendRelationshipEntity.FullName = "Naofumi Aoyama 2";
-                friendRelationshipEntity.FriendPersonId = Guid.Parse("157B7DC6-0D77-4305-A70F-3B73BA581351");
-                friendRelationshipEntity.FriendFullName = "Jenalyn Aoyama 2";
-                friendRelationshipEntity.FriendshipDateTime = DateTime.Today;
-                await friendRelationshipRepository.Update(friendRelationshipEntity);
-                var updatefriendRelationshipEntity = await friendRelationshipRepository.Get(friendRelationshipEntity.Id);
-                Assert.AreEqual(updatefriendRelationshipEntity.FullName, friendRelationshipEntity.FullName);
-                Assert.AreEqual(updatefriendRelationshipEntity.FriendFullName, friendRelationshipEntity.FriendFullName);
+                friendRelationship.FullName = "Naofumi Aoyama 2";
+                friendRelationship.FriendPersonId = Guid.Parse("157B7DC6-0D77-4305-A70F-3B73BA581351");
+                friendRelationship.FriendFullName = "Jenalyn Aoyama 2";
+                friendRelationship.FriendshipDateTime = DateTime.Today;
+                await friendRelationshipRepository.Update(friendRelationship);
+                var updatefriendRelationship = await friendRelationshipRepository.Get(friendRelationship.Id);
+                Assert.AreEqual(updatefriendRelationship.FullName, friendRelationship.FullName);
+                Assert.AreEqual(updatefriendRelationship.FriendFullName, friendRelationship.FriendFullName);
                
                 //removing
-                await friendRelationshipRepository.Remove(friendRelationshipEntity);
-                var resultPersonalInfo = friendRelationshipRepository.Get(friendRelationshipEntity.PersonId).Result;
+                await friendRelationshipRepository.Remove(friendRelationship);
+                var resultPersonalInfo = friendRelationshipRepository.Get(friendRelationship.PersonId).Result;
                 Assert.AreEqual(resultPersonalInfo, null);
 
 

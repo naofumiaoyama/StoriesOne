@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stories.Data;
 
 namespace Stories.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210722022612_Second")]
+    partial class Second
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -301,6 +303,9 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("CreateUserId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("PictureType")
                         .HasColumnType("int");
 
@@ -314,6 +319,8 @@ namespace Stories.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Pictures");
                 });
@@ -494,6 +501,15 @@ namespace Stories.Data.Migrations
                         .HasForeignKey("Stories.Data.Entities.PersonalInfo", "PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Picture", b =>
+                {
+                    b.HasOne("Stories.Data.Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId");
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Post", b =>

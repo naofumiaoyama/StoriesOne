@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class PersonEntity : BaseEntity
+    public class Person : BaseEntity
     {
         [Key]
         public Guid Id {get; set;}
@@ -19,17 +19,17 @@ namespace Stories.Data.Entities
         public string LivingPlace { get; set; }
         public string Occupation { get; set; }
 
-        public PersonalInfoEntity PersonalInfo { get; set; }
+        public PersonalInfo PersonalInfo { get; set; }
 
-        public TimelineEntity Timeline { get; set; }
-        [ForeignKey("PictureEntity")]
+        public Timeline Timeline { get; set; }
+        [ForeignKey("Picture")]
         public Guid ProfilePictureId { get; set; }
 
-        public ICollection<FriendRelationshipEntity> FriendRelationships { get; set; }
+        public ICollection<FriendRelationship> FriendRelationships { get; set; }
 
-        public ICollection<StoryEntity> Stories { get; set; }
+        public ICollection<Story> Stories { get; set; }
 
-        public ICollection<PostEntity> Posts { get; set; }
+        public ICollection<Post> Posts { get; set; }
 
     }
 

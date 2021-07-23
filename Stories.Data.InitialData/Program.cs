@@ -17,6 +17,7 @@ namespace Stories.Data.InitialData
             PostData postData = new PostData();
             StoryData storyData = new StoryData();
             ReactionMarkData reactionMarkData = new ReactionMarkData();
+            BodyData bodyData = new BodyData();
 
             await personData.DeleteData();
             await personalInfoData.DeleteData();
@@ -28,6 +29,7 @@ namespace Stories.Data.InitialData
             await postData.DeleteData();
             await storyData.DeleteData();
             await reactionMarkData.DeleteData();
+            await bodyData.DeleteData();
 
             await personData.MakeData();
             await personalInfoData.MakeData();
@@ -39,6 +41,7 @@ namespace Stories.Data.InitialData
             await postData.MakeData();
             await storyData.MakeData();
             await reactionMarkData.MakeData();
+            await bodyData.MakeData();
         }
     }
 }

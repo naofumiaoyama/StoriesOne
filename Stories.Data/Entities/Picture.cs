@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace Stories.Data.Entities
 {
-    public class PictureEntity : BaseEntity
+    public class Picture : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }

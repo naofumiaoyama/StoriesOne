@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Stories.Data.Entities
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
         public Guid CreateUserId { get; set; }
         public DateTime CreateDate { get; set; }

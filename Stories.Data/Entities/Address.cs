@@ -6,12 +6,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace Stories.Data.Entities
 {
-    public class AddressEntity : BaseEntity
+    public class Address : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
-        [ForeignKey("PersonEntity")]
-        public Guid PersonId { get; set; }
+        [ForeignKey("PersonalInfo")]
+        public Guid PersonalInfoId { get; set; }
         public string CountryCode { get; set; }
         public string CountryName { get; set; }
         public string PrefectureCode { get; set; }

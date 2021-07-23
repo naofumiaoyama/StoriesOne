@@ -4,13 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class CommentEntity : BaseEntity
+    public class Comment : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
-        [ForeignKey("PostEntity")]
+        [ForeignKey("Post")]
         public Guid PostId { get; set; }
-        [ForeignKey("PersonEntity")]
+        [ForeignKey("Person")]
         public Guid CommentPersonId { get; set; }
         public string CommentText { get; set; }
         public DateTime PostTime { get; set; }

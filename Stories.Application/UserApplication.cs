@@ -25,13 +25,6 @@ namespace Stories.Application
             return user;
         }
         
-        public User CheckSignUpUser(User user)
-        {
-            if(user.PersonalInfo.EmailAddress1 == null)
-            {
-                System.Diagnostics.Debug.WriteLine("There's no friends now");
-            }
-            return user;
-        }
+       
     }
 }
