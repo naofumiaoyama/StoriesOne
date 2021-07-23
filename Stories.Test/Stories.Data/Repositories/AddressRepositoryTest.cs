@@ -25,7 +25,6 @@ namespace Stories.Test.Stories.Data.Repositories
                 GenericRepository<Address> addressRepository = new GenericRepository<Address>(context);
                 Address address = new Address();
                 address.Id = Guid.Parse("52E91D81-D193-4BDC-911A-63C7F7CC099F");
-                address.PersonalInfoId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 address.CountryCode = "81";
                 address.CountryName = "Japan";
                 address.PrefectureCode = "301";
@@ -42,7 +41,6 @@ namespace Stories.Test.Stories.Data.Repositories
                 var getAddress = await addressRepository.Get(address.Id);
 
                 Assert.AreEqual(getAddress.Id, address.Id);
-                Assert.AreEqual(getAddress.PersonalInfoId, address.PersonalInfoId);
                 Assert.AreEqual(getAddress.CountryCode, address.CountryCode);
                 Assert.AreEqual(getAddress.CountryName, address.CountryName);
                 Assert.AreEqual(getAddress.PrefectureCode, address.PrefectureCode);

@@ -10,8 +10,6 @@ namespace Stories.Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        [ForeignKey("PersonalInfo")]
-        public Guid PersonalInfoId { get; set; }
         public string CountryCode { get; set; }
         public string CountryName { get; set; }
         public string PrefectureCode { get; set; }

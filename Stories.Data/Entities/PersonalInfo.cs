@@ -18,11 +18,10 @@ namespace Stories.Data.Entities
         public Sex Sex { get; set; }
         public DateTime Birthdate { get; set; }
         public MaritalStatus MaritalStatus { get; set; }
-        public string EmailAddress1 {get; set;}
+        public string EmailAddress1 { get; set; }
         public string EmailAddress2 { get; set; }
-
-        public ICollection<Address> Addresses { get; set; }
-
+        [ForeignKey("Address")]
+        public Guid AddressId { get; set; }
 
     }
 

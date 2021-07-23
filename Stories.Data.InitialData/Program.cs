@@ -20,10 +20,10 @@ namespace Stories.Data.InitialData
             BodyData bodyData = new BodyData();
 
             await personData.DeleteData();
+            await addressData.DeleteData();
             await personalInfoData.DeleteData();
             await pictureData.DeleteData();
-            await timelineData.DeleteData();
-            await addressData.DeleteData();
+            await timelineData.DeleteData(); 
             await commentData.DeleteData();
             await friendRelationshipData.DeleteData();
             await postData.DeleteData();
@@ -32,10 +32,10 @@ namespace Stories.Data.InitialData
             await bodyData.DeleteData();
 
             await personData.MakeData();
+            await addressData.MakeData();
             await personalInfoData.MakeData();
             await pictureData.MakeData();
             await timelineData.MakeData();
-            await addressData.MakeData();
             await commentData.MakeData();
             await friendRelationshipData.MakeData();
             await postData.MakeData();

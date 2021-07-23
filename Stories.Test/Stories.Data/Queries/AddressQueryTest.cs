@@ -16,10 +16,10 @@ namespace Stories.Test.Stories.Data.Queries
         public async Task GetTest()
         {
             var query = new AddressQuery();
-            var guid = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-            var addressGuid = Guid.Parse("4487058c-0c80-4655-8fc6-dfda0b1b1563");
-            var addresses = await query.Get(guid);
-            Assert.AreEqual(addresses[addressGuid].CountryCode, "81");
+            
+            var guid = Guid.Parse("2b3cd24f-5802-4d74-bacd-5de67a2b2fcb");
+            var address = await query.Get(guid);
+            Assert.AreEqual(address.CountryCode, "1");
         }
     }
 }      

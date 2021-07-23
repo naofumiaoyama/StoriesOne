@@ -13,11 +13,11 @@ namespace Stories.Data.Queries
     public class AddressQuery : IAddressQuery
     {
         /// <summary>
-        /// Getting Posts
+        /// Getting Address
         /// </summary>
-        /// <param name="guid">People.Id</param>
+        /// <param name="guid">Address.Id</param>
         /// <returns></returns>
-        public async Task<IDictionary<Guid, Address>> Get(Guid guid)
+        public async Task<Address> Get(Guid guid)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -26,14 +26,14 @@ namespace Stories.Data.Queries
                 await connection.OpenAsync();
             
                 var query = @"Select ad.* from Addresses ad " +
-                            "Where CAST(ad.PersonId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
+                            "Where CAST(ad.Id as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
                 
-                var addresses = await connection.QueryAsync<Address>(query);
+                var address = await connection.QueryAsync<Address>(query);
                 
                 await connection.CloseAsync();
 
-                var dic = addresses.ToDictionary(a => a.Id);
-                return dic;
+                
+                return address.FirstOrDefault();
             }
         }
     }

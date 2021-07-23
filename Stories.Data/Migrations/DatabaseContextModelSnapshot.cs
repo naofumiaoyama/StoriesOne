@@ -43,9 +43,6 @@ namespace Stories.Data.Migrations
                     b.Property<string>("Others")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PersonalInfoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("PrefectureCode")
                         .HasColumnType("nvarchar(max)");
 
@@ -71,8 +68,6 @@ namespace Stories.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PersonalInfoId");
 
                     b.ToTable("Addresses");
                 });
@@ -240,6 +235,9 @@ namespace Stories.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Birthdate")
@@ -460,15 +458,6 @@ namespace Stories.Data.Migrations
                     b.ToTable("Timelines");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.Address", b =>
-                {
-                    b.HasOne("Stories.Data.Entities.PersonalInfo", null)
-                        .WithMany("Addresses")
-                        .HasForeignKey("PersonalInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Stories.Data.Entities.Body", b =>
                 {
                     b.HasOne("Stories.Data.Entities.Story", null)
@@ -536,11 +525,6 @@ namespace Stories.Data.Migrations
                     b.Navigation("Stories");
 
                     b.Navigation("Timeline");
-                });
-
-            modelBuilder.Entity("Stories.Data.Entities.PersonalInfo", b =>
-                {
-                    b.Navigation("Addresses");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Story", b =>

@@ -9,6 +9,6 @@ namespace Stories.Data.Queries.Interface
 {
     public interface IAddressQuery
     {
-        Task<IDictionary<Guid, Address>> Get(Guid guid);
+        Task<Address> Get(Guid guid);
     }
 }

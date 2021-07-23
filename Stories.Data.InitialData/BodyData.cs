@@ -31,10 +31,10 @@ namespace Stories.Data.InitialData
                 body2.StoryId = Guid.Parse("4EADAFCD-7585-492C-A39D-878715441048");
                 body2.ChapterNumber = 2;
                 body2.BodyContent = "Stories Synopsis";
-                body1.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                body1.CreateDate = DateTime.Now;
-                body1.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                body1.UpdateDate = DateTime.Now;
+                body2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                body2.CreateDate = DateTime.Now;
+                body2.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                body2.UpdateDate = DateTime.Now;
                 await bodyRepository.Add(body2);
             }
         }

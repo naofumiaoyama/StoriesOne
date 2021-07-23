@@ -25,6 +25,7 @@ namespace Stories.Data.InitialData
                 personalInfo.MaritalStatus = MaritalStatus.Married;
                 personalInfo.EmailAddress1 = "naofumi.aoyoama@gmail.com";
                 personalInfo.EmailAddress2 = "janeaoyama@gmail.com";
+                personalInfo.AddressId = Guid.Parse("21eb3545-604e-42b4-9c7f-7057e55e2045");
                 personalInfo.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 personalInfo.CreateDate = DateTime.Now;
                 personalInfo.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
@@ -40,6 +41,7 @@ namespace Stories.Data.InitialData
                 personalInfo2.Birthdate = new DateTime(1995, 3, 27);
                 personalInfo2.EmailAddress1 = "albiosjenalyn27@gmail.com";
                 personalInfo2.EmailAddress2 = "jenaoyama@gmail.com";
+                personalInfo2.AddressId = Guid.Parse("2B3CD24F-5802-4D74-BACD-5DE67A2B2FCB");
                 personalInfo2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 personalInfo.CreateDate = DateTime.Now;
                 personalInfo2.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");

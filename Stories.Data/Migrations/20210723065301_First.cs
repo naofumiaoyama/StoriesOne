@@ -8,6 +8,31 @@ namespace Stories.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CountryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PrefectureCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PrefectureName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CityName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TownName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Others = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
@@ -126,6 +151,7 @@ namespace Stories.Data.Migrations
                     MaritalStatus = table.Column<int>(type: "int", nullable: false),
                     EmailAddress1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmailAddress2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -191,38 +217,6 @@ namespace Stories.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Addresses",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PersonalInfoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CountryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PrefectureCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PrefectureName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StateCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StateName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CityName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TownName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Others = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Addresses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Addresses_PersonalInfos_PersonalInfoId",
-                        column: x => x.PersonalInfoId,
-                        principalTable: "PersonalInfos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Bodies",
                 columns: table => new
                 {
@@ -279,11 +273,6 @@ namespace Stories.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Addresses_PersonalInfoId",
-                table: "Addresses",
-                column: "PersonalInfoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Bodies_StoryId",
                 table: "Bodies",
                 column: "StoryId");
@@ -330,6 +319,9 @@ namespace Stories.Data.Migrations
                 name: "FriendRelationships");
 
             migrationBuilder.DropTable(
+                name: "PersonalInfos");
+
+            migrationBuilder.DropTable(
                 name: "Pictures");
 
             migrationBuilder.DropTable(
@@ -337,9 +329,6 @@ namespace Stories.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ReactionMarks");
-
-            migrationBuilder.DropTable(
-                name: "PersonalInfos");
 
             migrationBuilder.DropTable(
                 name: "Stories");

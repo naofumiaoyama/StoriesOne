@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Stories.Test.Stories.Data.Repositories
 {
     [TestClass]
-   public class PersonalInfoEntityRepositoryTest
+   public class PersonalInfoRepositoryTest
     {
         [TestMethod]
         public async Task CRUDTest()
@@ -21,6 +21,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 GenericRepository<PersonalInfo> personalInfoRepository = new GenericRepository<PersonalInfo>(context);
                 //adding
                 PersonalInfo personalInfo = new PersonalInfo();
+                personalInfo.Id = Guid.Parse("69da8943-2dbf-4c2b-842d-b328c704be29");
                 personalInfo.PersonId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
                 personalInfo.LoginId = "chisumiAoyama@gmail.com";
                 personalInfo.Password = "abcde";
@@ -36,10 +37,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 await personalInfoRepository.Add(personalInfo);
 
                 //Getting
-                var getPersonalInfo = personalInfoRepository.Get(personalInfo.PersonId).Result;
+                var getPersonalInfo = personalInfoRepository.Get(personalInfo.Id).Result;
 
                 Assert.AreEqual(getPersonalInfo.PersonId, personalInfo.PersonId);
-  
                 Assert.AreEqual(getPersonalInfo.MobileNumber, personalInfo.MobileNumber);
                 Assert.AreEqual(getPersonalInfo.Sex, personalInfo.Sex);
                 Assert.AreEqual(getPersonalInfo.Birthdate, personalInfo.Birthdate);
@@ -52,7 +52,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 personalInfo.EmailAddress1 = "chisumi.aoyama@gmail.com";
                 personalInfo.EmailAddress2 = "chisumi2@gmail.com";
                 await personalInfoRepository.Update(personalInfo);
-                var updatepersonalInfo = await personalInfoRepository.Get(personalInfo.PersonId);
+                var updatepersonalInfo = await personalInfoRepository.Get(personalInfo.Id);
                 Assert.AreEqual(updatepersonalInfo.PersonId, personalInfo.PersonId);
                 Assert.AreEqual(updatepersonalInfo.MobileNumber, personalInfo.MobileNumber);
                 Assert.AreEqual(updatepersonalInfo.Sex, personalInfo.Sex);

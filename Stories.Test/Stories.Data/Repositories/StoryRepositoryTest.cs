@@ -18,7 +18,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 //adding
                 GenericRepository<Story>storyRepository = new GenericRepository<Story>(context);
                 Story story = new Story();
-                story.Id = new Guid();
+                story.Id = Guid.Parse("06afba69-53be-409c-bebd-ffadafb4524b");
                 story.Title = "Titanic";
                 story.AuthorPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 story.Summary = "Start by a young couple meeting, falling in love and having a hard time being together";
@@ -53,9 +53,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updateStory.UpdateUserId, story.UpdateUserId);
 
                 //Removing
-              // await storyRepository.Remove(story);
-              // var resultstory = storyRepository.Get(story.Id).Result;
-              // Assert.AreEqual(resultstory, null);
+                await storyRepository.Remove(story);
+                var resultstory = storyRepository.Get(story.Id).Result;
+                Assert.AreEqual(resultstory, null);
             }
         }
     }

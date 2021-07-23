@@ -21,7 +21,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 //adding
                 GenericRepository<Body> bodyRepository = new GenericRepository<Body>(context);
                 Body body = new Body();
-                body.Id = Guid.Parse("EAF78FDA-A8A7-497B-98B8-B67F6E294D83");
+                body.Id = Guid.Parse("8fdc139c-0cf1-49f5-9e80-ec71f6c74864");
                 body.StoryId = Guid.Parse("D701ACBD-97D9-437B-A949-A4CF04A33521");
                 body.ChapterNumber = 1;
                 body.BodyContent = "Story";
@@ -35,7 +35,6 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(getBody.BodyContent, body.BodyContent);
 
                 //updating
-                body.Id = Guid.Parse("6137AFDD-FDB8-408B-80FD-40882691FF1D");
                 body.StoryId = Guid.Parse("4EADAFCD-7585-492C-A39D-878715441048");
                 body.ChapterNumber = 2;
                 body.BodyContent = "Stories Synopsis";
@@ -47,9 +46,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updatebody.BodyContent, body.BodyContent);
 
                 //removing
-                //await bodyRepository.Remove(body);
-                //var resultbody = bodyRepository.Get(body.Id).Result;
-               // Assert.AreEqual(resultbody, null);
+                await bodyRepository.Remove(body);
+                var resultbody = bodyRepository.Get(body.Id).Result;
+                Assert.AreEqual(resultbody, null);
             }
         }
     }
