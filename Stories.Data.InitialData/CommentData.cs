@@ -14,8 +14,8 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<Comment>commentRepository = new GenericRepository<Comment>(context);
-                Comment comment1 = new Comment();
+                GenericRepository<CommentT>commentRepository = new GenericRepository<CommentT>(context);
+                CommentT comment1 = new CommentT();
                 comment1.Id = Guid.Parse("68AFFD37-1590-4EC9-9596-76A99F3AD892");
                 comment1.CommentText = "Abc";
                 comment1.CommentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
@@ -26,7 +26,7 @@ namespace Stories.Data.InitialData
                 comment1.UpdateDate = DateTime.Now;
                 await commentRepository.Add(comment1);
 
-                Comment comment2 = new Comment();
+                CommentT comment2 = new CommentT();
                 comment2.Id = Guid.Parse("9C886F4A-5BCE-4FEF-82AB-BF3BB922FACD");
                 comment2.CommentText = "Abc";
                 comment2.CommentPersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
@@ -44,7 +44,7 @@ namespace Stories.Data.InitialData
 
             using (var context = new DatabaseContext())
             {
-                GenericRepository<Comment> commentRepository = new GenericRepository<Comment>(context);
+                GenericRepository<CommentT> commentRepository = new GenericRepository<CommentT>(context);
                 var comment1 = commentRepository.Get(Guid.Parse("68AFFD37-1590-4EC9-9596-76A99F3AD892")).Result;
                 if (comment1 != null) { await commentRepository.Remove(comment1); }
 

@@ -21,8 +21,8 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 // Adding
-                GenericRepository<Person> personRepository = new GenericRepository<Person>(context);
-                Person person = new Person();
+                GenericRepository<PersonT> personRepository = new GenericRepository<PersonT>(context);
+                PersonT person = new PersonT();
                 person.Id = Guid.Parse("B87DD83A-7F89-4AD0-BB4E-E94518F8A677");
                 person.PersonType = PersonType.User;
                 person.FirstName = "OtherFirst";

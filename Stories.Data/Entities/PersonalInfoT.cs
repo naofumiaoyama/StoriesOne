@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class PersonalInfo : BaseEntity
+    public class PersonalInfoT : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
-        [ForeignKey("Person")]
+        [ForeignKey("PersonT")]
         public Guid PersonId { get; set; }
         public string LoginId { get; set; }
         public string Password { get; set; }
@@ -20,7 +20,7 @@ namespace Stories.Data.Entities
         public MaritalStatus MaritalStatus { get; set; }
         public string EmailAddress1 { get; set; }
         public string EmailAddress2 { get; set; }
-        [ForeignKey("Address")]
+        [ForeignKey("AddressT")]
         public Guid AddressId { get; set; }
 
     }

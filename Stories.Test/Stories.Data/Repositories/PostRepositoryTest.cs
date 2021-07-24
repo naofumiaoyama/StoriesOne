@@ -19,8 +19,8 @@ namespace Stories.Test.Stories.Data.Repositories
             using(var context = new DatabaseContext())
             {
                 //adding
-                GenericRepository<Post>postRepository = new GenericRepository<Post>(context);
-                Post post = new Post();
+                GenericRepository<PostT>postRepository = new GenericRepository<PostT>(context);
+                PostT post = new PostT();
                 post.Id = Guid.Parse("908FD83F-93C8-41BD-B3CA-438D06996F85");
                 post.TimelineId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
                 post.Title = "Hello";

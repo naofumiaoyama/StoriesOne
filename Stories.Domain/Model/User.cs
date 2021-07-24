@@ -5,7 +5,6 @@ namespace Stories.Domain.Model
 {
     public class User : Person
     {
-
         public string DisplayName { get; set; }
         public string SelfIntroction { get; set; }
         public Timeline Timeline { get; set; }

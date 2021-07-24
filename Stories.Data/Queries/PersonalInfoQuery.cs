@@ -10,29 +10,29 @@ using Dapper;
 
 namespace Stories.Data.Queries
 {
-    public class UserQuery : IUserQuery
+    public class PersonalInfoQuery : IPersonalInfoQuery
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="guid">People.Id</param>
         /// <returns></returns>
-        public async Task<User> Get(Guid guid)
+        public async Task<PersonalInfo> Get(Guid guid)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
             {
                 connection.ConnectionString = DatabaseContext.DbConnectionString;
                 await connection.OpenAsync();
-            
-                var query = @"Select pe.* from People pe " +
-                            "Where CAST(pe.Id as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
 
-                var user = await connection.QueryAsync<User>(query);
+                var query = @"Select pi.* from PersonalInfos pi " +
+                            "Where CAST(pi.Id as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
+                
+                var personalInfos = await connection.QueryAsync<PersonalInfo>(query);
                 
                 await connection.CloseAsync();
                 
-                return user.FirstOrDefault();
+                return personalInfos.FirstOrDefault();
 
             }
         }

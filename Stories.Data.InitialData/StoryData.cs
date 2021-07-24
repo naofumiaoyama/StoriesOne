@@ -14,8 +14,8 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<Story>storyRepository = new GenericRepository<Story>(context);
-                Story story = new Story();
+                GenericRepository<StoryT>storyRepository = new GenericRepository<StoryT>(context);
+                StoryT story = new StoryT();
                 story.Id = Guid.Parse("D701ACBD-97D9-437B-A949-A4CF04A33521");
                 story.Title = "Titanic";
                 story.AuthorPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
@@ -28,7 +28,7 @@ namespace Stories.Data.InitialData
                 story.UpdateDate = DateTime.Now;
                 await storyRepository.Add(story);
 
-                Story story2 = new Story();
+                StoryT story2 = new StoryT();
                 story2.Id = Guid.Parse("4EADAFCD-7585-492C-A39D-878715441048");
                 story2.Title = "Lovebirds";
                 story2.AuthorPersonId = Guid.Parse("EEFB1E9D-4E17-43A3-A690-F374D27D36DE");
@@ -49,7 +49,7 @@ namespace Stories.Data.InitialData
             using (var context = new DatabaseContext())
             {
 
-                GenericRepository<Story> storyRepository = new GenericRepository<Story>(context);
+                GenericRepository<StoryT> storyRepository = new GenericRepository<StoryT>(context);
                 var story1 = storyRepository.Get(Guid.Parse("D701ACBD-97D9-437B-A949-A4CF04A33521")).Result;
                 if (story1 != null) { await storyRepository.Remove(story1); }
 

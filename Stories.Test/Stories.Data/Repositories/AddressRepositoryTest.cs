@@ -22,8 +22,8 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                GenericRepository<Address> addressRepository = new GenericRepository<Address>(context);
-                Address address = new Address();
+                GenericRepository<AddressT> addressRepository = new GenericRepository<AddressT>(context);
+                AddressT address = new AddressT();
                 address.Id = Guid.Parse("52E91D81-D193-4BDC-911A-63C7F7CC099F");
                 address.CountryCode = "81";
                 address.CountryName = "Japan";

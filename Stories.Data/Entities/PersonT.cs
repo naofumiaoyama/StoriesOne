@@ -6,10 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class Person : BaseEntity
+    public class PersonT : BaseEntity
     {
         [Key]
-        public Guid Id {get; set;}
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
@@ -18,18 +18,11 @@ namespace Stories.Data.Entities
         public string SelfIntroduction { get; set; }
         public string LivingPlace { get; set; }
         public string Occupation { get; set; }
+        public PictureT ProfilePicture { get; set; }
+        public TimelineT Timeline { get; set; }
+        public ICollection<FriendRelationshipT> FriendRelationships { get; set; }
 
-        public PersonalInfo PersonalInfo { get; set; }
-
-        public Timeline Timeline { get; set; }
-        [ForeignKey("Picture")]
-        public Guid ProfilePictureId { get; set; }
-
-        public ICollection<FriendRelationship> FriendRelationships { get; set; }
-
-        public ICollection<Story> Stories { get; set; }
-
-        public ICollection<Post> Posts { get; set; }
+        public ICollection<StoryT> Stories { get; set; }
 
     }
 

@@ -15,8 +15,8 @@ namespace Stories.Data.InitialData
 
             using (var context = new DatabaseContext())
             {
-                GenericRepository<Post>postRepository = new GenericRepository<Post>(context);
-                Post post1 = new Post();
+                GenericRepository<PostT>postRepository = new GenericRepository<PostT>(context);
+                PostT post1 = new PostT();
                 post1.Id = Guid.Parse("231A90BC-72E8-4A01-8967-73EE78E0D497");
                 post1.TimelineId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 post1.Title = "Hello";
@@ -32,7 +32,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<Post> postRepository = new GenericRepository<Post>(context);
+                GenericRepository<PostT> postRepository = new GenericRepository<PostT>(context);
                 var post1 = postRepository.Get(Guid.Parse("231A90BC-72E8-4A01-8967-73EE78E0D497")).Result;
                 if (post1 != null) { await postRepository.Remove(post1); }
             }

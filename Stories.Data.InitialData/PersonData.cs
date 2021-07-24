@@ -13,8 +13,8 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<Person> personRepository = new GenericRepository<Person>(context);
-                Person person = new Person();
+                GenericRepository<PersonT> personRepository = new GenericRepository<PersonT>(context);
+                PersonT person = new PersonT();
                 person.Id = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 person.PersonType = PersonType.User;
                 person.FirstName = "Naofumi";
@@ -24,14 +24,13 @@ namespace Stories.Data.InitialData
                 person.SelfIntroduction = "私の自己紹介";
                 person.LivingPlace = "TokorozawaCity";
                 person.Occupation = "Engineer";
-                person.ProfilePictureId = Guid.Parse("CF2FD49A-A7CB-4523-8BED-C09B896026EF");
                 person.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 person.CreateDate = DateTime.Now;
                 person.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 person.UpdateDate = DateTime.Now;
                 await personRepository.Add(person);
 
-                Person person2 = new Person();
+                PersonT person2 = new PersonT();
                 person2.Id = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
                 person2.PersonType = PersonType.User;
                 person2.FirstName = "Jenalyn";
@@ -41,7 +40,6 @@ namespace Stories.Data.InitialData
                 person2.SelfIntroduction = "ジェナリンの自己紹介";
                 person2.LivingPlace = "MandaueCity";
                 person2.Occupation = "Engineer";
-                person2.ProfilePictureId = Guid.Parse("5006E057-4682-4EA6-BA61-C1FF7A63492C");
                 person2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 person2.CreateDate = DateTime.Now;
                 person2.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
@@ -49,7 +47,7 @@ namespace Stories.Data.InitialData
 
                 await personRepository.Add(person2);
 
-                Person person3 = new Person();
+                PersonT person3 = new PersonT();
                 person3.Id = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
                 person3.PersonType = PersonType.User;
                 person3.FirstName = "Chisumi";
@@ -72,7 +70,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<Person> personRepository = new GenericRepository<Person>(context);
+                GenericRepository<PersonT> personRepository = new GenericRepository<PersonT>(context);
                 var person1 = personRepository.Get(Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F")).Result;
                 if( person1 != null) { await personRepository.Remove(person1);  }
 

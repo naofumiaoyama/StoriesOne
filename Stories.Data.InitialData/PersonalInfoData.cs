@@ -14,16 +14,17 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<PersonalInfo> personalInfoRepository = new GenericRepository<PersonalInfo>(context);
-                PersonalInfo personalInfo = new PersonalInfo();
+                GenericRepository<PersonalInfoT> personalInfoRepository = new GenericRepository<PersonalInfoT>(context);
+                PersonalInfoT personalInfo = new PersonalInfoT();
+                personalInfo.Id = Guid.Parse("872A275C-283E-4161-A9C8-08D94E9FFD43");
                 personalInfo.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                personalInfo.LoginId = "naofumi.aoyoama@gmail.com";
+                personalInfo.LoginId = "naofumi.aoyama@gmail.com";
                 personalInfo.Password = "password";
                 personalInfo.MobileNumber = "09091068083";
                 personalInfo.Sex = Sex.Male;
                 personalInfo.Birthdate = new DateTime(1971, 7, 28);
                 personalInfo.MaritalStatus = MaritalStatus.Married;
-                personalInfo.EmailAddress1 = "naofumi.aoyoama@gmail.com";
+                personalInfo.EmailAddress1 = "naofumi.aoyama@gmail.com";
                 personalInfo.EmailAddress2 = "janeaoyama@gmail.com";
                 personalInfo.AddressId = Guid.Parse("21eb3545-604e-42b4-9c7f-7057e55e2045");
                 personalInfo.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
@@ -32,7 +33,8 @@ namespace Stories.Data.InitialData
                 personalInfo.UpdateDate = DateTime.Now;
                 await personalInfoRepository.Add(personalInfo);
 
-                PersonalInfo personalInfo2 = new PersonalInfo();
+                PersonalInfoT personalInfo2 = new PersonalInfoT();
+                personalInfo2.Id = Guid.Parse("9EF5F588-BAB5-4E71-A9C9-08D94E9FFD43");
                 personalInfo2.PersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
                 personalInfo2.LoginId = "albiosjenalyn27@gmail.com";
                 personalInfo2.Password = "abcd";
@@ -55,11 +57,11 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<PersonalInfo> personalInfoRepository = new GenericRepository<PersonalInfo>(context);
-                var personinfo1 = personalInfoRepository.Get(Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F")).Result;
+                GenericRepository<PersonalInfoT> personalInfoRepository = new GenericRepository<PersonalInfoT>(context);
+                var personinfo1 = personalInfoRepository.Get(Guid.Parse("872A275C-283E-4161-A9C8-08D94E9FFD43")).Result;
                 if (personinfo1 != null) { await personalInfoRepository.Remove(personinfo1); }
 
-                var personinfo2 = personalInfoRepository.Get(Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F")).Result;
+                var personinfo2 = personalInfoRepository.Get(Guid.Parse("9EF5F588-BAB5-4E71-A9C9-08D94E9FFD43")).Result;
                 if (personinfo2 != null) { await personalInfoRepository.Remove(personinfo2); }
 
                

@@ -1,13 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Stories.Domain.Model;
-using Stories.Data.Entities;
 using Stories.Data.Repositories;
+using Stories.Data.Entities;
 using Stories.Data;
+using Stories.Domain.Model;
 
 namespace Stories.Test.Stories.Data.Repositories
 {
@@ -32,7 +30,7 @@ namespace Stories.Test.Stories.Data.Repositories
 
             using (var context = new DatabaseContext())
             {
-                GenericRepository<global::Stories.Data.Entities.Person> personRepository = new GenericRepository<global::Stories.Data.Entities.Person>(context);
+                GenericRepository<PersonT> personRepository = new GenericRepository<PersonT>(context);
                 var person = await personRepository.Get(user.Id);
 
                 Assert.AreEqual(user.Id, person.Id);

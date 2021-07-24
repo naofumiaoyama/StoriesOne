@@ -5,41 +5,32 @@ namespace Stories.Domain.Model
 {
     public class PersonalInfo
     {
-        public PersonalInfo(string loginId, string password, string emailAddress1)
-        {
-            LoginID = loginId;
-            Password = password;
-            EmailAddress1 = emailAddress1;
-
-            if (string.IsNullOrEmpty(password))
-            {
-                throw new ArgumentNullException("loginId is required as an argument.");
-            }
-            if (string.IsNullOrEmpty(password))
-            {
-                throw new ArgumentNullException("password is required as an argument.");
-            }
-            if (string.IsNullOrEmpty(emailAddress1))
-            {
-                throw new ArgumentNullException("emailAddress1 is required as an argument.");
-            }
-            if ( loginId != emailAddress1)
-            {
-                throw new ArgumentException("loginId and emailAddress1 must be the same.");
-            }
-        }
-
-        public string LoginID { get; private set; }
-        public string Password { get; private set; }
+        public string LoginID { get; set; }
+        public string Password { get; set; }
         public string MobileNumber { get; set; }
         public Sex Sex { get; set; }
         public DateTime Birthdate { get; set; }
         public MaritalStatus MaritalStatus { get; set; }
         public string EmailAddress1 { get; private set; }
         public string EmailAddress2 { get; set; }
-       
-        public IDictionary<Guid, Address> Addresses { get; set; }
+        public Address Address{ get; set; }
 
+        public bool IsRequred()
+        {
+            if(LoginID != EmailAddress1)
+            {
+                throw new ArgumentNullException("Login-ID and Email-Address do not match.");
+            }
+            if (string.IsNullOrEmpty(LoginID))
+            {
+                throw new ArgumentNullException("LoginID is a required field.");
+            }
+            if (string.IsNullOrEmpty(Password))
+            {
+                throw new ArgumentNullException("Password is a required field.");
+            }
+            return true;
+        }
     }
 
     public enum Sex

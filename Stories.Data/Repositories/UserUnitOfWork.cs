@@ -14,19 +14,19 @@ namespace Stories.Data.Repositories
 
         public async Task CreateUser(User user)
         {
-            var userConfig = new MapperConfiguration(cfg => cfg.CreateMap<User, Entities.Person>());
-            var userInfoConfig = new MapperConfiguration(cfg => cfg.CreateMap<Domain.Model.PersonalInfo, Entities.PersonalInfo>());
+            var userConfig = new MapperConfiguration(cfg => cfg.CreateMap<User, PersonT>());
+            var userInfoConfig = new MapperConfiguration(cfg => cfg.CreateMap<PersonalInfo, PersonalInfoT>());
             
-            GenericRepository<Entities.Person> personRepository = 
-                new GenericRepository<Entities.Person>(new DatabaseContext());
-            GenericRepository<Entities.PersonalInfo> personInfoRepository = 
-                new GenericRepository<Entities.PersonalInfo>(new DatabaseContext());
+            GenericRepository<PersonT> personRepository = 
+                new GenericRepository<PersonT>(new DatabaseContext());
+            GenericRepository<PersonalInfoT> personInfoRepository = 
+                new GenericRepository<PersonalInfoT>(new DatabaseContext());
 
             var userMapper = new Mapper(userConfig);
             var personInfoMapper = new Mapper(userInfoConfig);
 
-            var personEntity = userMapper.Map<Entities.Person>(user);
-            var personInfoEntity = personInfoMapper.Map<Entities.PersonalInfo>(user.PersonalInfo);
+            var personEntity = userMapper.Map<PersonT>(user);
+            var personInfoEntity = personInfoMapper.Map<PersonalInfoT>(user.PersonalInfo);
 
             personEntity.CreateDate = DateTime.Now;
             personEntity.CreateUserId = user.Id;
