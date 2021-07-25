@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Stories.Api\Stories.Api.csproj" />
     <ProjectReference Include="..\Stories.Data\Stories.Data.csproj" />
     <ProjectReference Include="..\Stories.Domain\Stories.Domain.csproj" />
+    <ProjectReference Include="..\Stories.Utility\Stories.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class FriendRelationshipT : BaseEntity
+    public class FriendRelationshipEntity : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
         public Guid PersonId { get; set; }
         public string FullName { get; set; }
-        [ForeignKey("PersonT")]
+        [ForeignKey("PersonEntity")]
         public Guid FriendPersonId { get; set; }
         public string FriendFullName { get; set; }
         public DateTime FriendshipDateTime { get; set; }

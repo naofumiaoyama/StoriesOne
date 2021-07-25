@@ -14,10 +14,10 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<PictureT>pictureRepository = new GenericRepository<PictureT>(context);
-                PictureT picture1 = new PictureT();
+                GenericRepository<PictureEntity>pictureRepository = new GenericRepository<PictureEntity>(context);
+                PictureEntity picture1 = new PictureEntity();
                 picture1.Id = Guid.Parse("CF2FD49A-A7CB-4523-8BED-C09B896026EF");
-                picture1.PictureType = PictureType.UserProfile;
+                picture1.PictureOwnerType = PictureOwnerType.Person;
                 picture1.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 picture1.CreateDate = DateTime.Now;
                 picture1.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
@@ -26,9 +26,9 @@ namespace Stories.Data.InitialData
                 
                 await pictureRepository.Add(picture1);
 
-                PictureT picture2 = new PictureT();
+                PictureEntity picture2 = new PictureEntity();
                 picture2.Id = Guid.Parse("5006E057-4682-4EA6-BA61-C1FF7A63492C");
-                picture2.PictureType = PictureType.UserProfile;
+                picture2.PictureOwnerType = PictureOwnerType.Person;
                 picture2.Url = "https://scontent-nrt1-1.xx.fbcdn.net/v/t1.6435-9/197204748_101752262154035_1080203619806412059_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=8bfeb9&_nc_ohc=WW_QOkcT8R4AX8Cqqpn&_nc_ht=scontent-nrt1-1.xx&oh=c0a48e1a5efcef78cf7324428711d047&oe=60DBD398";
 
                 await pictureRepository.Add(picture2);      
@@ -39,7 +39,7 @@ namespace Stories.Data.InitialData
 
             using (var context = new DatabaseContext())
             {
-                GenericRepository<PictureT> pictureRepository = new GenericRepository<PictureT>(context);
+                GenericRepository<PictureEntity> pictureRepository = new GenericRepository<PictureEntity>(context);
                 var picture1 = pictureRepository.Get(Guid.Parse("CF2FD49A-A7CB-4523-8BED-C09B896026EF")).Result;
                 if (picture1 != null) { await pictureRepository.Remove(picture1); }
 

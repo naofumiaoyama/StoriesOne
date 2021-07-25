@@ -18,10 +18,10 @@ namespace Stories.Test.Stories.Data.Repositories
         {
             using(var context = new DatabaseContext())
             {
-                GenericRepository<TimelineT>timelineRepository = new GenericRepository<TimelineT>(context);
+                GenericRepository<TimelineEntity>timelineRepository = new GenericRepository<TimelineEntity>(context);
                 //adding
-                TimelineT timeline = new TimelineT();
-                timeline.PersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
+                TimelineEntity timeline = new TimelineEntity();
+                timeline.OwnerPersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
                 timeline.TimelineName = "Jenalyn Albios";
                 timeline.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 timeline.CreateDate = DateTime.Now;
@@ -31,19 +31,19 @@ namespace Stories.Test.Stories.Data.Repositories
     
 
                 //getting
-                var getTimeline = await  timelineRepository.Get(timeline.PersonId);                
-                Assert.AreEqual(getTimeline.PersonId, getTimeline.PersonId);
+                var getTimeline = await  timelineRepository.Get(timeline.Id);                
+                Assert.AreEqual(getTimeline.OwnerPersonId, getTimeline.OwnerPersonId);
                 Assert.AreEqual(getTimeline.TimelineName, getTimeline.TimelineName);
 
                 //Updating           
                 timeline.TimelineName = "Jenalyn Albios";
                 await timelineRepository.Update(timeline);
-                var updateTimeline = await timelineRepository.Get(timeline.PersonId);
+                var updateTimeline = await timelineRepository.Get(timeline.Id);
                 Assert.AreEqual(updateTimeline.TimelineName, timeline.TimelineName);
 
                 //Removing
                 await timelineRepository.Remove(timeline);
-                var resulttimeline = timelineRepository.Get(timeline.PersonId).Result;
+                var resulttimeline = timelineRepository.Get(timeline.Id).Result;
                 Assert.AreEqual(resulttimeline, null);
             }
         }

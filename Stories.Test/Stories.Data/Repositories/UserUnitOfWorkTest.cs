@@ -30,7 +30,7 @@ namespace Stories.Test.Stories.Data.Repositories
 
             using (var context = new DatabaseContext())
             {
-                GenericRepository<PersonT> personRepository = new GenericRepository<PersonT>(context);
+                GenericRepository<PersonEntity> personRepository = new GenericRepository<PersonEntity>(context);
                 var person = await personRepository.Get(user.Id);
 
                 Assert.AreEqual(user.Id, person.Id);

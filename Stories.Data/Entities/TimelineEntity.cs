@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace Stories.Data.Entities
 {
-   public class TimelineT : BaseEntity
+    public class TimelineEntity : BaseEntity
     {
         [Key]
-        [ForeignKey("PersonT")]
-        public Guid PersonId { get; set; }
+        public Guid Id { get; set; }
+        [ForeignKey("PersonEntity")]
+        public Guid OwnerPersonId { get; set; }
         public string TimelineName { get; set; }
-        public ICollection<PostT> Posts { get; set; }
+        public ICollection<PostEntity> Posts { get; set; }
     }
 }

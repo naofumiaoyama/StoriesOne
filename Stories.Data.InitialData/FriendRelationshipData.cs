@@ -14,8 +14,8 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<FriendRelationshipT>friendRelationshipRepository = new GenericRepository<FriendRelationshipT>(context);
-                FriendRelationshipT friendRelationship = new FriendRelationshipT();
+                GenericRepository<FriendRelationshipEntity>friendRelationshipRepository = new GenericRepository<FriendRelationshipEntity>(context);
+                FriendRelationshipEntity friendRelationship = new FriendRelationshipEntity();
                 friendRelationship.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 friendRelationship.FullName = "Naofumi Aoyama";
                 friendRelationship.FriendPersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
@@ -27,7 +27,7 @@ namespace Stories.Data.InitialData
                 friendRelationship.UpdateDate = DateTime.Now;
                 await friendRelationshipRepository.Add(friendRelationship);
 
-                FriendRelationshipT friendRelationship2 = new FriendRelationshipT();
+                FriendRelationshipEntity friendRelationship2 = new FriendRelationshipEntity();
                 friendRelationship2.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 friendRelationship2.FullName = "Shigeyoshi Aoyama";
                 friendRelationship2.FriendPersonId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
@@ -43,7 +43,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<FriendRelationshipT> friendRelationshipRepository = new GenericRepository<FriendRelationshipT>(context);
+                GenericRepository<FriendRelationshipEntity> friendRelationshipRepository = new GenericRepository<FriendRelationshipEntity>(context);
                 var friendRelationship1 = friendRelationshipRepository.Get(Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F")).Result;
                 if (friendRelationship1 != null) { await friendRelationshipRepository.Remove(friendRelationship1); }
 

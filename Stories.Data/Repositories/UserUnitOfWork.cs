@@ -14,27 +14,32 @@ namespace Stories.Data.Repositories
 
         public async Task CreateUser(User user)
         {
-            var userConfig = new MapperConfiguration(cfg => cfg.CreateMap<User, PersonT>());
-            var userInfoConfig = new MapperConfiguration(cfg => cfg.CreateMap<PersonalInfo, PersonalInfoT>());
+            var userConfig = new MapperConfiguration(cfg => cfg.CreateMap<User, PersonEntity>());
+            var userInfoConfig = new MapperConfiguration(cfg => cfg.CreateMap<PersonalInfo, PersonalInfoEntity>());
             
-            GenericRepository<PersonT> personRepository = 
-                new GenericRepository<PersonT>(new DatabaseContext());
-            GenericRepository<PersonalInfoT> personInfoRepository = 
-                new GenericRepository<PersonalInfoT>(new DatabaseContext());
+            GenericRepository<PersonEntity> personRepository = 
+                new GenericRepository<PersonEntity>(new DatabaseContext());
+            GenericRepository<PersonalInfoEntity> personInfoRepository = 
+                new GenericRepository<PersonalInfoEntity>(new DatabaseContext());
 
             var userMapper = new Mapper(userConfig);
             var personInfoMapper = new Mapper(userInfoConfig);
 
-            var personEntity = userMapper.Map<PersonT>(user);
-            var personInfoEntity = personInfoMapper.Map<PersonalInfoT>(user.PersonalInfo);
+            var personEntity = userMapper.Map<PersonEntity>(user);
+            var personInfoEntity = personInfoMapper.Map<PersonalInfoEntity>(user.PersonalInfo);
 
             personEntity.CreateDate = DateTime.Now;
             personEntity.CreateUserId = user.Id;
             personEntity.UpdateDate = DateTime.Now;
             personEntity.UpdateUserId = user.Id;
 
-            await personRepository.Add(personEntity);
+            personInfoEntity.CreateDate = DateTime.Now;
+            personInfoEntity.CreateUserId = user.Id;
+            personInfoEntity.UpdateDate = DateTime.Now;
+            personInfoEntity.UpdateUserId = user.Id;
 
+            await personRepository.Add(personEntity);
+            await personInfoRepository.Add(personInfoEntity);
         }
     }
 }

@@ -19,25 +19,25 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                GenericRepository<PictureT>pictureRespository = new GenericRepository<PictureT>(context);
-                PictureT picture = new PictureT();
+                GenericRepository<PictureEntity>pictureRespository = new GenericRepository<PictureEntity>(context);
+                PictureEntity picture = new PictureEntity();
                 picture.Id = Guid.NewGuid();
                 picture.Url = "http://www.photo.com";
-                picture.PictureType = PictureType.UserProfile;
+                picture.PictureOwnerType = PictureOwnerType.Person;
                 await pictureRespository.Add(picture);
 
                 //Getting
                 var getPhoto = await pictureRespository.Get(picture.Id);
 
                 Assert.AreEqual(getPhoto.Url, picture.Url);
-                Assert.AreEqual(getPhoto.PictureType, picture.PictureType);
+                Assert.AreEqual(getPhoto.PictureOwnerType, picture.PictureOwnerType);
 
                 //Updating
                 picture.Url = "http://www.stories.com";
                 await pictureRespository.Update(picture);
                 var updatePicture = await pictureRespository.Get(picture.Id);
                 Assert.AreEqual(updatePicture.Url, picture.Url);
-                Assert.AreEqual(updatePicture.PictureType, picture.PictureType);
+                Assert.AreEqual(updatePicture.PictureOwnerType, picture.PictureOwnerType);
 
                 ////Removing
                 await pictureRespository.Remove(picture);

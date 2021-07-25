@@ -19,7 +19,7 @@ namespace Stories.Domain.Model
         {
             if(LoginID != EmailAddress1)
             {
-                throw new ArgumentNullException("Login-ID and Email-Address do not match.");
+                throw new ArgumentNullException("LoginID and EmailAddress1 do not match.");
             }
             if (string.IsNullOrEmpty(LoginID))
             {

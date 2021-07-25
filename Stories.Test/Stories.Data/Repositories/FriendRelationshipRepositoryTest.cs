@@ -20,8 +20,8 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                GenericRepository<FriendRelationshipT> friendRelationshipRepository = new GenericRepository<FriendRelationshipT>(context);
-                FriendRelationshipT friendRelationship = new FriendRelationshipT();
+                GenericRepository<FriendRelationshipEntity> friendRelationshipRepository = new GenericRepository<FriendRelationshipEntity>(context);
+                FriendRelationshipEntity friendRelationship = new FriendRelationshipEntity();
                 friendRelationship.Id = Guid.Parse("2E4B133E-BEB5-44C6-9912-7A48CDECCC98");
                 friendRelationship.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 friendRelationship.FullName = "Naofumi Aoyama";

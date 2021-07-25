@@ -18,17 +18,17 @@ namespace Stories.Data
             optionsBuilder.UseSqlServer(DbConnectionString);
         }
 
-        public DbSet<AddressT> Addresses { get; set; }
-        public DbSet<CommentT> Comments { get; set; }
-        public DbSet<FriendRelationshipT> FriendRelationships { get; set; }
-        public DbSet<PersonT> People { get; set; }
-        public DbSet<PersonalInfoT> PersonalInfos { get; set; }      
-        public DbSet<PictureT> Pictures { get; set; }
-        public DbSet<PostT> Posts { get; set; }
-        public DbSet<ReactionMarkT> ReactionMarks { get; set;}
-        public DbSet<StoryT> Stories { get; set; }
-        public DbSet<TimelineT> Timelines { get; set; }
-        public DbSet<BodyT> Bodies { get; internal set; }
+        public DbSet<AddressEntity> Addresses { get; set; }
+        public DbSet<CommentEntity> Comments { get; set; }
+        public DbSet<FriendRelationshipEntity> FriendRelationships { get; set; }
+        public DbSet<PersonEntity> People { get; set; }
+        public DbSet<PersonalInfoEntity> PersonalInfos { get; set; }      
+        public DbSet<PictureEntity> Pictures { get; set; }
+        public DbSet<PostEntity> Posts { get; set; }
+        public DbSet<ReactionMarkEntity> ReactionMarks { get; set;}
+        public DbSet<StoryEntity> Stories { get; set; }
+        public DbSet<TimelineEntity> Timelines { get; set; }
+        public DbSet<BodyEntity> Bodies { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

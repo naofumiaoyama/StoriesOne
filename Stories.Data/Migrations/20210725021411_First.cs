@@ -52,6 +52,29 @@ namespace Stories.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "People",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PersonType = table.Column<int>(type: "int", nullable: false),
+                    DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SelfIntroduction = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LivingPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Occupation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_People", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PersonalInfos",
                 columns: table => new
                 {
@@ -77,6 +100,24 @@ namespace Stories.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Pictures",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PictureOwnerType = table.Column<int>(type: "int", nullable: false),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pictures", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ReactionMarks",
                 columns: table => new
                 {
@@ -99,7 +140,8 @@ namespace Stories.Data.Migrations
                 name: "Timelines",
                 columns: table => new
                 {
-                    PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OwnerPersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TimelineName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -108,93 +150,7 @@ namespace Stories.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Timelines", x => x.PersonId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Posts",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TimelineId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PostDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TimelineTPersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Posts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Posts_Timelines_TimelineTPersonId",
-                        column: x => x.TimelineTPersonId,
-                        principalTable: "Timelines",
-                        principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Pictures",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PictureType = table.Column<int>(type: "int", nullable: false),
-                    Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PostTId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pictures", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Pictures_Posts_PostTId",
-                        column: x => x.PostTId,
-                        principalTable: "Posts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "People",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PersonType = table.Column<int>(type: "int", nullable: false),
-                    DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SelfIntroduction = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LivingPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Occupation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProfilePictureId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    TimelinePersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_People", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_People_Pictures_ProfilePictureId",
-                        column: x => x.ProfilePictureId,
-                        principalTable: "Pictures",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_People_Timelines_TimelinePersonId",
-                        column: x => x.TimelinePersonId,
-                        principalTable: "Timelines",
-                        principalColumn: "PersonId",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Timelines", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -207,7 +163,7 @@ namespace Stories.Data.Migrations
                     FriendPersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FriendFullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FriendshipDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PersonTId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    PersonEntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -217,8 +173,8 @@ namespace Stories.Data.Migrations
                 {
                     table.PrimaryKey("PK_FriendRelationships", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FriendRelationships_People_PersonTId",
-                        column: x => x.PersonTId,
+                        name: "FK_FriendRelationships_People_PersonEntityId",
+                        column: x => x.PersonEntityId,
                         principalTable: "People",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -233,7 +189,7 @@ namespace Stories.Data.Migrations
                     AuthorName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Summary = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PersonTId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    PersonEntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -243,9 +199,34 @@ namespace Stories.Data.Migrations
                 {
                     table.PrimaryKey("PK_Stories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Stories_People_PersonTId",
-                        column: x => x.PersonTId,
+                        name: "FK_Stories_People_PersonEntityId",
+                        column: x => x.PersonEntityId,
                         principalTable: "People",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Posts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TimelineId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PostDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TimelineEntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Posts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Posts_Timelines_TimelineEntityId",
+                        column: x => x.TimelineEntityId,
+                        principalTable: "Timelines",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -258,7 +239,7 @@ namespace Stories.Data.Migrations
                     StoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ChapterNumber = table.Column<int>(type: "int", nullable: false),
                     BodyContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StoryTId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    StoryEntityId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -268,47 +249,32 @@ namespace Stories.Data.Migrations
                 {
                     table.PrimaryKey("PK_Bodies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bodies_Stories_StoryTId",
-                        column: x => x.StoryTId,
+                        name: "FK_Bodies_Stories_StoryEntityId",
+                        column: x => x.StoryEntityId,
                         principalTable: "Stories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bodies_StoryTId",
+                name: "IX_Bodies_StoryEntityId",
                 table: "Bodies",
-                column: "StoryTId");
+                column: "StoryEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FriendRelationships_PersonTId",
+                name: "IX_FriendRelationships_PersonEntityId",
                 table: "FriendRelationships",
-                column: "PersonTId");
+                column: "PersonEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_People_ProfilePictureId",
-                table: "People",
-                column: "ProfilePictureId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_People_TimelinePersonId",
-                table: "People",
-                column: "TimelinePersonId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Pictures_PostTId",
-                table: "Pictures",
-                column: "PostTId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Posts_TimelineTPersonId",
+                name: "IX_Posts_TimelineEntityId",
                 table: "Posts",
-                column: "TimelineTPersonId");
+                column: "TimelineEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Stories_PersonTId",
+                name: "IX_Stories_PersonEntityId",
                 table: "Stories",
-                column: "PersonTId");
+                column: "PersonEntityId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -329,22 +295,22 @@ namespace Stories.Data.Migrations
                 name: "PersonalInfos");
 
             migrationBuilder.DropTable(
-                name: "ReactionMarks");
-
-            migrationBuilder.DropTable(
-                name: "Stories");
-
-            migrationBuilder.DropTable(
-                name: "People");
-
-            migrationBuilder.DropTable(
                 name: "Pictures");
 
             migrationBuilder.DropTable(
                 name: "Posts");
 
             migrationBuilder.DropTable(
+                name: "ReactionMarks");
+
+            migrationBuilder.DropTable(
+                name: "Stories");
+
+            migrationBuilder.DropTable(
                 name: "Timelines");
+
+            migrationBuilder.DropTable(
+                name: "People");
         }
     }
 }

@@ -15,8 +15,8 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<ReactionMarkT> reactionMarkRepository = new GenericRepository<ReactionMarkT>(context);
-                ReactionMarkT reactionMark = new ReactionMarkT();
+                GenericRepository<ReactionMarkEntity> reactionMarkRepository = new GenericRepository<ReactionMarkEntity>(context);
+                ReactionMarkEntity reactionMark = new ReactionMarkEntity();
                 reactionMark.Id = Guid.Parse("42697A78-A3B6-4C49-AA5A-9A0F7F9B6405");
                 reactionMark.Url = "http://www.shortstories.com";
                 reactionMark.Name = "helloworld";
@@ -27,7 +27,7 @@ namespace Stories.Data.InitialData
                 await reactionMarkRepository.Add(reactionMark);
 
 
-                ReactionMarkT reactionMark2 = new ReactionMarkT();
+                ReactionMarkEntity reactionMark2 = new ReactionMarkEntity();
                 reactionMark2.Id = Guid.Parse("529099F0-B652-4CBF-AE9B-27E842B37B0D");
                 reactionMark2.Url = "http://www.short.net";
                 reactionMark2.Name = "Hello";
@@ -43,7 +43,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<ReactionMarkT> reactionMarkRepository = new GenericRepository<ReactionMarkT>(context);
+                GenericRepository<ReactionMarkEntity> reactionMarkRepository = new GenericRepository<ReactionMarkEntity>(context);
                 var reactionMark1 = reactionMarkRepository.Get(Guid.Parse("42697A78-A3B6-4C49-AA5A-9A0F7F9B6405")).Result;
                 if (reactionMark1 != null) { await reactionMarkRepository.Remove(reactionMark1); }
 

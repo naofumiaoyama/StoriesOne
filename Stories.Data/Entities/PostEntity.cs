@@ -5,16 +5,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class PostT : BaseEntity
+    public class PostEntity : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
-        [ForeignKey("TimelineT")]
+        [ForeignKey("TimelineEntity")]
         public Guid TimelineId { get; set; }
         public string Title { get; set; }
         public DateTime PostDateTime { get; set; }
 
-        public ICollection<PictureT> Pictures { get; set; }
     }
 }    
 
