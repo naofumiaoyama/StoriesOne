@@ -28,6 +28,9 @@ namespace Stories.Data.Repositories
             var personEntity = userMapper.Map<PersonEntity>(user);
             var personInfoEntity = personInfoMapper.Map<PersonalInfoEntity>(user.PersonalInfo);
 
+            // Set Encrypted Password
+            personInfoEntity.Password = user.PersonalInfo.EncryptedPassword;
+
             personEntity.CreateDate = DateTime.Now;
             personEntity.CreateUserId = user.Id;
             personEntity.UpdateDate = DateTime.Now;

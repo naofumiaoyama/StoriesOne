@@ -29,8 +29,18 @@ namespace Stories.Data.Queries
                              "Select fl.FriendPersonId From FriendRelationships fl " +
                              "Where CAST(fl.PersonId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier))";
                 
-                var friends = await connection.QueryAsync<User>(query);
-                
+
+                var friends = connection.Query(query).Select(row =>
+                new User((Guid)row.Id, (string)row.FirstName, (string)row.LastName, (PersonType)row.PersonType)
+                {
+                    MiddleName = row.MiddleName,
+                    DisplayName = row.DisplayName,
+                    SelfIntroction = row.SelfIntroction,
+                    LivingPlace = row.LivingPlace,
+                    Occupation = row.Occupation
+                });
+                await connection.CloseAsync();
+
                 await connection.CloseAsync();
 
                 return friends.ToDictionary(f => f.Id); ;

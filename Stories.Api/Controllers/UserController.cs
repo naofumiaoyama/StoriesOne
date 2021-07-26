@@ -56,7 +56,7 @@ namespace Stories.Api.Controllers
                 return BadRequest();
             }
 
-            var resultUser = new User();
+            //var resultUser = new User();
             //var resultUser = await _context.User.FindAsync(guid);
             //if (resultUser == null)
             //{
@@ -91,7 +91,7 @@ namespace Stories.Api.Controllers
 
             //_context.TodoItems.Remove(User);
             //await _context.SaveChangesAsync();
-            var resultUser = new User();
+            //var resultUser = new User();
 
 
             return NoContent();

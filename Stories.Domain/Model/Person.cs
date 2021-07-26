@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Stories.Domain.Model
 {
-    public class Person
+    public abstract class Person
     {
-        public Guid Id{ get; set; }
+       
+        public Guid Id{ get;  set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }

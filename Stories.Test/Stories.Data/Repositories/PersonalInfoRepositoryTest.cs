@@ -26,7 +26,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 personalInfo.LoginId = "chisumiAoyama@gmail.com";
                 personalInfo.Password = "abcde";
                 personalInfo.MobileNumber = "09011223344";
-                personalInfo.Sex = Sex.Female;
+                personalInfo.Sex = SexEnum.Female;
                 personalInfo.Birthdate = new DateTime(1995, 3, 27);
                 personalInfo.EmailAddress1 = "Aoyama@gmail.com";
                 personalInfo.EmailAddress2 = "Aoyama2@gmail.com";
@@ -47,7 +47,7 @@ namespace Stories.Test.Stories.Data.Repositories
 
                 //Updating
                 personalInfo.MobileNumber = "09091068083";
-                personalInfo.Sex = Sex.Male;
+                personalInfo.Sex = SexEnum.Male;
                 personalInfo.Birthdate = new DateTime(1971, 7, 28);
                 personalInfo.EmailAddress1 = "chisumi.aoyama@gmail.com";
                 personalInfo.EmailAddress2 = "chisumi2@gmail.com";

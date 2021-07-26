@@ -28,11 +28,19 @@ namespace Stories.Data.Queries
                 var query = @"Select pe.* from People pe " +
                             "Where CAST(pe.Id as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
 
-                var user = await connection.QueryAsync<User>(query);
-                
+                var user = connection.Query(query).Select(row =>
+                new User((Guid)row.Id, (string)row.FirstName, (string)row.LastName, (PersonType)row.PersonType)
+                {
+                    MiddleName = row.MiddleName,
+                    DisplayName = row.DisplayName,
+                    SelfIntroction = row.SelfIntroction,
+                    LivingPlace = row.LivingPlace,
+                    Occupation = row.Occupation
+                }).FirstOrDefault();
+
                 await connection.CloseAsync();
                 
-                return user.FirstOrDefault();
+                return user;
 
             }
         }
