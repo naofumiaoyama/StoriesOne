@@ -13,7 +13,7 @@ namespace Stories.Data.Entities
         [ForeignKey("PersonEntity")]
         public Guid PersonId { get; set; }
         public string LoginId { get; set; }
-        public string Password { get; set; }
+        public string EncryptedPassword { get; set; }
         public string MobileNumber { get; set; }
         public SexEnum Sex { get; set; }
         public DateTime Birthdate { get; set; }

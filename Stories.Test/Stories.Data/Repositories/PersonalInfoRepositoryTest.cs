@@ -24,7 +24,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 personalInfo.Id = Guid.Parse("69da8943-2dbf-4c2b-842d-b328c704be29");
                 personalInfo.PersonId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
                 personalInfo.LoginId = "chisumiAoyama@gmail.com";
-                personalInfo.Password = "abcde";
+                personalInfo.EncryptedPassword = "Dm10taQ/oG8bPpJtKFFOOA==";
                 personalInfo.MobileNumber = "09011223344";
                 personalInfo.Sex = SexEnum.Female;
                 personalInfo.Birthdate = new DateTime(1995, 3, 27);

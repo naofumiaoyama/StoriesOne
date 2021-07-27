@@ -28,12 +28,21 @@ namespace Stories.Data.Queries
                 var query = @"Select pi.* from PersonalInfos pi " +
                             "Where CAST(pi.Id as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
                 
-                var personalInfos = await connection.QueryAsync<PersonalInfo>(query);
-                
+                var personalInfo = connection.Query(query).Select(row =>
+                new PersonalInfo((Guid)row.Id, (string)row.LoginId, (string)row.EmailAddress1 )
+                {
+                    //Token = row.Token,
+                    EncryptedPassword = row.EncryptedPassword,
+                    MobileNumber = row.MobileNumber,
+                    Sex = (Sex)row.Sex,
+                    Birthdate = row.Birthdate,
+                    MaritalStatus = (MaritalStatus)row.MaritalStatus,
+                    EmailAddress2 = row.EmailAddress2,
+                }).FirstOrDefault();
+
                 await connection.CloseAsync();
                 
-                return personalInfos.FirstOrDefault();
-
+                return personalInfo;
             }
         }
     }

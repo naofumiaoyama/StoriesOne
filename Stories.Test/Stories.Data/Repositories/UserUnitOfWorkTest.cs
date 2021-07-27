@@ -13,7 +13,6 @@ namespace Stories.Test.Stories.Data.Repositories
     public class UserUnitOfWorkTest
     {
         [TestMethod]
-
         public async Task CreateUserTest()
         {
             UserUnitOfWork userUnitOfWork = new UserUnitOfWork();
@@ -26,19 +25,20 @@ namespace Stories.Test.Stories.Data.Repositories
             user.MiddleName = "MiddleName";
             user.DisplayName = "F.L";
             user.LivingPlace = "TokyoCity";
-            user.Occupation =
-                "Engineer";
+            user.Occupation = "Engineer";
 
-            PersonalInfo personalInfo = new PersonalInfo();
-            user.PersonalInfo = personalInfo;
-            personalInfo.Id = Guid.Parse("23BCE283-7D43-48ED-9F3E-319E0416DA89");
+           var personalInfo = new PersonalInfo(    
+               Guid.Parse("23BCE283-7D43-48ED-9F3E-319E0416DA89"),
+               "aoyama@gmail.com",
+               "aoyama@gmail.com"
+             );
+            personalInfo.Password = "password";
             personalInfo.Address = new Address();
             personalInfo.Birthdate = new DateTime(1971, 7, 28);
-            personalInfo.Password = "abcde";
-            personalInfo.EmailAddress1 = "aoyama@gmail.com";
             personalInfo.EmailAddress2 = "aoyama2@gmail.com";
             personalInfo.MobileNumber = "09011223344";
             personalInfo.Sex = Sex.Female;
+            user.PersonalInfo = personalInfo;
 
             await userUnitOfWork.CreateUser(user);
 
@@ -53,7 +53,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(user.PersonType.ToString(), person.PersonType.ToString());
                 Assert.AreEqual(user.FirstName, person.FirstName);
                 Assert.AreEqual(personalInfo.Id, personInfo.Id);
-                Assert.AreEqual("1l2y6OkawUI=", personalInfo.EncryptedPassword);
+                Assert.AreEqual("Dm10taQ/oG8bPpJtKFFOOA==", personalInfo.EncryptedPassword);
 
                 await personRepository.Remove(person);
                 await personalInfoRepository.Remove(personInfo);

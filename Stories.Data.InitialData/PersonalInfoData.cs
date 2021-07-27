@@ -19,7 +19,7 @@ namespace Stories.Data.InitialData
                 personalInfo.Id = Guid.Parse("872A275C-283E-4161-A9C8-08D94E9FFD43");
                 personalInfo.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 personalInfo.LoginId = "naofumi.aoyama@gmail.com";
-                personalInfo.Password = "password";
+                personalInfo.EncryptedPassword = "Dm10taQ/oG8bPpJtKFFOOA==";
                 personalInfo.MobileNumber = "09091068083";
                 personalInfo.Sex = SexEnum.Male;
                 personalInfo.Birthdate = new DateTime(1971, 7, 28);
@@ -37,7 +37,7 @@ namespace Stories.Data.InitialData
                 personalInfo2.Id = Guid.Parse("9EF5F588-BAB5-4E71-A9C9-08D94E9FFD43");
                 personalInfo2.PersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
                 personalInfo2.LoginId = "albiosjenalyn27@gmail.com";
-                personalInfo2.Password = "abcd";
+                personalInfo2.EncryptedPassword = "Dm10taQ/oG8bPpJtKFFOOA==";
                 personalInfo2.MobileNumber = "08035841995";
                 personalInfo2.Sex = SexEnum.Female;
                 personalInfo2.Birthdate = new DateTime(1995, 3, 27);

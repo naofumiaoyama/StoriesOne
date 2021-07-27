@@ -23,6 +23,7 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("The personType has not been defined.");
             }
+
             base.Id = id;
             base.FirstName = firstName;
             base.LastName = lastName;

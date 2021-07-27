@@ -29,7 +29,7 @@ namespace Stories.Data.Repositories
             var personInfoEntity = personInfoMapper.Map<PersonalInfoEntity>(user.PersonalInfo);
 
             // Set Encrypted Password
-            personInfoEntity.Password = user.PersonalInfo.EncryptedPassword;
+            personInfoEntity.EncryptedPassword = user.PersonalInfo.EncryptedPassword;
 
             personEntity.CreateDate = DateTime.Now;
             personEntity.CreateUserId = user.Id;

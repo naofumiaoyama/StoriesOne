@@ -17,9 +17,8 @@ namespace Stories.Test.Stories.Data.Queries
         {
             var query = new PersonalInfoQuery();
             var personalInfo = await query.Get(Guid.Parse("872A275C-283E-4161-A9C8-08D94E9FFD43"));
-            Assert.AreEqual(true, personalInfo.IsRequred());
             Assert.AreEqual(personalInfo.LoginID, "naofumi.aoyama@gmail.com");
-            Assert.AreEqual(personalInfo.Password, "password");
+            Assert.AreEqual(personalInfo.EncryptedPassword, "Dm10taQ/oG8bPpJtKFFOOA==");
             
         }
     }
