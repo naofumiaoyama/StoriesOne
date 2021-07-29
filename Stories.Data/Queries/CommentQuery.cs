@@ -1,24 +1,24 @@
-﻿using Stories.Domain.Model;
+﻿
+using Dapper;
 using Stories.Data.Queries.Interface;
+using Stories.Domain.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-using Dapper;
 
 namespace Stories.Data.Queries
 {
-    public class BodyQuery : IBodyQuery
+    public class CommentQuery : ICommentQuery
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="guid"></param>
         /// <returns></returns>
-
-        public async Task<IDictionary<Guid, Body>> Get(Guid guid)
+        public async Task<Comment> Get(Guid guid)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -26,15 +26,14 @@ namespace Stories.Data.Queries
                 connection.ConnectionString = DatabaseContext.DbConnectionString;
                 await connection.OpenAsync();
 
-                var query = "Select bs.* from Bodies bs " +
-                            "Where CAST(bs.StoryId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
+                var query = @"Select cs.* from Comments cs" +
+              " Where CAST(cs.CommentPersonId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
 
-                var bodies = await connection.QueryAsync<Body>(query);
+                var comment = await connection.QueryAsync<Comment>(query);
 
                 await connection.CloseAsync();
 
-                var dic = bodies.ToDictionary(b => b.Id);
-                return dic;
+                return comment.FirstOrDefault();
             }
         }
     }

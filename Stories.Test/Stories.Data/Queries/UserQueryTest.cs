@@ -9,7 +9,7 @@ using Stories.Data.Queries;
 namespace Stories.Test.Stories.Data.Queries
 {
     [TestClass]
-    public class UserQueryTest
+    public class AuthenticateApplicationTest
     {
         [TestMethod]
         public async Task GetTest()

@@ -20,14 +20,14 @@ namespace Stories.Api.Controllers
             _authenticateApplication = authenticateApplication;
         }
         [HttpPost]
-        public IActionResult Post(PersonalInfo personalInfo)
+        public IActionResult Post(string loginId, string encryptedPassword)
         {
-            var user = _authenticateApplication.Authenticate(personalInfo.LoginID, personalInfo.Password);
+            var personInfo = _authenticateApplication.Authenticate(loginId, encryptedPassword);
 
-            if (user == null)
-                return BadRequest(new { message = "Username or Password is incorrect" });
+            if (personInfo == null)
+                return BadRequest(new { message = "LoginID or Password is incorrect" });
 
-            return Ok(user);
+            return Ok(personInfo);
         }
     }
 }

@@ -18,16 +18,21 @@ namespace Stories.Application
     {
     
         private readonly AppSettings _appSettings;
+
+        public AuthenticateApplication()
+        {
+        }
+
         public AuthenticateApplication(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
         }
         
-        public PersonalInfo Authenticate(string loginId, string password)
+        public PersonalInfo Authenticate(string loginId, string encryptedpassword)
         {
 
             LoginQuery loginQuery = new LoginQuery();
-            var personalInfo = loginQuery.Get(loginId, password);
+            var personalInfo = loginQuery.Get(loginId, encryptedpassword);
             var personInfo = personalInfo.Result;
 
             //return null if  user is not found

@@ -18,7 +18,7 @@ namespace Stories.Data.Queries
         /// </summary>
         /// <param name="guid">People.Id</param>
         /// <returns></returns>
-        public async Task<PersonalInfo> Get(string loginId, string password)
+        public async Task<PersonalInfo> Get(string loginId, string encryptedPassword)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -27,13 +27,23 @@ namespace Stories.Data.Queries
                 await connection.OpenAsync();
 
                 var query = @"Select pi.* from PersonalInfos pi " +
-                             "Where LoginId = " + loginId + "And Password = " + password;
+                             "Where LoginId = '" + loginId + "' And EncryptedPassword = '" + encryptedPassword + "'";
 
-                var personalInfos = await connection.QueryAsync<PersonalInfo>(query);
+                var personalInfo = connection.Query(query).Select(row =>
+                new PersonalInfo((Guid)row.Id, (string)row.LoginId, (string)row.EmailAddress1)
+                {
+                    //Token = row.Token,
+                    EncryptedPassword = row.EncryptedPassword,
+                    MobileNumber = row.MobileNumber,
+                    Sex = (Sex)row.Sex,
+                    Birthdate = row.Birthdate,
+                    MaritalStatus = (MaritalStatus)row.MaritalStatus,
+                    EmailAddress2 = row.EmailAddress2,
+                }).FirstOrDefault();
 
                 await connection.CloseAsync();
 
-                return personalInfos.FirstOrDefault();
+                return personalInfo;
 
             }
         }

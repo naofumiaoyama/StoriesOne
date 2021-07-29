@@ -29,12 +29,12 @@ namespace Stories.Data.Queries
                             "Where CAST(ad.Id as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
                 
                 var address = await connection.QueryAsync<Address>(query);
-                
+
                 await connection.CloseAsync();
 
-                
                 return address.FirstOrDefault();
             }
+                
         }
     }
 }

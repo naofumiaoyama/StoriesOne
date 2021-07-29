@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Stories.Utility;
 
-namespace Stories.Test.Utility
+namespace Stories.Test.Stories.Utility
 {
     [TestClass]
     public class EncryptDecryptTest

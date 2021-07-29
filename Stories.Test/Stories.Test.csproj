@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Folder Include="Stories.Api\Controllers\" />
   </ItemGroup>
 
 </Project>
