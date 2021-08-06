@@ -7,6 +7,34 @@ namespace Stories.Data.InitialData
     {
         static async Task Main(string[] args)
         {
+            if(args[0] == "S" || args[0] == "s")
+            {
+                await InitialDataFromSource();
+            }
+            else if(args[0] == "E" || args[0] == "e")
+            {
+                 PutColumnInfoToExcelFromSQLServer();
+            }
+            else if(args[0] == "R" || args[0] == "r")
+            {
+                var bookName = Console.ReadLine();
+                await ReadExcelToSQLServerAsync(bookName);
+            }
+        }
+        static void PutColumnInfoToExcelFromSQLServer()
+        {
+            ExcelNPoi excelNPoi = new ExcelNPoi();
+            excelNPoi.PutColumnInfoFromSQLServer();
+
+        }
+
+        static async Task ReadExcelToSQLServerAsync(string bookName)
+        {
+            ExcelNPoi excelNPoi = new ExcelNPoi();
+            await excelNPoi.ReadExcelBookToSQLServerAsync(bookName);
+        }
+        static async Task InitialDataFromSource()
+        {
             PersonData personData = new PersonData();
             PersonalInfoData personalInfoData = new PersonalInfoData();
             PictureData pictureData = new PictureData();
@@ -23,7 +51,7 @@ namespace Stories.Data.InitialData
             await addressData.DeleteData();
             await personalInfoData.DeleteData();
             await pictureData.DeleteData();
-            await timelineData.DeleteData(); 
+            await timelineData.DeleteData();
             await commentData.DeleteData();
             await friendRelationshipData.DeleteData();
             await postData.DeleteData();

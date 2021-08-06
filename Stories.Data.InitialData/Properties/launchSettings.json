@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Stories.Data.InitialData": {
+      "commandName": "Project",
+      "commandLineArgs": "R"
+    }
+  }
+}
