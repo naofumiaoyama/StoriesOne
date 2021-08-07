@@ -51,7 +51,7 @@ namespace Stories.Data.InitialData
                 address2.UpdateDate = DateTime.Now;
                 await addressRepository.Add(address2);
 
-                AddressEntity address3 = new AddressEntity();
+                Address address3 = new Address();
                 address3.Id = Guid.Parse("7e4a36cb-4840-41f3-b14e-a283b5881621");
                 address3.CountryCode = "81";
                 address3.CountryName = "Japan";

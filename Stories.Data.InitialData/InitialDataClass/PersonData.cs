@@ -64,7 +64,7 @@ namespace Stories.Data.InitialData
 
                 await personRepository.Add(person3);
 
-                PersonEntity person4 = new PersonEntity();
+                Person person4 = new Person();
                 person4.Id = Guid.Parse("e62ae34a-840c-47d4-96a5-1dffdb5e61ce");
                 person4.PersonType = PersonType.User;
                 person4.FirstName = "Toya";
