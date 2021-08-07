@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Stories.Domain.Model
 {
-    public class User : Person
+    public class UserModel : PersonModel
     {
-        public User(Guid id, string firstName, string lastName, PersonType personType)
+        public UserModel(Guid id, string firstName, string lastName, PersonType personType)
         {
             if (Guid.Empty == id)
             {
@@ -31,14 +31,14 @@ namespace Stories.Domain.Model
         }
         public string DisplayName { get; set; }
         public string SelfIntroction { get; set; } 
-        public Timeline Timeline { get; set; }
+        public TimelineModel Timeline { get; set; }
         public string LivingPlace { get; set; }
         public string Occupation { get; set; }
-        public IDictionary<Guid, Story> Stories { get; set; }
+        public IDictionary<Guid, StoryModel> Stories { get; set; }
         
-        public IDictionary<Guid, User> Friends { get; set; }
+        public IDictionary<Guid, UserModel> Friends { get; set; }
 
-        public Picture ProfilePicture { get; set; }
+        public PictureModel ProfilePicture { get; set; }
 
     }
 }

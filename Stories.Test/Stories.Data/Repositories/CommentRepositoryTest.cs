@@ -19,8 +19,8 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                GenericRepository<CommentEntity>commentRepository = new GenericRepository<CommentEntity>(context);
-                CommentEntity comment= new CommentEntity();
+                GenericRepository<Comment>commentRepository = new GenericRepository<Comment>(context);
+                Comment comment= new Comment();
                 comment.Id = Guid.NewGuid();
                 comment.CommentText = "Abc";
                 comment.CommentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");

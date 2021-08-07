@@ -19,7 +19,7 @@ namespace Stories.Test.Stories.Data.Queries
             var query = new FriendQuery();
             var guid = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
             var friendGuid = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
-            Dictionary<Guid, User> friends = (Dictionary<Guid, User>) await query.Get(guid);
+            Dictionary<Guid, UserModel> friends = (Dictionary<Guid, UserModel>) await query.Get(guid);
             Assert.AreEqual(friends[friendGuid].FullName, "Jenalyn Aoyama");
         }
     }

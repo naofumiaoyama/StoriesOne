@@ -16,8 +16,8 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                GenericRepository<StoryEntity>storyRepository = new GenericRepository<StoryEntity>(context);
-                StoryEntity story = new StoryEntity();
+                GenericRepository<Story>storyRepository = new GenericRepository<Story>(context);
+                Story story = new Story();
                 story.Id = Guid.Parse("06afba69-53be-409c-bebd-ffadafb4524b");
                 story.Title = "Titanic";
                 story.AuthorPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");

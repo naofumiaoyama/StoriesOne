@@ -1,10 +1,10 @@
 ﻿using System;
 namespace Stories.Domain.Model
 {
-    public class Message
+    public class MessageModel
     {
         public string Title { get; set; }
-        public User User { get; set; }
+        public UserModel User { get; set; }
         public string Content { get; set; }
         
     }

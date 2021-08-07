@@ -9,11 +9,10 @@ using System.Threading.Tasks;
 
 namespace Stories.Data.Entities
 {
-    public class ReactionMarkEntity : BaseEntity
+    public class ReactionMark : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
-        [ForeignKey("PostEntity")]
         public Guid PostId { get; set; }
         public string Url { get; set; }
         public string Name { get; set; }

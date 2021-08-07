@@ -18,9 +18,9 @@ namespace Stories.Test.Stories.Data.Repositories
         {
             using(var context = new DatabaseContext())
             {
-                GenericRepository<TimelineEntity>timelineRepository = new GenericRepository<TimelineEntity>(context);
+                GenericRepository<Timeline>timelineRepository = new GenericRepository<Timeline>(context);
                 //adding
-                TimelineEntity timeline = new TimelineEntity();
+                Timeline timeline = new Timeline();
                 timeline.OwnerPersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
                 timeline.TimelineName = "Jenalyn Albios";
                 timeline.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");

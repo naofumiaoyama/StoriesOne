@@ -4,9 +4,9 @@ using Stories.Utility;
 
 namespace Stories.Domain.Model
 {
-    public class PersonalInfo
+    public class PersonalInfoModel
     {
-        public PersonalInfo(Guid id, string loginId, string emailAddress1)
+        public PersonalInfoModel(Guid id, string loginId, string emailAddress1)
         {
             if( Guid.Empty == id)
             {
@@ -54,7 +54,7 @@ namespace Stories.Domain.Model
       
         public string EmailAddress2 { get; set; }
      
-        public Address Address{ get; set; }
+        public AddressModel Address{ get; set; }
     }
 
     public enum Sex

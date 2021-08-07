@@ -18,7 +18,7 @@ namespace Stories.Data.Queries
         /// <param name="guid"></param>
         /// <returns></returns>
 
-        public async Task<IDictionary<Guid, Body>> Get(Guid guid)
+        public async Task<IDictionary<Guid, BodyModel>> Get(Guid guid)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -29,7 +29,7 @@ namespace Stories.Data.Queries
                 var query = "Select bs.* from Bodies bs " +
                             "Where CAST(bs.StoryId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
 
-                var bodies = await connection.QueryAsync<Body>(query);
+                var bodies = await connection.QueryAsync<BodyModel>(query);
 
                 await connection.CloseAsync();
 

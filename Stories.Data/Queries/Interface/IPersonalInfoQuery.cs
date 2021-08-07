@@ -9,6 +9,6 @@ namespace Stories.Data.Queries.Interface
 {
     public interface IPersonalInfoQuery
     {
-        Task<PersonalInfo> Get(Guid guid);
+        Task<PersonalInfoModel> Get(Guid guid);
     }
 }

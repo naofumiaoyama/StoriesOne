@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace Stories.Domain.Model
 {
-    public class Timeline
+    public class TimelineModel
     {
         public Guid PersonId { get; set; }
         public string TimelineName { get; set; }
-        public IDictionary<Guid, Post> Posts { get; set; }
+        public IDictionary<Guid, PostModel> Posts { get; set; }
     }
 }

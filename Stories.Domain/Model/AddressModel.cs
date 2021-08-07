@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Stories.Domain.Model
 {
-    public class Address
+    public class AddressModel
     {
         public Guid Id { get; set; }
         public string CountryCode { get; set; }

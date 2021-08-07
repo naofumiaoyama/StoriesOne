@@ -83,18 +83,30 @@ namespace Stories.Data.InitialData
             // Read Data from the sheet
             var sheetPeople = storiesBook.GetSheet("People");
             var sheetAddress = storiesBook.GetSheet("Addresses");
+            var sheetTimeline = storiesBook.GetSheet("Timelines");
+            var sheetPost = storiesBook.GetSheet("Posts");
 
             using (var context = new DatabaseContext())
             {
-                GenericRepository<PersonEntity> personRepository = new GenericRepository<PersonEntity>(context);
+                GenericRepository<Person> personRepository = new GenericRepository<Person>(context);
                 var dicPeople = GetTableDictionary(sheetPeople);
                 var person = SetPersonEntity(dicPeople);
                 await personRepository.Add(person);
 
-                GenericRepository<AddressEntity> addressRepository = new GenericRepository<AddressEntity>(context);
+                GenericRepository<Entities.Address> addressRepository = new GenericRepository<Entities.Address>(context);
                 var dicAddress = GetTableDictionary(sheetAddress);
-                var address = SetAddressEntity(dicAddress);
+                var address = SetAddress(dicAddress);
                 await addressRepository.Add(address);
+
+                GenericRepository<Timeline> timelineRepository = new GenericRepository<Timeline>(context);
+                var dicTimelines = GetTableDictionary(sheetTimeline);
+                var timeline = SetTimeLineEntity(dicTimelines);
+                await timelineRepository.Add(timeline);
+
+                GenericRepository<Post> postRepository = new GenericRepository<Post>(context);
+                var dicPosts = GetTableDictionary(sheetPost);
+                var post = SetPostEntity(dicPosts);
+                await postRepository.Add(post);
             }
             
         }
@@ -106,11 +118,12 @@ namespace Stories.Data.InitialData
 
         private Dictionary<int, CellValueInfo> GetTableDictionary(ISheet sheet)
         {
-            Dictionary<int, CellValueInfo> dic = new Dictionary<int, CellValueInfo>();
+            Dictionary<int, CellValueInfo> dic = null;
             int lastRowNum = sheet.LastRowNum;
             // Get Data
-            for (int r = 1; r <= lastRowNum; r++)
+            for (int r = 1; r < lastRowNum; r++)
             {
+                dic = new Dictionary<int, CellValueInfo>();
                 var datarow = sheet.GetRow(r);
                 {
                     foreach (var cell in datarow.Cells)
@@ -156,9 +169,9 @@ namespace Stories.Data.InitialData
             return dic;
         }
         
-        private PersonEntity SetPersonEntity(Dictionary<int, CellValueInfo> dic)
+        private Person SetPersonEntity(Dictionary<int, CellValueInfo> dic)
         {
-            Data.Entities.PersonEntity person = new Entities.PersonEntity();
+            Data.Entities.Person person = new Entities.Person();
 
             person.Id = dic[0].GetGuidValue();
             person.FirstName = dic[1].GetStringValue();
@@ -177,9 +190,9 @@ namespace Stories.Data.InitialData
             return person;
         }
 
-        private AddressEntity SetAddressEntity(Dictionary<int,CellValueInfo> dic)
+        private Entities.Address SetAddress(Dictionary<int,CellValueInfo> dic)
         {
-            Data.Entities.AddressEntity address = new Entities.AddressEntity();
+            Data.Entities.Address address = new Entities.Address();
 
             address.Id = dic[0].GetGuidValue();
             address.CountryCode = dic[1].GetStringValue();
@@ -200,8 +213,38 @@ namespace Stories.Data.InitialData
             return address;
         }
 
+        private Timeline SetTimeLineEntity(Dictionary<int, CellValueInfo> dic)
+        {
+            Data.Entities.Timeline timeline = new Timeline();
 
+            timeline.Id = dic[0].GetGuidValue();
+            timeline.OwnerPersonId = dic[1].GetGuidValue();
+            timeline.TimelineName = dic[2].GetStringValue();
+            timeline.CreateUserId = dic[3].GetGuidValue();
+            timeline.CreateDate = (DateTime)dic[4].GetDateTimeValue();
+            timeline.UpdateUserId = dic[5].GetGuidValue();
+            timeline.UpdateDate = (DateTime)dic[6].GetDateTimeValue();
 
+            return timeline;     
+        }
+
+        private Post SetPostEntity(Dictionary<int, CellValueInfo> dic)
+        {
+            Data.Entities.Post post = new Post();
+
+            post.Id = dic[0].GetGuidValue();
+            post.TimelineId = dic[1].GetGuidValue();
+            post.Title = dic[2].GetStringValue();
+            post.PostDateTime = (DateTime)dic[3].GetDateTimeValue();
+            post.CreateUserId = dic[4].GetGuidValue();
+            post.CreateDate = (DateTime)dic[5].GetDateTimeValue();
+            post.UpdateUserId = dic[6].GetGuidValue();
+            post.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
+
+            return post;
+        }
+
+        
         public class CellValueInfo
         {
             public int ColumnIndex { get; set; }
@@ -288,7 +331,7 @@ namespace Stories.Data.InitialData
                     value = cell.BooleanCellValue.ToString();
                     break;
                 default:
-                    value = "Value無し";
+                    value = "Value";
                     break;
             }
             return value;
@@ -332,32 +375,30 @@ namespace Stories.Data.InitialData
 
   
     public class TableColumnField
-    {
-            public string TABLE_CATALOG { get; set; }
-            public string TABLE_SCHEMA { get; set; }
-            public string TABLE_NAME { get; set; }
-            public string COLUMN_NAME { get; set; }
-            public string ORDINAL_POSITION { get; set; }
-            public string COLUMN_DEFAULT { get; set; }
-            public string IS_NULLABLE { get; set; }
-            public string DATA_TYPE { get; set; }
-            public string CHARACTER_MAXIMUM_LENGTH { get; set; }
-            public string CHARACTER_OCTET_LENGTH { get; set; }
-            public string NUMERIC_PRECISION { get; set; }
-            public string NUMERIC_PRECISION_RADIX { get; set; }
-            public string NUMERIC_SCALE { get; set; }
-            public string DATETIME_PRECISION { get; set; }
-            public string CHARACTER_SET_CATALOG { get; set; }
-            public string CHARACTER_SET_SCHEMA { get; set; }
-            public string CHARACTER_SET_NAME { get; set; }
-            public string COLLATION_CATALOG { get; set; }
-            public string COLLATION_SCHEMA { get; set; }
-            public string COLLATION_NAME { get; set; }
-            public string DOMAIN_CATALOG { get; set; }
-            public string  DOMAIN_SCHEMA { get; set; }
-            public string  DOMAIN_NAME { get; set; }
-
-  
+{
+        public string TABLE_CATALOG { get; set; }
+        public string TABLE_SCHEMA { get; set; }
+        public string TABLE_NAME { get; set; }
+        public string COLUMN_NAME { get; set; }
+        public string ORDINAL_POSITION { get; set; }
+        public string COLUMN_DEFAULT { get; set; }
+        public string IS_NULLABLE { get; set; }
+        public string DATA_TYPE { get; set; }
+        public string CHARACTER_MAXIMUM_LENGTH { get; set; }
+        public string CHARACTER_OCTET_LENGTH { get; set; }
+        public string NUMERIC_PRECISION { get; set; }
+        public string NUMERIC_PRECISION_RADIX { get; set; }
+        public string NUMERIC_SCALE { get; set; }
+        public string DATETIME_PRECISION { get; set; }
+        public string CHARACTER_SET_CATALOG { get; set; }
+        public string CHARACTER_SET_SCHEMA { get; set; }
+        public string CHARACTER_SET_NAME { get; set; }
+        public string COLLATION_CATALOG { get; set; }
+        public string COLLATION_SCHEMA { get; set; }
+        public string COLLATION_NAME { get; set; }
+        public string DOMAIN_CATALOG { get; set; }
+        public string  DOMAIN_SCHEMA { get; set; }
+        public string  DOMAIN_NAME { get; set; }
     }
 
 }

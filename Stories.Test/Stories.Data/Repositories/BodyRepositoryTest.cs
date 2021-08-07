@@ -19,8 +19,8 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                GenericRepository<BodyEntity> bodyRepository = new GenericRepository<BodyEntity>(context);
-                BodyEntity body = new BodyEntity();
+                GenericRepository<Body> bodyRepository = new GenericRepository<Body>(context);
+                Body body = new Body();
                 body.Id = Guid.Parse("8fdc139c-0cf1-49f5-9e80-ec71f6c74864");
                 body.StoryId = Guid.Parse("D701ACBD-97D9-437B-A949-A4CF04A33521");
                 body.ChapterNumber = 1;

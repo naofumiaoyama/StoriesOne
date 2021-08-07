@@ -16,7 +16,7 @@ namespace Stories.Data.Queries
         /// </summary>
         /// <param name="guid">People.Id</param>
         /// <returns></returns>
-        public async Task<IDictionary<Guid, User>> Get(Guid guid)
+        public async Task<IDictionary<Guid, UserModel>> Get(Guid guid)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -31,7 +31,7 @@ namespace Stories.Data.Queries
                 
 
                 var friends = connection.Query(query).Select(row =>
-                new User((Guid)row.Id, (string)row.FirstName, (string)row.LastName, (PersonType)row.PersonType)
+                new UserModel((Guid)row.Id, (string)row.FirstName, (string)row.LastName, (PersonType)row.PersonType)
                 {
                     MiddleName = row.MiddleName,
                     DisplayName = row.DisplayName,

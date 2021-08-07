@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Stories.Data.Entities
 {
-    public class PictureEntity : BaseEntity
+    public class Story : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
-        public Guid OwnerId { get; set; }
-        public PictureOwnerType PictureOwnerType { get; set; }
-        public string Url { get; set; }
-    }
+        public Guid AuthorPersonId { get; set; }
+        public string AuthorName { get; set; }
+        public string Title { get; set; }
+        public string Summary { get; set; }
 
-    public enum PictureOwnerType
-    {
-        Person = 1,
-        Post = 2,
-        Story = 3
+        public ICollection<Body> Bodies { get; set; }
+
     }
 }

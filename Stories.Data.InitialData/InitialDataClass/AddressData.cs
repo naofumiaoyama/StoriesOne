@@ -14,8 +14,8 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<AddressEntity>addressRepository = new GenericRepository<AddressEntity>(context);
-                AddressEntity address = new AddressEntity();
+                GenericRepository<Address>addressRepository = new GenericRepository<Address>(context);
+                Address address = new Address();
                 address.Id = Guid.Parse("21eb3545-604e-42b4-9c7f-7057e55e2045");
                 address.CountryCode = "81";
                 address.CountryName = "Japan";
@@ -33,7 +33,7 @@ namespace Stories.Data.InitialData
                 address.UpdateDate = DateTime.Now;
                 await addressRepository.Add(address);
 
-                AddressEntity address2 = new AddressEntity();
+                Address address2 = new Address();
                 address2.Id = Guid.Parse("2B3CD24F-5802-4D74-BACD-5DE67A2B2FCB");
                 address2.CountryCode = "1";
                 address2.CountryName = "UnitedStates";
@@ -57,7 +57,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<AddressEntity> addressRepository = new GenericRepository<AddressEntity>(context);
+                GenericRepository<Address> addressRepository = new GenericRepository<Address>(context);
                 var address1 = addressRepository.Get(Guid.Parse("21eb3545-604e-42b4-9c7f-7057e55e2045")).Result;
                 if (address1 != null) { await addressRepository.Remove(address1); }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Stories.Domain.Model
 {
-    public class ReactionMark
+    public class ReactionMarkModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

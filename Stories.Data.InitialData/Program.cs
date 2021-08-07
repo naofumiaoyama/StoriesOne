@@ -17,7 +17,7 @@ namespace Stories.Data.InitialData
             }
             else if(args[0] == "R" || args[0] == "r")
             {
-                var bookName = Console.ReadLine();
+                var bookName = args[1];
                 await ReadExcelToSQLServerAsync(bookName);
             }
         }

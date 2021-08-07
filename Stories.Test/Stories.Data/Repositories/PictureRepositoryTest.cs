@@ -19,8 +19,8 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                GenericRepository<PictureEntity>pictureRespository = new GenericRepository<PictureEntity>(context);
-                PictureEntity picture = new PictureEntity();
+                GenericRepository<Picture>pictureRespository = new GenericRepository<Picture>(context);
+                Picture picture = new Picture();
                 picture.Id = Guid.NewGuid();
                 picture.Url = "http://www.photo.com";
                 picture.PictureOwnerType = PictureOwnerType.Person;

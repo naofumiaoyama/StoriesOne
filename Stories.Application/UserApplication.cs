@@ -17,7 +17,7 @@ namespace Stories.Application
             _friendQuery = new FriendQuery();
         }
 
-        public async Task<User> GetUserWithFriends(string id)
+        public async Task<UserModel> GetUserWithFriends(string id)
         {
             var user = await _userQuery.Get(Guid.Parse(id));
             var friends = await _friendQuery.Get(Guid.Parse(id));

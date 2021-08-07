@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Stories.Domain.Model
 {
-    public class SearchContents
+    public class SearchContentsModel
     {
         public string SearchWord { get; set; }
     }

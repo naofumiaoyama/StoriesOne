@@ -18,7 +18,7 @@ namespace Stories.Data.Queries
         /// </summary>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public async Task<Comment> Get(Guid guid)
+        public async Task<CommentModel> Get(Guid guid)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -29,7 +29,7 @@ namespace Stories.Data.Queries
                 var query = @"Select cs.* from Comments cs" +
               " Where CAST(cs.CommentPersonId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
 
-                var comment = await connection.QueryAsync<Comment>(query);
+                var comment = await connection.QueryAsync<CommentModel>(query);
 
                 await connection.CloseAsync();
 

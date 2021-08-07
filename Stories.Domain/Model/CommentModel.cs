@@ -1,11 +1,11 @@
 ﻿using System;
 namespace Stories.Domain.Model
 {
-    public class Comment
+    public class CommentModel
     {
         public Guid Id { get; set; }
         public string CommentText { get; set; }
-        public Person CommentUser { get; set; }
+        public PersonModel CommentUser { get; set; }
         public DateTime PostTime { get; set; }
     }
 }

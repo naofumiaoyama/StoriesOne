@@ -28,7 +28,7 @@ namespace Stories.Application
             _appSettings = appSettings.Value;
         }
         
-        public PersonalInfo Authenticate(string loginId, string encryptedpassword)
+        public PersonalInfoModel Authenticate(string loginId, string encryptedpassword)
         {
 
             LoginQuery loginQuery = new LoginQuery();

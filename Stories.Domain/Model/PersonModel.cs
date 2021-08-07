@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Stories.Domain.Model
 {
-    public abstract class Person
+    public abstract class PersonModel
     {
        
         public Guid Id{ get;  set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
-        public PersonalInfo PersonalInfo { get; set; }
+        public PersonalInfoModel PersonalInfo { get; set; }
         public PersonType PersonType { get; set; }
 
 

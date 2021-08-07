@@ -16,7 +16,7 @@ namespace Stories.Test.Stories.Data.Repositories
         public async Task CreateUserTest()
         {
             UserUnitOfWork userUnitOfWork = new UserUnitOfWork();
-            User user = new User(Guid.Parse("ABC5DFFF-0109-4FCF-9512-41FF73BD24E7"),
+            UserModel user = new UserModel(Guid.Parse("ABC5DFFF-0109-4FCF-9512-41FF73BD24E7"),
                                     "FirstName",
                                     "LastName",
                                     Domain.Model.PersonType.User
@@ -27,13 +27,13 @@ namespace Stories.Test.Stories.Data.Repositories
             user.LivingPlace = "TokyoCity";
             user.Occupation = "Engineer";
 
-           var personalInfo = new PersonalInfo(    
+           var personalInfo = new Domain.Model.PersonalInfoModel(
                Guid.Parse("23BCE283-7D43-48ED-9F3E-319E0416DA89"),
                "aoyama@gmail.com",
                "aoyama@gmail.com"
              );
             personalInfo.Password = "password";
-            personalInfo.Address = new Address();
+            personalInfo.Address = new AddressModel();
             personalInfo.Birthdate = new DateTime(1971, 7, 28);
             personalInfo.EmailAddress2 = "aoyama2@gmail.com";
             personalInfo.MobileNumber = "09011223344";
@@ -45,8 +45,8 @@ namespace Stories.Test.Stories.Data.Repositories
 
             using (var context = new DatabaseContext())
             {
-                GenericRepository<PersonEntity> personRepository = new GenericRepository<PersonEntity>(context);
-                GenericRepository<PersonalInfoEntity> personalInfoRepository = new GenericRepository<PersonalInfoEntity>(context);
+                GenericRepository<global::Stories.Data.Entities.Person> personRepository = new GenericRepository<global::Stories.Data.Entities.Person>(context);
+                GenericRepository<global::Stories.Data.Entities.PersonalInfo> personalInfoRepository = new GenericRepository<global::Stories.Data.Entities.PersonalInfo>(context);
                 var person = await personRepository.Get(user.Id);
                 var personInfo = await personalInfoRepository.Get(personalInfo.Id);
                 Assert.AreEqual(user.Id, person.Id);

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Stories.Domain.Model
 {
-    public class Body
+    public class BodyModel
     {
         public Guid Id { get; set; }
         public Guid StoryId { get; set; }

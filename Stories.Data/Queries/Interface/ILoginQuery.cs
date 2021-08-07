@@ -9,6 +9,6 @@ namespace Stories.Data.Queries.Interface
 {
     public interface ILoginQuery
     {
-        Task<PersonalInfo> Get(string loginId, string password);
+        Task<PersonalInfoModel> Get(string loginId, string password);
     }
 }
