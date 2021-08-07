@@ -50,6 +50,26 @@ namespace Stories.Data.InitialData
                 address2.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 address2.UpdateDate = DateTime.Now;
                 await addressRepository.Add(address2);
+
+                AddressEntity address3 = new AddressEntity();
+                address3.Id = Guid.Parse("7e4a36cb-4840-41f3-b14e-a283b5881621");
+                address3.CountryCode = "81";
+                address3.CountryName = "Japan";
+                address3.PrefectureCode = "13";
+                address3.PrefectureName = "TokyoPrefecture";
+                address3.StateCode = "1";
+                address3.StateName = "Tokyo";
+                address3.CityName = "ToshimaCity";
+                address3.TownName = "Toshima";
+                address3.Street = "Ikebukuro";
+                address3.Others = "etc";
+                address3.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                address3.CreateDate = DateTime.Now;
+                address3.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                address3.UpdateDate = DateTime.Now;
+                await addressRepository.Add(address3);
+
+
             }
         }
 
@@ -63,6 +83,9 @@ namespace Stories.Data.InitialData
 
                 var address2 = addressRepository.Get(Guid.Parse("2B3CD24F-5802-4D74-BACD-5DE67A2B2FCB")).Result;
                 if (address2 != null) { await addressRepository.Remove(address2); }
+
+                var address3 = addressRepository.Get(Guid.Parse("7e4a36cb-4840-41f3-b14e-a283b5881621")).Result;
+                if (address3 != null) { await addressRepository.Remove(address3); }
             }
         }
    }

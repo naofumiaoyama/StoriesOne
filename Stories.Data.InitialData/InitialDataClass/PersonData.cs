@@ -63,6 +63,23 @@ namespace Stories.Data.InitialData
                 person3.UpdateDate = DateTime.Now;
 
                 await personRepository.Add(person3);
+
+                PersonEntity person4 = new PersonEntity();
+                person4.Id = Guid.Parse("e62ae34a-840c-47d4-96a5-1dffdb5e61ce");
+                person4.PersonType = PersonType.User;
+                person4.FirstName = "Toya";
+                person4.MiddleName = "Pokemon";
+                person4.LastName = "Arai";
+                person4.DisplayName = "T.A";
+                person4.SelfIntroduction = "とーやの自己紹介";
+                person4.LivingPlace = "池袋";
+                person4.Occupation = "PublicOfficer";
+                person4.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                person4.CreateDate = DateTime.Now;
+                person4.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                person4.UpdateDate = DateTime.Now;
+
+                await personRepository.Add(person4);
             }
         }
 
@@ -79,6 +96,9 @@ namespace Stories.Data.InitialData
 
                 var person3 = personRepository.Get(Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C")).Result;
                 if (person3 != null) { await personRepository.Remove(person3); }
+
+                var person4 = personRepository.Get(Guid.Parse("e62ae34a-840c-47d4-96a5-1dffdb5e61ce")).Result;
+                if (person4 != null) { await personRepository.Remove(person4); }
 
             }
         }
