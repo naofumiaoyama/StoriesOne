@@ -13,7 +13,8 @@ namespace Stories.Data.InitialData
             }
             else if(args[0] == "E" || args[0] == "e")
             {
-                 PutColumnInfoToExcelFromSQLServer();
+                var bookName = args[1];
+                PutColumnInfoToExcelFromSQLServer(bookName);
             }
             else if(args[0] == "R" || args[0] == "r")
             {
@@ -21,11 +22,10 @@ namespace Stories.Data.InitialData
                 await ReadExcelToSQLServerAsync(bookName);
             }
         }
-        static void PutColumnInfoToExcelFromSQLServer()
+        static void PutColumnInfoToExcelFromSQLServer(string bookName)
         {
             ExcelNPoi excelNPoi = new ExcelNPoi();
-            excelNPoi.PutColumnInfoFromSQLServer();
-
+            excelNPoi.PutColumnInfoFromSQLServer(bookName);
         }
 
         static async Task ReadExcelToSQLServerAsync(string bookName)

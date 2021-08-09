@@ -10,25 +10,28 @@ using Dapper;
 using NPOI.HSSF.UserModel;
 using NPOI.XSSF.UserModel;
 using System.Reflection;
-using NPOI.SS.Formula.Functions;
 using System.Data;
 using Stories.Data.Repositories;
 using Stories.Data.Entities;
+using AutoMapper;
 
 namespace Stories.Data.InitialData
 {
     public class ExcelNPoi
     {
-
         List<TableColumnField> dataList = new List<TableColumnField>();
 
-        public void PutColumnInfoFromSQLServer()
+        public void PutColumnInfoFromSQLServer(string bookName)
         {
-            string filePath = @"../../../ExcelFiles/StoriesData-" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
+            string filePath = @"../../../ExcelFiles/" + bookName;
 
             try
             {
-                var book = CreateNewBook(filePath);
+                XSSFWorkbook storiesBook;
+                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    storiesBook = new XSSFWorkbook(fs);
+                }
 
                 DatabaseContext databaseContext = new DatabaseContext();
                 Type type = databaseContext.GetType();
@@ -37,12 +40,16 @@ namespace Stories.Data.InitialData
 
                 foreach (PropertyInfo p in tables)
                 {
-                    book.CreateSheet(p.Name);
+                    var sheet = storiesBook.GetSheet(p.Name);
+                    if( sheet == null)
+                    {
+                        storiesBook.CreateSheet(p.Name);
+                    }
                 }
                 foreach (PropertyInfo p in tables)
                 {
                     var tableColumnFields = GetTableColumnInfo(p.Name).Result;
-                    var sheet = book.GetSheet(p.Name);
+                    var sheet = storiesBook.GetSheet(p.Name);
                     int i = 0;
                     foreach (var field in tableColumnFields)
                     {
@@ -52,7 +59,7 @@ namespace Stories.Data.InitialData
                 }
                 using (var fs = new FileStream(filePath, FileMode.Create))
                 {
-                    book.Write(fs);
+                    storiesBook.Write(fs);
                 }
             }
             catch (Exception ex)
@@ -68,7 +75,7 @@ namespace Stories.Data.InitialData
 
             // Get All Sheets Name
             XSSFWorkbook storiesBook;
-            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 storiesBook = new XSSFWorkbook(fs);
 
@@ -85,45 +92,85 @@ namespace Stories.Data.InitialData
             var sheetAddress = storiesBook.GetSheet("Addresses");
             var sheetTimeline = storiesBook.GetSheet("Timelines");
             var sheetPost = storiesBook.GetSheet("Posts");
+            var sheetComment = storiesBook.GetSheet("Comments");
+            var sheetBody = storiesBook.GetSheet("Bodies");
 
             using (var context = new DatabaseContext())
             {
                 GenericRepository<Person> personRepository = new GenericRepository<Person>(context);
-                var dicPeople = GetTableDictionary(sheetPeople);
-                var person = SetPersonEntity(dicPeople);
-                await personRepository.Add(person);
+                var lstPeople = GetTableDictionary(sheetPeople);
+                foreach (var dicPeople in lstPeople)
+                {
+                    var person = SetPersonEntity(dicPeople);
+                    var getPerson = await personRepository.Get(person.Id);
+                    if(getPerson == null)
+                    {
+                        await personRepository.Add(person);
+                    }
+                    else
+                    {
+                        var userConfig = new MapperConfiguration(cfg => cfg.CreateMap<Person, Person>());
+                        var userMapper = new Mapper(userConfig);
+                        userMapper.Map<Person,Person>(person,getPerson);
+                        await personRepository.Update(getPerson);
+                    }   
+                }
+                
 
-                GenericRepository<Entities.Address> addressRepository = new GenericRepository<Entities.Address>(context);
-                var dicAddress = GetTableDictionary(sheetAddress);
-                var address = SetAddress(dicAddress);
-                await addressRepository.Add(address);
+                GenericRepository<Address> addressRepository = new GenericRepository<Address>(context);
+                var lstAddress = GetTableDictionary(sheetAddress);
+                foreach(var dicAddress in lstAddress)
+                {
+                    var address = SetAddress(dicAddress);
+                    await addressRepository.Add(address);
+                }
+               
 
                 GenericRepository<Timeline> timelineRepository = new GenericRepository<Timeline>(context);
-                var dicTimelines = GetTableDictionary(sheetTimeline);
-                var timeline = SetTimeLineEntity(dicTimelines);
-                await timelineRepository.Add(timeline);
+                var lstTimelines = GetTableDictionary(sheetTimeline);
+                foreach(var dicTimeline in lstTimelines)
+                {
+                    var timeline = SetTimeLineEntity(dicTimeline);
+                    await timelineRepository.Add(timeline);
+                }
+
 
                 GenericRepository<Post> postRepository = new GenericRepository<Post>(context);
-                var dicPosts = GetTableDictionary(sheetPost);
-                var post = SetPostEntity(dicPosts);
-                await postRepository.Add(post);
+                var lstPosts = GetTableDictionary(sheetPost);
+                foreach(var dicPost in lstPosts )
+                {
+                    var post = SetPostEntity(dicPost);
+                    await postRepository.Add(post);
+                }
+
+
+                GenericRepository<Comment> commentRepository = new GenericRepository<Comment>(context);
+                var lstComments = GetTableDictionary(sheetComment);
+                foreach(var dicComment in lstPosts)
+                {
+                    var comment = SetCommentEntity(dicComment);
+                    await commentRepository.Add(comment);
+                }
+
+                GenericRepository<Body> bodyRepository = new GenericRepository<Body>(context);
+                var lstBodies = GetTableDictionary(sheetBody);
+                 foreach(var dicbody in lstBodies)
+                {
+                    var body = SetBodyEntity(dicbody);
+                    await bodyRepository.Add(body);
+                }
             }
             
         }
 
-        
-
-        // Put Data to SQLServer by Repository
-
-
-        private Dictionary<int, CellValueInfo> GetTableDictionary(ISheet sheet)
+        private List<Dictionary<int, CellValueInfo>> GetTableDictionary(ISheet sheet)
         {
-            Dictionary<int, CellValueInfo> dic = null;
+            List<Dictionary<int, CellValueInfo>> lst = new List<Dictionary<int, CellValueInfo>>(); 
             int lastRowNum = sheet.LastRowNum;
             // Get Data
-            for (int r = 1; r < lastRowNum; r++)
+            for (int r = 1; r < lastRowNum+1; r++)
             {
-                dic = new Dictionary<int, CellValueInfo>();
+                Dictionary<int, CellValueInfo> dic = new Dictionary<int, CellValueInfo>();
                 var datarow = sheet.GetRow(r);
                 {
                     foreach (var cell in datarow.Cells)
@@ -156,8 +203,11 @@ namespace Stories.Data.InitialData
                         }
                     }
                 }
+
+                lst.Add(dic);
             }
-            return dic;
+
+            return lst;
         }
 
         private Dictionary<int, CellValueInfo> AddDataDic(Dictionary<int, CellValueInfo> dic, int columIndex, System.Type type, string value)
@@ -244,6 +294,38 @@ namespace Stories.Data.InitialData
             return post;
         }
 
+        private Comment SetCommentEntity(Dictionary<int, CellValueInfo> dic)
+        {
+            Data.Entities.Comment comment = new Comment();
+
+            comment.Id = dic[0].GetGuidValue();
+            comment.PostId = dic[1].GetGuidValue();
+            comment.CommentPersonId = dic[2].GetGuidValue();
+            comment.CommentText = dic[3].GetStringValue();
+            comment.PostTime = (DateTime)dic[4].GetDateTimeValue();
+            comment.CreateUserId = dic[4].GetGuidValue();
+            comment.CreateDate = (DateTime)dic[5].GetDateTimeValue();
+            comment.UpdateUserId = dic[6].GetGuidValue();
+            comment.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
+
+            return comment;
+        }
+
+        private Body SetBodyEntity(Dictionary<int, CellValueInfo> dic)
+        {
+            Data.Entities.Body body = new Body();
+
+            body.Id = dic[0].GetGuidValue();
+            body.StoryId = dic[1].GetGuidValue();
+            body.ChapterNumber = dic[2].GetIntValue();
+            body.BodyContent = dic[3].GetStringValue();
+            body.CreateUserId = dic[4].GetGuidValue();
+            body.CreateDate = (DateTime)dic[5].GetDateTimeValue();
+            body.UpdateUserId = dic[6].GetGuidValue();
+            body.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
+
+            return body;
+        }
         
         public class CellValueInfo
         {

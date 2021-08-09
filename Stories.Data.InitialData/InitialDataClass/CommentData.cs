@@ -17,6 +17,7 @@ namespace Stories.Data.InitialData
                 GenericRepository<Comment>commentRepository = new GenericRepository<Comment>(context);
                 Comment comment1 = new Comment();
                 comment1.Id = Guid.Parse("68AFFD37-1590-4EC9-9596-76A99F3AD892");
+                comment1.PostId = Guid.Parse("231A90BC-72E8-4A01-8967-73EE78E0D497");
                 comment1.CommentText = "Abc";
                 comment1.CommentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 comment1.PostTime = DateTime.Now;

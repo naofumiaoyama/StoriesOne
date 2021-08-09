@@ -2,7 +2,7 @@
   "profiles": {
     "Stories.Data.InitialData": {
       "commandName": "Project",
-      "commandLineArgs": "S"
+      "commandLineArgs": "R StoriesData.xlsx"
     }
   }
 }
