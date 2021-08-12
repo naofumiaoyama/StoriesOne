@@ -12,7 +12,8 @@ namespace Stories.Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        public Guid OwnerPersonId { get; set; }
+        [ForeignKey("Person")]
+        public Guid PersonId { get; set; }
         public string TimelineName { get; set; }
         public ICollection<Post> Posts { get; set; }
     }

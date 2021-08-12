@@ -94,6 +94,8 @@ namespace Stories.Data.InitialData
             var sheetPost = storiesBook.GetSheet("Posts");
             var sheetComment = storiesBook.GetSheet("Comments");
             var sheetBody = storiesBook.GetSheet("Bodies");
+            var sheetFriendRelationship = storiesBook.GetSheet("FriendRelationships");
+            var sheetStory = storiesBook.GetSheet("Stories");
 
             using (var context = new DatabaseContext())
             {
@@ -122,42 +124,136 @@ namespace Stories.Data.InitialData
                 foreach(var dicAddress in lstAddress)
                 {
                     var address = SetAddress(dicAddress);
-                    await addressRepository.Add(address);
-                }
-               
+                    var getAddress = await addressRepository.Get(address.Id);
+                    if (getAddress == null)
+                    {
+                        await addressRepository.Add(address);
+                    }
+                    else
+                    {
+                        var addressConfig = new MapperConfiguration(cfg => cfg.CreateMap<Address, Address>());
+                        var addressMapper = new Mapper(addressConfig);
+                        addressMapper.Map<Address, Address>(address, getAddress);
+                        await addressRepository.Update(getAddress);
+                    }
+                } 
 
                 GenericRepository<Timeline> timelineRepository = new GenericRepository<Timeline>(context);
-                var lstTimelines = GetTableDictionary(sheetTimeline);
-                foreach(var dicTimeline in lstTimelines)
+                var lstTimeline = GetTableDictionary(sheetTimeline);
+                foreach(var dicTimeline in lstTimeline)
                 {
-                    var timeline = SetTimeLineEntity(dicTimeline);
-                    await timelineRepository.Add(timeline);
+                    var timeline = SetTimeLine(dicTimeline);
+                  var getTimeline =  await timelineRepository.Get(timeline.Id);
+                    if (getTimeline == null)
+                    {
+                        await timelineRepository.Add(timeline);
+                    }
+                    else
+                    {
+                        var timelineConfig = new MapperConfiguration(cfg => cfg.CreateMap<Timeline, Timeline>());
+                        var timelineMapper = new Mapper(timelineConfig);
+                        timelineMapper.Map<Timeline, Timeline>(timeline, getTimeline);
+                        await timelineRepository.Update(getTimeline);
+                    }
                 }
 
 
                 GenericRepository<Post> postRepository = new GenericRepository<Post>(context);
-                var lstPosts = GetTableDictionary(sheetPost);
-                foreach(var dicPost in lstPosts )
+                var lstPost = GetTableDictionary(sheetPost);
+                foreach(var dicPost in lstPost )
                 {
                     var post = SetPostEntity(dicPost);
-                    await postRepository.Add(post);
+                   var getPost =  await postRepository.Get(post.Id);
+                    if (getPost == null)
+                    {
+                        
+                        await postRepository.Add(post);
+                    }
+                    else
+                    {
+                        var postConfig = new MapperConfiguration(cfg => cfg.CreateMap<Post, Post>());
+                        var postMapper = new Mapper(postConfig);
+                        postMapper.Map<Post, Post>(post, getPost);
+                        await postRepository.Update(getPost);
+                    }
                 }
 
 
                 GenericRepository<Comment> commentRepository = new GenericRepository<Comment>(context);
                 var lstComments = GetTableDictionary(sheetComment);
-                foreach(var dicComment in lstPosts)
+                foreach(var dicComment in lstComments)
                 {
                     var comment = SetCommentEntity(dicComment);
-                    await commentRepository.Add(comment);
+                   var getComment = await commentRepository.Get(comment.Id);
+                    if (getComment == null)
+                    {
+                        await commentRepository.Add(comment);
+                    }
+                    else
+                    {
+                        var commentConfig = new MapperConfiguration(cfg => cfg.CreateMap<Comment, Comment>());
+                        var commentMapper = new Mapper(commentConfig);
+                        commentMapper.Map<Comment, Comment>(comment, getComment);
+                        await commentRepository.Update(getComment);
+                    }
+                }
+
+                GenericRepository<Story> storyRepository = new GenericRepository<Story>(context);
+                var lstStories = GetTableDictionary(sheetStory);
+                foreach (var dicstory in lstStories)
+
+                {
+                    var story = SetStoryEntity(dicstory);
+                    var getStory = await storyRepository.Get(story.Id);
+                    if (getStory == null)
+                    {
+                        await storyRepository.Add(story);
+                    }
+                    else
+                    {
+                        var storyConfig = new MapperConfiguration(cfg => cfg.CreateMap<Story, Story>());
+                        var storyMapper = new Mapper(storyConfig);
+                        storyMapper.Map<Story, Story>(story, getStory);
+                        await storyRepository.Update(getStory);
+                    }
                 }
 
                 GenericRepository<Body> bodyRepository = new GenericRepository<Body>(context);
                 var lstBodies = GetTableDictionary(sheetBody);
-                 foreach(var dicbody in lstBodies)
+                foreach(var dicbody in lstBodies)
                 {
                     var body = SetBodyEntity(dicbody);
-                    await bodyRepository.Add(body);
+                    var getBody = await bodyRepository.Get(body.Id);
+                    if (getBody == null)
+                    {
+                        await bodyRepository.Add(body);
+                    }
+                    else
+                    {
+                        var bodyConfig = new MapperConfiguration(cfg => cfg.CreateMap<Body, Body>());
+                        var bodyMapper = new Mapper(bodyConfig);
+                        bodyMapper.Map<Body, Body>(body, getBody);
+                        await bodyRepository.Update(getBody);
+                    }
+                }
+
+                GenericRepository<FriendRelationship> friendRelationshipRepository = new GenericRepository<FriendRelationship>(context);
+                var lstFriendRelationships = GetTableDictionary(sheetFriendRelationship);
+                foreach(var dicfriendRelationship in lstFriendRelationships)
+                {
+                    var friendRelationship = SetFriendRelationashipEntity(dicfriendRelationship);
+                    var getFriendRelationship = await friendRelationshipRepository.Get(friendRelationship.Id);
+                    if(getFriendRelationship == null)
+                    {
+                        await friendRelationshipRepository.Add(friendRelationship);
+                    }
+                    else
+                    {
+                        var friendRelationshipConfig = new MapperConfiguration(cfg => cfg.CreateMap<FriendRelationship, FriendRelationship>());
+                        var friendRelationshipMapper = new Mapper(friendRelationshipConfig);
+                        friendRelationshipMapper.Map<FriendRelationship, FriendRelationship>(friendRelationship, getFriendRelationship);
+                        await friendRelationshipRepository.Update(getFriendRelationship);
+                    }
                 }
             }
             
@@ -263,12 +359,12 @@ namespace Stories.Data.InitialData
             return address;
         }
 
-        private Timeline SetTimeLineEntity(Dictionary<int, CellValueInfo> dic)
+        private Timeline SetTimeLine(Dictionary<int, CellValueInfo> dic)
         {
             Data.Entities.Timeline timeline = new Timeline();
 
             timeline.Id = dic[0].GetGuidValue();
-            timeline.OwnerPersonId = dic[1].GetGuidValue();
+            timeline.PersonId = dic[1].GetGuidValue();
             timeline.TimelineName = dic[2].GetStringValue();
             timeline.CreateUserId = dic[3].GetGuidValue();
             timeline.CreateDate = (DateTime)dic[4].GetDateTimeValue();
@@ -300,13 +396,12 @@ namespace Stories.Data.InitialData
 
             comment.Id = dic[0].GetGuidValue();
             comment.PostId = dic[1].GetGuidValue();
-            comment.CommentPersonId = dic[2].GetGuidValue();
             comment.CommentText = dic[3].GetStringValue();
             comment.PostTime = (DateTime)dic[4].GetDateTimeValue();
-            comment.CreateUserId = dic[4].GetGuidValue();
-            comment.CreateDate = (DateTime)dic[5].GetDateTimeValue();
-            comment.UpdateUserId = dic[6].GetGuidValue();
-            comment.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
+            comment.CreateUserId = dic[5].GetGuidValue();
+            comment.CreateDate = (DateTime)dic[6].GetDateTimeValue();
+            comment.UpdateUserId = dic[7].GetGuidValue();
+            comment.UpdateDate = (DateTime)dic[8].GetDateTimeValue();
 
             return comment;
         }
@@ -326,6 +421,43 @@ namespace Stories.Data.InitialData
 
             return body;
         }
+
+        private FriendRelationship SetFriendRelationashipEntity(Dictionary<int, CellValueInfo> dic)
+        {
+            Data.Entities.FriendRelationship friendRelationship = new FriendRelationship();
+
+            friendRelationship.Id = dic[0].GetGuidValue();
+            friendRelationship.PersonId = dic[1].GetGuidValue();
+            friendRelationship.FullName = dic[2].GetStringValue();
+            friendRelationship.FriendPersonId = dic[3].GetGuidValue();
+            friendRelationship.FriendFullName = dic[4].GetStringValue();
+            friendRelationship.FriendshipDateTime = (DateTime)dic[5].GetDateTimeValue();
+            friendRelationship.CreateUserId = dic[6].GetGuidValue();
+            friendRelationship.CreateDate = (DateTime)dic[7].GetDateTimeValue();
+            friendRelationship.UpdateUserId = dic[8].GetGuidValue();
+            friendRelationship.UpdateDate = (DateTime)dic[9].GetDateTimeValue();
+
+            return friendRelationship;
+        }
+
+        private Story SetStoryEntity(Dictionary<int, CellValueInfo> dic)
+        {
+            Data.Entities.Story story = new Story();
+
+            story.Id = dic[0].GetGuidValue();
+            story.PersonId = dic[1].GetGuidValue();
+            story.Title = dic[2].GetStringValue();
+            story.Summary = dic[3].GetStringValue();
+            story.CreateUserId = dic[4].GetGuidValue();
+            story.CreateDate = (DateTime)dic[5].GetDateTimeValue();
+            story.UpdateUserId = dic[6].GetGuidValue();
+            story.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
+
+            return story;
+        }
+       
+
+        
         
         public class CellValueInfo
         {

@@ -12,11 +12,10 @@ namespace Stories.Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        public Guid AuthorPersonId { get; set; }
-        public string AuthorName { get; set; }
+        [ForeignKey("Person")]
+        public Guid PersonId { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
-
         public ICollection<Body> Bodies { get; set; }
 
     }

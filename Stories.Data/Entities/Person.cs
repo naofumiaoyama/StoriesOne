@@ -18,11 +18,14 @@ namespace Stories.Data.Entities
         public string SelfIntroduction { get; set; }
         public string LivingPlace { get; set; }
         public string Occupation { get; set; }
+        
+        public PersonalInfo PersonalInfo { get; set; }
+
+        public Timeline Timeline { get; set; }
 
         public ICollection<FriendRelationship> FriendRelationships { get; set; }
 
         public ICollection<Story> Stories { get; set; }
-
 
     }
 

@@ -9,6 +9,7 @@ namespace Stories.Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
+        [ForeignKey("Person")]
         public Guid PersonId { get; set; }
         public string FullName { get; set; }
         public Guid FriendPersonId { get; set; }

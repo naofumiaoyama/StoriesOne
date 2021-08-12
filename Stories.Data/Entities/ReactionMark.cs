@@ -13,6 +13,7 @@ namespace Stories.Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
+        [ForeignKey("Post")]
         public Guid PostId { get; set; }
         public string Url { get; set; }
         public string Name { get; set; }

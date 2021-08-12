@@ -64,9 +64,9 @@ namespace Stories.Data.InitialData
             await personalInfoData.MakeData();
             await pictureData.MakeData();
             await timelineData.MakeData();
+            await postData.MakeData();
             await commentData.MakeData();
             await friendRelationshipData.MakeData();
-            await postData.MakeData();
             await storyData.MakeData();
             await reactionMarkData.MakeData();
             await bodyData.MakeData();

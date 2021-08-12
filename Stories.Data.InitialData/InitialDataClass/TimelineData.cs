@@ -18,7 +18,7 @@ namespace Stories.Data.InitialData
                 GenericRepository<Timeline>timelineRepository = new GenericRepository<Timeline>(context);
                 Timeline timeline = new Timeline();
                 timeline.Id = Guid.Parse("09604DDD-D01A-4307-BD5D-908594216904");
-                timeline.OwnerPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                timeline.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 timeline.TimelineName = "Naofumi Aoyama";
                 timeline.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 timeline.CreateDate = DateTime.Now;
@@ -28,7 +28,7 @@ namespace Stories.Data.InitialData
 
                 Timeline timeline2 = new Timeline();
                 timeline2.Id = Guid.Parse("C1F76AAB-C27C-42C0-9BDB-1DE9EC182B0B");
-                timeline2.OwnerPersonId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
+                timeline2.PersonId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
                 timeline2.TimelineName = "Chisumi Aoyama";
                 timeline2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 timeline2.CreateDate = DateTime.Now;
