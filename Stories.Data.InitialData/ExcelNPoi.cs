@@ -96,6 +96,7 @@ namespace Stories.Data.InitialData
             var sheetBody = storiesBook.GetSheet("Bodies");
             var sheetFriendRelationship = storiesBook.GetSheet("FriendRelationships");
             var sheetStory = storiesBook.GetSheet("Stories");
+            var sheetPersonalInfo = storiesBook.GetSheet("PersonalInfos");
 
             using (var context = new DatabaseContext())
             {
@@ -117,7 +118,25 @@ namespace Stories.Data.InitialData
                         await personRepository.Update(getPerson);
                     }   
                 }
-                
+
+                GenericRepository<PersonalInfo> personalInfoRepository = new GenericRepository<PersonalInfo>(context);
+                var lstPersonalInfos = GetTableDictionary(sheetPersonalInfo);
+                foreach (var dicPersonalInfos in lstPersonalInfos) 
+                {
+                    var personalInfo = SetPersonalInfoEntity(dicPersonalInfos);
+                    var getPersonalInfo = await personalInfoRepository.Get(personalInfo.Id);
+                    if (getPersonalInfo == null)
+                    {
+                        await personalInfoRepository.Add(personalInfo);
+                    }
+                    else
+                    {
+                        var personalInfoConfig = new MapperConfiguration(cfg => cfg.CreateMap<PersonalInfo, PersonalInfo>());
+                        var personalInfoMapper = new Mapper(personalInfoConfig);
+                        personalInfoMapper.Map<PersonalInfo, PersonalInfo>(personalInfo, getPersonalInfo);
+                        await personalInfoRepository.Update(getPersonalInfo);
+                    }
+                }
 
                 GenericRepository<Address> addressRepository = new GenericRepository<Address>(context);
                 var lstAddress = GetTableDictionary(sheetAddress);
@@ -454,6 +473,30 @@ namespace Stories.Data.InitialData
             story.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
 
             return story;
+        }
+
+        private PersonalInfo SetPersonalInfoEntity(Dictionary<int, CellValueInfo> dic)
+        
+        {
+            Data.Entities.PersonalInfo personalInfo = new PersonalInfo();
+
+            personalInfo.Id = dic[0].GetGuidValue();
+            personalInfo.PersonId = dic[1].GetGuidValue();
+            personalInfo.LoginId = dic[2].GetStringValue();
+            personalInfo.EncryptedPassword = dic[3].GetStringValue();
+            personalInfo.MobileNumber = dic[4].GetStringValue();
+            personalInfo.Sex = (SexEnum)dic[5].GetIntValue();
+            personalInfo.Birthdate = (DateTime)dic[6].GetDateTimeValue();
+            personalInfo.MaritalStatus = (MaritalStatusEnum)dic[7].GetIntValue();
+            personalInfo.EmailAddress1 = dic[8].GetStringValue();
+            personalInfo.EmailAddress2 = dic[9].GetStringValue();
+            personalInfo.AddressId = dic[10].GetGuidValue();
+            personalInfo.CreateUserId = dic[11].GetGuidValue();
+            personalInfo.CreateDate = (DateTime)dic[12].GetDateTimeValue();
+            personalInfo.UpdateUserId = dic[13].GetGuidValue();
+            personalInfo.UpdateDate = (DateTime)dic[14].GetDateTimeValue();
+
+            return personalInfo;
         }
        
 

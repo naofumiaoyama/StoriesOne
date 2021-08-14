@@ -27,20 +27,5 @@ namespace Stories.Utility
             return finalString;
         }
 
-        public static string Decrypt(string value)
-        {
-            string key = "St0r1es";
-            byte[] data = Convert.FromBase64String(value);
-            using (MD5CryptoServiceProvider mD5 = new MD5CryptoServiceProvider())
-            {
-                byte[] keys = mD5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
-                using (TripleDESCryptoServiceProvider tripDes = new TripleDESCryptoServiceProvider() { Key = keys, Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 })
-                {
-                    ICryptoTransform transform = tripDes.CreateDecryptor();
-                    byte[] results = transform.TransformFinalBlock(data, 0, data.Length);
-                    return UTF8Encoding.UTF8.GetString(results);
-                }
-            }
-        }
     }
 }

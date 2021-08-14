@@ -5,6 +5,7 @@ namespace Stories.Domain.Model
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string Url { get; set; }
         public ReactionMarkType ReactionMarkType { get; set; }
         public bool Clicked { get; set; }
     }
