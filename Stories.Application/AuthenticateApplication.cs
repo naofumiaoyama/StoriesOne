@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Stories.Domain.Model;
-using Stories.Utility;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -10,6 +8,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Stories.Data.Queries;
+using Stories.Domain.Model;
+using Stories.Utility;
 
 
 namespace Stories.Application
@@ -28,7 +28,7 @@ namespace Stories.Application
             _appSettings = appSettings.Value;
         }
         
-        public PersonalInfoModel Authenticate(string loginId, string encryptedpassword)
+        public PersonalInfo Authenticate(string loginId, string encryptedpassword)
         {
 
             LoginQuery loginQuery = new LoginQuery();

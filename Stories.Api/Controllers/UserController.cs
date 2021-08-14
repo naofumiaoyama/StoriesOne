@@ -22,11 +22,11 @@ namespace Stories.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<UserModel> GetUserWithFriendsAsync(string id)
+        public async Task<User> GetUserWithFriendsAsync(string id)
         {
             UserApplication userApplication = new UserApplication();
-            var user = await userApplication.GetUserWithFriends(id);
-            
+            await userApplication.GetUserWithFriends(id);
+
             return null;
         }
 
@@ -49,7 +49,7 @@ namespace Stories.Api.Controllers
         */
 
         [HttpPut("{id}")]
-        public IActionResult UpdateUser(Guid guid, UserModel newUser)
+        public IActionResult UpdateUser(Guid guid, User newUser)
         {
             if (guid != newUser.Id)
             {

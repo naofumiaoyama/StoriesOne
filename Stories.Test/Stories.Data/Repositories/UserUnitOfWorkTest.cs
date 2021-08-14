@@ -16,7 +16,8 @@ namespace Stories.Test.Stories.Data.Repositories
         public async Task CreateUserTest()
         {
             UserUnitOfWork userUnitOfWork = new UserUnitOfWork();
-            UserModel user = new UserModel(Guid.Parse("ABC5DFFF-0109-4FCF-9512-41FF73BD24E7"),
+            var personGuid = Guid.NewGuid();
+            User user = new User( personGuid,
                                     "FirstName",
                                     "LastName",
                                     Domain.Model.PersonType.User
@@ -27,13 +28,14 @@ namespace Stories.Test.Stories.Data.Repositories
             user.LivingPlace = "TokyoCity";
             user.Occupation = "Engineer";
 
-           var personalInfo = new Domain.Model.PersonalInfoModel(
-               Guid.Parse("23BCE283-7D43-48ED-9F3E-319E0416DA89"),
+           var personalInfo = new Domain.Model.PersonalInfo(
+               Guid.NewGuid(),
+               personGuid,
                "aoyama@gmail.com",
                "aoyama@gmail.com"
              );
             personalInfo.Password = "password";
-            personalInfo.Address = new AddressModel();
+            personalInfo.Address = new Domain.Model.Address(Guid.NewGuid(), Domain.Model.CountryCode.Japan, "埼玉県","所沢市");
             personalInfo.Birthdate = new DateTime(1971, 7, 28);
             personalInfo.EmailAddress2 = "aoyama2@gmail.com";
             personalInfo.MobileNumber = "09011223344";
@@ -53,10 +55,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(user.PersonType.ToString(), person.PersonType.ToString());
                 Assert.AreEqual(user.FirstName, person.FirstName);
                 Assert.AreEqual(personalInfo.Id, personInfo.Id);
-                Assert.AreEqual("Dm10taQ/oG8bPpJtKFFOOA==", personalInfo.EncryptedPassword);
+                Assert.AreEqual("+5C9YQ+5Fk2whnQRKic1+o2eao+8cy9O", personalInfo.EncryptedPassword);
 
                 await personRepository.Remove(person);
-                await personalInfoRepository.Remove(personInfo);
             }         
         }       
     }

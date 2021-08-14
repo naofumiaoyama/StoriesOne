@@ -17,7 +17,7 @@ namespace Stories.Data.Queries
         /// </summary>
         /// <param name="guid">People.Id</param>
         /// <returns></returns>
-        public async Task<PersonalInfoModel> Get(Guid guid)
+        public async Task<PersonalInfo> Get(Guid guid)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -29,9 +29,9 @@ namespace Stories.Data.Queries
                             "Where CAST(pi.Id as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
                 
                 var personalInfo = connection.Query(query).Select(row =>
-                new PersonalInfoModel((Guid)row.Id, (string)row.LoginId, (string)row.EmailAddress1 )
+                new PersonalInfo((Guid)row.Id, (Guid)row.PersonId, (string)row.LoginId, (string)row.EmailAddress1 )
                 {
-                    //Token = row.Token,
+                    Token = row.Token,
                     EncryptedPassword = row.EncryptedPassword,
                     MobileNumber = row.MobileNumber,
                     Sex = (Sex)row.Sex,

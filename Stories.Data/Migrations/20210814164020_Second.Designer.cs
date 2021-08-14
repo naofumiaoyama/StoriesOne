@@ -10,8 +10,8 @@ using Stories.Data;
 namespace Stories.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210812102927_Third")]
-    partial class Third
+    [Migration("20210814164020_Second")]
+    partial class Second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,8 +30,8 @@ namespace Stories.Data.Migrations
                     b.Property<string>("CityName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CountryCode")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CountryCode")
+                        .HasColumnType("int");
 
                     b.Property<string>("CountryName")
                         .HasColumnType("nvarchar(max)");
@@ -45,13 +45,10 @@ namespace Stories.Data.Migrations
                     b.Property<string>("Others")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PrefectureCode")
+                    b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PrefectureName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StateCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StateName")
@@ -106,6 +103,38 @@ namespace Stories.Data.Migrations
                     b.HasIndex("StoryId");
 
                     b.ToTable("Bodies");
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Character", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreateUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("StoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UpdateUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Characters");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Comment", b =>

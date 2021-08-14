@@ -9,6 +9,6 @@ namespace Stories.Data.Queries.Interface
 {
     public interface IUserQuery
     {
-        Task<UserModel> Get(Guid guid);
+        Task<User> Get(Guid guid);
     }
 }

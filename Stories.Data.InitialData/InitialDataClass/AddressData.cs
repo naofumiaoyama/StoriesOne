@@ -17,11 +17,10 @@ namespace Stories.Data.InitialData
                 GenericRepository<Address>addressRepository = new GenericRepository<Address>(context);
                 Address address = new Address();
                 address.Id = Guid.Parse("21eb3545-604e-42b4-9c7f-7057e55e2045");
-                address.CountryCode = "81";
+                address.PostalCode = "3451111";
+                address.CountryCode = CountryCode.Japan;
                 address.CountryName = "Japan";
-                address.PrefectureCode = "301";
                 address.PrefectureName = "SaitamaPrefecture";
-                address.StateCode = "23";
                 address.StateName = "Saitama";
                 address.CityName = "TorokorozawaCity";
                 address.TownName = "Tokorozawa";
@@ -35,11 +34,10 @@ namespace Stories.Data.InitialData
 
                 Address address2 = new Address();
                 address2.Id = Guid.Parse("2B3CD24F-5802-4D74-BACD-5DE67A2B2FCB");
-                address2.CountryCode = "1";
+                address2.PostalCode = "3441113";
+                address2.CountryCode = CountryCode.Japan;
                 address2.CountryName = "UnitedStates";
-                address2.PrefectureCode = "91";
                 address2.PrefectureName = "Havana";
-                address2.StateCode = "43";
                 address2.StateName = "SouthCarolina";
                 address2.CityName = "NewYork";
                 address2.TownName = "regatta";
@@ -53,11 +51,9 @@ namespace Stories.Data.InitialData
 
                 Address address3 = new Address();
                 address3.Id = Guid.Parse("7e4a36cb-4840-41f3-b14e-a283b5881621");
-                address3.CountryCode = "81";
+                address3.CountryCode = CountryCode.Japan;
                 address3.CountryName = "Japan";
-                address3.PrefectureCode = "13";
                 address3.PrefectureName = "TokyoPrefecture";
-                address3.StateCode = "1";
                 address3.StateName = "Tokyo";
                 address3.CityName = "ToshimaCity";
                 address3.TownName = "Toshima";

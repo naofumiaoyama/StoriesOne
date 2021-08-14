@@ -12,6 +12,5 @@ namespace Stories.Data.Entities
         public Guid StoryId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-
     }
 }

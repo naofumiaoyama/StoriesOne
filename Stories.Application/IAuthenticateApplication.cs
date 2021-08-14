@@ -9,6 +9,6 @@ namespace Stories.Application
 {
    public interface IAuthenticateApplication
     {
-        PersonalInfoModel Authenticate(string userName, string password);
+        PersonalInfo Authenticate(string userName, string password);
     }
 }

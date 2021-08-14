@@ -19,8 +19,8 @@ namespace Stories.Test.Stories.Data.Repositories
                 GenericRepository<Story>storyRepository = new GenericRepository<Story>(context);
                 Story story = new Story();
                 story.Id = Guid.Parse("06afba69-53be-409c-bebd-ffadafb4524b");
+                story.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 story.Title = "Titanic";
-
                 story.Summary = "Start by a young couple meeting, falling in love and having a hard time being together";
                 story.CreateDate = new DateTime(2021- 3 - 27);
                 story.UpdateDate = DateTime.Today;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Stories.Domain.Model
 {
-    public class CharacterModel
+    public class Character
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

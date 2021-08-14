@@ -4,13 +4,17 @@ using Stories.Utility;
 
 namespace Stories.Domain.Model
 {
-    public class PersonalInfoModel
+    public class PersonalInfo
     {
-        public PersonalInfoModel(Guid id, string loginId, string emailAddress1)
+        public PersonalInfo(Guid id, Guid personId, string loginId, string emailAddress1)
         {
             if( Guid.Empty == id)
             {
                 throw new ArgumentException("id is a required field.");
+            }
+            if (Guid.Empty == personId)
+            {
+                throw new ArgumentException("personId is a required field.");
             }
             if (string.IsNullOrEmpty(loginId))
             {
@@ -23,13 +27,13 @@ namespace Stories.Domain.Model
             
             this.Id = id;
             this.LoginID = loginId;
+            this.PersonId = personId;
             this.EmailAddress1 = emailAddress1;
-           
         }
 
-        public Guid Id { get; private set; }
-        public string LoginID { get; private set; }
-
+        public Guid Id { get; set; }
+        public string LoginID { get; set; }
+        public Guid PersonId { get; set; }
         private string password;
         public string Password {
             get { return password; }
@@ -38,7 +42,7 @@ namespace Stories.Domain.Model
                 EncryptedPassword = EncryptDecrypt.Encrypt(value);
             }
         }
-        public string EmailAddress1 { get; private set; }
+        public string EmailAddress1 { get; set; }
 
         public string Token { get; set; }
 
@@ -54,7 +58,7 @@ namespace Stories.Domain.Model
       
         public string EmailAddress2 { get; set; }
      
-        public AddressModel Address{ get; set; }
+        public Address Address{ get; set; }
     }
 
     public enum Sex

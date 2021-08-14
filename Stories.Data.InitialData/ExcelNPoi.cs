@@ -97,6 +97,7 @@ namespace Stories.Data.InitialData
             var sheetFriendRelationship = storiesBook.GetSheet("FriendRelationships");
             var sheetStory = storiesBook.GetSheet("Stories");
             var sheetPersonalInfo = storiesBook.GetSheet("PersonalInfos");
+            var sheetReactionMark = storiesBook.GetSheet("ReactionMarks");
 
             using (var context = new DatabaseContext())
             {
@@ -157,7 +158,9 @@ namespace Stories.Data.InitialData
                     }
                 } 
 
-                GenericRepository<Timeline> timelineRepository = new GenericRepository<Timeline>(context);
+                
+                
+               GenericRepository<Timeline> timelineRepository = new GenericRepository<Timeline>(context);
                 var lstTimeline = GetTableDictionary(sheetTimeline);
                 foreach(var dicTimeline in lstTimeline)
                 {
@@ -274,6 +277,26 @@ namespace Stories.Data.InitialData
                         await friendRelationshipRepository.Update(getFriendRelationship);
                     }
                 }
+
+                GenericRepository<ReactionMark> reactionMarkRepository = new GenericRepository<ReactionMark>(context);
+                var lstReactionMarks = GetTableDictionary(sheetReactionMark);
+                foreach (var dicReactionMark in lstReactionMarks)
+                {
+                    var reactionMark = SetReactionMarkEntity(dicReactionMark);
+                    var getReactionMark = await reactionMarkRepository.Get(reactionMark.Id);
+                    if (getReactionMark == null)
+                    {
+                        await reactionMarkRepository.Add(reactionMark);
+                    }
+                    else
+                    {
+                        var reactionMarkConfig = new MapperConfiguration(cfg => cfg.CreateMap<ReactionMark, ReactionMark>());
+                        var reactionMarkMapper = new Mapper(reactionMarkConfig);
+                        reactionMarkMapper.Map<ReactionMark, ReactionMark>(reactionMark, getReactionMark);
+                        await reactionMarkRepository.Update(getReactionMark);
+                    }
+                }
+
             }
             
         }
@@ -360,11 +383,9 @@ namespace Stories.Data.InitialData
             Data.Entities.Address address = new Entities.Address();
 
             address.Id = dic[0].GetGuidValue();
-            address.CountryCode = dic[1].GetStringValue();
+            address.CountryCode = (CountryCode)dic[1].GetIntValue();
             address.CountryName = dic[2].GetStringValue();
-            address.PrefectureCode = dic[3].GetStringValue();
             address.PrefectureName = dic[4].GetStringValue();
-            address.StateCode = dic[5].GetStringValue();
             address.StateName = dic[6].GetStringValue();
             address.CityName = dic[7].GetStringValue();
             address.TownName = dic[8].GetStringValue();
@@ -498,10 +519,27 @@ namespace Stories.Data.InitialData
 
             return personalInfo;
         }
-       
 
-        
-        
+        private ReactionMark SetReactionMarkEntity(Dictionary<int, CellValueInfo> dic)
+        {
+            Data.Entities.ReactionMark reactionMark = new ReactionMark();
+
+            reactionMark.Id = dic[0].GetGuidValue();
+            reactionMark.PostId = dic[1].GetGuidValue();
+            reactionMark.Url = dic[2].GetStringValue();
+            reactionMark.Name = dic[3].GetStringValue();
+            reactionMark.Clicked = dic[4].GetBoolValue();
+            reactionMark.CreateUserId = dic[5].GetGuidValue();
+            reactionMark.CreateDate = (DateTime)dic[6].GetDateTimeValue();
+            reactionMark.UpdateUserId = dic[7].GetGuidValue();
+            reactionMark.UpdateDate = (DateTime)dic[8].GetDateTimeValue();
+
+            return reactionMark;
+        }
+
+
+
+
         public class CellValueInfo
         {
             public int ColumnIndex { get; set; }
@@ -527,6 +565,11 @@ namespace Stories.Data.InitialData
             public DateTime GetDateTimeValue()
             {
                 return Convert.ToDateTime(Value);
+            }
+
+            public bool GetBoolValue()
+            {
+                return Convert.ToBoolean(Value);
             }
         }
 

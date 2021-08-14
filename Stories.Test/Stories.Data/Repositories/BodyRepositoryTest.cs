@@ -46,9 +46,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(updatebody.BodyContent, body.BodyContent);
 
                 //removing
-               // await bodyRepository.Remove(body);
-                //var resultbody = bodyRepository.Get(body.Id).Result;
-               // Assert.AreEqual(resultbody, null);
+                await bodyRepository.Remove(body);
+                var resultbody = bodyRepository.Get(body.Id).Result;
+                Assert.AreEqual(resultbody, null);
             }
         }
     }

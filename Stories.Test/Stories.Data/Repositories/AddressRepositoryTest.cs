@@ -25,11 +25,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 GenericRepository<Address> addressRepository = new GenericRepository<Address>(context);
                 Address address = new Address();
                 address.Id = Guid.Parse("52E91D81-D193-4BDC-911A-63C7F7CC099F");
-                address.CountryCode = "81";
+                address.CountryCode = CountryCode.Japan;
                 address.CountryName = "Japan";
-                address.PrefectureCode = "301";
                 address.PrefectureName = "SaitamaPrefecture";
-                address.StateCode = "23";
                 address.StateName = "Saitama";
                 address.CityName = "TorokorozawaCity";
                 address.TownName = "Tokorozawa";
@@ -43,9 +41,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(getAddress.Id, address.Id);
                 Assert.AreEqual(getAddress.CountryCode, address.CountryCode);
                 Assert.AreEqual(getAddress.CountryName, address.CountryName);
-                Assert.AreEqual(getAddress.PrefectureCode, address.PrefectureCode);
                 Assert.AreEqual(getAddress.PrefectureName, address.PrefectureName);
-                Assert.AreEqual(getAddress.StateCode, address.StateCode);
                 Assert.AreEqual(getAddress.StateName, address.StateName);
                 Assert.AreEqual(getAddress.CityName, address.CityName);
                 Assert.AreEqual(getAddress.TownName, address.TownName);
@@ -53,11 +49,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(getAddress.Others, address.Others);
 
                 //Updating
-                address.CountryCode = "1";
+                address.CountryCode = CountryCode.UnitedStates;
                 address.CountryName = "United States";
-                address.PrefectureCode = "91";
                 address.PrefectureName = "Havana";
-                address.StateCode = "43";
                 address.StateName = "SouthCarolina";
                 address.CityName = "NewYork";
                 address.TownName = "regatta";
@@ -67,9 +61,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 var updateaddress = await addressRepository.Get(address.Id);
                 Assert.AreEqual(updateaddress.CountryCode, address.CountryCode);
                 Assert.AreEqual(updateaddress.CountryName, address.CountryName);
-                Assert.AreEqual(updateaddress.PrefectureCode, address.PrefectureCode);
                 Assert.AreEqual(updateaddress.PrefectureName, address.PrefectureName);
-                Assert.AreEqual(updateaddress.StateCode, address.StateCode);
                 Assert.AreEqual(updateaddress.CityName, address.CityName);
                 Assert.AreEqual(updateaddress.TownName, address.TownName);
                 Assert.AreEqual(updateaddress.Street, address.Street);

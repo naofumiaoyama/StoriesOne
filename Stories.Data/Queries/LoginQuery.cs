@@ -18,7 +18,7 @@ namespace Stories.Data.Queries
         /// </summary>
         /// <param name="guid">People.Id</param>
         /// <returns></returns>
-        public async Task<PersonalInfoModel> Get(string loginId, string encryptedPassword)
+        public async Task<PersonalInfo> Get(string loginId, string encryptedPassword)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -30,7 +30,7 @@ namespace Stories.Data.Queries
                              "Where LoginId = '" + loginId + "' And EncryptedPassword = '" + encryptedPassword + "'";
 
                 var personalInfo = connection.Query(query).Select(row =>
-                new PersonalInfoModel((Guid)row.Id, (string)row.LoginId, (string)row.EmailAddress1)
+                new PersonalInfo((Guid)row.Id, (Guid)row.PersonId, (string)row.LoginId, (string)row.EmailAddress1)
                 {
                     //Token = row.Token,
                     EncryptedPassword = row.EncryptedPassword,

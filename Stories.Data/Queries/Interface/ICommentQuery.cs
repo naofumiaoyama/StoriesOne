@@ -9,6 +9,6 @@ namespace Stories.Data.Queries.Interface
 {
   public  interface ICommentQuery
     {
-        public Task<CommentModel> Get(Guid guid);
+        public Task<Comment> Get(Guid guid);
     }
 }
