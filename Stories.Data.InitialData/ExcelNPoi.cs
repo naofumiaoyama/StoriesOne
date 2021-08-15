@@ -98,6 +98,7 @@ namespace Stories.Data.InitialData
             var sheetStory = storiesBook.GetSheet("Stories");
             var sheetPersonalInfo = storiesBook.GetSheet("PersonalInfos");
             var sheetReactionMark = storiesBook.GetSheet("ReactionMarks");
+            var sheetPicture = storiesBook.GetSheet("Pictures");
 
             using (var context = new DatabaseContext())
             {
@@ -297,6 +298,25 @@ namespace Stories.Data.InitialData
                     }
                 }
 
+                GenericRepository<Picture> pictureRepository = new GenericRepository<Picture>(context);
+                var lstPictures = GetTableDictionary(sheetPicture);
+                foreach (var dicPicture in lstPictures)
+                {
+                    var picture = SetPictureEntity(dicPicture);
+                    var getPicture = await pictureRepository.Get(picture.Id);
+                    if (getPicture == null)
+                    {
+                        await pictureRepository.Add(picture);
+                    }
+                    else
+                    {
+                        var pictureConfig = new MapperConfiguration(cfg => cfg.CreateMap<Picture, Picture>());
+                        var pictureMapper = new Mapper(pictureConfig);
+                        pictureMapper.Map<Picture, Picture>(picture, getPicture);
+                        await pictureRepository.Update(getPicture);
+                    }
+                }
+
             }
             
         }
@@ -383,18 +403,19 @@ namespace Stories.Data.InitialData
             Data.Entities.Address address = new Entities.Address();
 
             address.Id = dic[0].GetGuidValue();
-            address.CountryCode = (CountryCode)dic[1].GetIntValue();
-            address.CountryName = dic[2].GetStringValue();
+            address.PostalCode = dic[1].GetStringValue();
+            address.CountryCode = (CountryCode)dic[2].GetIntValue();
+            address.CountryName = dic[3].GetStringValue();
             address.PrefectureName = dic[4].GetStringValue();
-            address.StateName = dic[6].GetStringValue();
-            address.CityName = dic[7].GetStringValue();
-            address.TownName = dic[8].GetStringValue();
-            address.Street = dic[9].GetStringValue();
-            address.Others = dic[10].GetStringValue();
-            address.CreateUserId = dic[11].GetGuidValue();
-            address.CreateDate = dic[12].GetDateTimeValue();
-            address.UpdateUserId = dic[13].GetGuidValue();
-            address.UpdateDate = dic[14].GetDateTimeValue();
+            address.StateName = dic[5].GetStringValue();
+            address.CityName = dic[6].GetStringValue();
+            address.TownName = dic[7].GetStringValue();
+            address.Street = dic[8].GetStringValue();
+            address.Others = dic[9].GetStringValue();
+            address.CreateUserId = dic[10].GetGuidValue();
+            address.CreateDate = dic[11].GetDateTimeValue();
+            address.UpdateUserId = dic[12].GetGuidValue();
+            address.UpdateDate = dic[13].GetDateTimeValue();
 
             return address;
         }
@@ -537,6 +558,21 @@ namespace Stories.Data.InitialData
             return reactionMark;
         }
 
+        private Picture SetPictureEntity(Dictionary<int, CellValueInfo> dic)
+        {
+            Data.Entities.Picture picture = new Picture();
+
+            picture.Id = dic[0].GetGuidValue();
+            picture.OwnerId = dic[1].GetGuidValue();
+            picture.PictureOwnerType = (PictureOwnerType)dic[2].GetIntValue();
+            picture.Url = dic[3].GetStringValue();
+            picture.CreateUserId = dic[4].GetGuidValue();
+            picture.CreateDate = (DateTime)dic[5].GetDateTimeValue();
+            picture.UpdateUserId = dic[6].GetGuidValue();
+            picture.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
+
+            return picture;
+        }
 
 
 
@@ -571,6 +607,8 @@ namespace Stories.Data.InitialData
             {
                 return Convert.ToBoolean(Value);
             }
+
+            
         }
 
         static IWorkbook CreateNewBook(string filePath)
