@@ -36,7 +36,19 @@ namespace Stories.Data.InitialData
                 comment2.UpdateDate = DateTime.Now;
                 comment2.PostTime = DateTime.Now;
 
-                await commentRepository.Add(comment2);      
+                await commentRepository.Add(comment2);
+
+                CommentEntity comment3 = new CommentEntity();
+                comment3.Id = Guid.Parse("a108c926-e915-45d3-8daa-63fca0ddf142");
+                comment3.CommentText = "Abc";
+                comment3.CommentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                comment3.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                comment3.CreateDate = DateTime.Now;
+                comment3.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                comment3.UpdateDate = DateTime.Now;
+                comment3.PostTime = DateTime.Now;
+
+                await commentRepository.Add(comment3);
             }
         }
         public async Task DeleteData()
@@ -50,6 +62,11 @@ namespace Stories.Data.InitialData
 
                 var comment2 = commentRepository.Get(Guid.Parse("9C886F4A-5BCE-4FEF-82AB-BF3BB922FACD")).Result;
                 if (comment2 != null) { await commentRepository.Remove(comment2); }
+
+                var comment3 = commentRepository.Get(Guid.Parse("a108c926-e915-45d3-8daa-63fca0ddf142")).Result;
+                if (comment3 != null) { await commentRepository.Remove(comment3); }
+
+
             }
         }
     }

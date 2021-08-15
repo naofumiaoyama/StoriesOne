@@ -36,6 +36,16 @@ namespace Stories.Data.InitialData
                 friendRelationship2.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 friendRelationship2.UpdateDate = DateTime.Now;
                 await friendRelationshipRepository.Add(friendRelationship2);
+
+                FriendRelationshipEntity friendRelationship3 = new FriendRelationshipEntity();
+                friendRelationship3.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                friendRelationship3.FullName = "Toya Arai";
+                friendRelationship3.FriendPersonId = Guid.Parse("35289062-e681-4ac5-ad9c-24700f967bfb");
+                friendRelationship3.FriendFullName = "Homare Sawa";
+                friendRelationship3.CreateDate = DateTime.Now;
+                friendRelationship3.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                friendRelationship3.UpdateDate = DateTime.Now;
+                await friendRelationshipRepository.Add(friendRelationship3);
             }
         }
 
@@ -49,6 +59,9 @@ namespace Stories.Data.InitialData
 
                 var friendRelationship2 = friendRelationshipRepository.Get(Guid.Parse("8241FD67-2A46-45A9-B64D-42D788B71A65")).Result;
                 if (friendRelationship2 != null) { await friendRelationshipRepository.Remove(friendRelationship2); }
+
+                var friendRelationship3 = friendRelationshipRepository.Get(Guid.Parse("35289062-e681-4ac5-ad9c-24700f967bfb")).Result;
+                if (friendRelationship3 != null) { await friendRelationshipRepository.Remove(friendRelationship3); }
             }
         }
     }
