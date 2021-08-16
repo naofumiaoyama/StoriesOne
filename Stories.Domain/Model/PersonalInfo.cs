@@ -32,8 +32,11 @@ namespace Stories.Domain.Model
         }
 
         public Guid Id { get; set; }
-        public string LoginID { get; set; }
+
         public Guid PersonId { get; set; }
+
+        public string LoginID { get; set; }
+
         private string password;
         public string Password {
             get { return password; }
@@ -42,20 +45,21 @@ namespace Stories.Domain.Model
                 EncryptedPassword = EncryptDecrypt.Encrypt(value);
             }
         }
-        public string EmailAddress1 { get; set; }
-
-        public string Token { get; set; }
 
         public string EncryptedPassword { get; set; }
 
         public string MobileNumber { get; set; }
+
+        public string Token { get; set; }
 
         public Sex Sex { get; set; }
         
         public DateTime Birthdate { get; set; }
         
         public MaritalStatus MaritalStatus { get; set; }
-      
+
+        public string EmailAddress1 { get; set; }
+
         public string EmailAddress2 { get; set; }
      
         public Address Address{ get; set; }
