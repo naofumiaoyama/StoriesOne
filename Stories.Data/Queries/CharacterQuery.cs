@@ -1,17 +1,16 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
 using Stories.Domain.Model;
 using Stories.Data.Queries.Interface;
+using System.Data.SqlClient;
 using Dapper;
 
 namespace Stories.Data.Queries
 {
-    public class BodyQuery : IBodyQuery
+    public class CharacterQuery : ICharacterQuery
     {
         /// <summary>
         /// 
@@ -19,7 +18,7 @@ namespace Stories.Data.Queries
         /// <param name="guid"></param>
         /// <returns></returns>
 
-        public async Task<IDictionary<Guid, Body>> Get(Guid guid)
+      public async Task<IDictionary<Guid, Character>> Get(Guid guid)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -27,15 +26,16 @@ namespace Stories.Data.Queries
                 connection.ConnectionString = DatabaseContext.DbConnectionString;
                 await connection.OpenAsync();
 
-                var query = "Select bs.* from Bodies bs " +
-                            "Where CAST(bs.StoryId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
+                var query = @"Select crs.* from Characters crs " +
+                             "Where CAST(crs.StoryId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
 
-                var bodies =  connection.QueryAsync(query).Result.Select(row =>
-                new Body((Guid)row.Id, (int)row.ChapterNumber, (string)row.BodyContent) { });
+                var characters = connection.QueryAsync(query).Result.Select(row =>
+                new Character((Guid)row.Id, (string)row.Name, (string)row.Description)
+                {
+                });
 
                 await connection.CloseAsync();
-
-                var dic = bodies.ToDictionary(b => b.Id);
+                var dic = characters.ToDictionary(f => f.Id);
                 return dic;
             }
         }

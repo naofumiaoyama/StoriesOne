@@ -99,10 +99,12 @@ namespace Stories.Data.InitialData
             var sheetPersonalInfo = storiesBook.GetSheet("PersonalInfos");
             var sheetReactionMark = storiesBook.GetSheet("ReactionMarks");
             var sheetPicture = storiesBook.GetSheet("Pictures");
+            var sheetCharacter = storiesBook.GetSheet("Characters");
 
             using (var context = new DatabaseContext())
             {
                 GenericRepository<Person> personRepository = new GenericRepository<Person>(context);
+                
                 var lstPeople = GetTableDictionary(sheetPeople);
                 foreach (var dicPeople in lstPeople)
                 {
@@ -317,6 +319,24 @@ namespace Stories.Data.InitialData
                     }
                 }
 
+                GenericRepository<Character> characterRepository = new GenericRepository<Character>(context);
+                var lstCharacters = GetTableDictionary(sheetCharacter);
+                foreach (var dicCharacter in lstCharacters)
+                {
+                    var character = SetCharacterEntity(dicCharacter);
+                    var getCharacter = await characterRepository.Get(character.Id);
+                    if (getCharacter == null)
+                    {
+                        await characterRepository.Add(character);
+                    }
+                    else
+                    {
+                        var characterConfig = new MapperConfiguration(cfg => cfg.CreateMap<Character, Character>());
+                        var characterMapper = new Mapper(characterConfig);
+                        characterMapper.Map<Character, Character>(character, getCharacter);
+                        await characterRepository.Update(getCharacter);
+                    }
+                }
             }
             
         }
@@ -574,6 +594,21 @@ namespace Stories.Data.InitialData
             return picture;
         }
 
+        private Character SetCharacterEntity(Dictionary<int, CellValueInfo> dic)
+        {
+            Data.Entities.Character character = new Character();
+
+            character.Id = dic[0].GetGuidValue();
+            character.StoryId = dic[1].GetGuidValue();
+            character.Name = dic[2].GetStringValue();
+            character.Description = dic[3].GetStringValue();
+            character.CreateUserId = dic[4].GetGuidValue();
+            character.CreateDate = (DateTime)dic[5].GetDateTimeValue();
+            character.UpdateUserId = dic[6].GetGuidValue();
+            character.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
+
+            return character;
+        }
 
 
         public class CellValueInfo
@@ -583,6 +618,9 @@ namespace Stories.Data.InitialData
 
             public Guid GetGuidValue()
             {
+
+
+
                 return Guid.Parse(Value);
             }
             public string GetStringValue()

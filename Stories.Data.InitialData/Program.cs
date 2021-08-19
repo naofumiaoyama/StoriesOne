@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stories.Data.InitialData.InitialDataClass;
+using System;
 using System.Threading.Tasks;
 
 namespace Stories.Data.InitialData
@@ -46,6 +47,7 @@ namespace Stories.Data.InitialData
             StoryData storyData = new StoryData();
             ReactionMarkData reactionMarkData = new ReactionMarkData();
             BodyData bodyData = new BodyData();
+            CharacterData characterData = new CharacterData();
 
             await personData.DeleteData();
             await addressData.DeleteData();
@@ -58,6 +60,8 @@ namespace Stories.Data.InitialData
             await storyData.DeleteData();
             await reactionMarkData.DeleteData();
             await bodyData.DeleteData();
+            await characterData.DeleteData();
+
 
             await personData.MakeData();
             await addressData.MakeData();
@@ -70,6 +74,7 @@ namespace Stories.Data.InitialData
             await storyData.MakeData();
             await reactionMarkData.MakeData();
             await bodyData.MakeData();
+            await characterData.MakeData();
         }
     }
 }

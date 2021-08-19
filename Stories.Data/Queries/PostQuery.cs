@@ -33,7 +33,6 @@ namespace Stories.Data.Queries
                 await connection.CloseAsync();
                 var dic = posts.ToDictionary(f => f.Id);
                 return dic;
-
             }
         }
     }

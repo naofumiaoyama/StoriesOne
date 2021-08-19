@@ -12,11 +12,10 @@ namespace Stories.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CountryCode = table.Column<int>(type: "int", nullable: false),
                     CountryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PrefectureCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PrefectureName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StateCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StateName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CityName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TownName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -29,7 +28,8 @@ namespace Stories.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                    table.PrimaryKey("PK_Addresses", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,7 +47,8 @@ namespace Stories.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Characters", x => x.Id);
+                    table.PrimaryKey("PK_Characters", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,7 +71,8 @@ namespace Stories.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_People", x => x.Id);
+                    table.PrimaryKey("PK_People", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                 });
 
             migrationBuilder.CreateTable(
@@ -88,7 +90,8 @@ namespace Stories.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pictures", x => x.Id);
+                    table.PrimaryKey("PK_Pictures", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                 });
 
             migrationBuilder.CreateTable(
@@ -108,7 +111,8 @@ namespace Stories.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FriendRelationships", x => x.Id);
+                    table.PrimaryKey("PK_FriendRelationships", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                     table.ForeignKey(
                         name: "FK_FriendRelationships_People_PersonId",
                         column: x => x.PersonId,
@@ -139,7 +143,8 @@ namespace Stories.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PersonalInfos", x => x.Id);
+                    table.PrimaryKey("PK_PersonalInfos", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                     table.ForeignKey(
                         name: "FK_PersonalInfos_People_PersonId",
                         column: x => x.PersonId,
@@ -163,7 +168,8 @@ namespace Stories.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stories", x => x.Id);
+                    table.PrimaryKey("PK_Stories", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                     table.ForeignKey(
                         name: "FK_Stories_People_PersonId",
                         column: x => x.PersonId,
@@ -186,7 +192,8 @@ namespace Stories.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Timelines", x => x.Id);
+                    table.PrimaryKey("PK_Timelines", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                     table.ForeignKey(
                         name: "FK_Timelines_People_PersonId",
                         column: x => x.PersonId,
@@ -210,7 +217,8 @@ namespace Stories.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bodies", x => x.Id);
+                    table.PrimaryKey("PK_Bodies", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                     table.ForeignKey(
                         name: "FK_Bodies_Stories_StoryId",
                         column: x => x.StoryId,
@@ -234,7 +242,8 @@ namespace Stories.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Posts", x => x.Id);
+                    table.PrimaryKey("PK_Posts", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                     table.ForeignKey(
                         name: "FK_Posts_Timelines_TimelineId",
                         column: x => x.TimelineId,
@@ -258,7 +267,8 @@ namespace Stories.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.PrimaryKey("PK_Comments", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                     table.ForeignKey(
                         name: "FK_Comments_Posts_PostId",
                         column: x => x.PostId,
@@ -283,7 +293,8 @@ namespace Stories.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ReactionMarks", x => x.Id);
+                    table.PrimaryKey("PK_ReactionMarks", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
                     table.ForeignKey(
                         name: "FK_ReactionMarks_Posts_PostId",
                         column: x => x.PostId,

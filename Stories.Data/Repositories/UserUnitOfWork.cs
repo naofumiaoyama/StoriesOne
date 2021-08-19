@@ -12,7 +12,7 @@ namespace Stories.Data.Repositories
         {
         }
 
-        public async Task CreateUser(User userModel)
+        public async Task CreateUser(User user)
         { 
             var userConfig = new MapperConfiguration(cfg => {
                 cfg.CreateMap<User, Entities.Person>();
@@ -26,17 +26,17 @@ namespace Stories.Data.Repositories
 
             var userMapper = new Mapper(userConfig);
             
-            var personEntity = userMapper.Map<Entities.Person>(userModel);
+            var personEntity = userMapper.Map<Entities.Person>(user);
             
             personEntity.CreateDate = DateTime.Now;
-            personEntity.CreateUserId = userModel.Id;
+            personEntity.CreateUserId = user.Id;
             personEntity.UpdateDate = DateTime.Now;
-            personEntity.UpdateUserId = userModel.Id;
+            personEntity.UpdateUserId = user.Id;
 
             personEntity.PersonalInfo.CreateDate = DateTime.Now;
-            personEntity.PersonalInfo.CreateUserId = userModel.Id;
+            personEntity.PersonalInfo.CreateUserId = user.Id;
             personEntity.PersonalInfo.UpdateDate = DateTime.Now;
-            personEntity.PersonalInfo.UpdateUserId = userModel.Id;
+            personEntity.PersonalInfo.UpdateUserId = user.Id;
 
             await personRepository.Add(personEntity);
         }

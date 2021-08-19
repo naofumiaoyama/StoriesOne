@@ -64,7 +64,8 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.ToTable("Addresses");
                 });
@@ -96,7 +97,8 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.HasIndex("StoryId");
 
@@ -130,7 +132,8 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.ToTable("Characters");
                 });
@@ -162,7 +165,8 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.HasIndex("PostId");
 
@@ -202,7 +206,8 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.HasIndex("PersonId");
 
@@ -251,7 +256,8 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.ToTable("People");
                 });
@@ -304,7 +310,8 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.HasIndex("PersonId")
                         .IsUnique();
@@ -339,7 +346,8 @@ namespace Stories.Data.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.ToTable("Pictures");
                 });
@@ -371,7 +379,8 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.HasIndex("TimelineId");
 
@@ -408,7 +417,8 @@ namespace Stories.Data.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.HasIndex("PostId");
 
@@ -442,7 +452,8 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.HasIndex("PersonId");
 
@@ -473,7 +484,8 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.HasIndex("PersonId")
                         .IsUnique();

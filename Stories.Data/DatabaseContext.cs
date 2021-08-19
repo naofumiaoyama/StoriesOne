@@ -10,9 +10,9 @@ namespace Stories.Data
         }
 
         //Win SQLServer Developer Edition
-        //public static string DbConnectionString = "server=localhost\\MSSQLSERVER01; database = Stories; integrated security = true";
+        public static string DbConnectionString = "server=localhost\\MSSQLSERVER01; database = Stories; integrated security = true";
         // Mac Docker
-        public static string DbConnectionString = "Data Source=localhost;database=Stories; User ID = sa; Password=reallyStrongPwd123;";
+        //public static string DbConnectionString = "Data Source=localhost;database=Stories; User ID = sa; Password=reallyStrongPwd123;";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(DbConnectionString);
@@ -33,7 +33,42 @@ namespace Stories.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
+            modelBuilder.Entity<Address>()
+                .HasKey(e => e.Id)
+                .IsClustered(false);
+            modelBuilder.Entity<Comment>()
+                .HasKey(e => e.Id)
+                .IsClustered(false);
+            modelBuilder.Entity<FriendRelationship>()
+                .HasKey(e => e.Id)
+                .IsClustered(false);
+            modelBuilder.Entity<Person>()
+                .HasKey(e => e.Id)
+                .IsClustered(false);
+            modelBuilder.Entity<PersonalInfo>()
+                .HasKey(e => e.Id)
+                .IsClustered(false);
+            modelBuilder.Entity<Picture>()
+                .HasKey(e => e.Id)
+                .IsClustered(false);
+            modelBuilder.Entity<Post>()
+                .HasKey(e => e.Id)
+                .IsClustered(false);
+            modelBuilder.Entity<ReactionMark>()
+                .HasKey(e => e.Id)
+                .IsClustered(false);
+            modelBuilder.Entity<Story>()
+                .HasKey(e => e.Id)
+                .IsClustered(false);
+            modelBuilder.Entity<Timeline>()
+                .HasKey(e => e.Id)
+                .IsClustered(false);
+            modelBuilder.Entity<Body>()
+                .HasKey(e => e.Id)
+                .IsClustered(false);
+            modelBuilder.Entity<Character>()
+                .HasKey(e => e.Id)
+                .IsClustered(false);
         }
     }
 }
