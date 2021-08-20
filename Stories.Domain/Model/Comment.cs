@@ -3,7 +3,7 @@ namespace Stories.Domain.Model
 {
     public class Comment
     {
-        public Comment(Guid id, string commentText, User commentUser, DateTime postTime)
+        public Comment(Guid id, string commentText, DateTime postTime)
         {
             if (Guid.Empty == id)
             {
@@ -13,10 +13,6 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("commentText is a required field.");
             }
-            if (commentUser == null)
-            {
-                throw new ArgumentException("commentUser can't be null ");
-            }
             if (postTime == DateTime.MinValue)
             {
                 throw new ArgumentException("postTime can't be minvalue");
@@ -24,12 +20,10 @@ namespace Stories.Domain.Model
 
             this.Id = id;
             this.CommentText = commentText;
-            this.CommentUser = commentUser;
             this.PostTime = postTime;
         }
         public Guid Id { get; private set; }
         public string CommentText { get; private set; }
-        public Person CommentUser { get; private set; }
         public DateTime PostTime { get; private set; }
     }
 }

@@ -15,9 +15,10 @@ namespace Stories.Test.Stories.Data.Queries
         public async Task GetTest()
         {
             var query = new CommentQuery();
-            var commentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-            var comments = await query.Get(commentPersonId);
-            Assert.AreEqual(comments.CommentText,"Abc");
+            var commentPostId = Guid.Parse("231A90BC-72E8-4A01-8967-73EE78E0D497");
+            var comments = await query.Get(commentPostId);
+            Assert.AreEqual(comments[Guid.Parse("68AFFD37-1590-4EC9-9596-76A99F3AD892")].CommentText, "Abc");
+            Assert.AreEqual(comments[Guid.Parse("9C886F4A-5BCE-4FEF-82AB-BF3BB922FACD")].CommentText, "def");
         }
     }
 }
