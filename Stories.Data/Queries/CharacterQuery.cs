@@ -13,12 +13,11 @@ namespace Stories.Data.Queries
     public class CharacterQuery : ICharacterQuery
     {
         /// <summary>
-        /// 
+        /// Getting Characters
         /// </summary>
         /// <param name="guid"></param>
         /// <returns></returns>
-
-      public async Task<IDictionary<Guid, Character>> Get(Guid guid)
+        public async Task<IDictionary<Guid, Character>> Get(Guid guid)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())

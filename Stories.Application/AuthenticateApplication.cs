@@ -55,8 +55,6 @@ namespace Stories.Application
             var token = tokenHandler.CreateToken(tokenDescriptor);
             personInfo.Token = tokenHandler.WriteToken(token);
 
-            personInfo.Password = null;
-
             return personInfo;
         }
     }

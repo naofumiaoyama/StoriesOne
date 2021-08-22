@@ -34,7 +34,7 @@ namespace Stories.Test.Stories.Data.Repositories
                "aoyama@gmail.com",
                "aoyama@gmail.com"
              );
-            personalInfo.Password = "password";
+            personalInfo.EncryptedPassword = "password";
             personalInfo.Address = new Domain.Model.Address(Guid.NewGuid(), Domain.Model.CountryCode.Japan, "埼玉県","所沢市");
             personalInfo.Birthdate = new DateTime(1971, 7, 28);
             personalInfo.EmailAddress2 = "aoyama2@gmail.com";

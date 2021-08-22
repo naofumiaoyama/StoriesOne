@@ -19,35 +19,35 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                GenericRepository<Body> bodyRepository = new GenericRepository<Body>(context);
-                Body body = new Body();
-                body.Id = Guid.Parse("8fdc139c-0cf1-49f5-9e80-ec71f6c74864");
-                body.StoryId = Guid.Parse("D701ACBD-97D9-437B-A949-A4CF04A33521");
-                body.ChapterNumber = 1;
-                body.BodyContent = "Story";
-                await bodyRepository.Add(body);
+                GenericRepository<Chapter> chapterRepository = new GenericRepository<Chapter>(context);
+                Chapter chapter = new Chapter();
+                chapter.Id = Guid.Parse("8fdc139c-0cf1-49f5-9e80-ec71f6c74864");
+                chapter.StoryId = Guid.Parse("D701ACBD-97D9-437B-A949-A4CF04A33521");
+                chapter.Number = 1;
+                chapter.Content = "Story";
+                await chapterRepository.Add(chapter);
 
                 //getting
-                var getBody = await bodyRepository.Get(body.Id);
-                Assert.AreEqual(getBody.Id, body.Id);
-                Assert.AreEqual(getBody.StoryId, body.StoryId);
-                Assert.AreEqual(getBody.ChapterNumber, body.ChapterNumber);
-                Assert.AreEqual(getBody.BodyContent, body.BodyContent);
+                var getBody = await chapterRepository.Get(chapter.Id);
+                Assert.AreEqual(getBody.Id, chapter.Id);
+                Assert.AreEqual(getBody.StoryId, chapter.StoryId);
+                Assert.AreEqual(getBody.Number, chapter.Number);
+                Assert.AreEqual(getBody.Content, chapter.Content);
 
                 //updating
-                body.StoryId = Guid.Parse("4EADAFCD-7585-492C-A39D-878715441048");
-                body.ChapterNumber = 2;
-                body.BodyContent = "Stories Synopsis";
-                await bodyRepository.Update(body);
-                var updatebody = await bodyRepository.Get(body.Id);
-                Assert.AreEqual(updatebody.Id, body.Id);
-                Assert.AreEqual(updatebody.StoryId, body.StoryId);
-                Assert.AreEqual(updatebody.ChapterNumber, body.ChapterNumber);
-                Assert.AreEqual(updatebody.BodyContent, body.BodyContent);
+                chapter.StoryId = Guid.Parse("4EADAFCD-7585-492C-A39D-878715441048");
+                chapter.Number = 2;
+                chapter.Content = "Stories Synopsis";
+                await chapterRepository.Update(chapter);
+                var updatebody = await chapterRepository.Get(chapter.Id);
+                Assert.AreEqual(updatebody.Id, chapter.Id);
+                Assert.AreEqual(updatebody.StoryId, chapter.StoryId);
+                Assert.AreEqual(updatebody.Number, chapter.Number);
+                Assert.AreEqual(updatebody.Content, chapter.Content);
 
                 //removing
-                await bodyRepository.Remove(body);
-                var resultbody = bodyRepository.Get(body.Id).Result;
+                await chapterRepository.Remove(chapter);
+                var resultbody = chapterRepository.Get(chapter.Id).Result;
                 Assert.AreEqual(resultbody, null);
             }
         }

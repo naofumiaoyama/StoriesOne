@@ -16,7 +16,7 @@ namespace Stories.Data.Entities
         public Guid PersonId { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
-        public ICollection<Body> Bodies { get; set; }
+        public ICollection<Chapter> Chapters { get; set; }
 
     }
 }

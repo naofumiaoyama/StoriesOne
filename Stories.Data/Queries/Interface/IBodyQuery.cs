@@ -9,6 +9,6 @@ namespace Stories.Data.Queries.Interface
 {
    public interface IBodyQuery
     {
-        Task<IDictionary<Guid, Body>> Get(Guid guid);
+        Task<IDictionary<Guid, Chapter>> Get(Guid guid);
     }
 }

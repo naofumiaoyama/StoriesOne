@@ -37,20 +37,11 @@ namespace Stories.Domain.Model
 
         public string LoginID { get; set; }
 
-        private string password;
-        public string Password {
-            get { return password; }
-            set {
-                password = value;
-                EncryptedPassword = EncryptDecrypt.Encrypt(value);
-            }
-        }
-
         public string EncryptedPassword { get; set; }
 
-        public string MobileNumber { get; set; }
-
         public string Token { get; set; }
+
+        public string MobileNumber { get; set; }
 
         public Sex Sex { get; set; }
         

@@ -19,7 +19,7 @@ namespace Stories.Data.Queries
         /// <param name="guid"></param>
         /// <returns></returns>
 
-        public async Task<IDictionary<Guid, Body>> Get(Guid guid)
+        public async Task<IDictionary<Guid, Chapter>> Get(Guid guid)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -30,12 +30,12 @@ namespace Stories.Data.Queries
                 var query = "Select bs.* from Bodies bs " +
                             "Where CAST(bs.StoryId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
 
-                var bodies =  connection.QueryAsync(query).Result.Select(row =>
-                new Body((Guid)row.Id, (int)row.ChapterNumber, (string)row.BodyContent) { });
+                var chapters =  connection.QueryAsync(query).Result.Select(row =>
+                new Chapter((Guid)row.Id, (int)row.ChapterNumber, (string)row.Content) { });
 
                 await connection.CloseAsync();
 
-                var dic = bodies.ToDictionary(b => b.Id);
+                var dic = chapters.ToDictionary(b => b.Id);
                 return dic;
             }
         }

@@ -243,22 +243,22 @@ namespace Stories.Data.InitialData
                     }
                 }
 
-                GenericRepository<Body> bodyRepository = new GenericRepository<Body>(context);
+                GenericRepository<Chapter> chapterRepository = new GenericRepository<Chapter>(context);
                 var lstBodies = GetTableDictionary(sheetBody);
                 foreach(var dicbody in lstBodies)
                 {
-                    var body = SetBodyEntity(dicbody);
-                    var getBody = await bodyRepository.Get(body.Id);
-                    if (getBody == null)
+                    var chapter = SetChapterEntity(dicbody);
+                    var getChapter = await chapterRepository.Get(chapter.Id);
+                    if (getChapter == null)
                     {
-                        await bodyRepository.Add(body);
+                        await chapterRepository.Add(chapter);
                     }
                     else
                     {
-                        var bodyConfig = new MapperConfiguration(cfg => cfg.CreateMap<Body, Body>());
+                        var bodyConfig = new MapperConfiguration(cfg => cfg.CreateMap<Chapter, Chapter>());
                         var bodyMapper = new Mapper(bodyConfig);
-                        bodyMapper.Map<Body, Body>(body, getBody);
-                        await bodyRepository.Update(getBody);
+                        bodyMapper.Map<Chapter, Chapter>(chapter, getChapter);
+                        await chapterRepository.Update(getChapter);
                     }
                 }
 
@@ -487,20 +487,20 @@ namespace Stories.Data.InitialData
             return comment;
         }
 
-        private Body SetBodyEntity(Dictionary<int, CellValueInfo> dic)
+        private Chapter SetChapterEntity(Dictionary<int, CellValueInfo> dic)
         {
-            Data.Entities.Body body = new Body();
+            Data.Entities.Chapter chapter = new Chapter();
 
-            body.Id = dic[0].GetGuidValue();
-            body.StoryId = dic[1].GetGuidValue();
-            body.ChapterNumber = dic[2].GetIntValue();
-            body.BodyContent = dic[3].GetStringValue();
-            body.CreateUserId = dic[4].GetGuidValue();
-            body.CreateDate = (DateTime)dic[5].GetDateTimeValue();
-            body.UpdateUserId = dic[6].GetGuidValue();
-            body.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
+            chapter.Id = dic[0].GetGuidValue();
+            chapter.StoryId = dic[1].GetGuidValue();
+            chapter.Number = dic[2].GetIntValue();
+            chapter.Content = dic[3].GetStringValue();
+            chapter.CreateUserId = dic[4].GetGuidValue();
+            chapter.CreateDate = (DateTime)dic[5].GetDateTimeValue();
+            chapter.UpdateUserId = dic[6].GetGuidValue();
+            chapter.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
 
-            return body;
+            return chapter;
         }
 
         private FriendRelationship SetFriendRelationashipEntity(Dictionary<int, CellValueInfo> dic)

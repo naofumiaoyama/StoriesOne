@@ -46,7 +46,7 @@ namespace Stories.Data.InitialData
             PostData postData = new PostData();
             StoryData storyData = new StoryData();
             ReactionMarkData reactionMarkData = new ReactionMarkData();
-            BodyData bodyData = new BodyData();
+            ChapterData chapterData = new ChapterData();
             CharacterData characterData = new CharacterData();
 
             await personData.DeleteData();
@@ -59,7 +59,7 @@ namespace Stories.Data.InitialData
             await postData.DeleteData();
             await storyData.DeleteData();
             await reactionMarkData.DeleteData();
-            await bodyData.DeleteData();
+            await chapterData.DeleteData();
             await characterData.DeleteData();
 
 
@@ -73,7 +73,7 @@ namespace Stories.Data.InitialData
             await friendRelationshipData.MakeData();
             await storyData.MakeData();
             await reactionMarkData.MakeData();
-            await bodyData.MakeData();
+            await chapterData.MakeData();
             await characterData.MakeData();
         }
     }

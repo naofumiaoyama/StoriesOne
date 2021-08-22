@@ -8,7 +8,7 @@ namespace Stories.Domain.Model
 {
     public class Character
     {
-        public Character(Guid id, string name, string description)
+        public Character(Guid id, string name, string content)
         {
             if (Guid.Empty == id)
             {
@@ -18,16 +18,16 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("name is a required field.");
             }
-            if (string.IsNullOrEmpty(description))
+            if (string.IsNullOrEmpty(content))
             {
-                throw new ArgumentException("description is a required field.");
+                throw new ArgumentException("content is a required field.");
             }
             this.Id = id;
             this.Name = name;
-            this.Description = description;
+            this.Content = content;
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string Content { get; set; }
     }
 }
