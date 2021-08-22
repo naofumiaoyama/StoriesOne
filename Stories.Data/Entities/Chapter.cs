@@ -4,13 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Stories.Data.Entities
 {
-    public class Body : BaseEntity
+    public class Chapter : BaseEntity
     {
         [Key]
         public Guid Id { get; set; }
         [ForeignKey("Story")]
         public Guid StoryId { get; set; }
-        public int ChapterNumber { get; set; }
-        public string BodyContent { get; set; }
+        public int Number { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
     }
 }

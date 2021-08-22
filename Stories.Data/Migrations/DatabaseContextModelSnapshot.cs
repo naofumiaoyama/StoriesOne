@@ -70,17 +70,14 @@ namespace Stories.Data.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.Body", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Chapter", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("BodyContent")
+                    b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ChapterNumber")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -88,8 +85,14 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("CreateUserId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("StoryId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
@@ -102,7 +105,7 @@ namespace Stories.Data.Migrations
 
                     b.HasIndex("StoryId");
 
-                    b.ToTable("Bodies");
+                    b.ToTable("Chapters");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Character", b =>
@@ -493,10 +496,10 @@ namespace Stories.Data.Migrations
                     b.ToTable("Timelines");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.Body", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Chapter", b =>
                 {
                     b.HasOne("Stories.Data.Entities.Story", null)
-                        .WithMany("Bodies")
+                        .WithMany("Chapters")
                         .HasForeignKey("StoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -585,7 +588,7 @@ namespace Stories.Data.Migrations
 
             modelBuilder.Entity("Stories.Data.Entities.Story", b =>
                 {
-                    b.Navigation("Bodies");
+                    b.Navigation("Chapters");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Timeline", b =>

@@ -1,15 +1,15 @@
 ﻿using System;
 namespace Stories.Domain.Model
 {
-    public class Body
+    public class Chapter
     {
-        public Body(Guid id, int chapterNumber, string bodyContent )
+        public Chapter(Guid id, int number, string bodyContent )
         {
             if (Guid.Empty == id)
             {
                 throw new ArgumentException("id is a required field.");
             }
-            if (chapterNumber < 1)
+            if (number < 1)
             {
                 throw new ArgumentException("chapterNumber needs over 0");
             }
@@ -18,11 +18,11 @@ namespace Stories.Domain.Model
                 throw new ArgumentException("bodyContent is a required field.");
             }
             this.Id = id;
-            this.ChapterNumber = chapterNumber;
+            this.Number = number;
             this.BodyContent = bodyContent;
         }
         public Guid Id { get; set; }
-        public int ChapterNumber { get; set; }
+        public int Number { get; set; }
         public string BodyContent { get; set; }
     }
 }
