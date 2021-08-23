@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Stories.Data.Queries.Interface
 {
-   public interface IBodyQuery
+   public interface IChapterQuery
     {
         Task<IDictionary<Guid, Chapter>> Get(Guid guid);
     }

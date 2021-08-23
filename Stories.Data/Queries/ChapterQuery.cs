@@ -11,10 +11,10 @@ using Dapper;
 
 namespace Stories.Data.Queries
 {
-    public class BodyQuery : IBodyQuery
+    public class ChapterQuery : IChapterQuery
     {
         /// <summary>
-        /// 
+        /// Getting Chapters
         /// </summary>
         /// <param name="guid"></param>
         /// <returns></returns>

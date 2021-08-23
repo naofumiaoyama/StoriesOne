@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Stories.Test.Stories.Data.Repositories
 {
     [TestClass]
-   public class BodyRepositoryTest
+   public class ChapterRepositoryTest
     {
         [TestMethod]
         public async Task CRUDTest()

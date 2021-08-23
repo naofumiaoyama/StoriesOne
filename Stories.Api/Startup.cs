@@ -33,37 +33,9 @@ namespace Stories.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DatabaseContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("sqlServerConnection"))
-                // Mac
-                // options.UseSqlServer(Configuration.GetConnectionString("sqlServerMacConnection"))
-                );
-
             services.AddControllers();
 
-            var appSettingsSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
-
-            //JWT Authentication
-            var appSettings = appSettingsSection.Get<AppSettings>();
-            var key = Encoding.ASCII.GetBytes(appSettings.Key);
-
-            services.AddAuthentication(au => {
-                au.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                au.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(jwt => {
-
-                jwt.RequireHttpsMetadata = false;
-                jwt.SaveToken = true;
-                jwt.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
-
+            
             services.AddScoped<IAuthenticateApplication, AuthenticateApplication>();
 
 
