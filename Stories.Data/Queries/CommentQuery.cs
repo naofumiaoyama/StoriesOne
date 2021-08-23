@@ -13,11 +13,11 @@ namespace Stories.Data.Queries
     public class CommentQuery : ICommentQuery
     {
         /// <summary>
-        /// 
+        /// Getting Comments
         /// </summary>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public async Task<IDictionary<Guid, Comment>> Get(Guid guid)
+        public async Task<IDictionary<Guid, Comment>> Get(Guid postId)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -26,10 +26,10 @@ namespace Stories.Data.Queries
                 await connection.OpenAsync();
 
                 var query = @"Select cs.* from Comments cs" +
-              " Where CAST(cs.PostId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
+              " Where CAST(cs.PostId as uniqueidentifier) = CAST('" + postId + "' as uniqueidentifier)";
 
                 var comments = connection.QueryAsync(query).Result.Select(row =>
-                new Stories.Domain.Model.Comment((Guid)row.Id, (string)row.CommentText, (DateTime)row.PostTime)
+                new Comment((Guid)row.Id, (string)row.CommentText, (DateTime)row.PostTime)
                 {
                 });
 

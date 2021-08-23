@@ -14,7 +14,7 @@ namespace Stories.Data.Queries
     public class LoginQuery : ILoginQuery
     {
         /// <summary>
-        /// 
+        /// Getting PersonalInfo for login
         /// </summary>
         /// <param name="guid">People.Id</param>
         /// <returns></returns>

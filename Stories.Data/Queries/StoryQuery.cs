@@ -25,9 +25,10 @@ namespace Stories.Data.Queries
                 await connection.OpenAsync();
 
                 var query = @"select sto.* from Stories sto "+
-               "where CAST(sto.AuthorPersonId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
+                             "where CAST(sto.AuthorPersonId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
 
-                var stories = await connection.QueryAsync<Story>(query);
+                var stories = connection.QueryAsync<Story>(query).Result.Select(row =>
+                new Story((Guid)row.Id, (string)row.Title, (string)row.Summary, (StoryType) row.StoryType) {});
 
                 await connection.CloseAsync();
 

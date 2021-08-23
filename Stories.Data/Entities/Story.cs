@@ -14,9 +14,16 @@ namespace Stories.Data.Entities
         public Guid Id { get; set; }
         [ForeignKey("Person")]
         public Guid PersonId { get; set; }
+        public StoryType StoryType { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
+        public string Thougts { get; set; }
         public ICollection<Chapter> Chapters { get; set; }
+    }
 
+    public enum StoryType
+    {
+        WellKnown = 1,
+        Original = 2
     }
 }

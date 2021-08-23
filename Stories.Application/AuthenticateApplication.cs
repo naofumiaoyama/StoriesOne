@@ -16,21 +16,15 @@ namespace Stories.Application
 {
     public class AuthenticateApplication : IAuthenticateApplication
     {
-    
-        private readonly AppSettings _appSettings;
 
+        private string _key = "";
         public AuthenticateApplication()
         {
-        }
-
-        public AuthenticateApplication(IOptions<AppSettings> appSettings)
-        {
-            _appSettings = appSettings.Value;
+            _key = "pintusharmaqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqweqwe";
         }
         
         public PersonalInfo Authenticate(string loginId, string encryptedpassword)
         {
-
             LoginQuery loginQuery = new LoginQuery();
             var personalInfo = loginQuery.Get(loginId, encryptedpassword);
             var personInfo = personalInfo.Result;
@@ -41,7 +35,7 @@ namespace Stories.Application
 
             //if user found
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Key);
+            var key = Encoding.ASCII.GetBytes(_key);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new System.Security.Claims.ClaimsIdentity(new Claim[] {

@@ -16,7 +16,7 @@ namespace Stories.Data.Queries
         /// </summary>
         /// <param name="guid">People.Id</param>
         /// <returns></returns>
-        public async Task<IDictionary<Guid, User>> Get(Guid guid)
+        public async Task<IDictionary<Guid, User>> Get(Guid personId)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -27,7 +27,7 @@ namespace Stories.Data.Queries
                 var query = @"Select pl.* from People pl " +
                              "Where pl.Id In( " +
                              "Select fl.FriendPersonId From FriendRelationships fl " +
-                             "Where CAST(fl.PersonId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier))";
+                             "Where CAST(fl.PersonId as uniqueidentifier) = CAST('" + personId + "' as uniqueidentifier))";
 
                 var friends = connection.Query(query).Select(row =>
                 new User((Guid)row.Id, (string)row.FirstName, (string)row.LastName, (PersonType)row.PersonType)

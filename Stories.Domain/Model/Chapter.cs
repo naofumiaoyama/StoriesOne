@@ -3,7 +3,7 @@ namespace Stories.Domain.Model
 {
     public class Chapter
     {
-        public Chapter(Guid id, int number, string bodyContent )
+        public Chapter(Guid id, int number, string content )
         {
             if (Guid.Empty == id)
             {
@@ -13,16 +13,16 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("chapterNumber needs over 0");
             }
-            if (string.IsNullOrEmpty(bodyContent))
+            if (string.IsNullOrEmpty(content))
             {
-                throw new ArgumentException("bodyContent is a required field.");
+                throw new ArgumentException("content is a required field.");
             }
             this.Id = id;
             this.Number = number;
-            this.BodyContent = bodyContent;
+            this.Content = content;
         }
         public Guid Id { get; set; }
         public int Number { get; set; }
-        public string BodyContent { get; set; }
+        public string Content { get; set; }
     }
 }

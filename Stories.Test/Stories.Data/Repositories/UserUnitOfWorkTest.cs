@@ -55,7 +55,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 Assert.AreEqual(user.PersonType.ToString(), person.PersonType.ToString());
                 Assert.AreEqual(user.FirstName, person.FirstName);
                 Assert.AreEqual(personalInfo.Id, personInfo.Id);
-                Assert.AreEqual("+5C9YQ+5Fk2whnQRKic1+o2eao+8cy9O", personalInfo.EncryptedPassword);
+                Assert.AreEqual("password", personalInfo.EncryptedPassword);
 
                 await personRepository.Remove(person);
             }         

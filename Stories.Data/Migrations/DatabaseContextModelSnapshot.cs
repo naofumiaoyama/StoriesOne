@@ -307,6 +307,9 @@ namespace Stories.Data.Migrations
                     b.Property<int>("Sex")
                         .HasColumnType("int");
 
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
@@ -443,7 +446,13 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("PersonId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("StoryType")
+                        .HasColumnType("int");
+
                     b.Property<string>("Summary")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Thougts")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
