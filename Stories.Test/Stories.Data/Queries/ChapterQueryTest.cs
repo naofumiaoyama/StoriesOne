@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Stories.Test.Stories.Data.Queries
 {
     [TestClass]
-  public  class BodyQueryTest
+  public  class ChapterQueryTest
     {
         [TestMethod]
         public async Task GetTest()

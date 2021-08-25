@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stories.Data;
 
 namespace Stories.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210824071433_Third")]
+    partial class Third
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,23 +225,11 @@ namespace Stories.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreateUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("GenreType")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UpdateUserId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id")
                         .IsClustered(false);
@@ -500,7 +490,8 @@ namespace Stories.Data.Migrations
                     b.HasKey("Id")
                         .IsClustered(false);
 
-                    b.HasIndex("GenreId");
+                    b.HasIndex("GenreId")
+                        .IsUnique();
 
                     b.HasIndex("PersonId");
 
@@ -597,8 +588,8 @@ namespace Stories.Data.Migrations
             modelBuilder.Entity("Stories.Data.Entities.Story", b =>
                 {
                     b.HasOne("Stories.Data.Entities.Genre", null)
-                        .WithMany("Stories")
-                        .HasForeignKey("GenreId")
+                        .WithOne("Story")
+                        .HasForeignKey("Stories.Data.Entities.Story", "GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -620,7 +611,7 @@ namespace Stories.Data.Migrations
 
             modelBuilder.Entity("Stories.Data.Entities.Genre", b =>
                 {
-                    b.Navigation("Stories");
+                    b.Navigation("Story");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Person", b =>

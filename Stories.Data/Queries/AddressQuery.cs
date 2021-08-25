@@ -29,7 +29,7 @@ namespace Stories.Data.Queries
                             "Where CAST(ad.Id as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
 
                 var address = connection.QueryAsync(query).Result.Select(row =>
-                new Stories.Domain.Model.Address((Guid)row.Id, (CountryCode)row.CountryCode, (string)row.PrefectureName, (string)row.CityName)
+                new Address((Guid)row.Id, (CountryCode)row.CountryCode, (string)row.PrefectureName, (string)row.CityName)
                 {
                     CountryName = row.CountryName,
                     StateName = row.StateName,

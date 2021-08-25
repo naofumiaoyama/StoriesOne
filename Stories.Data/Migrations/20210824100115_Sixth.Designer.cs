@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stories.Data;
 
 namespace Stories.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210824100115_Sixth")]
+    partial class Sixth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -473,7 +475,7 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("CreateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("GenreId")
+                    b.Property<Guid?>("GenreId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("PersonId")
@@ -596,17 +598,17 @@ namespace Stories.Data.Migrations
 
             modelBuilder.Entity("Stories.Data.Entities.Story", b =>
                 {
-                    b.HasOne("Stories.Data.Entities.Genre", null)
-                        .WithMany("Stories")
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Stories.Data.Entities.Genre", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId");
 
                     b.HasOne("Stories.Data.Entities.Person", null)
                         .WithMany("Stories")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Timeline", b =>
@@ -616,11 +618,6 @@ namespace Stories.Data.Migrations
                         .HasForeignKey("Stories.Data.Entities.Timeline", "PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Stories.Data.Entities.Genre", b =>
-                {
-                    b.Navigation("Stories");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Person", b =>

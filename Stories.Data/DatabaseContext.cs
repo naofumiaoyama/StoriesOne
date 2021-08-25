@@ -10,9 +10,9 @@ namespace Stories.Data
         }
 
         //Win SQLServer Developer Edition
-        //public static string DbConnectionString = "server=localhost\\MSSQLSERVER01; database = Stories; integrated security = true";
+        public static string DbConnectionString = "server=localhost\\MSSQLSERVER01; database = Stories; integrated security = true";
         // Mac Docker
-        public static string DbConnectionString = "Data Source=localhost;database=Stories; User ID = sa; Password=reallyStrongPwd123;";
+        //public static string DbConnectionString = "Data Source=localhost;database=Stories; User ID = sa; Password=reallyStrongPwd123;";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(DbConnectionString);
@@ -30,6 +30,7 @@ namespace Stories.Data
         public DbSet<Timeline> Timelines { get; set; }
         public DbSet<Chapter> Chapters { get; set; }
         public DbSet<Character> Characters { get; set; }
+        public DbSet<Genre> Genres { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -67,6 +68,9 @@ namespace Stories.Data
                 .HasKey(e => e.Id)
                 .IsClustered(false);
             modelBuilder.Entity<Character>()
+                .HasKey(e => e.Id)
+                .IsClustered(false);
+            modelBuilder.Entity<Genre>()
                 .HasKey(e => e.Id)
                 .IsClustered(false);
         }

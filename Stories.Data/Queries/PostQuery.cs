@@ -28,10 +28,13 @@ namespace Stories.Data.Queries
                 var query = @"Select ps.* from Posts ps " +
                              "Where CAST(ps.TimelineId as uniqueidentifier) = CAST('" + timelineId + "' as uniqueidentifier)";
                 
-                var posts = connection.QueryAsync<Post>(query).Result.Select(row =>
-                new Post((Guid)row.Id, (string)row.Title) { }); ;
+                var posts = connection.QueryAsync(query).Result.Select(row =>
+                new Post((Guid)row.Id, (string)row.Title) { 
+                    PostDateTime = row.PostDateTime
+                });
                 
                 await connection.CloseAsync();
+
                 var dic = posts.ToDictionary(f => f.Id);
                 return dic;
             }

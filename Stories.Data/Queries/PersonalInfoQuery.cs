@@ -28,7 +28,7 @@ namespace Stories.Data.Queries
                 var query = @"Select pi.* from PersonalInfos pi " +
                             "Where CAST(pi.Id as uniqueidentifier) = CAST('" + personalInfoId + "' as uniqueidentifier)";
                 
-                var personalInfo = connection.Query(query).Select(row =>
+                var personalInfo = connection.QueryAsync(query).Result.Select(row =>
                 new PersonalInfo((Guid)row.Id, (Guid)row.PersonId, (string)row.LoginId, (string)row.EmailAddress1 )
                 {
                     Token = row.Token,

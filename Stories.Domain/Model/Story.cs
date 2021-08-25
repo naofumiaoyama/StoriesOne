@@ -11,10 +11,6 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("id is a required field.");
             }
-            if (!StoryType.IsDefined(storyType))
-            {
-                throw new ArgumentException("The storyType has not been defined.");
-            }
             if (string.IsNullOrEmpty(title))
             {
                 throw new ArgumentException("title is a required field.");
@@ -23,10 +19,15 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("summary is a required field.");
             }
+            if (!StoryType.IsDefined(storyType))
+            {
+                throw new ArgumentException("The storyType has not been defined.");
+            }
+            
             this.Id = id;
-            this.StoryType = storyType;
             this.Title = title;
             this.Summary = summary;
+            this.StoryType = storyType;
         }
         public Guid Id { get; set; }
         public StoryType StoryType { get; set; }

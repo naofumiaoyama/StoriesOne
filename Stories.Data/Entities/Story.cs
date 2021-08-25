@@ -17,7 +17,9 @@ namespace Stories.Data.Entities
         public StoryType StoryType { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }
-        public string Thougts { get; set; }
+        public string Thoughts { get; set; }
+        [ForeignKey("Genre")]
+        public Guid GenreId { get; set; }
         public ICollection<Chapter> Chapters { get; set; }
     }
 

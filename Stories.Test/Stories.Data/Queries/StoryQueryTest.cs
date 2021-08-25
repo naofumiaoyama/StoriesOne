@@ -16,7 +16,7 @@ namespace Stories.Test.Stories.Data.Queries
         {
             var query = new StoryQuery();
             
-            var storyPersonGuid = Guid.Parse("EEFB1E9D-4E17-43A3-A690-F374D27D36DE");
+            var storyPersonGuid = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
             var storyId = Guid.Parse("4EADAFCD-7585-492C-A39D-878715441048");
             var stories = await query.Get(storyPersonGuid);
             Assert.AreEqual(stories[storyId].Id, storyId);

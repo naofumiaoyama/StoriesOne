@@ -15,9 +15,12 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("title is null.");
             }
+            this.Id = id;
+            this.Title = title;
         }
         public Guid Id { get; set; }
         public string Title { get; set; }
+        public DateTime PostDateTime { get; set; }
         public Story Story { get; set; }
         public IDictionary<Guid, Comment> Comments { get; set; } 
     }

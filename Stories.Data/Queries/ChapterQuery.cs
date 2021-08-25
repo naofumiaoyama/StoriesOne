@@ -27,15 +27,15 @@ namespace Stories.Data.Queries
                 connection.ConnectionString = DatabaseContext.DbConnectionString;
                 await connection.OpenAsync();
 
-                var query = "Select bs.* from Bodies bs " +
-                            "Where CAST(bs.StoryId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
+                var query = "Select chs.* from Chapters chs " +
+                            "Where CAST(chs.StoryId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
 
                 var chapters =  connection.QueryAsync(query).Result.Select(row =>
-                new Chapter((Guid)row.Id, (int)row.ChapterNumber, (string)row.Content) { });
+                new Chapter((Guid)row.Id, (int)row.Number, (string)row.Content) { });
 
                 await connection.CloseAsync();
 
-                var dic = chapters.ToDictionary(b => b.Id);
+                var dic = chapters.ToDictionary(chs => chs.Id);
                 return dic;
             }
         }
