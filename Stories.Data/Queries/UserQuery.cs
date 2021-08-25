@@ -13,11 +13,11 @@ namespace Stories.Data.Queries
     public class UserQuery : IUserQuery
     {
         /// <summary>
-        /// 
+        /// Getting User by Id
         /// </summary>
         /// <param name="guid">People.Id</param>
         /// <returns></returns>
-        public async Task<User> Get(Guid guid)
+        public async Task<User> Get(Guid id)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -26,7 +26,7 @@ namespace Stories.Data.Queries
                 await connection.OpenAsync();
             
                 var query = @"Select pe.* from People pe " +
-                            "Where CAST(pe.Id as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
+                            "Where CAST(pe.Id as uniqueidentifier) = CAST('" + id + "' as uniqueidentifier)";
 
                 var user = connection.QueryAsync(query).Result.Select(row =>
                 new User((Guid)row.Id, (string)row.FirstName, (string)row.LastName, (PersonType)row.PersonType)
@@ -40,6 +40,37 @@ namespace Stories.Data.Queries
 
                 await connection.CloseAsync();
                 
+                return user;
+
+            }
+        }
+
+        public async Task<User> GetByLoginIdAndPassword(string loginId, string encryptedPassword)
+        {
+            LoginQuery loginQuery = new LoginQuery();
+            var personalInfo = loginQuery.Get(loginId, encryptedPassword).Result;
+
+            using (var connection = new SqlConnection())
+            using (var command = new SqlCommand())
+            {
+                connection.ConnectionString = DatabaseContext.DbConnectionString;
+                await connection.OpenAsync();
+
+                var query = @"Select pe.* from People pe " +
+                            "Where CAST(pe.Id as uniqueidentifier) = CAST('" + personalInfo.PersonId + "' as uniqueidentifier)";
+
+                var user = connection.QueryAsync(query).Result.Select(row =>
+                new User((Guid)row.Id, (string)row.FirstName, (string)row.LastName, (PersonType)row.PersonType)
+                {
+                    MiddleName = row.MiddleName,
+                    DisplayName = row.DisplayName,
+                    SelfIntroction = row.SelfIntroction,
+                    LivingPlace = row.LivingPlace,
+                    Occupation = row.Occupation
+                }).FirstOrDefault();
+
+                await connection.CloseAsync();
+                user.PersonalInfo = personalInfo;
                 return user;
 
             }
