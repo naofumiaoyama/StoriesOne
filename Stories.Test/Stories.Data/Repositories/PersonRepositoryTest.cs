@@ -47,7 +47,7 @@ namespace Stories.Test.Stories.Data.Repositories
                 person.Id = Guid.Parse("B87DD83A-7F89-4AD0-BB4E-E94518F8A677");
                 person.PersonType = PersonType.User;
                 person.FirstName = "OtherFirst";
-                person.MiddleName = "Makio";
+                person.NickName = "Makio";
                 person.LastName = "OtherLast";
                 person.DisplayName = "N.A";
                 person.SelfIntroduction = "私の自己紹介";

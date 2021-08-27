@@ -18,7 +18,7 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("id is a required field.");
             }
-            if (string.IsNullOrEmpty(PostalCode))
+            if (string.IsNullOrEmpty(postalCode))
             {
                 throw new ArgumentException("postalcode is a required field");
             }
@@ -26,7 +26,7 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("The countryCode has not been defined.");
             }
-            if (string.IsNullOrEmpty(CountryName))
+            if (string.IsNullOrEmpty(countryName))
             {
                 throw new ArgumentException("countryName is required field");
             }
@@ -34,7 +34,7 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("prefectureName is a required field.");
             }
-            if (string.IsNullOrEmpty(StateName))
+            if (string.IsNullOrEmpty(stateName))
             {
                 throw new ArgumentException("stateName is a required field");
             }
@@ -42,15 +42,15 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("cityName is a required field.");
             }
-            if (string.IsNullOrEmpty(TownName))
+            if (string.IsNullOrEmpty(townName))
             {
                 throw new ArgumentException("townName is a requierd field");
             }
-            if (string.IsNullOrEmpty(Street))
+            if (string.IsNullOrEmpty(street))
             {
                 throw new ArgumentException("street is a required field");
             }
-            if (string.IsNullOrEmpty(Others))
+            if (string.IsNullOrEmpty(others))
             {
                 throw new ArgumentException("others is a required field");
             }

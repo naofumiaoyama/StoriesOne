@@ -31,11 +31,11 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("loginId is a required field.");
             }
-            if(!Sex.IsDefined(Sex))
+            if(!Sex.IsDefined(sex))
             {
                 throw new ArgumentException("The sex has not been define");
             }
-            if(!MaritalStatus.IsDefined(MaritalStatus))
+            if(!MaritalStatus.IsDefined(maritalStatus))
             {
                 throw new ArgumentException("The maritalStatus has not been define");
             }
@@ -43,11 +43,7 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("loginId and emailAddress1 do not match.");
             }
-            if(string.IsNullOrEmpty(Token))
-            {
-                throw new ArgumentException("token is a required field");
-            }
-            if(string.IsNullOrEmpty(EmailAddress2))
+            if(string.IsNullOrEmpty(emailAddress2))
             {
                 throw new ArgumentException("loginId and emailAddress2 do not match");
             }

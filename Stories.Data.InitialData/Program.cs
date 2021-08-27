@@ -53,11 +53,11 @@ namespace Stories.Data.InitialData
             await addressData.DeleteData();
             await personalInfoData.DeleteData();
             await pictureData.DeleteData();
-            await commentData.DeleteData();
             await friendRelationshipData.DeleteData();
-            await postData.DeleteData();
             await genreData.DeleteData();
             await storyData.DeleteData();
+            await postData.DeleteData();
+            await commentData.DeleteData();
             await reactionMarkData.DeleteData();
             await chapterData.DeleteData();
             await characterData.DeleteData();
@@ -67,11 +67,11 @@ namespace Stories.Data.InitialData
             await addressData.MakeData();
             await personalInfoData.MakeData();
             await pictureData.MakeData();
-            await postData.MakeData();
-            await commentData.MakeData();
             await friendRelationshipData.MakeData();
             await genreData.MakeData();
             await storyData.MakeData();
+            await postData.MakeData();
+            await commentData.MakeData();
             await reactionMarkData.MakeData();
             await chapterData.MakeData();
             await characterData.MakeData();

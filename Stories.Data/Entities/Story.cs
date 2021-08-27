@@ -21,6 +21,7 @@ namespace Stories.Data.Entities
         [ForeignKey("Genre")]
         public Guid GenreId { get; set; }
         public ICollection<Chapter> Chapters { get; set; }
+        public Post Post { get; set; }
     }
 
     public enum StoryType

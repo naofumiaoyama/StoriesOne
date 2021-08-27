@@ -75,13 +75,13 @@ namespace Stories.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PersonType = table.Column<int>(type: "int", nullable: false),
+                    NickName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SelfIntroduction = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LivingPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Occupation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PersonType = table.Column<int>(type: "int", nullable: false),
                     CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -207,30 +207,6 @@ namespace Stories.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Timelines",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TimelineName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Timelines", x => x.Id)
-                        .Annotation("SqlServer:Clustered", false);
-                    table.ForeignKey(
-                        name: "FK_Timelines_People_PersonId",
-                        column: x => x.PersonId,
-                        principalTable: "People",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Chapters",
                 columns: table => new
                 {
@@ -261,7 +237,7 @@ namespace Stories.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TimelineId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PostDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -274,9 +250,9 @@ namespace Stories.Data.Migrations
                     table.PrimaryKey("PK_Posts", x => x.Id)
                         .Annotation("SqlServer:Clustered", false);
                     table.ForeignKey(
-                        name: "FK_Posts_Timelines_TimelineId",
-                        column: x => x.TimelineId,
-                        principalTable: "Timelines",
+                        name: "FK_Posts_Stories_StoryId",
+                        column: x => x.StoryId,
+                        principalTable: "Stories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -354,9 +330,10 @@ namespace Stories.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_TimelineId",
+                name: "IX_Posts_StoryId",
                 table: "Posts",
-                column: "TimelineId");
+                column: "StoryId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReactionMarks_PostId",
@@ -372,12 +349,6 @@ namespace Stories.Data.Migrations
                 name: "IX_Stories_PersonId",
                 table: "Stories",
                 column: "PersonId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Timelines_PersonId",
-                table: "Timelines",
-                column: "PersonId",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -407,16 +378,13 @@ namespace Stories.Data.Migrations
                 name: "ReactionMarks");
 
             migrationBuilder.DropTable(
-                name: "Stories");
-
-            migrationBuilder.DropTable(
                 name: "Posts");
 
             migrationBuilder.DropTable(
-                name: "Genres");
+                name: "Stories");
 
             migrationBuilder.DropTable(
-                name: "Timelines");
+                name: "Genres");
 
             migrationBuilder.DropTable(
                 name: "People");

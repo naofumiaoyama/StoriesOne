@@ -41,6 +41,7 @@ namespace Stories.Data.InitialData
                 personalInfo2.MobileNumber = "08035841995";
                 personalInfo2.Sex = SexEnum.Female;
                 personalInfo2.Birthdate = new DateTime(1995, 3, 27);
+                personalInfo2.MaritalStatus = MaritalStatusEnum.Married;
                 personalInfo2.EmailAddress1 = "albiosjenalyn27@gmail.com";
                 personalInfo2.EmailAddress2 = "jenaoyama@gmail.com";
                 personalInfo2.AddressId = Guid.Parse("2B3CD24F-5802-4D74-BACD-5DE67A2B2FCB");

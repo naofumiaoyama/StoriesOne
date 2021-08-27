@@ -14,7 +14,7 @@ namespace Stories.Data.Queries
         /// <summary>
         /// Getting Friends
         /// </summary>
-        /// <param name="guid">People.Id</param>
+        /// <param name="guid">PersonId</param>
         /// <returns></returns>
         public async Task<IDictionary<Guid, User>> Get(Guid personId)
         {
@@ -30,14 +30,20 @@ namespace Stories.Data.Queries
                              "Where CAST(fl.PersonId as uniqueidentifier) = CAST('" + personId + "' as uniqueidentifier))";
 
                 var friends = connection.Query(query).Select(row =>
-                new User((Guid)row.Id, (string)row.FirstName, (string)row.LastName, (PersonType)row.PersonType)
+                new User((Guid)row.Id,
+                        (string)row.FirstName,
+                        (string)row.LastName,
+                        (string)row.NickName,
+                        null,
+                        (PersonType)row.PersonType,
+                        (string)row.DisplayName,
+                        (string)row.SelfIntroduction,
+                        (string)row.LivingPlace,
+                        (string)row.Occupation,
+                        null, null, null)
                 {
-                    MiddleName = row.MiddleName,
-                    DisplayName = row.DisplayName,
-                    SelfIntroction = row.SelfIntroction,
-                    LivingPlace = row.LivingPlace,
-                    Occupation = row.Occupation
                 });
+
                 await connection.CloseAsync();
 
                 return friends.ToDictionary(f => f.Id); ;

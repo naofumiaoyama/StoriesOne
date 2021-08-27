@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Stories.Data.Repositories;
-using Stories.Data.Entities;
 using Stories.Data;
 using Stories.Domain.Model;
 
@@ -16,31 +15,34 @@ namespace Stories.Test.Stories.Data.Repositories
         public async Task CreateUserTest()
         {
             UserUnitOfWork userUnitOfWork = new UserUnitOfWork();
-            var personGuid = Guid.NewGuid();
-            User user = new User( personGuid,
-                                    "FirstName",
-                                    "LastName",
-                                    Domain.Model.PersonType.User
-                                    );
-
-            user.MiddleName = "MiddleName";
-            user.DisplayName = "F.L";
-            user.LivingPlace = "TokyoCity";
-            user.Occupation = "Engineer";
-
-           var personalInfo = new Domain.Model.PersonalInfo(
-               Guid.NewGuid(),
-               personGuid,
-               "aoyama@gmail.com",
-               "aoyama@gmail.com"
-             );
-            personalInfo.EncryptedPassword = "password";
-            personalInfo.Address = new Domain.Model.Address(Guid.NewGuid(), Domain.Model.CountryCode.Japan, "埼玉県","所沢市");
-            personalInfo.Birthdate = new DateTime(1971, 7, 28);
-            personalInfo.EmailAddress2 = "aoyama2@gmail.com";
-            personalInfo.MobileNumber = "09011223344";
-            personalInfo.Sex = Sex.Female;
-            user.PersonalInfo = personalInfo;
+            var personId = Guid.NewGuid();
+            var personalInfo = new PersonalInfo(
+              Guid.NewGuid(),
+              personId,
+              "aoyama@gmail.com",
+              "password",
+              "",
+              "09091120212",
+              new DateTime(1971,7,28),
+              Sex.Male,
+              MaritalStatus.Married,
+              "aoyama1@gmail.com",
+              "aoyama2@gmail.com",
+              new Address(Guid.NewGuid(), "3451124", CountryCode.Japan, "日本", "", "埼玉県", "所沢市", "小手指町", "2-2-2", "シャルル111")
+            ); 
+            
+            User user = new User(personId,
+                                 "FirstName",
+                                 "LastName",
+                                 "NickName",
+                                 personalInfo,
+                                 Domain.Model.PersonType.User,
+                                 "F.L",
+                                 "SelfIntroduction",
+                                 "LivingPlace",
+                                 "Engineer",
+                                 null,null,null
+                                 );
 
             await userUnitOfWork.CreateUser(user);
 

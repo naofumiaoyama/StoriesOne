@@ -17,7 +17,7 @@ namespace Stories.Data.Queries
         /// </summary>
         /// <param name="guid">Address.Id</param>
         /// <returns></returns>
-        public async Task<Address> Get(Guid guid)
+        public async Task<Address> Get(Guid id)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -26,16 +26,16 @@ namespace Stories.Data.Queries
                 await connection.OpenAsync();
             
                 var query = @"Select ad.* from Addresses ad " +
-                            "Where CAST(ad.Id as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
+                            "Where CAST(ad.Id as uniqueidentifier) = CAST('" + id + "' as uniqueidentifier)";
 
                 var address = connection.QueryAsync(query).Result.Select(row =>
                 new Address((Guid)row.Id, 
                             (string)row.PostalCode,
-                            (CountryCode)row.CountryCode, 
-                            (string)row.PrefectureName, 
-                            (string)row.CityName,
-                            (string)row.ContryName,
+                            (CountryCode)row.CountryCode,
+                            (string)row.CountryName,
+                            (string)row.PrefectureName,
                             (string)row.StateName,
+                            (string)row.CityName,
                             (string)row.TownName,
                             (string)row.Street,
                             (string)row.Others)

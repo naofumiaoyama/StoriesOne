@@ -51,6 +51,7 @@ namespace Stories.Data.InitialData
 
                 Address address3 = new Address();
                 address3.Id = Guid.Parse("7e4a36cb-4840-41f3-b14e-a283b5881621");
+                address3.PostalCode = "3441113";
                 address3.CountryCode = CountryCode.Japan;
                 address3.CountryName = "Japan";
                 address3.PrefectureName = "TokyoPrefecture";

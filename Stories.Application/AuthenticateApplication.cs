@@ -25,8 +25,8 @@ namespace Stories.Application
         
         public PersonalInfo Authenticate(string loginId, string encryptedpassword)
         {
-            LoginQuery loginQuery = new LoginQuery();
-            var personalInfo = loginQuery.Get(loginId, encryptedpassword);
+            PersonalInfoQuery personalInfoQuery = new PersonalInfoQuery();
+            var personalInfo = personalInfoQuery.GetForLogin(loginId, encryptedpassword);
             var personInfo = personalInfo.Result;
 
             //return null if  user is not found

@@ -10,7 +10,7 @@ using Stories.Data;
 namespace Stories.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210826130045_First")]
+    [Migration("20210827123036_First")]
     partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -273,7 +273,7 @@ namespace Stories.Data.Migrations
                     b.Property<string>("LivingPlace")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MiddleName")
+                    b.Property<string>("NickName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Occupation")
@@ -405,7 +405,7 @@ namespace Stories.Data.Migrations
                     b.Property<DateTime>("PostDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("TimelineId")
+                    b.Property<Guid>("StoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
@@ -420,7 +420,8 @@ namespace Stories.Data.Migrations
                     b.HasKey("Id")
                         .IsClustered(false);
 
-                    b.HasIndex("TimelineId");
+                    b.HasIndex("StoryId")
+                        .IsUnique();
 
                     b.ToTable("Posts");
                 });
@@ -509,39 +510,6 @@ namespace Stories.Data.Migrations
                     b.ToTable("Stories");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.Timeline", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreateUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("PersonId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("TimelineName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UpdateUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id")
-                        .IsClustered(false);
-
-                    b.HasIndex("PersonId")
-                        .IsUnique();
-
-                    b.ToTable("Timelines");
-                });
-
             modelBuilder.Entity("Stories.Data.Entities.Chapter", b =>
                 {
                     b.HasOne("Stories.Data.Entities.Story", null)
@@ -580,9 +548,9 @@ namespace Stories.Data.Migrations
 
             modelBuilder.Entity("Stories.Data.Entities.Post", b =>
                 {
-                    b.HasOne("Stories.Data.Entities.Timeline", null)
-                        .WithMany("Posts")
-                        .HasForeignKey("TimelineId")
+                    b.HasOne("Stories.Data.Entities.Story", null)
+                        .WithOne("Post")
+                        .HasForeignKey("Stories.Data.Entities.Post", "StoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -611,15 +579,6 @@ namespace Stories.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.Timeline", b =>
-                {
-                    b.HasOne("Stories.Data.Entities.Person", null)
-                        .WithOne("Timeline")
-                        .HasForeignKey("Stories.Data.Entities.Timeline", "PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Stories.Data.Entities.Genre", b =>
                 {
                     b.Navigation("Stories");
@@ -632,8 +591,6 @@ namespace Stories.Data.Migrations
                     b.Navigation("PersonalInfo");
 
                     b.Navigation("Stories");
-
-                    b.Navigation("Timeline");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Post", b =>
@@ -646,11 +603,8 @@ namespace Stories.Data.Migrations
             modelBuilder.Entity("Stories.Data.Entities.Story", b =>
                 {
                     b.Navigation("Chapters");
-                });
 
-            modelBuilder.Entity("Stories.Data.Entities.Timeline", b =>
-                {
-                    b.Navigation("Posts");
+                    b.Navigation("Post");
                 });
 #pragma warning restore 612, 618
         }

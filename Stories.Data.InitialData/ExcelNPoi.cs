@@ -161,28 +161,6 @@ namespace Stories.Data.InitialData
                     }
                 } 
 
-                
-                
-               GenericRepository<Timeline> timelineRepository = new GenericRepository<Timeline>(context);
-                var lstTimeline = GetTableDictionary(sheetTimeline);
-                foreach(var dicTimeline in lstTimeline)
-                {
-                    var timeline = SetTimeLine(dicTimeline);
-                  var getTimeline =  await timelineRepository.Get(timeline.Id);
-                    if (getTimeline == null)
-                    {
-                        await timelineRepository.Add(timeline);
-                    }
-                    else
-                    {
-                        var timelineConfig = new MapperConfiguration(cfg => cfg.CreateMap<Timeline, Timeline>());
-                        var timelineMapper = new Mapper(timelineConfig);
-                        timelineMapper.Map<Timeline, Timeline>(timeline, getTimeline);
-                        await timelineRepository.Update(getTimeline);
-                    }
-                }
-
-
                 GenericRepository<Post> postRepository = new GenericRepository<Post>(context);
                 var lstPost = GetTableDictionary(sheetPost);
                 foreach(var dicPost in lstPost )
@@ -403,7 +381,7 @@ namespace Stories.Data.InitialData
 
             person.Id = dic[0].GetGuidValue();
             person.FirstName = dic[1].GetStringValue();
-            person.MiddleName = dic[2].GetStringValue();
+            person.NickName = dic[2].GetStringValue();
             person.LastName = dic[3].GetStringValue();
             person.PersonType = (PersonType)dic[4].GetIntValue();
             person.DisplayName = dic[5].GetStringValue();
@@ -440,27 +418,12 @@ namespace Stories.Data.InitialData
             return address;
         }
 
-        private Timeline SetTimeLine(Dictionary<int, CellValueInfo> dic)
-        {
-            Data.Entities.Timeline timeline = new Timeline();
-
-            timeline.Id = dic[0].GetGuidValue();
-            timeline.PersonId = dic[1].GetGuidValue();
-            timeline.TimelineName = dic[2].GetStringValue();
-            timeline.CreateUserId = dic[3].GetGuidValue();
-            timeline.CreateDate = (DateTime)dic[4].GetDateTimeValue();
-            timeline.UpdateUserId = dic[5].GetGuidValue();
-            timeline.UpdateDate = (DateTime)dic[6].GetDateTimeValue();
-
-            return timeline;     
-        }
-
         private Post SetPostEntity(Dictionary<int, CellValueInfo> dic)
         {
             Data.Entities.Post post = new Post();
 
             post.Id = dic[0].GetGuidValue();
-            post.TimelineId = dic[1].GetGuidValue();
+            post.StoryId = dic[1].GetGuidValue();
             post.Title = dic[2].GetStringValue();
             post.PostDateTime = (DateTime)dic[3].GetDateTimeValue();
             post.CreateUserId = dic[4].GetGuidValue();

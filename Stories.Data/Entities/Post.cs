@@ -9,11 +9,10 @@ namespace Stories.Data.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        [ForeignKey("Timeline")]
-        public Guid TimelineId { get; set; }
+        [ForeignKey("Story")]
+        public Guid StoryId { get; set; }
         public string Title { get; set; }
         public DateTime PostDateTime { get; set; }
-
         public ICollection<Comment> Comments { get; set; }
         public ICollection<ReactionMark> ReactionMarks { get; set; }
 
