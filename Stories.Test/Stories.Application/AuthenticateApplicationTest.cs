@@ -17,7 +17,6 @@ namespace Stories.Test.Stories.Application
         [TestMethod]
         public void AuthTest()
         {
-            //var appSettings = ConfigurationManager.AppSettings;
             AuthenticateApplication authenticateApplication = new AuthenticateApplication();
             var personalInfo = authenticateApplication.Authenticate("naofumi.aoyama@gmail.com", "Dm10taQ/oG8bPpJtKFFOOA==");
             Assert.AreEqual(personalInfo.LoginID, "naofumi.aoyama@gmail.com");

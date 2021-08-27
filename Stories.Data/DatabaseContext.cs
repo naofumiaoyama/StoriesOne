@@ -10,9 +10,9 @@ namespace Stories.Data
         }
 
         //Win SQLServer Developer Edition
-        public static string DbConnectionString = "server=localhost\\MSSQLSERVER01; database = Stories; integrated security = true";
+        //public static string DbConnectionString = "server=localhost\\MSSQLSERVER01; database = Stories; integrated security = true";
         // Mac Docker
-        //public static string DbConnectionString = "Data Source=localhost;database=Stories; User ID = sa; Password=reallyStrongPwd123;";
+        public static string DbConnectionString = "Data Source=localhost;database=Stories; User ID = sa; Password=MyPass@word;";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(DbConnectionString);

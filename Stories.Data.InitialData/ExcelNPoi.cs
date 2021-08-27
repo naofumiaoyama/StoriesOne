@@ -403,7 +403,7 @@ namespace Stories.Data.InitialData
 
             person.Id = dic[0].GetGuidValue();
             person.FirstName = dic[1].GetStringValue();
-            person.MiddleName = dic[2].GetStringValue();
+            person.NickName = dic[2].GetStringValue();
             person.LastName = dic[3].GetStringValue();
             person.PersonType = (PersonType)dic[4].GetIntValue();
             person.DisplayName = dic[5].GetStringValue();

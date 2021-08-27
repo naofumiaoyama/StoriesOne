@@ -11,20 +11,16 @@ namespace Stories.Data.Entities
         [Key]
         public Guid Id { get; set; }
         public string FirstName { get; set; }
-        public string MiddleName { get; set; }
         public string LastName { get; set; }
-        public PersonType PersonType { get; set; }
+        public string NickName { get; set; }
         public string DisplayName { get; set; }
         public string SelfIntroduction { get; set; }
         public string LivingPlace { get; set; }
         public string Occupation { get; set; }
-        
+        public PersonType PersonType { get; set; }
         public PersonalInfo PersonalInfo { get; set; }
-
         public Timeline Timeline { get; set; }
-
         public ICollection<FriendRelationship> FriendRelationships { get; set; }
-
         public ICollection<Story> Stories { get; set; }
 
     }

@@ -17,30 +17,32 @@ namespace Stories.Test.Stories.Data.Repositories
         {
             UserUnitOfWork userUnitOfWork = new UserUnitOfWork();
             var personGuid = Guid.NewGuid();
-            User user = new User( personGuid,
-                                    "FirstName",
-                                    "LastName",
-                                    Domain.Model.PersonType.User
-                                    );
-
-            user.MiddleName = "MiddleName";
-            user.DisplayName = "F.L";
-            user.LivingPlace = "TokyoCity";
-            user.Occupation = "Engineer";
-
-           var personalInfo = new Domain.Model.PersonalInfo(
-               Guid.NewGuid(),
-               personGuid,
-               "aoyama@gmail.com",
-               "aoyama@gmail.com"
-             );
+            var personalInfo = new Domain.Model.PersonalInfo(
+              Guid.NewGuid(),
+              personGuid,
+              "aoyama@gmail.com",
+              "aoyama@gmail.com"
+            );
             personalInfo.EncryptedPassword = "password";
-            personalInfo.Address = new Domain.Model.Address(Guid.NewGuid(), Domain.Model.CountryCode.Japan, "埼玉県","所沢市");
+            personalInfo.Address = new Domain.Model.Address(Guid.NewGuid(), Domain.Model.CountryCode.Japan, "埼玉県", "所沢市");
             personalInfo.Birthdate = new DateTime(1971, 7, 28);
             personalInfo.EmailAddress2 = "aoyama2@gmail.com";
             personalInfo.MobileNumber = "09011223344";
             personalInfo.Sex = Sex.Female;
-            user.PersonalInfo = personalInfo;
+
+            
+            User user = new User( personGuid,
+                                    "FirstName",
+                                    "LastName",
+                                    "NickName",
+                                    personalInfo,
+                                    Domain.Model.PersonType.User,
+                                    "F.L",
+                                    "SelfIntroduction",
+                                    "LivingPlace",
+                                    "Engineer",
+                                    null,null,null
+                                    );
 
             await userUnitOfWork.CreateUser(user);
 
