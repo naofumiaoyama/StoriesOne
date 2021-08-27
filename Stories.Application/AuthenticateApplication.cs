@@ -47,9 +47,21 @@ namespace Stories.Application
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            personInfo.Token = tokenHandler.WriteToken(token);
+            var tokenValue = tokenHandler.WriteToken(token);
+            PersonalInfo personalInfoWithToken = new PersonalInfo(personInfo.Id,
+                                                            personInfo.PersonId,
+                                                            personInfo.LoginID,
+                                                            personInfo.EncryptedPassword,
+                                                            tokenValue,
+                                                            personInfo.MobileNumber,
+                                                            personInfo.Birthdate,
+                                                            personInfo.Sex,
+                                                            personInfo.MaritalStatus,
+                                                            personInfo.EmailAddress1,
+                                                            personInfo.EmailAddress2,
+                                                            personInfo.Address);
 
-            return personInfo;
+            return personalInfoWithToken;
         }
     }
     

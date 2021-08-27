@@ -26,9 +26,9 @@ namespace Stories.Domain.Model
             this.PictureType = pictureType;
             this.Url = url;
         }
-        public Guid Id { get; set; }
-        public PictureType PictureType { get; set; }
-        public string Url { get; set; }
+        public Guid Id { get; private set; }
+        public PictureType PictureType { get; private set; }
+        public string Url { get; private set; }
     }
 
     public enum PictureType

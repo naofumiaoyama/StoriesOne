@@ -27,7 +27,6 @@ namespace Stories.Data
         public DbSet<Post> Posts { get; set; }
         public DbSet<ReactionMark> ReactionMarks { get; set;}
         public DbSet<Story> Stories { get; set; }
-        public DbSet<Timeline> Timelines { get; set; }
         public DbSet<Chapter> Chapters { get; set; }
         public DbSet<Character> Characters { get; set; }
         public DbSet<Genre> Genres { get; set; }
@@ -59,9 +58,6 @@ namespace Stories.Data
                 .HasKey(e => e.Id)
                 .IsClustered(false);
             modelBuilder.Entity<Story>()
-                .HasKey(e => e.Id)
-                .IsClustered(false);
-            modelBuilder.Entity<Timeline>()
                 .HasKey(e => e.Id)
                 .IsClustered(false);
             modelBuilder.Entity<Chapter>()

@@ -34,6 +34,7 @@ namespace Stories.Domain.Model
         public string Title { get; set; }
         public string Summary { get; set; }
         public string Thoughts { get; set; }
+        public Genre Genre { get; set; }
         public IDictionary<Guid, Chapter> Chapters { get; set; }
         public IDictionary<Guid, Character> Characters { get; set; }
         public DateTime CreateDate { get; set;}

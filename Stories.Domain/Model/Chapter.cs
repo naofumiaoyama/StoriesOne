@@ -21,8 +21,8 @@ namespace Stories.Domain.Model
             this.Number = number;
             this.Content = content;
         }
-        public Guid Id { get; set; }
-        public int Number { get; set; }
-        public string Content { get; set; }
+        public Guid Id { get; private set; }
+        public int Number { get; private set; }
+        public string Content { get; private set; }
     }
 }

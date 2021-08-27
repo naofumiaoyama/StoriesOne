@@ -39,7 +39,6 @@ namespace Stories.Data.InitialData
             PersonData personData = new PersonData();
             PersonalInfoData personalInfoData = new PersonalInfoData();
             PictureData pictureData = new PictureData();
-            TimelineData timelineData = new TimelineData();
             AddressData addressData = new AddressData();
             CommentData commentData = new CommentData();
             FriendRelationshipData friendRelationshipData = new FriendRelationshipData();
@@ -54,7 +53,6 @@ namespace Stories.Data.InitialData
             await addressData.DeleteData();
             await personalInfoData.DeleteData();
             await pictureData.DeleteData();
-            await timelineData.DeleteData();
             await commentData.DeleteData();
             await friendRelationshipData.DeleteData();
             await postData.DeleteData();
@@ -69,7 +67,6 @@ namespace Stories.Data.InitialData
             await addressData.MakeData();
             await personalInfoData.MakeData();
             await pictureData.MakeData();
-            await timelineData.MakeData();
             await postData.MakeData();
             await commentData.MakeData();
             await friendRelationshipData.MakeData();

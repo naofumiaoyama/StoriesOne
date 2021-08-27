@@ -10,8 +10,8 @@ using Stories.Data;
 namespace Stories.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210824090657_Fifth")]
-    partial class Fifth
+    [Migration("20210826130045_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -502,6 +502,8 @@ namespace Stories.Data.Migrations
                     b.HasKey("Id")
                         .IsClustered(false);
 
+                    b.HasIndex("GenreId");
+
                     b.HasIndex("PersonId");
 
                     b.ToTable("Stories");
@@ -596,6 +598,12 @@ namespace Stories.Data.Migrations
 
             modelBuilder.Entity("Stories.Data.Entities.Story", b =>
                 {
+                    b.HasOne("Stories.Data.Entities.Genre", null)
+                        .WithMany("Stories")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Stories.Data.Entities.Person", null)
                         .WithMany("Stories")
                         .HasForeignKey("PersonId")
@@ -610,6 +618,11 @@ namespace Stories.Data.Migrations
                         .HasForeignKey("Stories.Data.Entities.Timeline", "PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Genre", b =>
+                {
+                    b.Navigation("Stories");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Person", b =>

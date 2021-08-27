@@ -52,6 +52,24 @@ namespace Stories.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Genres",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GenreType = table.Column<int>(type: "int", nullable: false),
+                    CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genres", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "People",
                 columns: table => new
                 {
@@ -129,6 +147,7 @@ namespace Stories.Data.Migrations
                     PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LoginId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EncryptedPassword = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Sex = table.Column<int>(type: "int", nullable: false),
                     Birthdate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -159,8 +178,11 @@ namespace Stories.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StoryType = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Summary = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Thoughts = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GenreId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -170,6 +192,12 @@ namespace Stories.Data.Migrations
                 {
                     table.PrimaryKey("PK_Stories", x => x.Id)
                         .Annotation("SqlServer:Clustered", false);
+                    table.ForeignKey(
+                        name: "FK_Stories_Genres_GenreId",
+                        column: x => x.GenreId,
+                        principalTable: "Genres",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Stories_People_PersonId",
                         column: x => x.PersonId,
@@ -336,6 +364,11 @@ namespace Stories.Data.Migrations
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Stories_GenreId",
+                table: "Stories",
+                column: "GenreId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Stories_PersonId",
                 table: "Stories",
                 column: "PersonId");
@@ -378,6 +411,9 @@ namespace Stories.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Posts");
+
+            migrationBuilder.DropTable(
+                name: "Genres");
 
             migrationBuilder.DropTable(
                 name: "Timelines");

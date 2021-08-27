@@ -31,7 +31,6 @@ namespace Stories.Domain.Model
         }
         public string DisplayName { get; set; }
         public string SelfIntroction { get; set; } 
-        public Timeline Timeline { get; set; }
         public string LivingPlace { get; set; }
         public string Occupation { get; set; }
         public IDictionary<Guid, Story> Stories { get; set; }

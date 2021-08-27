@@ -21,8 +21,6 @@ namespace Stories.Data.Entities
         
         public PersonalInfo PersonalInfo { get; set; }
 
-        public Timeline Timeline { get; set; }
-
         public ICollection<FriendRelationship> FriendRelationships { get; set; }
 
         public ICollection<Story> Stories { get; set; }

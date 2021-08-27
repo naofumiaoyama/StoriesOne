@@ -9,14 +9,14 @@ using Stories.Domain.Model;
 
 namespace Stories.Data.Queries
 {
-    public class StoryQuery : IStoryQuery
+    public class GenreQuery : IGenreQuery
     {
         /// <summary>
-        /// Getting Story
+        /// Getting Genre
         /// </summary>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public async Task<IDictionary<Guid, Story>> Get(Guid personId)
+        public async Task<Genre> Get(Guid id)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -24,19 +24,17 @@ namespace Stories.Data.Queries
                 connection.ConnectionString = DatabaseContext.DbConnectionString;
                 await connection.OpenAsync();
 
-                var query = @"Select sto.* from Stories sto " +
-                             "where CAST(sto.PersonId as uniqueidentifier) = CAST('" + personId + "' as uniqueidentifier)";
+                var query = @"Select ge.* from Genres ge " +
+                            "Where CAST(ge.Id as uniqueidentifier) = CAST('" + id + "' as uniqueidentifier)";
 
-                var stories = connection.QueryAsync(query).Result.Select(row =>
-                new Story((Guid)row.Id, (string)row.Title, (string)row.Summary, (StoryType) row.StoryType) {
-                    Thoughts = row.Thoughts
-                });
+                var genre = connection.QueryAsync(query).Result.Select(row =>
+                new Genre((Guid)row.Id, (string)row.Name, (GenreType)row.GenreType)
+                {
+                }).FirstOrDefault();
 
                 await connection.CloseAsync();
 
-                var dic = stories.ToDictionary(s => s.Id);
-                return dic;
-
+                return genre;
             }
         }
     }
