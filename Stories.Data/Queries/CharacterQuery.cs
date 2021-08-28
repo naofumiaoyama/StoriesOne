@@ -29,7 +29,9 @@ namespace Stories.Data.Queries
                              "Where CAST(crs.StoryId as uniqueidentifier) = CAST('" + storyId + "' as uniqueidentifier)";
 
                 var characters = connection.QueryAsync(query).Result.Select(row =>
-                new Character((Guid)row.Id, (string)row.Name, (string)row.Description)
+                new Character((Guid)row.Id,
+                (string)row.Name,
+                (string)row.Description)
                 {
                 });
 

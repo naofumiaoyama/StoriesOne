@@ -35,7 +35,7 @@ namespace Stories.Data.Queries
                                  (string)row.EncryptedPassword,
                                  (string)row.Token,
                                  (string)row.MobileNumber,
-                                 (DateTime)row.BirthDate,
+                                 (DateTime)row.Birthdate,
                                  (Sex)row.Sex,
                                  (MaritalStatus)row.MaritalStatus,
                                  (string)row.EmailAddress1,

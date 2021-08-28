@@ -28,7 +28,9 @@ namespace Stories.Data.Queries
                             "Where CAST(ge.Id as uniqueidentifier) = CAST('" + id + "' as uniqueidentifier)";
 
                 var genre = connection.QueryAsync(query).Result.Select(row =>
-                new Genre((Guid)row.Id, (string)row.Name, (GenreType)row.GenreType)
+                new Genre((Guid)row.Id,
+                (string)row.Name,
+                    (GenreType)row.GenreType)
                 {
                 }).FirstOrDefault();
 

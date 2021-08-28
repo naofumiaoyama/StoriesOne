@@ -29,7 +29,9 @@ namespace Stories.Data.Queries
               " Where CAST(cs.PostId as uniqueidentifier) = CAST('" + postId + "' as uniqueidentifier)";
 
                 var comments = connection.QueryAsync(query).Result.Select(row =>
-                new Comment((Guid)row.Id, (string)row.CommentText, (DateTime)row.PostTime)
+                new Comment((Guid)row.Id,
+                (string)row.CommentText,
+                (DateTime)row.PostTime)
                 {
                 });
 

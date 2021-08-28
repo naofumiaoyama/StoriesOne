@@ -16,9 +16,9 @@ namespace Stories.Test.Stories.Data.Queries
         {
 
             var query = new GenreQuery();
-            var genreId = Guid.Parse("1D675D51-9AB5-4B50-9DCF-1E0DDED73625");
+            var genreId = Guid.Parse("A130CB16-4349-48DB-9E10-764974E4102D");
             var genre =  await query.Get(genreId);
-            Assert.AreEqual(genre.Id, Guid.Parse("1D675D51-9AB5-4B50-9DCF-1E0DDED73625"));
+            Assert.AreEqual(genre.Id, Guid.Parse("A130CB16-4349-48DB-9E10-764974E4102D"));
         }
     }
 }

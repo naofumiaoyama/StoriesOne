@@ -28,7 +28,9 @@ namespace Stories.Data.Queries
                              "where CAST(sto.PersonId as uniqueidentifier) = CAST('" + personId + "' as uniqueidentifier)";
 
                 var stories = connection.QueryAsync(query).Result.Select(row =>
-                new Story((Guid)row.Id, (string)row.Title, (string)row.Summary, (StoryType) row.StoryType) {
+                new Story((Guid)row.Id,
+                (string)row.Title, (string)row.Summary,
+                (StoryType) row.StoryType) {
                     Thoughts = row.Thoughts
                 });
 

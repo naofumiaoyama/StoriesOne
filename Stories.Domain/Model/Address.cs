@@ -34,10 +34,6 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("prefectureName is a required field.");
             }
-            if (string.IsNullOrEmpty(stateName))
-            {
-                throw new ArgumentException("stateName is a required field");
-            }
             if (string.IsNullOrEmpty(cityName))
             {
                 throw new ArgumentException("cityName is a required field.");

@@ -18,7 +18,7 @@ namespace Stories.Domain.Model
             {
                 throw new ArgumentException("name is a required field");
             }
-            if (!GenreType.IsDefined(GenreType))
+            if (!GenreType.IsDefined(genreType))
             {
                 throw new ArgumentException("The genreType has not been defined");
             }

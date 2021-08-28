@@ -26,9 +26,9 @@ namespace Stories.Test.Stories.Data.Repositories
               new DateTime(1971,7,28),
               Sex.Male,
               MaritalStatus.Married,
-              "aoyama1@gmail.com",
+              "aoyama@gmail.com",
               "aoyama2@gmail.com",
-              new Address(Guid.NewGuid(), "3451124", CountryCode.Japan, "日本", "", "埼玉県", "所沢市", "小手指町", "2-2-2", "シャルル111")
+              new Address(Guid.NewGuid(), "3451124", CountryCode.Japan, "日本", "埼玉県", "", "所沢市","小手指町", "2-2-2", "シャルル111")
             ); 
             
             User user = new User(personId,

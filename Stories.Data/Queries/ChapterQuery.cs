@@ -31,7 +31,9 @@ namespace Stories.Data.Queries
                             "Where CAST(chs.StoryId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
 
                 var chapters =  connection.QueryAsync(query).Result.Select(row =>
-                new Chapter((Guid)row.Id, (int)row.Number, (string)row.Content) { });
+                new Chapter((Guid)row.Id,
+                (int)row.Number, 
+                (string)row.Content) { });
 
                 await connection.CloseAsync();
 

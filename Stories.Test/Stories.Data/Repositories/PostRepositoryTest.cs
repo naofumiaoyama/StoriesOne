@@ -22,8 +22,9 @@ namespace Stories.Test.Stories.Data.Repositories
                 GenericRepository<Post>postRepository = new GenericRepository<Post>(context);
                 Post post = new Post();
                 post.Id = Guid.Parse("908FD83F-93C8-41BD-B3CA-438D06996F85");
-                post.StoryId = Guid.Parse("09604DDD-D01A-4307-BD5D-908594216904");
+                post.StoryId = Guid.Parse("FC8849B3-AB67-4D05-8FFA-C2ED67CAC709");
                 post.Title = "Hello";
+                post.PostDateTime = DateTime.Now;
                 
                 await postRepository.Add(post);
 

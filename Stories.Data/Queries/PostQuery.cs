@@ -31,9 +31,8 @@ namespace Stories.Data.Queries
                 var post = connection.QueryAsync(query).Result.Select(row =>
                 new Post((Guid)row.Id,
                         (string)row.Title,
-                        (DateTime)row.postDatetime,
-                        (Story)row.Story,
-                        null)
+                        (DateTime)row.PostDateTime,
+                        null, null)        
                 {
                 }).FirstOrDefault();
 
