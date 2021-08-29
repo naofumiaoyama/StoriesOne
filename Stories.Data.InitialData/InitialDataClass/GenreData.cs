@@ -35,6 +35,16 @@ namespace Stories.Data.InitialData.InitialDataClass
                 genre2.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 genre2.UpdateDate = DateTime.Now;
                 await genreRepository.Add(genre2);
+
+                Genre genre3 = new Genre();
+                genre3.Id = Guid.Parse("64a25e25-2d0b-46e6-8488-dc089bb9a92e");
+                genre3.Name = "SF";
+                genre3.GenreType = GenreType.Media;
+                genre3.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                genre3.CreateDate = DateTime.Now;
+                genre3.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                genre3.UpdateDate = DateTime.Now;
+                await genreRepository.Add(genre2);
             }
         }
 
@@ -48,6 +58,9 @@ namespace Stories.Data.InitialData.InitialDataClass
 
                 var genre2 = genreRepository.Get(Guid.Parse("01CE57F8-C669-43B9-A6E5-3B0E6558838C")).Result;
                 if (genre2 != null) { await genreRepository.Remove(genre2); }
+
+                var genre3 = genreRepository.Get(Guid.Parse("64a25e25-2d0b-46e6-8488-dc089bb9a92e")).Result;
+                if (genre3 != null) { await genreRepository.Remove(genre3); }
             }
         }
     }

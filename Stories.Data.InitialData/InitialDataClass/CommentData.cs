@@ -38,10 +38,10 @@ namespace Stories.Data.InitialData
 
                 await commentRepository.Add(comment2);
 
-                CommentEntity comment3 = new CommentEntity();
+                Comment comment3 = new Comment();
                 comment3.Id = Guid.Parse("a108c926-e915-45d3-8daa-63fca0ddf142");
                 comment3.CommentText = "Abc";
-                comment3.CommentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+                //comment3.CommentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 comment3.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 comment3.CreateDate = DateTime.Now;
                 comment3.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");

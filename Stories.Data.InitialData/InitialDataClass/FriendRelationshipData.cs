@@ -37,7 +37,7 @@ namespace Stories.Data.InitialData
                 friendRelationship2.UpdateDate = DateTime.Now;
                 await friendRelationshipRepository.Add(friendRelationship2);
 
-                FriendRelationshipEntity friendRelationship3 = new FriendRelationshipEntity();
+                FriendRelationship friendRelationship3 = new FriendRelationship();
                 friendRelationship3.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 friendRelationship3.FullName = "Toya Arai";
                 friendRelationship3.FriendPersonId = Guid.Parse("35289062-e681-4ac5-ad9c-24700f967bfb");
