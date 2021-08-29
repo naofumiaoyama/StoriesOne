@@ -5,40 +5,35 @@ namespace Stories.Domain.Model
 {
     public class User : Person
     {
-        public User(Guid id, string firstName, string lastName, PersonType personType)
+        public User(Guid id,
+            string firstName,
+            string lastName,
+            string nickName,
+            PersonalInfo personalInfo,
+            PersonType personType,
+            string displayName,
+            string selfIntroduction,
+            string livingPlace,
+            string occupation,
+            IDictionary<Guid, Story> stories,
+            IDictionary<Guid, User> friends,
+            Picture profilePicture) :
+            base(id, firstName, lastName, nickName, personalInfo, personType)
         {
-            if (Guid.Empty == id)
-            {
-                throw new ArgumentException("id is a required field.");
-            }
-            if (string.IsNullOrEmpty(firstName))
-            {
-                throw new ArgumentException("firstName is a required field.");
-            }
-            if (string.IsNullOrEmpty(lastName))
-            {
-                throw new ArgumentException("lastName is a required field.");
-            }
-            if (!PersonType.IsDefined(personType))
-            {
-                throw new ArgumentException("The personType has not been defined.");
-            }
-
-            base.Id = id;
-            base.FirstName = firstName;
-            base.LastName = lastName;
-            base.PersonType = personType;
+            DisplayName = displayName;
+            SelfIntroduction = selfIntroduction;
+            LivingPlace = livingPlace;
+            Occupation = occupation;
+            Stories = stories;
+            Friends = friends;
+            ProfilePicture = profilePicture;
         }
-        public string DisplayName { get; set; }
-        public string SelfIntroction { get; set; } 
-        public Timeline Timeline { get; set; }
-        public string LivingPlace { get; set; }
-        public string Occupation { get; set; }
-        public IDictionary<Guid, Story> Stories { get; set; }
-        
-        public IDictionary<Guid, User> Friends { get; set; }
-
-        public Picture ProfilePicture { get; set; }
-
+        public string DisplayName { get; private set; }
+        public string SelfIntroduction { get; private set; } 
+        public string LivingPlace { get; private set; }
+        public string Occupation { get; private set; }
+        public IDictionary<Guid, Story> Stories { get; private set; }
+        public IDictionary<Guid, User> Friends { get; private set; }
+        public Picture ProfilePicture { get; private set; }
     }
 }

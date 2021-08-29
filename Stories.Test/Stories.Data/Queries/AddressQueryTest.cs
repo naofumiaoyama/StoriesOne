@@ -19,7 +19,7 @@ namespace Stories.Test.Stories.Data.Queries
             
             var guid = Guid.Parse("2b3cd24f-5802-4d74-bacd-5de67a2b2fcb");
             var address = await query.Get(guid);
-            Assert.AreEqual(address.CountryCode, "1");
+            Assert.AreEqual(address.CountryCode, Domain.Model.CountryCode.Japan);
         }
     }
 }      

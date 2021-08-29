@@ -15,9 +15,10 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<ReactionMarkEntity> reactionMarkRepository = new GenericRepository<ReactionMarkEntity>(context);
-                ReactionMarkEntity reactionMark = new ReactionMarkEntity();
+                GenericRepository<Entities.ReactionMark> reactionMarkRepository = new GenericRepository<Entities.ReactionMark>(context);
+                Entities.ReactionMark reactionMark = new Entities.ReactionMark();
                 reactionMark.Id = Guid.Parse("42697A78-A3B6-4C49-AA5A-9A0F7F9B6405");
+                reactionMark.PostId = Guid.Parse("231A90BC-72E8-4A01-8967-73EE78E0D497");
                 reactionMark.Url = "http://www.shortstories.com";
                 reactionMark.Name = "helloworld";
                 reactionMark.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
@@ -27,8 +28,9 @@ namespace Stories.Data.InitialData
                 await reactionMarkRepository.Add(reactionMark);
 
 
-                ReactionMarkEntity reactionMark2 = new ReactionMarkEntity();
+                Entities.ReactionMark reactionMark2 = new Entities.ReactionMark();
                 reactionMark2.Id = Guid.Parse("529099F0-B652-4CBF-AE9B-27E842B37B0D");
+                reactionMark2.PostId = Guid.Parse("231A90BC-72E8-4A01-8967-73EE78E0D497");
                 reactionMark2.Url = "http://www.short.net";
                 reactionMark2.Name = "Hello";
                 reactionMark2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
@@ -43,7 +45,7 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<ReactionMarkEntity> reactionMarkRepository = new GenericRepository<ReactionMarkEntity>(context);
+                GenericRepository<Entities.ReactionMark> reactionMarkRepository = new GenericRepository<Entities.ReactionMark>(context);
                 var reactionMark1 = reactionMarkRepository.Get(Guid.Parse("42697A78-A3B6-4C49-AA5A-9A0F7F9B6405")).Result;
                 if (reactionMark1 != null) { await reactionMarkRepository.Remove(reactionMark1); }
 

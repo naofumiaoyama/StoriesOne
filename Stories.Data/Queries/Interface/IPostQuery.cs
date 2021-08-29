@@ -9,6 +9,6 @@ namespace Stories.Data.Queries.Interface
 {
     public interface IPostQuery
     {
-        Task<IDictionary<Guid, Post>> Get(Guid guid);
+        Task<Post> Get(Guid id);
     }
 }

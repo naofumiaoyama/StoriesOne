@@ -19,7 +19,17 @@ namespace Stories.Test.Stories.Data.Queries
             Assert.AreEqual(user.Id, Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F"));
             Assert.AreEqual(user.FullName, "Naofumi Aoyama");
             Assert.AreEqual(user.DisplayName, "N.A");
-            //Assert.AreEqual(user.Timeline.TimelineName, "Naofumi Aoyama");
+        }
+
+        [TestMethod]
+        public async Task GetByLoginIdAndPasswordTest()
+        {
+            var query = new UserQuery();
+            var user = await query.GetByLoginIdAndPassword("naofumi.aoyama@gmail.com", "Dm10taQ/oG8bPpJtKFFOOA==");
+            Assert.AreEqual(user.Id, Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F"));
+            Assert.AreEqual(user.FullName, "Naofumi Aoyama");
+            Assert.AreEqual(user.DisplayName, "N.A");
+            Assert.AreEqual(user.PersonalInfo.EncryptedPassword, "Dm10taQ/oG8bPpJtKFFOOA==");
         }
     }
 }      

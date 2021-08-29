@@ -17,7 +17,7 @@ namespace Stories.Data.Queries
         /// </summary>
         /// <param name="guid">Timeline.Id</param>
         /// <returns></returns>
-        public async Task<IDictionary<Guid, Post>> Get(Guid guid)
+        public async Task<Post> Get(Guid Id)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -26,14 +26,19 @@ namespace Stories.Data.Queries
                 await connection.OpenAsync();
 
                 var query = @"Select ps.* from Posts ps " +
-                             "Where CAST(ps.TimelineId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier)";
-                
-                var posts = await connection.QueryAsync<Post>(query);
-                
-                await connection.CloseAsync();
-                var dic = posts.ToDictionary(f => f.Id);
-                return dic;
+                             "Where CAST(ps.Id as uniqueidentifier) = CAST('" + Id + "' as uniqueidentifier)";
 
+                var post = connection.QueryAsync(query).Result.Select(row =>
+                new Post((Guid)row.Id,
+                        (string)row.Title,
+                        (DateTime)row.PostDateTime,
+                        null, null)        
+                {
+                }).FirstOrDefault();
+
+                await connection.CloseAsync();
+
+                return post;
             }
         }
     }

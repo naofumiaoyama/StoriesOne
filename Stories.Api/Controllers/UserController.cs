@@ -25,8 +25,8 @@ namespace Stories.Api.Controllers
         public async Task<User> GetUserWithFriendsAsync(string id)
         {
             UserApplication userApplication = new UserApplication();
-            var user = await userApplication.GetUserWithFriends(id);
-            
+            await userApplication.GetUserWithFriends(id);
+
             return null;
         }
 

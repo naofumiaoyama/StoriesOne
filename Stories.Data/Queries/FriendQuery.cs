@@ -14,9 +14,9 @@ namespace Stories.Data.Queries
         /// <summary>
         /// Getting Friends
         /// </summary>
-        /// <param name="guid">People.Id</param>
+        /// <param name="guid">PersonId</param>
         /// <returns></returns>
-        public async Task<IDictionary<Guid, User>> Get(Guid guid)
+        public async Task<IDictionary<Guid, User>> Get(Guid personId)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -27,19 +27,22 @@ namespace Stories.Data.Queries
                 var query = @"Select pl.* from People pl " +
                              "Where pl.Id In( " +
                              "Select fl.FriendPersonId From FriendRelationships fl " +
-                             "Where CAST(fl.PersonId as uniqueidentifier) = CAST('" + guid + "' as uniqueidentifier))";
-                
+                             "Where CAST(fl.PersonId as uniqueidentifier) = CAST('" + personId + "' as uniqueidentifier))";
 
                 var friends = connection.Query(query).Select(row =>
-                new User((Guid)row.Id, (string)row.FirstName, (string)row.LastName, (PersonType)row.PersonType)
+                new User((Guid)row.Id,
+                        (string)row.FirstName,
+                        (string)row.LastName,
+                        (string)row.NickName,
+                        null,
+                        (PersonType)row.PersonType,
+                        (string)row.DisplayName,
+                        (string)row.SelfIntroduction,
+                        (string)row.LivingPlace,
+                        (string)row.Occupation,
+                        null, null, null)
                 {
-                    MiddleName = row.MiddleName,
-                    DisplayName = row.DisplayName,
-                    SelfIntroction = row.SelfIntroction,
-                    LivingPlace = row.LivingPlace,
-                    Occupation = row.Occupation
                 });
-                await connection.CloseAsync();
 
                 await connection.CloseAsync();
 

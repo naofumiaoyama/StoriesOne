@@ -13,36 +13,32 @@ namespace Stories.Data.Repositories
         }
 
         public async Task CreateUser(User user)
-        {
-            var userConfig = new MapperConfiguration(cfg => cfg.CreateMap<User, PersonEntity>());
-            var userInfoConfig = new MapperConfiguration(cfg => cfg.CreateMap<PersonalInfo, PersonalInfoEntity>());
-            
-            GenericRepository<PersonEntity> personRepository = 
-                new GenericRepository<PersonEntity>(new DatabaseContext());
-            GenericRepository<PersonalInfoEntity> personInfoRepository = 
-                new GenericRepository<PersonalInfoEntity>(new DatabaseContext());
+        { 
+            var userConfig = new MapperConfiguration(cfg => {
+                cfg.CreateMap<User, Entities.Person>();
+                cfg.CreateMap<Stories.Domain.Model.PersonalInfo, Entities.PersonalInfo>();
+            });
+
+            GenericRepository<Entities.Person> personRepository = 
+                new GenericRepository<Entities.Person>(new DatabaseContext());
+            GenericRepository<Entities.PersonalInfo> personInfoRepository = 
+                new GenericRepository<Entities.PersonalInfo>(new DatabaseContext());
 
             var userMapper = new Mapper(userConfig);
-            var personInfoMapper = new Mapper(userInfoConfig);
-
-            var personEntity = userMapper.Map<PersonEntity>(user);
-            var personInfoEntity = personInfoMapper.Map<PersonalInfoEntity>(user.PersonalInfo);
-
-            // Set Encrypted Password
-            personInfoEntity.EncryptedPassword = user.PersonalInfo.EncryptedPassword;
-
+            
+            var personEntity = userMapper.Map<Entities.Person>(user);
+            
             personEntity.CreateDate = DateTime.Now;
             personEntity.CreateUserId = user.Id;
             personEntity.UpdateDate = DateTime.Now;
             personEntity.UpdateUserId = user.Id;
 
-            personInfoEntity.CreateDate = DateTime.Now;
-            personInfoEntity.CreateUserId = user.Id;
-            personInfoEntity.UpdateDate = DateTime.Now;
-            personInfoEntity.UpdateUserId = user.Id;
+            personEntity.PersonalInfo.CreateDate = DateTime.Now;
+            personEntity.PersonalInfo.CreateUserId = user.Id;
+            personEntity.PersonalInfo.UpdateDate = DateTime.Now;
+            personEntity.PersonalInfo.UpdateUserId = user.Id;
 
             await personRepository.Add(personEntity);
-            await personInfoRepository.Add(personInfoEntity);
         }
     }
 }

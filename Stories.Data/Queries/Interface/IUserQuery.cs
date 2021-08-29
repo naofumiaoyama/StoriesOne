@@ -9,6 +9,7 @@ namespace Stories.Data.Queries.Interface
 {
     public interface IUserQuery
     {
-        Task<User> Get(Guid guid);
+        Task<User> Get(Guid id);
+        Task<User> GetByLoginIdAndPassword(string loginId, string encryptedPassword);
     }
 }

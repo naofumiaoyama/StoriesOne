@@ -16,10 +16,10 @@ namespace Stories.Test.Stories.Data.Queries
         public async Task GetTest()
         {
             var query = new PostQuery();
-            var guid = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
+            
             var postGuid = Guid.Parse("231A90BC-72E8-4A01-8967-73EE78E0D497");
-            var posts = await query.Get(guid);
-            Assert.AreEqual(posts[postGuid].Title, "Hello");
+            var post = await query.Get(postGuid);
+            Assert.AreEqual(post.Title, "Hello");
         }
     }
 }      

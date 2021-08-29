@@ -14,11 +14,11 @@ namespace Stories.Data.InitialData
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<CommentEntity>commentRepository = new GenericRepository<CommentEntity>(context);
-                CommentEntity comment1 = new CommentEntity();
+                GenericRepository<Comment>commentRepository = new GenericRepository<Comment>(context);
+                Comment comment1 = new Comment();
                 comment1.Id = Guid.Parse("68AFFD37-1590-4EC9-9596-76A99F3AD892");
+                comment1.PostId = Guid.Parse("231A90BC-72E8-4A01-8967-73EE78E0D497");
                 comment1.CommentText = "Abc";
-                comment1.CommentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 comment1.PostTime = DateTime.Now;
                 comment1.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 comment1.CreateDate = DateTime.Now;
@@ -26,10 +26,10 @@ namespace Stories.Data.InitialData
                 comment1.UpdateDate = DateTime.Now;
                 await commentRepository.Add(comment1);
 
-                CommentEntity comment2 = new CommentEntity();
+                Comment comment2 = new Comment();
                 comment2.Id = Guid.Parse("9C886F4A-5BCE-4FEF-82AB-BF3BB922FACD");
-                comment2.CommentText = "Abc";
-                comment2.CommentPersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
+                comment2.PostId = Guid.Parse("231A90BC-72E8-4A01-8967-73EE78E0D497");
+                comment2.CommentText = "def";
                 comment2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 comment2.CreateDate = DateTime.Now;
                 comment2.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
@@ -56,7 +56,7 @@ namespace Stories.Data.InitialData
 
             using (var context = new DatabaseContext())
             {
-                GenericRepository<CommentEntity> commentRepository = new GenericRepository<CommentEntity>(context);
+                GenericRepository<Comment> commentRepository = new GenericRepository<Comment>(context);
                 var comment1 = commentRepository.Get(Guid.Parse("68AFFD37-1590-4EC9-9596-76A99F3AD892")).Result;
                 if (comment1 != null) { await commentRepository.Remove(comment1); }
 

@@ -19,11 +19,11 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //adding
-                GenericRepository<CommentEntity>commentRepository = new GenericRepository<CommentEntity>(context);
-                CommentEntity comment= new CommentEntity();
+                GenericRepository<Comment>commentRepository = new GenericRepository<Comment>(context);
+                Comment comment= new Comment();
                 comment.Id = Guid.NewGuid();
+                comment.PostId = Guid.Parse("231A90BC-72E8-4A01-8967-73EE78E0D497");
                 comment.CommentText = "Abc";
-                comment.CommentPersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 comment.PostTime = DateTime.Now;
                 await commentRepository.Add(comment);
 
@@ -31,15 +31,12 @@ namespace Stories.Test.Stories.Data.Repositories
                 var getcomment = await commentRepository.Get(comment.Id);
                 Assert.AreEqual(getcomment.Id, comment.Id);
                 Assert.AreEqual(getcomment.CommentText, comment.CommentText);
-                Assert.AreEqual(getcomment.CommentPersonId,comment.CommentPersonId);
                 Assert.AreEqual(getcomment.PostTime, comment.PostTime);
 
                 //Updating
                 comment.CommentText = "CDE";
-                comment.CommentPersonId = Guid.Parse("54AE5D62-D355-46D3-81C7-A35806A4E9BB");
                 var updateComment = await commentRepository.Get(comment.Id);
                 Assert.AreEqual(updateComment.CommentText, comment.CommentText);       
-                Assert.AreEqual(updateComment.CommentPersonId, comment.CommentPersonId);
 
                 //Removing
                 await commentRepository.Remove(comment);

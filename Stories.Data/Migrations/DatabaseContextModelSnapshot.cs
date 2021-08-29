@@ -19,7 +19,7 @@ namespace Stories.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Stories.Data.Entities.AddressEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Address", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -28,8 +28,8 @@ namespace Stories.Data.Migrations
                     b.Property<string>("CityName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CountryCode")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CountryCode")
+                        .HasColumnType("int");
 
                     b.Property<string>("CountryName")
                         .HasColumnType("nvarchar(max)");
@@ -43,13 +43,10 @@ namespace Stories.Data.Migrations
                     b.Property<string>("Others")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PrefectureCode")
+                    b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PrefectureName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StateCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StateName")
@@ -67,22 +64,20 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.BodyEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Chapter", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("BodyContent")
+                    b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ChapterNumber")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -90,8 +85,46 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("CreateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("StoryEntityId")
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("StoryId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UpdateUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id")
+                        .IsClustered(false);
+
+                    b.HasIndex("StoryId");
+
+                    b.ToTable("Chapters");
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Character", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreateUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("StoryId")
                         .HasColumnType("uniqueidentifier");
@@ -102,20 +135,16 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
-                    b.HasIndex("StoryEntityId");
-
-                    b.ToTable("Bodies");
+                    b.ToTable("Characters");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.CommentEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Comment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CommentPersonId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CommentText")
@@ -139,12 +168,15 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
+
+                    b.HasIndex("PostId");
 
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.FriendRelationshipEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.FriendRelationship", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -168,9 +200,6 @@ namespace Stories.Data.Migrations
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("PersonEntityId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("PersonId")
                         .HasColumnType("uniqueidentifier");
 
@@ -180,14 +209,45 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
-                    b.HasIndex("PersonEntityId");
+                    b.HasIndex("PersonId");
 
                     b.ToTable("FriendRelationships");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.PersonEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Genre", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreateUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("GenreType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UpdateUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id")
+                        .IsClustered(false);
+
+                    b.ToTable("Genres");
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Person", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -211,7 +271,7 @@ namespace Stories.Data.Migrations
                     b.Property<string>("LivingPlace")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MiddleName")
+                    b.Property<string>("NickName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Occupation")
@@ -229,12 +289,13 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.ToTable("People");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.PersonalInfoEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.PersonalInfo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -276,18 +337,25 @@ namespace Stories.Data.Migrations
                     b.Property<int>("Sex")
                         .HasColumnType("int");
 
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
+
+                    b.HasIndex("PersonId")
+                        .IsUnique();
 
                     b.ToTable("PersonalInfos");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.PictureEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Picture", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -314,12 +382,13 @@ namespace Stories.Data.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
                     b.ToTable("Pictures");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.PostEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Post", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -334,10 +403,7 @@ namespace Stories.Data.Migrations
                     b.Property<DateTime>("PostDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("TimelineEntityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TimelineId")
+                    b.Property<Guid>("StoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
@@ -349,14 +415,16 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
-                    b.HasIndex("TimelineEntityId");
+                    b.HasIndex("StoryId")
+                        .IsUnique();
 
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.ReactionMarkEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.ReactionMark", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -386,21 +454,18 @@ namespace Stories.Data.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
+
+                    b.HasIndex("PostId");
 
                     b.ToTable("ReactionMarks");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.StoryEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Story", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AuthorName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("AuthorPersonId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreateDate")
@@ -409,10 +474,19 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("CreateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("PersonEntityId")
+                    b.Property<Guid>("GenreId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("PersonId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("StoryType")
+                        .HasColumnType("int");
+
                     b.Property<string>("Summary")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Thoughts")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -424,85 +498,111 @@ namespace Stories.Data.Migrations
                     b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .IsClustered(false);
 
-                    b.HasIndex("PersonEntityId");
+                    b.HasIndex("GenreId");
+
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Stories");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.TimelineEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Chapter", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("CreateUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("OwnerPersonId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("TimelineName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UpdateUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Timelines");
+                    b.HasOne("Stories.Data.Entities.Story", null)
+                        .WithMany("Chapters")
+                        .HasForeignKey("StoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.BodyEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Comment", b =>
                 {
-                    b.HasOne("Stories.Data.Entities.StoryEntity", null)
-                        .WithMany("Bodies")
-                        .HasForeignKey("StoryEntityId");
+                    b.HasOne("Stories.Data.Entities.Post", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.FriendRelationshipEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.FriendRelationship", b =>
                 {
-                    b.HasOne("Stories.Data.Entities.PersonEntity", null)
+                    b.HasOne("Stories.Data.Entities.Person", null)
                         .WithMany("FriendRelationships")
-                        .HasForeignKey("PersonEntityId");
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.PostEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.PersonalInfo", b =>
                 {
-                    b.HasOne("Stories.Data.Entities.TimelineEntity", null)
-                        .WithMany("Posts")
-                        .HasForeignKey("TimelineEntityId");
+                    b.HasOne("Stories.Data.Entities.Person", null)
+                        .WithOne("PersonalInfo")
+                        .HasForeignKey("Stories.Data.Entities.PersonalInfo", "PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.StoryEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Post", b =>
                 {
-                    b.HasOne("Stories.Data.Entities.PersonEntity", null)
+                    b.HasOne("Stories.Data.Entities.Story", null)
+                        .WithOne("Post")
+                        .HasForeignKey("Stories.Data.Entities.Post", "StoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.ReactionMark", b =>
+                {
+                    b.HasOne("Stories.Data.Entities.Post", null)
+                        .WithMany("ReactionMarks")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Story", b =>
+                {
+                    b.HasOne("Stories.Data.Entities.Genre", null)
                         .WithMany("Stories")
-                        .HasForeignKey("PersonEntityId");
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Stories.Data.Entities.Person", null)
+                        .WithMany("Stories")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.PersonEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Genre", b =>
+                {
+                    b.Navigation("Stories");
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Person", b =>
                 {
                     b.Navigation("FriendRelationships");
+
+                    b.Navigation("PersonalInfo");
 
                     b.Navigation("Stories");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.StoryEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Post", b =>
                 {
-                    b.Navigation("Bodies");
+                    b.Navigation("Comments");
+
+                    b.Navigation("ReactionMarks");
                 });
 
-            modelBuilder.Entity("Stories.Data.Entities.TimelineEntity", b =>
+            modelBuilder.Entity("Stories.Data.Entities.Story", b =>
                 {
-                    b.Navigation("Posts");
+                    b.Navigation("Chapters");
+
+                    b.Navigation("Post");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,27 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Stories.Application;
-using Stories.Data.Queries;
 using AutoMapper.Configuration;
+using System.Configuration;
+using Microsoft.IdentityModel.Protocols;
 
 namespace Stories.Test.Stories.Application
 {
-    //[TestClass]
-    //public class AuthenticateApplicationTest
-    //{
-    //    [TestMethod]
-    //    public void AuthenticateTest()
-    //    {
-    //        public IConfiguration Configuration;
+    [TestClass]
+    public class AuthenticateApplicationTest
+    {
+        [TestMethod]
+        public void AuthTest()
+        {
+            AuthenticateApplication authenticateApplication = new AuthenticateApplication();
+            var personalInfo = authenticateApplication.Authenticate("naofumi.aoyama@gmail.com", "Dm10taQ/oG8bPpJtKFFOOA==");
+            Assert.AreEqual(personalInfo.LoginID, "naofumi.aoyama@gmail.com");
+            Assert.AreEqual(personalInfo.EncryptedPassword, "Dm10taQ/oG8bPpJtKFFOOA==");
+            Assert.IsNotNull(personalInfo.Token);
+        }
 
-    //        ////JWT Authentication
-    //        //var appSettings = appSettingsSection.Get<AppSettings>();
-    //        //var key = Encoding.ASCII.GetBytes(appSettings.Key);
-    //        //AuthenticateApplication authenticateApplication = new AuthenticateApplication(;
-    //        //var personalInfo = authenticateApplication.Authenticate("naofumi.aoyama@gmail.com", "Dm10taQ/oG8bPpJtKFFOOA==");
-    //        //Assert.AreEqual(personalInfo.LoginID, "naofumi.aoyama@gmail.com");
-    //        //Assert.AreEqual(personalInfo.EncryptedPassword, "Dm10taQ/oG8bPpJtKFFOOA==");
-    //        //Assert.IsNotNull(personalInfo.Token);
-    //    }
-    //}
+    }
 }

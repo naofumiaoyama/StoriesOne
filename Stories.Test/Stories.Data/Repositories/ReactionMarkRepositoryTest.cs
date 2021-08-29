@@ -19,9 +19,10 @@ namespace Stories.Test.Stories.Data.Repositories
             using (var context = new DatabaseContext())
             {
                 //Adding
-                GenericRepository<ReactionMarkEntity>reactionMarkRepository = new GenericRepository<ReactionMarkEntity>(context);
-                ReactionMarkEntity reactionMark = new ReactionMarkEntity();
+                GenericRepository<ReactionMark>reactionMarkRepository = new GenericRepository<ReactionMark>(context);
+                ReactionMark reactionMark = new ReactionMark();
                 reactionMark.Id = Guid.Parse("347157AA-A162-48A5-94C4-87A023A77A3A");
+                reactionMark.PostId = Guid.Parse("231A90BC-72E8-4A01-8967-73EE78E0D497");
                 reactionMark.Url = "http://www.shortstories.com";
                 reactionMark.Name = "helloworld";
                 await reactionMarkRepository.Add(reactionMark);

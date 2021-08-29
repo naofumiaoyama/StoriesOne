@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,13 +21,33 @@ namespace Stories.Test.Stories.Data.Repositories
         {
             using (var context = new DatabaseContext())
             {
+                // 1000000recoreds
+                GenericRepository<Person> personRepository1 = new GenericRepository<Person>(context);
+               
+                //for (int i = 0; i < 1000000; i++)
+                //{
+                //    Person person1 = new Person();
+                //    person1.Id = Guid.NewGuid();
+                //    person1.PersonType = PersonType.User;
+                //    person1.FirstName = "OtherFirst " + i.ToString();
+                //    person1.MiddleName = "Makio";
+                //    person1.LastName = "OtherLast";
+                //    person1.DisplayName = "N.A";
+                //    person1.SelfIntroduction = "私の自己紹介";
+                //    person1.LivingPlace = "TokorozawaCity";
+                //    person1.Occupation = "Engineer";
+                //    await personRepository1.Add(person1);
+                    
+                //}
+                
+                
                 // Adding
-                GenericRepository<PersonEntity> personRepository = new GenericRepository<PersonEntity>(context);
-                PersonEntity person = new PersonEntity();
+                GenericRepository<Person> personRepository = new GenericRepository<Person>(context);
+                Person person = new Person();
                 person.Id = Guid.Parse("B87DD83A-7F89-4AD0-BB4E-E94518F8A677");
                 person.PersonType = PersonType.User;
                 person.FirstName = "OtherFirst";
-                person.MiddleName = "Makio";
+                person.NickName = "Makio";
                 person.LastName = "OtherLast";
                 person.DisplayName = "N.A";
                 person.SelfIntroduction = "私の自己紹介";

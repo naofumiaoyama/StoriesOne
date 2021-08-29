@@ -18,9 +18,9 @@ namespace Stories.Test.Stories.Data.Repositories
         {
             using (var context = new DatabaseContext())
             {
-                GenericRepository<PersonalInfoEntity> personalInfoRepository = new GenericRepository<PersonalInfoEntity>(context);
+                GenericRepository<PersonalInfo> personalInfoRepository = new GenericRepository<PersonalInfo>(context);
                 //adding
-                PersonalInfoEntity personalInfo = new PersonalInfoEntity();
+                PersonalInfo personalInfo = new PersonalInfo();
                 personalInfo.Id = Guid.Parse("69da8943-2dbf-4c2b-842d-b328c704be29");
                 personalInfo.PersonId = Guid.Parse("0389C8FF-2B0F-4215-8F47-DD58C69CA17C");
                 personalInfo.LoginId = "chisumiAoyama@gmail.com";
