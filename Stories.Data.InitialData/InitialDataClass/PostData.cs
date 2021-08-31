@@ -47,6 +47,9 @@ namespace Stories.Data.InitialData
                 GenericRepository<Post> postRepository = new GenericRepository<Post>(context);
                 var post1 = postRepository.Get(Guid.Parse("231A90BC-72E8-4A01-8967-73EE78E0D497")).Result;
                 if (post1 != null) { await postRepository.Remove(post1); }
+
+                var post2 = postRepository.Get(Guid.Parse("BD640647-F214-4661-8DAD-A097D33B665C")).Result;
+                if (post2 != null) { await postRepository.Remove(post1); }
             }
         }
     }
