@@ -30,6 +30,7 @@ namespace Stories.Data
         public DbSet<Chapter> Chapters { get; set; }
         public DbSet<Character> Characters { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -67,6 +68,9 @@ namespace Stories.Data
                 .HasKey(e => e.Id)
                 .IsClustered(false);
             modelBuilder.Entity<Genre>()
+                .HasKey(e => e.Id)
+                .IsClustered(false);
+            modelBuilder.Entity<Notification>()
                 .HasKey(e => e.Id)
                 .IsClustered(false);
         }

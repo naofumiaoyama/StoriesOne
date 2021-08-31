@@ -8,7 +8,7 @@ namespace Stories.Domain.Model
 {
     public abstract class Person
     {
-        protected Person(Guid id, string firstName, string lastName, string nickName, PersonalInfo personalInfo, PersonType personType)
+        public  Person(Guid id, string firstName, string lastName, string nickName, PersonalInfo personalInfo, PersonType personType)
         {
             if (Guid.Empty == id)
             {

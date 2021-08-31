@@ -27,8 +27,8 @@ namespace Stories.Data.InitialData.InitialDataClass
                 await genreRepository.Add(genre);
 
                 Genre genre2 = new Genre();
-                genre2.Id = Guid.Parse("01CE57F8-C669-43B9-A6E5-3B0E6558838C");
-                genre2.Name = "Novel";
+                genre2.Id = Guid.Parse("7222231D-7EF9-490B-9548-6D6C161F2329");
+                genre2.Name = "Comic";
                 genre2.GenreType = GenreType.Media;
                 genre2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 genre2.CreateDate = DateTime.Now;

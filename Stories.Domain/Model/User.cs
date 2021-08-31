@@ -29,7 +29,7 @@ namespace Stories.Domain.Model
             ProfilePicture = profilePicture;
         }
         public string DisplayName { get; private set; }
-        public string SelfIntroduction { get; private set; } 
+        public string SelfIntroduction { get; private set; }
         public string LivingPlace { get; private set; }
         public string Occupation { get; private set; }
         public IDictionary<Guid, Story> Stories { get; private set; }

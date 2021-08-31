@@ -10,8 +10,8 @@ using Stories.Data;
 namespace Stories.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210827123036_First")]
-    partial class First
+    [Migration("20210831084840_Second")]
+    partial class Second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -247,6 +247,29 @@ namespace Stories.Data.Migrations
                         .IsClustered(false);
 
                     b.ToTable("Genres");
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Notification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Contents")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("DispImageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UrlLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id")
+                        .IsClustered(false);
+
+                    b.HasIndex("DispImageId");
+
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.Person", b =>
@@ -535,6 +558,15 @@ namespace Stories.Data.Migrations
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Stories.Data.Entities.Notification", b =>
+                {
+                    b.HasOne("Stories.Data.Entities.Picture", "DispImage")
+                        .WithMany()
+                        .HasForeignKey("DispImageId");
+
+                    b.Navigation("DispImage");
                 });
 
             modelBuilder.Entity("Stories.Data.Entities.PersonalInfo", b =>
