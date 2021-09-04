@@ -32,7 +32,7 @@ namespace Stories.Data.InitialData
                 Story story2 = new Story();
                 story2.Id = Guid.Parse("4EADAFCD-7585-492C-A39D-878715441048");
                 story2.PersonId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
-                story2.GenreId = Guid.Parse("01CE57F8-C669-43B9-A6E5-3B0E6558838C");
+                story2.GenreId = Guid.Parse("F16815B8-B7C1-4CF8-BE95-678990A5DB25");
                 story2.Title = "Lovebirds";
                 story2.Summary = "The two people who believe that love knows no age";
                 story2.Thoughts = "Thats good2";
@@ -46,7 +46,7 @@ namespace Stories.Data.InitialData
                 Story story3 = new Story();
                 story3.Id = Guid.Parse("FC8849B3-AB67-4D05-8FFA-C2ED67CAC709");
                 story3.PersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
-                story3.GenreId = Guid.Parse("01CE57F8-C669-43B9-A6E5-3B0E6558838C");
+                story3.GenreId = Guid.Parse("F16815B8-B7C1-4CF8-BE95-678990A5DB25");
                 story3.Title = "Lovebirds2";
                 story3.Summary = "The two people who believe that love knows no age";
                 story3.Thoughts = "Thats good3";

@@ -27,8 +27,8 @@ namespace Stories.Data.InitialData.InitialDataClass
                 await genreRepository.Add(genre);
 
                 Genre genre2 = new Genre();
-                genre2.Id = Guid.Parse("7222231D-7EF9-490B-9548-6D6C161F2329");
-                genre2.Name = "Comic";
+                genre2.Id = Guid.Parse("F16815B8-B7C1-4CF8-BE95-678990A5DB25");
+                genre2.Name = "Novel";
                 genre2.GenreType = GenreType.Media;
                 genre2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 genre2.CreateDate = DateTime.Now;
@@ -44,7 +44,7 @@ namespace Stories.Data.InitialData.InitialDataClass
                 genre3.CreateDate = DateTime.Now;
                 genre3.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 genre3.UpdateDate = DateTime.Now;
-                await genreRepository.Add(genre2);
+                await genreRepository.Add(genre3);
             }
         }
 
@@ -56,7 +56,7 @@ namespace Stories.Data.InitialData.InitialDataClass
                 var genre1 = genreRepository.Get(Guid.Parse("A130CB16-4349-48DB-9E10-764974E4102D")).Result;
                 if (genre1 != null) { await genreRepository.Remove(genre1); }
 
-                var genre2 = genreRepository.Get(Guid.Parse("01CE57F8-C669-43B9-A6E5-3B0E6558838C")).Result;
+                var genre2 = genreRepository.Get(Guid.Parse("F16815B8-B7C1-4CF8-BE95-678990A5DB25")).Result;
                 if (genre2 != null) { await genreRepository.Remove(genre2); }
 
                 var genre3 = genreRepository.Get(Guid.Parse("64a25e25-2d0b-46e6-8488-dc089bb9a92e")).Result;
