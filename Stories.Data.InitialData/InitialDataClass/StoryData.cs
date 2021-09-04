@@ -46,7 +46,7 @@ namespace Stories.Data.InitialData
                 Story story3 = new Story();
                 story3.Id = Guid.Parse("FC8849B3-AB67-4D05-8FFA-C2ED67CAC709");
                 story3.PersonId = Guid.Parse("F7A70CB7-F46D-4A94-88CD-6B0284CBE96F");
-                story3.GenreId = Guid.Parse("01CE57F8-C669-43B9-A6E5-3B0E6558838C");
+                story3.GenreId = Guid.Parse("64A25E25-2D0B-46E6-8488-DC089BB9A92E");
                 story3.Title = "Lovebirds2";
                 story3.Summary = "The two people who believe that love knows no age";
                 story3.Thoughts = "Thats good3";
