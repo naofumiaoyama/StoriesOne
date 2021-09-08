@@ -10,8 +10,8 @@ using Stories.Data;
 namespace Stories.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210831084840_Second")]
-    partial class Second
+    [Migration("20210907023349_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -258,7 +258,19 @@ namespace Stories.Data.Migrations
                     b.Property<string>("Contents")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreateUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("DispImageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UrlLink")

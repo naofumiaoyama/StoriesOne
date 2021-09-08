@@ -256,7 +256,19 @@ namespace Stories.Data.Migrations
                     b.Property<string>("Contents")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreateUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("DispImageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UpdateUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UrlLink")

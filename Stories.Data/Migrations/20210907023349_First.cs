@@ -207,6 +207,31 @@ namespace Stories.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DispImageId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Contents = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UrlLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.Id)
+                        .Annotation("SqlServer:Clustered", false);
+                    table.ForeignKey(
+                        name: "FK_Notifications_Pictures_DispImageId",
+                        column: x => x.DispImageId,
+                        principalTable: "Pictures",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Chapters",
                 columns: table => new
                 {
@@ -324,6 +349,11 @@ namespace Stories.Data.Migrations
                 column: "PersonId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Notifications_DispImageId",
+                table: "Notifications",
+                column: "DispImageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PersonalInfos_PersonId",
                 table: "PersonalInfos",
                 column: "PersonId",
@@ -369,13 +399,16 @@ namespace Stories.Data.Migrations
                 name: "FriendRelationships");
 
             migrationBuilder.DropTable(
+                name: "Notifications");
+
+            migrationBuilder.DropTable(
                 name: "PersonalInfos");
 
             migrationBuilder.DropTable(
-                name: "Pictures");
+                name: "ReactionMarks");
 
             migrationBuilder.DropTable(
-                name: "ReactionMarks");
+                name: "Pictures");
 
             migrationBuilder.DropTable(
                 name: "Posts");

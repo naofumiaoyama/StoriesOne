@@ -29,7 +29,8 @@ namespace Stories.Data.Queries
 
                 var stories = connection.QueryAsync(query).Result.Select(row =>
                 new Story((Guid)row.Id,
-                (string)row.Title, (string)row.Summary,
+                (string)row.Title,
+                (string)row.Summary,
                 (StoryType) row.StoryType) {
                     Thoughts = row.Thoughts
                 });
