@@ -64,7 +64,7 @@ namespace Stories.Data.InitialData
                 address3.CreateDate = DateTime.Now;
                 address3.UpdateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 address3.UpdateDate = DateTime.Now;
-                await addressRepository.Add(address3);
+                await addressRepository.Add(address3);//
 
 
             }
