@@ -99,6 +99,5 @@ namespace Stories.Domain.Model
         Married = 2,
         Divorced = 3,
         Windowed = 4,
-        Complicated = 5
     }   
 }

@@ -29,16 +29,16 @@ namespace Stories.Domain.Model
             this.Summary = summary;
             this.StoryType = storyType;
         }
-        public Guid Id { get; set; }
-        public StoryType StoryType { get; set; }
-        public string Title { get; set; }
-        public string Summary { get; set; }
-        public string Thoughts { get; set; }
-        public Genre Genre { get; set; }
-        public IDictionary<Guid, Chapter> Chapters { get; set; }
-        public IDictionary<Guid, Character> Characters { get; set; }
-        public DateTime CreateDate { get; set;}
-        public DateTime UpdateDate { get; set;}
+        public Guid Id { get; private set; }
+        public StoryType StoryType { get; private  set; }
+        public string Title { get; private set; }
+        public string Summary { get; private set; }
+        public string Thoughts { get; private set; }
+        public Genre Genre { get; private set; }
+        public IDictionary<Guid, Chapter> Chapters { get; private set; }
+        public IDictionary<Guid, Character> Characters { get; private set; }
+        public DateTime CreateDate { get; private set;}
+        public DateTime UpdateDate { get; private set;}
     }
 
     public enum StoryType

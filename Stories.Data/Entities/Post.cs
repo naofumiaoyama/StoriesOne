@@ -15,7 +15,6 @@ namespace Stories.Data.Entities
         public DateTime PostDateTime { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<ReactionMark> ReactionMarks { get; set; }
-
     }
 }    
 

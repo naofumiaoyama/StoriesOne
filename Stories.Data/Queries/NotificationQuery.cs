@@ -10,12 +10,15 @@ using Stories.Domain.Model;
 
 namespace Stories.Data.Queries
 {
-    /// <summary>
-    /// 
-    /// </summary>
+   
     public class NotificationQuery : INotificationQuery
     {
-        public async Task<Notification> Get(Guid id)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="notificationid"></param>
+        /// <returns></returns>
+        public async Task<Notification> Get(Guid notificationid)
         {
             using (var connection = new SqlConnection())
             using (var command = new SqlCommand())
@@ -24,7 +27,7 @@ namespace Stories.Data.Queries
                 await connection.OpenAsync();
 
                 var query = @"select ns.* from Notifications ns " +
-                 "Where CAST(ns.Id as uniqueidentifier) = CAST('" + id + "' as uniqueidentifier)";
+                 "Where CAST(ns.Id as uniqueidentifier) = CAST('" + notificationid + "' as uniqueidentifier)";
 
                 var notification = connection.QueryAsync(query).Result.Select(row =>
                 new Notification((Guid)row.Id,

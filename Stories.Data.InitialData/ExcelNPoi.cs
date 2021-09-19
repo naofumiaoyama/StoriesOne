@@ -91,15 +91,17 @@ namespace Stories.Data.InitialData
             var sheetPeople = storiesBook.GetSheet("People");
             var sheetAddress = storiesBook.GetSheet("Addresses");
             var sheetTimeline = storiesBook.GetSheet("Timelines");
-            var sheetPost = storiesBook.GetSheet("Posts");
             var sheetComment = storiesBook.GetSheet("Comments");
-            var sheetBody = storiesBook.GetSheet("Bodies");
+            var sheetChapter = storiesBook.GetSheet("Chapters");
             var sheetFriendRelationship = storiesBook.GetSheet("FriendRelationships");
+            var sheetGenre = storiesBook.GetSheet("Genres");
             var sheetStory = storiesBook.GetSheet("Stories");
+            var sheetPost = storiesBook.GetSheet("Posts");
             var sheetPersonalInfo = storiesBook.GetSheet("PersonalInfos");
             var sheetReactionMark = storiesBook.GetSheet("ReactionMarks");
             var sheetPicture = storiesBook.GetSheet("Pictures");
             var sheetCharacter = storiesBook.GetSheet("Characters");
+            var sheetNotification = storiesBook.GetSheet("Notifications");
 
             using (var context = new DatabaseContext())
             {
@@ -159,7 +161,46 @@ namespace Stories.Data.InitialData
                         addressMapper.Map<Address, Address>(address, getAddress);
                         await addressRepository.Update(getAddress);
                     }
-                } 
+                }
+
+                GenericRepository<Genre> genreRepository = new GenericRepository<Genre>(context);
+                var lstgenres = GetTableDictionary(sheetGenre);
+                foreach (var dicGenre in lstgenres)
+                {
+                    var genre = SetGenreEntity(dicGenre);
+                    var getGenre = await genreRepository.Get(genre.Id);
+                    if (getGenre == null)
+                    {
+                        await genreRepository.Add(genre);
+                    }
+                    else
+                    {
+                        var genreConfig = new MapperConfiguration(cfg => cfg.CreateMap<Genre, Genre>());
+                        var genreMapper = new Mapper(genreConfig);
+                        genreMapper.Map<Genre, Genre>(genre, getGenre);
+                        await genreRepository.Update(getGenre);
+                    }
+                }
+
+                GenericRepository<Story> storyRepository = new GenericRepository<Story>(context);
+                var lstStory = GetTableDictionary(sheetStory);
+                foreach(var dicStory in lstStory)
+                {
+                    var story = SetStoryEntity(dicStory);
+                    var getStory = await storyRepository.Get(story.Id);
+                    if (getStory == null) 
+                    {
+                        await storyRepository.Add(story);
+                    }
+                    else
+                    {
+                        var storyConfig = new MapperConfiguration(cfg => cfg.CreateMap<Story, Story>());
+                        var storyMapper = new Mapper(storyConfig);
+                        storyMapper.Map<Story, Story>(story, getStory);
+                        await storyRepository.Update(getStory);
+                    }
+                }
+
 
                 GenericRepository<Post> postRepository = new GenericRepository<Post>(context);
                 var lstPost = GetTableDictionary(sheetPost);
@@ -201,31 +242,12 @@ namespace Stories.Data.InitialData
                     }
                 }
 
-                GenericRepository<Story> storyRepository = new GenericRepository<Story>(context);
-                var lstStories = GetTableDictionary(sheetStory);
-                foreach (var dicstory in lstStories)
-
-                {
-                    var story = SetStoryEntity(dicstory);
-                    var getStory = await storyRepository.Get(story.Id);
-                    if (getStory == null)
-                    {
-                        await storyRepository.Add(story);
-                    }
-                    else
-                    {
-                        var storyConfig = new MapperConfiguration(cfg => cfg.CreateMap<Story, Story>());
-                        var storyMapper = new Mapper(storyConfig);
-                        storyMapper.Map<Story, Story>(story, getStory);
-                        await storyRepository.Update(getStory);
-                    }
-                }
 
                 GenericRepository<Chapter> chapterRepository = new GenericRepository<Chapter>(context);
-                var lstBodies = GetTableDictionary(sheetBody);
-                foreach(var dicbody in lstBodies)
+                var lstChapters = GetTableDictionary(sheetChapter);
+                foreach(var dichapter in lstChapters)
                 {
-                    var chapter = SetChapterEntity(dicbody);
+                    var chapter = SetChapterEntity(dichapter);
                     var getChapter = await chapterRepository.Get(chapter.Id);
                     if (getChapter == null)
                     {
@@ -239,6 +261,8 @@ namespace Stories.Data.InitialData
                         await chapterRepository.Update(getChapter);
                     }
                 }
+
+
 
                 GenericRepository<FriendRelationship> friendRelationshipRepository = new GenericRepository<FriendRelationship>(context);
                 var lstFriendRelationships = GetTableDictionary(sheetFriendRelationship);
@@ -315,6 +339,25 @@ namespace Stories.Data.InitialData
                         await characterRepository.Update(getCharacter);
                     }
                 }
+
+                GenericRepository<Notification> notificationRepository = new GenericRepository<Notification>(context);
+                var lstnotifications = GetTableDictionary(sheetNotification);
+                foreach (var dicNotification in lstnotifications)
+                {
+                    var notification = SetNotificationEntity(dicNotification);
+                    var getNotification = await notificationRepository.Get(notification.Id);
+                    if (getNotification == null)
+                    {
+                        await notificationRepository.Add(notification);
+                    }
+                    else
+                    {
+                        var notificationConfig = new MapperConfiguration(cfg => cfg.CreateMap<Notification, Notification>());
+                        var notificationMapper = new Mapper(notificationConfig);
+                        notificationMapper.Map<Notification, Notification>(notification, getNotification);
+                        await notificationRepository.Update(getNotification);
+                    }
+                }
             }
             
         }
@@ -383,11 +426,11 @@ namespace Stories.Data.InitialData
             person.FirstName = dic[1].GetStringValue();
             person.NickName = dic[2].GetStringValue();
             person.LastName = dic[3].GetStringValue();
-            person.PersonType = (PersonType)dic[4].GetIntValue();
-            person.DisplayName = dic[5].GetStringValue();
-            person.SelfIntroduction = dic[6].GetStringValue();
-            person.LivingPlace = dic[7].GetStringValue();
-            person.Occupation = dic[8].GetStringValue();
+            person.DisplayName = dic[4].GetStringValue();
+            person.SelfIntroduction = dic[5].GetStringValue();
+            person.LivingPlace = dic[6].GetStringValue();
+            person.Occupation = dic[7].GetStringValue();
+            person.PersonType = (PersonType)dic[8].GetIntValue();
             person.CreateUserId = dic[9].GetGuidValue();
             person.CreateDate = dic[10].GetDateTimeValue();
             person.UpdateUserId = dic[11].GetGuidValue();
@@ -418,6 +461,40 @@ namespace Stories.Data.InitialData
             return address;
         }
 
+        private Genre SetGenreEntity(Dictionary<int, CellValueInfo> dic)
+        {
+            Data.Entities.Genre genre = new Genre();
+
+            genre.Id = dic[0].GetGuidValue();
+            genre.Name = dic[1].GetStringValue();
+            genre.GenreType = (GenreType)dic[2].GetIntValue();
+            genre.CreateUserId = dic[3].GetGuidValue();
+            genre.CreateDate = dic[4].GetDateTimeValue();
+            genre.UpdateUserId = dic[5].GetGuidValue();
+            genre.UpdateDate = dic[6].GetDateTimeValue();
+
+            return genre;
+        }
+
+        private Story SetStoryEntity(Dictionary<int, CellValueInfo> dic)
+        {
+            Data.Entities.Story story = new Story();
+
+            story.Id = dic[0].GetGuidValue();
+            story.PersonId = dic[1].GetGuidValue();
+            story.StoryType = (StoryType)dic[2].GetIntValue();
+            story.Title = dic[3].GetStringValue();
+            story.Summary = dic[4].GetStringValue();
+            story.Thoughts = dic[5].GetStringValue();
+            story.GenreId = dic[6].GetGuidValue();
+            story.CreateUserId = dic[7].GetGuidValue();
+            story.CreateDate = dic[8].GetDateTimeValue();
+            story.UpdateUserId = dic[9].GetGuidValue();
+            story.UpdateDate = dic[10].GetDateTimeValue();
+
+            return story;
+        }
+
         private Post SetPostEntity(Dictionary<int, CellValueInfo> dic)
         {
             Data.Entities.Post post = new Post();
@@ -425,11 +502,11 @@ namespace Stories.Data.InitialData
             post.Id = dic[0].GetGuidValue();
             post.StoryId = dic[1].GetGuidValue();
             post.Title = dic[2].GetStringValue();
-            post.PostDateTime = (DateTime)dic[3].GetDateTimeValue();
+            post.PostDateTime = dic[3].GetDateTimeValue();
             post.CreateUserId = dic[4].GetGuidValue();
-            post.CreateDate = (DateTime)dic[5].GetDateTimeValue();
+            post.CreateDate = dic[5].GetDateTimeValue();
             post.UpdateUserId = dic[6].GetGuidValue();
-            post.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
+            post.UpdateDate = dic[7].GetDateTimeValue();
 
             return post;
         }
@@ -440,12 +517,12 @@ namespace Stories.Data.InitialData
 
             comment.Id = dic[0].GetGuidValue();
             comment.PostId = dic[1].GetGuidValue();
-            comment.CommentText = dic[3].GetStringValue();
-            comment.PostTime = (DateTime)dic[4].GetDateTimeValue();
-            comment.CreateUserId = dic[5].GetGuidValue();
-            comment.CreateDate = (DateTime)dic[6].GetDateTimeValue();
-            comment.UpdateUserId = dic[7].GetGuidValue();
-            comment.UpdateDate = (DateTime)dic[8].GetDateTimeValue();
+            comment.CommentText = dic[2].GetStringValue();
+            comment.PostTime = dic[3].GetDateTimeValue();
+            comment.CreateUserId = dic[4].GetGuidValue();
+            comment.CreateDate = dic[5].GetDateTimeValue();
+            comment.UpdateUserId = dic[6].GetGuidValue();
+            comment.UpdateDate = dic[7].GetDateTimeValue();
 
             return comment;
         }
@@ -457,14 +534,17 @@ namespace Stories.Data.InitialData
             chapter.Id = dic[0].GetGuidValue();
             chapter.StoryId = dic[1].GetGuidValue();
             chapter.Number = dic[2].GetIntValue();
-            chapter.Content = dic[3].GetStringValue();
-            chapter.CreateUserId = dic[4].GetGuidValue();
-            chapter.CreateDate = (DateTime)dic[5].GetDateTimeValue();
-            chapter.UpdateUserId = dic[6].GetGuidValue();
-            chapter.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
+            chapter.Title = dic[3].GetStringValue();
+            chapter.Content = dic[4].GetStringValue();
+            chapter.CreateUserId = dic[5].GetGuidValue();
+            chapter.CreateDate = dic[6].GetDateTimeValue();
+            chapter.UpdateUserId = dic[7].GetGuidValue();
+            chapter.UpdateDate = dic[8].GetDateTimeValue();
 
             return chapter;
         }
+
+
 
         private FriendRelationship SetFriendRelationashipEntity(Dictionary<int, CellValueInfo> dic)
         {
@@ -475,33 +555,17 @@ namespace Stories.Data.InitialData
             friendRelationship.FullName = dic[2].GetStringValue();
             friendRelationship.FriendPersonId = dic[3].GetGuidValue();
             friendRelationship.FriendFullName = dic[4].GetStringValue();
-            friendRelationship.FriendshipDateTime = (DateTime)dic[5].GetDateTimeValue();
+            friendRelationship.FriendshipDateTime = dic[5].GetDateTimeValue();
             friendRelationship.CreateUserId = dic[6].GetGuidValue();
-            friendRelationship.CreateDate = (DateTime)dic[7].GetDateTimeValue();
+            friendRelationship.CreateDate = dic[7].GetDateTimeValue();
             friendRelationship.UpdateUserId = dic[8].GetGuidValue();
-            friendRelationship.UpdateDate = (DateTime)dic[9].GetDateTimeValue();
+            friendRelationship.UpdateDate = dic[9].GetDateTimeValue();
 
             return friendRelationship;
         }
 
-        private Story SetStoryEntity(Dictionary<int, CellValueInfo> dic)
-        {
-            Data.Entities.Story story = new Story();
-
-            story.Id = dic[0].GetGuidValue();
-            story.PersonId = dic[1].GetGuidValue();
-            story.Title = dic[2].GetStringValue();
-            story.Summary = dic[3].GetStringValue();
-            story.CreateUserId = dic[4].GetGuidValue();
-            story.CreateDate = (DateTime)dic[5].GetDateTimeValue();
-            story.UpdateUserId = dic[6].GetGuidValue();
-            story.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
-
-            return story;
-        }
 
         private PersonalInfo SetPersonalInfoEntity(Dictionary<int, CellValueInfo> dic)
-        
         {
             Data.Entities.PersonalInfo personalInfo = new PersonalInfo();
 
@@ -509,17 +573,18 @@ namespace Stories.Data.InitialData
             personalInfo.PersonId = dic[1].GetGuidValue();
             personalInfo.LoginId = dic[2].GetStringValue();
             personalInfo.EncryptedPassword = dic[3].GetStringValue();
-            personalInfo.MobileNumber = dic[4].GetStringValue();
-            personalInfo.Sex = (SexEnum)dic[5].GetIntValue();
-            personalInfo.Birthdate = (DateTime)dic[6].GetDateTimeValue();
-            personalInfo.MaritalStatus = (MaritalStatusEnum)dic[7].GetIntValue();
-            personalInfo.EmailAddress1 = dic[8].GetStringValue();
-            personalInfo.EmailAddress2 = dic[9].GetStringValue();
-            personalInfo.AddressId = dic[10].GetGuidValue();
-            personalInfo.CreateUserId = dic[11].GetGuidValue();
-            personalInfo.CreateDate = (DateTime)dic[12].GetDateTimeValue();
-            personalInfo.UpdateUserId = dic[13].GetGuidValue();
-            personalInfo.UpdateDate = (DateTime)dic[14].GetDateTimeValue();
+            personalInfo.Token = dic[4].GetStringValue();
+            personalInfo.MobileNumber = dic[5].GetStringValue();
+            personalInfo.Sex = (SexEnum)dic[6].GetIntValue();
+            personalInfo.Birthdate = dic[7].GetDateTimeValue();
+            personalInfo.MaritalStatus = (MaritalStatusEnum)dic[8].GetIntValue();
+            personalInfo.EmailAddress1 = dic[9].GetStringValue();
+            personalInfo.EmailAddress2 = dic[10].GetStringValue();
+            personalInfo.AddressId = dic[11].GetGuidValue();
+            personalInfo.CreateUserId = dic[12].GetGuidValue();
+            personalInfo.CreateDate = dic[13].GetDateTimeValue();
+            personalInfo.UpdateUserId = dic[14].GetGuidValue();
+            personalInfo.UpdateDate = dic[15].GetDateTimeValue();
 
             return personalInfo;
         }
@@ -534,9 +599,9 @@ namespace Stories.Data.InitialData
             reactionMark.Name = dic[3].GetStringValue();
             reactionMark.Clicked = dic[4].GetBoolValue();
             reactionMark.CreateUserId = dic[5].GetGuidValue();
-            reactionMark.CreateDate = (DateTime)dic[6].GetDateTimeValue();
+            reactionMark.CreateDate = dic[6].GetDateTimeValue();
             reactionMark.UpdateUserId = dic[7].GetGuidValue();
-            reactionMark.UpdateDate = (DateTime)dic[8].GetDateTimeValue();
+            reactionMark.UpdateDate = dic[8].GetDateTimeValue();
 
             return reactionMark;
         }
@@ -550,9 +615,9 @@ namespace Stories.Data.InitialData
             picture.PictureOwnerType = (PictureOwnerType)dic[2].GetIntValue();
             picture.Url = dic[3].GetStringValue();
             picture.CreateUserId = dic[4].GetGuidValue();
-            picture.CreateDate = (DateTime)dic[5].GetDateTimeValue();
+            picture.CreateDate = dic[5].GetDateTimeValue();
             picture.UpdateUserId = dic[6].GetGuidValue();
-            picture.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
+            picture.UpdateDate = dic[7].GetDateTimeValue();
 
             return picture;
         }
@@ -566,12 +631,33 @@ namespace Stories.Data.InitialData
             character.Name = dic[2].GetStringValue();
             character.Description = dic[3].GetStringValue();
             character.CreateUserId = dic[4].GetGuidValue();
-            character.CreateDate = (DateTime)dic[5].GetDateTimeValue();
+            character.CreateDate = dic[5].GetDateTimeValue();
             character.UpdateUserId = dic[6].GetGuidValue();
-            character.UpdateDate = (DateTime)dic[7].GetDateTimeValue();
+            character.UpdateDate = dic[7].GetDateTimeValue();
 
             return character;
         }
+
+        private Notification SetNotificationEntity(Dictionary<int, CellValueInfo> dic)
+        {
+            Data.Entities.Notification notification = new Notification();
+            Picture picture = new Picture();
+            picture.Id = Guid.NewGuid();
+            picture.PictureOwnerType = PictureOwnerType.Person;
+            picture.Url = "Https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.forkknifeswoon.com%2Fwp-content%2Fuploads%2F2014%2F10%2Fsimple-homemade-chicken-ramen-fork-knife-swoon-01.jpg&imgrefurl=https%3A%2F%2Fwww.forkknifeswoon.com%2Fsimple-homemade-chicken-ramen%2F&tbnid=xvuanwzsBotXAM&vet=12ahUKEwi0q92A1t_yAhVK95QKHfbIAT4QMygBegUIARDfAQ..i&docid=Pt4KygPKLwIZ3M&w=690&h=862&itg=1&q=ramen%20pic&ved=2ahUKEwi0q92A1t_yAhVK95QKHfbIAT4QMygBegUIARDfAQ";
+            
+            notification.Id = dic[0].GetGuidValue();
+            notification.DispImage = picture;
+            notification.Contents = dic[2].GetStringValue();
+            notification.UrlLink = dic[3].GetStringValue();
+            notification.CreateUserId = dic[4].GetGuidValue();
+            notification.CreateDate = dic[5].GetDateTimeValue();
+            notification.UpdateUserId = dic[6].GetGuidValue();
+            notification.UpdateDate = dic[7].GetDateTimeValue();
+
+            return notification;
+        }
+
 
 
         public class CellValueInfo

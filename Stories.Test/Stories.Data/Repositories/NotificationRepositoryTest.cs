@@ -24,10 +24,10 @@ namespace Stories.Test.Stories.Data.Repositories
                 //adding
                 Notification notification = new Notification();
                 Picture picture = new Picture();
-                notification.Id = Guid.Parse("2CBE22F9-99F0-42AD-9779-255B8F781FE4");
-               //icture.Id = Guid.Parse("5EDF933F-6D19-4255-B195-C5709C1B3A26");
+                picture.Id = Guid.NewGuid();
                 picture.PictureOwnerType = PictureOwnerType.Person;
-                picture.Url = "Https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.forkknifeswoon.com%2Fwp-content%2Fuploads%2F2014%2F10%2Fsimple-homemade-chicken-ramen-fork-knife-swoon-01.jpg&imgrefurl=https%3A%2F%2Fwww.forkknifeswoon.com%2Fsimple-homemade-chicken-ramen%2F&tbnid=xvuanwzsBotXAM&vet=12ahUKEwi0q92A1t_yAhVK95QKHfbIAT4QMygBegUIARDfAQ..i&docid=Pt4KygPKLwIZ3M&w=690&h=862&itg=1&q=ramen%20pic&ved=2ahUKEwi0q92A1t_yAhVK95QKHfbIAT4QMygBegUIARDfAQ"; 
+                picture.Url = "Https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.forkknifeswoon.com%2Fwp-content%2Fuploads%2F2014%2F10%2Fsimple-homemade-chicken-ramen-fork-knife-swoon-01.jpg&imgrefurl=https%3A%2F%2Fwww.forkknifeswoon.com%2Fsimple-homemade-chicken-ramen%2F&tbnid=xvuanwzsBotXAM&vet=12ahUKEwi0q92A1t_yAhVK95QKHfbIAT4QMygBegUIARDfAQ..i&docid=Pt4KygPKLwIZ3M&w=690&h=862&itg=1&q=ramen%20pic&ved=2ahUKEwi0q92A1t_yAhVK95QKHfbIAT4QMygBegUIARDfAQ";
+                notification.Id = Guid.Parse("2CBE22F9-99F0-42AD-9779-255B8F781FE4");
                 notification.DispImage = picture;
                 notification.UrlLink = "https://www.vanityfair.com/style/2020/11/angelina-jolie-brad-pitt-divorce-judge-not-removed";
                 notification.Contents = "Angelina Jolie reacted to your story";

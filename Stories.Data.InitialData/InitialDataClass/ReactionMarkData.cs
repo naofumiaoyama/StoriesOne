@@ -30,7 +30,7 @@ namespace Stories.Data.InitialData
 
                 Entities.ReactionMark reactionMark2 = new Entities.ReactionMark();
                 reactionMark2.Id = Guid.Parse("529099F0-B652-4CBF-AE9B-27E842B37B0D");
-                reactionMark2.PostId = Guid.Parse("231A90BC-72E8-4A01-8967-73EE78E0D497");
+                reactionMark2.PostId = Guid.Parse("BD640647-F214-4661-8DAD-A097D33B665C");
                 reactionMark2.Url = "http://www.short.net";
                 reactionMark2.Name = "Hello";
                 reactionMark2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");

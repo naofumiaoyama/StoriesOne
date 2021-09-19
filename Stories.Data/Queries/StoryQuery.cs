@@ -32,7 +32,7 @@ namespace Stories.Data.Queries
                 (string)row.Title,
                 (string)row.Summary,
                 (StoryType) row.StoryType) {
-                    Thoughts = row.Thoughts
+   
                 });
 
                 await connection.CloseAsync();

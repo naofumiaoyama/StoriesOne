@@ -17,7 +17,7 @@ namespace Stories.Data.InitialData
                 GenericRepository<Notification> notificationRepository = new GenericRepository<Notification>(context);
                 Notification notification = new Notification();
                 Picture picture = new Picture();
-                picture.Id = Guid.Parse("144BA215-F86B-4DE1-B0B4-5BAD44CAA76E");
+                picture.Id = Guid.Parse("4532077D-3FCC-4B7B-9E9C-5EB05C4703F6");
                 picture.Url = "Https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.forkknifeswoon.com%2Fwp-content%2Fuploads%2F2014%2F10%2Fsimple-homemade-chicken-ramen-fork-knife-swoon-01.jpg&imgrefurl=https%3A%2F%2Fwww.forkknifeswoon.com%2Fsimple-homemade-chicken-ramen%2F&tbnid=xvuanwzsBotXAM&vet=12ahUKEwi0q92A1t_yAhVK95QKHfbIAT4QMygBegUIARDfAQ..i&docid=Pt4KygPKLwIZ3M&w=690&h=862&itg=1&q=ramen%20pic&ved=2ahUKEwi0q92A1t_yAhVK95QKHfbIAT4QMygBegUIARDfAQ";
                 picture.PictureOwnerType = PictureOwnerType.Person;
                 notification.Id = Guid.Parse("9dc16535-6133-4487-a4ef-36eb8d9ce084");
