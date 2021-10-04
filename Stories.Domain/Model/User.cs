@@ -33,7 +33,7 @@ namespace Stories.Domain.Model
         public string LivingPlace { get; private set; }
         public string Occupation { get; private set; }
         public IDictionary<Guid, Story> Stories { get; private set; }
-        public IDictionary<Guid, User> Friends { get; private set; }
+        public IDictionary<Guid, User> Friends { get; set; }
         public Picture ProfilePicture { get; private set; }
     }
 }

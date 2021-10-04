@@ -10,7 +10,7 @@ namespace Stories.Data
         }
 
         //Win SQLServer Developer Edition
-        public static string DbConnectionString = "server=localhost\\MSSQLSERVER01; database = Stories; integrated security = true";
+        public static string DbConnectionString = "server=localhost; database = Stories; User ID = sa; Password=Pass123!; ";
         // Mac Docker
         //public static string DbConnectionString = "Data Source=localhost;database=Stories; User ID = sa; Password=MyPass@word;";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -22,7 +22,7 @@ namespace Stories.Data
         public DbSet<Comment> Comments { get; set; }
         public DbSet<FriendRelationship> FriendRelationships { get; set; }
         public DbSet<Person> People { get; set; }
-        public DbSet<PersonalInfo> PersonalInfos { get; set; }      
+        public DbSet<PersonalInfo> PersonalInfos { get; set; }
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<ReactionMark> ReactionMarks { get; set;}

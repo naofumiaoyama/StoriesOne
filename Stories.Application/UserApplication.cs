@@ -20,8 +20,11 @@ namespace Stories.Application
         public async Task<User> GetUserWithFriends(string id)
         {
             var user = await _userQuery.Get(Guid.Parse(id));
-            //var friends = await _friendQuery.Get(Guid.Parse(id));
-            //user.Friends = friends;
+            if (user != null)
+            {
+                var friends = await _friendQuery.Get(Guid.Parse(id));
+                user.Friends = friends;
+            }
             return user;
         }
         
