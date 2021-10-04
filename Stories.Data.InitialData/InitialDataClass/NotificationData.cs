@@ -52,13 +52,20 @@ namespace Stories.Data.InitialData
             using (var context = new DatabaseContext())
             {
                 GenericRepository<Notification> notificationRepository = new GenericRepository<Notification>(context);
+                GenericRepository<Picture> pictureRepository = new GenericRepository<Picture>(context);
+
                 var notification = notificationRepository.Get(Guid.Parse("9dc16535-6133-4487-a4ef-36eb8d9ce084")).Result;
-                var picture = notificationRepository.Get(Guid.Parse("144BA215-F86B-4DE1-B0B4-5BAD44CAA76E"));
+                
                 if(notification != null) { await notificationRepository.Remove(notification); }
 
-                var notification2 = notificationRepository.Get(Guid.Parse("27DB3580-CF20-4F08-B5CC-4D783A49C933")).Result;
-                var picture2 = notificationRepository.Get(Guid.Parse("49EF9B2B-46C1-4532-93DD-7A425CE373AE"));
+                var notification2 = notificationRepository.Get(Guid.Parse("5006E057-4682-4EA6-BA61-C1FF7A63492C")).Result;
                 if (notification2 != null) { await notificationRepository.Remove(notification2); }
+
+                var picture = pictureRepository.Get(Guid.Parse("4532077D-3FCC-4B7B-9E9C-5EB05C4703F6")).Result;
+                if (picture != null) { await pictureRepository.Remove(picture); }
+
+                var picture2 = pictureRepository.Get(Guid.Parse("49EF9B2B-46C1-4532-93DD-7A425CE373AE")).Result;
+                if (picture2 != null) { await pictureRepository.Remove(picture2); }
             }
         }
     }

@@ -21,7 +21,7 @@ namespace Stories.Data.InitialData
                 person.NickName = "Nao";
                 person.LastName = "Aoyama";
                 person.DisplayName = "N.A";
-                person.SelfIntroduction = "私の自己紹介";
+                person.SelfIntroduction = "Naofumiの自己紹介";
                 person.LivingPlace = "TokorozawaCity";
                 person.Occupation = "Engineer";
                 person.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
@@ -37,7 +37,7 @@ namespace Stories.Data.InitialData
                 person2.NickName = "Jen";
                 person2.LastName = "Aoyama";
                 person2.DisplayName = "J.A";
-                person2.SelfIntroduction = "ジェナリンの自己紹介";
+                person2.SelfIntroduction = "Jenalynの自己紹介";
                 person2.LivingPlace = "MandaueCity";
                 person2.Occupation = "Engineer";
                 person2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
@@ -54,8 +54,8 @@ namespace Stories.Data.InitialData
                 person3.NickName = "Makio";
                 person3.LastName = "Aoyama";
                 person3.DisplayName = "C.A";
-                person3.SelfIntroduction = "チスミの自己紹介";
-                person3.LivingPlace = "坂町";
+                person3.SelfIntroduction = "Chisumiの自己紹介";
+                person3.LivingPlace = "広島県";
                 person3.Occupation = "とくになし";
                 person3.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 person3.CreateDate = DateTime.Now;
@@ -72,7 +72,7 @@ namespace Stories.Data.InitialData
                 person4.LastName = "Arai";
                 person4.DisplayName = "T.A";
                 person4.SelfIntroduction = "とーやの自己紹介";
-                person4.LivingPlace = "池袋";
+                person4.LivingPlace = "東京";
                 person4.Occupation = "PublicOfficer";
                 person4.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 person4.CreateDate = DateTime.Now;

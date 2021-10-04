@@ -27,7 +27,7 @@ namespace Stories.Data.InitialData
                 await pictureRepository.Add(picture1);
 
                 Picture picture2 = new Picture();
-                picture2.Id = Guid.Parse("5006E057-4682-4EA6-BA61-C1FF7A63492C");
+                picture2.Id = Guid.Parse("5006e057-4682-4ea6-ba61-c1ff7a63492c");
                 picture2.PictureOwnerType = PictureOwnerType.Person;
                 picture2.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 picture2.CreateDate = DateTime.Now;
@@ -47,7 +47,7 @@ namespace Stories.Data.InitialData
                 var picture1 = pictureRepository.Get(Guid.Parse("66D994A3-C6B3-49A0-B775-915346FD890C")).Result;
                 if (picture1 != null) { await pictureRepository.Remove(picture1); }
 
-                var picture2 = pictureRepository.Get(Guid.Parse("5006E057-4682-4EA6-BA61-C1FF7A63492C")).Result;
+                var picture2 = pictureRepository.Get(Guid.Parse("5006e057-4682-4ea6-ba61-c1ff7a63492c")).Result;
                 if (picture2 != null) { await pictureRepository.Remove(picture2); }
             }
         }

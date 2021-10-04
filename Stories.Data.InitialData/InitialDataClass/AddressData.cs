@@ -24,7 +24,7 @@ namespace Stories.Data.InitialData
                 address.StateName = "Saitama";
                 address.CityName = "TorokorozawaCity";
                 address.TownName = "Tokorozawa";
-                address.Street = "Kotesashi";
+                address.Street = "";
                 address.Others = "etc";
                 address.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 address.CreateDate = DateTime.Now;
@@ -58,7 +58,7 @@ namespace Stories.Data.InitialData
                 address3.StateName = "Tokyo";
                 address3.CityName = "ToshimaCity";
                 address3.TownName = "Toshima";
-                address3.Street = "Ikebukuro";
+                address3.Street = "";
                 address3.Others = "etc";
                 address3.CreateUserId = Guid.Parse("019520F8-E48B-4079-84CC-B7F0F5A79C1F");
                 address3.CreateDate = DateTime.Now;
